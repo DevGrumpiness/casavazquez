@@ -1,11 +1,12 @@
 import { TMenuItem } from "../../interfaces/menuItem";
 
 interface MenuItemProps {
-    item: TMenuItem;
+	item: TMenuItem;
 }
 
-export const MenuItem: React.FC = ({item}: MenuItemProps) => {
+export const MenuItem: React.FC = ({ item }: MenuItemProps) => {
 	return (
+		<></>
 		// create MenuItem component here
 	);
 };

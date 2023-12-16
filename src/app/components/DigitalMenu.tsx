@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TMenuItem } from "../../interfaces/menuItem";
+import mockData from "../lib/mockdata.js";
 
 export const DigitalMenu: React.FC = () => {
 	const [menuItems, setMenuItems] = useState<TMenuItem[]>([]);
@@ -8,15 +9,19 @@ export const DigitalMenu: React.FC = () => {
 	useEffect(() => {
 		const fetchMenuItems = async (): Promise<TMenuItem[]> => {
 			// we will move this function to a custom hook later
-			// Replace with actual data fetching logic
-			return Promise.resolve([
-				/* Pseudo code placeholder for menu items */
-			]);
+			return new Promise((resolve) => {
+				setTimeout(() => {
+					return resolve(mockData as unknown as TMenuItem[]);
+				}, 2000);
+			});
 		};
 
 		// todo: Fetch menu items from hour mock data file for now
 		fetchMenuItems()
-			.then((items) => setMenuItems(items))
+			.then((items) => {
+				console.log(items);
+				setMenuItems(items);
+			})
 			.catch((err) => setError("Failed to load menu items"));
 	}, []);
 
@@ -27,9 +32,11 @@ export const DigitalMenu: React.FC = () => {
 			{error && <p className="error">{error}</p>}
 
 			<div className="menu-items">
-				{menuItems.map((item) => (
-					// map menu items to MenuItem components
-				))}
+				{menuItems.length > 0 &&
+					menuItems.map((item) => (
+						<></>
+						// map menu items to MenuItem components
+					))}
 			</div>
 		</div>
 	);
