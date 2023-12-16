@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { MenuItem } from "../../interfaces/menuItem";
+import { TMenuItem } from "../../interfaces/menuItem";
 
 export const DigitalMenu: React.FC = () => {
-	const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+	const [menuItems, setMenuItems] = useState<TMenuItem[]>([]);
 	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
-		const fetchMenuItems = async (): Promise<MenuItem[]> => {
+		const fetchMenuItems = async (): Promise<TMenuItem[]> => {
 			// we will move this function to a custom hook later
 			// Replace with actual data fetching logic
 			return Promise.resolve([
@@ -25,7 +25,7 @@ export const DigitalMenu: React.FC = () => {
 			<h1>Menu</h1>
 
 			{error && <p className="error">{error}</p>}
-			
+
 			<div className="menu-items">
 				{menuItems.map((item) => (
 					// map menu items to MenuItem components

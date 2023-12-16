@@ -1,5 +1,5 @@
 // define interface for menu item here
-export type MenuItem = {
+export type TMenuItem = {
 	id: number;
 	name: string;
 	description: string;
