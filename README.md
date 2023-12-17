@@ -6,12 +6,14 @@ Jump in! See the projects page to participate in the current project stage.
 
 -   Assign a ticket to yourself (you can also create a new one)
 -   Create a Branch. Make the name reflect the ticket title
--   Create a pull request
+-   (maybe run npm install locally)
+-   work on your brnach to solve the ticket
+-   Create a pull request (with a decent description)
 -   don't forget your ticket branch with the current main branch from time to time if woking on a ticket takes some time.
 
 ## typescript
 
-Never used typescript before? Don't worry! You will be fine. Actually you will love it. Everbody does!
+Never used typescript before? Don't worry! You will be fine. Actually you will love it. Everbody does! The code editor basically tells you what to do and prevents the app from crashing hard.
 
 ## github coespaces
 
@@ -21,7 +23,10 @@ Codescpaces basically runs a container in the cloud and connects to you VSCode.
 ## prettier.rc and eslint
 
 To make things easier I configured eslint and prettier.
-I recommend turning on "format on save" in you editor and choose "Prettier Code Formatter" while working on this project.
+I recommend turning on "format on save" in you editor and choose "Prettier Code Formatter" as default formatter while working on this project.
+
+This a short video on that topic
+https://www.youtube.com/watch?v=vaikye4etXI
 
 ## Getting Started
 
