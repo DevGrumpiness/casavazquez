@@ -16,10 +16,15 @@ Jump in! See the projects page to participate in the current project stage.
 
 Never used typescript before? Don't worry! You will be fine. Actually you will love it. Everbody does! The code editor basically tells you what to do and prevents the app from crashing hard.
 
+## copilot, ChatGPT & Co
+
+If you use some kind of AI to help you solve tickets, in your own interest reqrite the code (don't copy-paste) and make sure you understand what it does.
+You will need to be able to explain you code in the code reviews in order to have you contributions merged.
+
 ## github coespaces
 
-You can clone th project locally or just use the magic of github codespaces.
-Codescpaces basically runs a container in the cloud and connects to you VSCode.
+You can clone the project locally or just use the magic of github codespaces.
+Codescpaces basically runs a container in the cloud and connects to your VSCode so that you don't even need to have any of the files on your machine.
 
 ## prettier.rc and eslint
 
@@ -30,6 +35,16 @@ This a short video on that topic
 https://www.youtube.com/watch?v=vaikye4etXI
 
 ## Getting Started
+
+Example:
+
+1. Pick a ticket in the current project board, for example Ticket #3
+2. Create a branch for your ticket from _main_
+3. got to the github page of the created branch
+4. clone OR Create a cosepcae and select "Open in Visual Studio Code"
+5. Make your changes
+6. Create a pull request (PR) when you think you are done. Use the keyword _cloeses #3_ to link PR and Ticket. Add an enlightening description of what you have done
+7. Grab the next ticket while your PR is pending
 
 To run the development server:
 
