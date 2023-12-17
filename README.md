@@ -9,6 +9,7 @@ Jump in! See the projects page to participate in the current project stage.
 -   (maybe run npm install locally)
 -   work on your brnach to solve the ticket
 -   Create a pull request (with a decent description)
+-   link a pull request to the corresponding issu using resrved keywords in the pr description followed by the issue number, like 'closes #2' [learn more](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
 -   don't forget your ticket branch with the current main branch from time to time if woking on a ticket takes some time.
 
 ## typescript
