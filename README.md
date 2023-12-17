@@ -5,7 +5,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 Jump in! See the projects page to participate in the current project stage.
 
 -   Assign a ticket to yourself (you can also create a new one)
--   Create a Branch. Make the name reflect the ticket title
+-   Create a Branch. Make the name reflect the ticket title [learn more](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-a-branch-for-an-issue)
 -   (maybe run npm install locally)
 -   work on your brnach to solve the ticket
 -   Create a pull request (with a decent description)
