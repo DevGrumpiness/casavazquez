@@ -6,12 +6,12 @@ import { MenuItemFood } from "./MenuItemFood";
 type fetchStatus = "idle" | "loading" | "error" | "success";
 
 export const DigitalMenu: React.FC = () => {
-	const [food, setFood] = useState<TMenTMenuItemFooduItem[]>([]);
+	const [food, setFood] = useState<TMenuItemFood[]>([]);
 	const [drinks, setDrinks] = useState<TMenuItemDrink[]>([]);
 	const [status, setStatus] = useState<fetchStatus>("idle");
 
 	useEffect(() => {
-		const fetchDrinks = async (): Promise<TMenuItem[]> => {
+		const fetchDrinks = async (): Promise<TMenuItemDrink[]> => {
 			setStatus("loading");
 			// we will move this function to a custom hook later
 			return new Promise((resolve) => {
@@ -22,7 +22,7 @@ export const DigitalMenu: React.FC = () => {
 			});
 		};
 
-		const fetchFood = async (): Promise<TMenuItem[]> => {
+		const fetchFood = async (): Promise<TMenuItemFood[]> => {
 			setStatus("loading");
 			// we will move this function to a custom hook later
 			return new Promise((resolve) => {
@@ -38,13 +38,13 @@ export const DigitalMenu: React.FC = () => {
 				console.log(items);
 				setDrinks(items);
 			})
-			.catch((err) => setError("Failed to load menu items"));
+			.catch((err) => setStatus("error"));
 		fetchFood()
 			.then((items) => {
 				console.log(items);
 				setFood(items);
 			})
-			.catch((err) => setError("Failed to load menu items"));
+			.catch((err) => setStatus("error"));
 	}, []);
 
 	return (
@@ -54,6 +54,7 @@ export const DigitalMenu: React.FC = () => {
 			{status === "error" && (
 				<p className="error">Error loading data..</p>
 			)}
+			{status === "loading" && <p className="error">..loading...</p>}
 
 			<div className="menuItems">
 				{food.length > 0 &&
