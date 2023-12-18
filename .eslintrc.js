@@ -30,5 +30,6 @@ module.exports = {
 		"linebreak-style": ["error", "windows"],
 		quotes: ["error", "double"],
 		"prefer-const": "error",
+		"react/jsx-wrap-multilines": ["error", { return: "parens" }],
 	},
 };

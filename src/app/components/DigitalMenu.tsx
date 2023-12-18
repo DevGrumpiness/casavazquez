@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { TMenuItemFood, TMenuItemDrink } from "../../interfaces/menuItem";
-import { drinks, food } from "../lib/mockdata";
+import { drinks as mockDrinks, food as mockFood } from "../lib/mockdata";
+import { MenuItemFood } from "./MenuItemFood";
 
 type fetchStatus = "idle" | "loading" | "error" | "success";
 
@@ -16,7 +17,7 @@ export const DigitalMenu: React.FC = () => {
 			return new Promise((resolve) => {
 				setTimeout(() => {
 					setStatus("success");
-					return resolve(drinks as unknown as TMenuItemDrink[]);
+					return resolve(mockDrinks as unknown as TMenuItemDrink[]);
 				}, 2000);
 			});
 		};
@@ -27,7 +28,7 @@ export const DigitalMenu: React.FC = () => {
 			return new Promise((resolve) => {
 				setTimeout(() => {
 					setStatus("success");
-					return resolve(food as unknown as TMenuItemFood[]);
+					return resolve(mockFood as unknown as TMenuItemFood[]);
 				}, 2000);
 			});
 		};
@@ -47,16 +48,17 @@ export const DigitalMenu: React.FC = () => {
 	}, []);
 
 	return (
-		<div className="digital-menu">
+		<div className="digitalMenu">
 			<h1>Menu</h1>
 
-			{error && <p className="error">{error}</p>}
+			{status === "error" && (
+				<p className="error">Error loading data..</p>
+			)}
 
-			<div className="menu-items">
+			<div className="menuItems">
 				{food.length > 0 &&
 					food.map((item) => (
-						<></>
-						// map menu items to MenuItem components
+						<MenuItemFood key={`foodItem${item.id}`} item={item} />
 					))}
 			</div>
 		</div>

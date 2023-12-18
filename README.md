@@ -52,7 +52,21 @@ To run the development server:
 npm run dev
 ```
 
+## Nice To Know
+
+### SCSS files automatic import in build-styles.js
+
+The script build-styles.js crawls through the src folder and makes sure all the scss files are being imported automatically to \auto_generated_main.scss and compiled to \auto_generated_main.css. This saves us some work. \auto_generated_main.css is the only file that needs to be imported then in layout.tsx.
+
+The script is integrated in the workflow via _package.json_
+Additionally nodemon got the order to watch changes so that we don't need to stop and rerun _npm run dev_ each time we add /delete /change scss files.
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Troubleshooting
+
+-   Sometimes the app runs on a different port, for example on [http://localhost:3001](http://localhost:3001) when 3000 is currently blocked.
+-   sometimes deleting the .next folder can help resolving cache problems
 
 ## Learn More about Next
 
