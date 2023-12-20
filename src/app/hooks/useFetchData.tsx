@@ -14,14 +14,15 @@ export const useFetchData = <T,>(url: string): TResponse<T> => {
 
 	useEffect(() => {
 		const fetchData = async () => {
+			setStatus("loading");
 			try {
-				setStatus("loading");
-				fetch(url)
-					.then((res) => res.json())
-					.then((data) => {
-						setData(data);
-						setStatus("success");
-					});
+				const response = await fetch(url);
+				if (!response.ok) {
+					throw new Error("Something went wrong");
+				}
+				const jsonData = await response.json();
+				setData(jsonData);
+				setStatus("success");
 			} catch (error) {
 				setStatus("error");
 				setErrorMessage((error as Error).message);
