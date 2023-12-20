@@ -2,50 +2,23 @@ import React, { useState, useEffect } from "react";
 import { TMenuItemFood, TMenuItemDrink } from "../../interfaces/menuItem";
 import { drinks as mockDrinks, food as mockFood } from "../lib/mockdata";
 import { MenuItemFood } from "./MenuItemFood";
+import { useFetchData } from "../hooks/useFetchData";
 
-type fetchStatus = "idle" | "loading" | "error" | "success";
+type TFoodData = {
+	food: TMenuItemFood[];
+};
 
 export const DigitalMenu: React.FC = () => {
 	const [food, setFood] = useState<TMenuItemFood[]>([]);
 	const [drinks, setDrinks] = useState<TMenuItemDrink[]>([]);
-	const [status, setStatus] = useState<fetchStatus>("idle");
+
+	const { data, status, errorMessage } = useFetchData<TFoodData>(
+		"/mockdata_food.json"
+	);
 
 	useEffect(() => {
-		const fetchDrinks = async (): Promise<TMenuItemDrink[]> => {
-			setStatus("loading");
-			// we will move this function to a custom hook later
-			return new Promise((resolve) => {
-				setTimeout(() => {
-					setStatus("success");
-					return resolve(mockDrinks as unknown as TMenuItemDrink[]);
-				}, 2000);
-			});
-		};
-
-		const fetchFood = async (): Promise<TMenuItemFood[]> => {
-			setStatus("loading");
-			// we will move this function to a custom hook later
-			return new Promise((resolve) => {
-				setTimeout(() => {
-					setStatus("success");
-					return resolve(mockFood as unknown as TMenuItemFood[]);
-				}, 2000);
-			});
-		};
-
-		fetchDrinks()
-			.then((items) => {
-				console.log(items);
-				setDrinks(items);
-			})
-			.catch((err) => setStatus("error"));
-		fetchFood()
-			.then((items) => {
-				console.log(items);
-				setFood(items);
-			})
-			.catch((err) => setStatus("error"));
-	}, []);
+		data?.food && setFood(data.food);
+	}, [data]);
 
 	return (
 		<div className="digitalMenu">
