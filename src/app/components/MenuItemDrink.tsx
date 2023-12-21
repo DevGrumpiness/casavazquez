@@ -1,10 +1,10 @@
-import { TMenuItemFood } from "../../interfaces/menuItem";
+import { TMenuItemDrink } from "../../interfaces/menuItem";
 
-interface MenuItemFoodProps {
-	item: TMenuItemFood;
+interface MenuItemDrinkProps {
+	drink: TMenuItemDrink;
 }
 
-export const MenuItemFood: React.FC<MenuItemFoodProps> = ({ item }) => {
+export const MenuItemDrink: React.FC<MenuItemDrinkProps> = ({ item }) => {
 	if (!item) {
 		return;
 	}
@@ -14,7 +14,7 @@ export const MenuItemFood: React.FC<MenuItemFoodProps> = ({ item }) => {
 		"https://placehold.jp/3d4070/ffffff/70x70.png?css=%7B%22border-radius%22%3A%2215px%22%7D";
 
 	return (
-		<div className="menuItem food">
+		<div className="menuItem drink">
 			<img src={imageUrl} />
 			<div className={`content ${!item.available && "disabled"}`}>
 				<h3>{item.name}</h3>
