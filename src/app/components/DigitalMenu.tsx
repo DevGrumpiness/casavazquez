@@ -4,6 +4,7 @@ import { drinks as mockDrinks, food as mockFood } from "../lib/mockdata";
 import { MenuItemFood } from "./MenuItemFood";
 import { useFetchData } from "../hooks/useFetchData";
 import { MenuItemDrink } from "./MenuItemDrink";
+import { BaseContext } from "../context/BaseContext";
 
 type TFoodData = {
 	food: TMenuItemFood[];
@@ -17,8 +18,9 @@ export const DigitalMenu: React.FC = () => {
 	const [drinks, setDrinks] = useState<TMenuItemDrink[]>([]);
 
 	const foodData = useFetchData<TFoodData>("/mockdata_food.json");
-
 	const drinksData = useFetchData<TDrinksData>("/mockdata_drinks.json");
+
+	const { baseState, updateBaseState } = React.useContext(BaseContext);
 
 	useEffect(() => {
 		foodData.data?.food && setFood(foodData.data.food);
@@ -27,6 +29,16 @@ export const DigitalMenu: React.FC = () => {
 	useEffect(() => {
 		drinksData.data?.drinks && setDrinks(drinksData.data.drinks);
 	}, [drinksData]);
+
+	useEffect(() => {
+		if (food.length > 0 && drinks.length > 0) {
+			updateBaseState({
+				...baseState,
+				drinks: [...drinks],
+				food: [...food],
+			});
+		}
+	}, [food, drinks]);
 
 	return (
 		<div className="digitalMenu">
