@@ -54,6 +54,10 @@ npm run dev
 
 ## Nice To Know
 
+### State Management
+
+For the global state management we are using [React Context](https://react.dev/reference/react/createContext).
+
 ### SCSS files automatic import in build-styles.js
 
 The script build-styles.js crawls through the src folder and makes sure all the scss files are being imported automatically to \auto_generated_main.scss and compiled to \auto_generated_main.css. This saves us some work. \auto_generated_main.css is the only file that needs to be imported then in layout.tsx.
