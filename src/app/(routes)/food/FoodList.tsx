@@ -10,15 +10,14 @@ const FoodList: React.FC = () => {
 	if (!menuContext) {
 		return <p>menuContext not found</p>;
 	}
-	const { menuState } = menuContext;
+
+	const foddData = menuContext.menuState.food;
 
 	useEffect(() => {
-		console.log("menuState.food", menuState.food);
-		if (menuState.food) {
-			setDishes([...menuState.food]);
-			console.log("dishes", dishes);
+		if (foddData) {
+			setDishes([...foddData]);
 		}
-	}, [menuState.food]);
+	}, [foddData]);
 
 	return (
 		<div className="foodList">
