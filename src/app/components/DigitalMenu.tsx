@@ -20,7 +20,13 @@ export const DigitalMenu: React.FC = () => {
 	const foodData = useFetchData<TFoodData>("/mockdata_food.json");
 	const drinksData = useFetchData<TDrinksData>("/mockdata_drinks.json");
 
-	const { menuState, updateMenuState } = React.useContext(MenuContext);
+	const menuContext = React.useContext(MenuContext);
+
+	if (!menuContext) {
+		return <p>MenuContext not found.</p>;
+	}
+
+	const { menuState, updateMenuState } = menuContext;
 
 	useEffect(() => {
 		foodData.data?.food && setFood(foodData.data.food);
