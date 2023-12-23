@@ -1,13 +1,13 @@
 "use client";
 import FoodList from "./FoodList";
-import { BaseProvider } from "../../context/MenuContext";
+import { MenuProvider } from "../../context/MenuContext";
 
 export default function Food() {
 	return (
-		<BaseProvider>
+		<MenuProvider>
 			<main className="">
 				<FoodList />
 			</main>
-		</BaseProvider>
+		</MenuProvider>
 	);
 }
