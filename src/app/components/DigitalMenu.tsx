@@ -29,14 +29,6 @@ export const DigitalMenu: React.FC = () => {
 	const { menuState, updateMenuState } = menuContext;
 
 	useEffect(() => {
-		foodData.data?.food && setFood(foodData.data.food);
-	}, [foodData]);
-
-	useEffect(() => {
-		drinksData.data?.drinks && setDrinks(drinksData.data.drinks);
-	}, [drinksData]);
-
-	useEffect(() => {
 		if (food.length > 0 && drinks.length > 0) {
 			updateMenuState({
 				...menuState,

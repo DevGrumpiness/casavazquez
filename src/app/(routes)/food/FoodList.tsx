@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MenuContext } from "../../context/MenuContext";
 import { TMenuItemFood } from "../../../interfaces/menuItem";
 import { MenuItemFood } from "../../components/MenuItemFood";
 
 const FoodList: React.FC = () => {
+	const [dishes, setDishes] = useState<TMenuItemFood[]>([]);
 	const menuContext = React.useContext(MenuContext);
 
 	if (!menuContext) {
@@ -11,18 +12,26 @@ const FoodList: React.FC = () => {
 	}
 	const { menuState } = menuContext;
 
+	useEffect(() => {
+		console.log("menuState.food", menuState.food);
+		if (menuState.food) {
+			setDishes([...menuState.food]);
+			console.log("dishes", dishes);
+		}
+	}, [menuState.food]);
+
 	return (
 		<div className="foodList">
 			<h1>Our Dishes</h1>
 			<hr />
+			{dishes.length}hallo
+			{dishes.length > 0 ? dishes.length : "No dishes"}
 			<div className="menuItems">
-				{menuState.food && menuState.food.length > 0 ? (
-					menuState.food.map((dish: TMenuItemFood) => {
+				{dishes &&
+					dishes.length > 0 &&
+					dishes.map((dish: TMenuItemFood) => {
 						return <MenuItemFood key={dish.id} dish={dish} />;
-					})
-				) : (
-					<span>loading...</span>
-				)}
+					})}
 			</div>
 		</div>
 	);
