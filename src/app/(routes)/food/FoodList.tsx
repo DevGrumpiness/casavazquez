@@ -1,23 +1,23 @@
 import React from "react";
-import { BaseContext } from "../../context/BaseContext";
+import { MenuContext } from "../../context/MenuContext";
 import { TMenuItemFood } from "../../../interfaces/menuItem";
 import { MenuItemFood } from "../../components/MenuItemFood";
 
 const FoodList: React.FC = () => {
-	const BaseState = React.useContext(BaseContext);
+	const menuContext = React.useContext(MenuContext);
 
-	if (!BaseState) {
-		return;
+	if (!menuContext) {
+		return <p>menuContext not found</p>;
 	}
-	const { food } = BaseState.baseState;
+	const { menuState } = menuContext;
 
 	return (
 		<div className="foodList">
 			<h1>Our Dishes</h1>
 			<hr />
 			<div className="menuItems">
-				{food && food.length > 0 ? (
-					food.map((dish: TMenuItemFood) => {
+				{menuState.food && menuState.food.length > 0 ? (
+					menuState.food.map((dish: TMenuItemFood) => {
 						return <MenuItemFood key={dish.id} dish={dish} />;
 					})
 				) : (
