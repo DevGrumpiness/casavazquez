@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { TMenuItemFood, TMenuItemDrink } from "../../interfaces/menuItem";
 import { drinks as mockDrinks, food as mockFood } from "../lib/mockdata";
-import { MenuItemFood } from "./MenuItemFood";
+import { MenuItemFood } from "./ListItemFood";
 import { useFetchData } from "../hooks/useFetchData";
-import { MenuItemDrink } from "./MenuItemDrink";
+import { MenuItemDrink } from "./ListItemDrink";
 import { MenuContext } from "../context/MenuContext";
 
 type TFoodData = {

@@ -2,6 +2,7 @@
 	"food": [
 		{
 			"id": 1,
+			"type": "food",
 			"name": "Cheeseburger",
 			"description": "A juicy cheeseburger with a beef patty, cheese, lettuce, and tomato",
 			"price": 8.99,
@@ -11,6 +12,7 @@
 		},
 		{
 			"id": 2,
+			"type": "food",
 			"name": "Veggie Pizza",
 			"description": "Delicious pizza topped with a variety of vegetables",
 			"price": 10.5,
@@ -20,6 +22,7 @@
 		},
 		{
 			"id": 3,
+			"type": "food",
 			"name": "Chicken Wings",
 			"description": "Spicy and savory chicken wings served with a side of sauce",
 			"price": 7.99,
@@ -29,6 +32,7 @@
 		},
 		{
 			"id": 4,
+			"type": "food",
 			"name": "Garden Salad",
 			"description": "Fresh garden salad with a mix of greens, tomatoes, and cucumbers",
 			"price": 6.99,
@@ -38,6 +42,7 @@
 		},
 		{
 			"id": 5,
+			"type": "food",
 			"name": "Steak",
 			"description": "Grilled steak cooked to your liking, served with vegetables",
 			"price": 15.99,
@@ -47,6 +52,7 @@
 		},
 		{
 			"id": 6,
+			"type": "food",
 			"name": "Grilled Cheese Sandwich",
 			"description": "Classic grilled cheese sandwich with melted cheese on toasted bread",
 			"price": 5.99,

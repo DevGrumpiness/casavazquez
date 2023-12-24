@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MenuContext } from "../../context/MenuContext";
 import { TMenuItemFood } from "../../../interfaces/menuItem";
-import { MenuItemFood } from "../../components/MenuItemFood";
+import { ListItem } from "../../components/ListItem";
 
 const FoodList: React.FC = () => {
 	const [dishes, setDishes] = useState<TMenuItemFood[]>([]);
@@ -23,13 +23,11 @@ const FoodList: React.FC = () => {
 		<div className="foodList">
 			<h1>Our Dishes</h1>
 			<hr />
-			{dishes.length}hallo
-			{dishes.length > 0 ? dishes.length : "No dishes"}
 			<div className="menuItems">
 				{dishes &&
 					dishes.length > 0 &&
 					dishes.map((dish: TMenuItemFood) => {
-						return <MenuItemFood key={dish.id} dish={dish} />;
+						return <ListItem key={dish.id} listItem={dish} />;
 					})}
 			</div>
 		</div>
