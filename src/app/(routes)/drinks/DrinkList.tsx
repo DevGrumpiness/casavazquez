@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MenuContext } from "../../context/MenuContext";
 import { TMenuItemDrink } from "../../../interfaces/menuItem";
-import { MenuItemDrink } from "../../components/ListItemDrink";
+import { ListItem } from "../../components/ListItem";
 
 const DrinkList: React.FC = () => {
 	const [drinks, setDrinks] = useState<TMenuItemDrink[]>([]);
@@ -27,7 +27,7 @@ const DrinkList: React.FC = () => {
 				{drinks &&
 					drinks.length > 0 &&
 					drinks.map((drink: TMenuItemDrink) => {
-						return <MenuItemDrink key={drink.id} drink={drink} />;
+						return <ListItem key={drink.id} listItem={drink} />;
 					})}
 			</div>
 		</div>

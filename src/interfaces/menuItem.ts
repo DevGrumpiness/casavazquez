@@ -1,5 +1,6 @@
 interface MenuItem {
 	id: number;
+	type: "food" | "drink";
 	name: string;
 	description: string;
 	price: number;

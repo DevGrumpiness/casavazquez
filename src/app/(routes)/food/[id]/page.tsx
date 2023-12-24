@@ -1,0 +1,41 @@
+"use client";
+
+import { useParams } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
+import MenuItemDetail from "../../../components/MenuItemDetails";
+import { MenuContext } from "../../../context/MenuContext";
+import { TMenuItemFood, TMenuItemDrink } from "../../../../interfaces/menuItem";
+import { useFetchData } from "../../../hooks/useFetchData";
+
+type TFoodData = {
+	food: TMenuItemFood[];
+};
+
+export default function Page() {
+	const { id } = useParams<{ id: string }>();
+	const [food, setFood] = useState<TMenuItemFood[]>([]);
+
+	const menuContext = useContext(MenuContext);
+
+	const foodData = useFetchData<TFoodData>("/mockdata_food.json");
+
+	useEffect(() => {
+		if (!menuContext) {
+			setFood(foodData.data?.food ?? []);
+		} else {
+			setFood(menuContext.menuState.food);
+		}
+	}, [menuContext, foodData]);
+
+	const item = food.find((foodItem) => foodItem.id === Number(id)) ?? null;
+
+	if (!item) {
+		return <p>Item not found</p>;
+	}
+
+	return (
+		<div>
+			<MenuItemDetail item={item} />
+		</div>
+	);
+}
