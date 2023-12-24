@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MenuContext } from "../../context/MenuContext";
 import { TMenuItemDrink } from "../../../interfaces/menuItem";
-import { MenuItemDrink } from "../../components/MenuItemDrink";
+import { MenuItemDrink } from "../../components/ListItemDrink";
 
 const DrinkList: React.FC = () => {
 	const [drinks, setDrinks] = useState<TMenuItemDrink[]>([]);
@@ -23,8 +23,6 @@ const DrinkList: React.FC = () => {
 		<div className="DrinkList">
 			<h1>Our Drinks</h1>
 			<hr />
-			{drinks.length}hallo
-			{drinks.length > 0 ? drinks.length : "No drinks"}
 			<div className="menuItems">
 				{drinks &&
 					drinks.length > 0 &&
