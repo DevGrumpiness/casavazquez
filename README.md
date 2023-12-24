@@ -67,7 +67,12 @@ Additionally nodemon got the order to watch changes so that we don't need to sto
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Troubleshooting
+### routing
+
+We use the NextJS routing system.
+Make yourself familar with the concepts in the [documentation](https://nextjs.org/docs/pages/building-your-application/routing)
+
+## Troubleshooting development
 
 -   Sometimes the app runs on a different port, for example on [http://localhost:3001](http://localhost:3001) when 3000 is currently blocked.
 -   sometimes deleting the .next folder can help resolving cache problems
