@@ -1,6 +1,7 @@
 "usec client";
 import { TMenuItemDrink, TMenuItemFood } from "../../interfaces/menuItem";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface ListItemProps {
 	listItem: TMenuItemDrink | TMenuItemFood;
@@ -13,10 +14,7 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem }) => {
 
 	const router = useRouter();
 
-	const imageUrl =
-		listItem.imageUrl ??
-		"https://placehold.jp/3d4070/ffffff/70x70.png?css=%7B%22border-radius%22%3A%2215px%22%7D";
-
+	const imageUrl = listItem.imageUrl ?? "/media/70x70.png";
 	const handleListItemClick = () => {
 		if (listItem.type === "food") {
 			router.push(`/food/${listItem.id}`);
@@ -27,7 +25,7 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem }) => {
 
 	return (
 		<button className="menuItem" onClick={handleListItemClick}>
-			<img src={imageUrl} />
+			<Image src={imageUrl} alt={listItem.name} width={70} height={70} />
 			<div className={`content ${!listItem.available && "disabled"}`}>
 				<h3>{listItem.name}</h3>
 				<span> {listItem.description} </span>
