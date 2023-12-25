@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { TMenuItemFood, TMenuItemDrink } from "../../interfaces/menuItem";
 import { drinks as mockDrinks, food as mockFood } from "../lib/mockdata";
-import { MenuItemFood } from "./ListItemFood";
 import { useFetchData } from "../hooks/useFetchData";
-import { MenuItemDrink } from "./ListItemDrink";
 import { MenuContext } from "../context/MenuContext";
+import ListItem from "./ListItem";
 
 type TFoodData = {
 	food: TMenuItemFood[];
@@ -40,45 +39,8 @@ export const DigitalMenu: React.FC = () => {
 
 	return (
 		<div className="digitalMenu">
-			<h1>Menu</h1>
+			<h1>Welcome</h1>
 			<hr />
-			<h2>Food</h2>
-			{foodData.status === "error" && (
-				<p className="error">
-					Error loading data.. {foodData.errorMessage ?? ""}
-				</p>
-			)}
-			{foodData.status === "loading" && (
-				<p className="error">..loading...</p>
-			)}
-
-			<div className="menuItems">
-				{food.length > 0 &&
-					food.map((dish) => (
-						<MenuItemFood key={`foodItem${dish.id}`} dish={dish} />
-					))}
-			</div>
-
-			<h2>Drinks</h2>
-
-			{drinksData.status === "error" && (
-				<p className="error">
-					Error loading data.. {drinksData.errorMessage ?? ""}
-				</p>
-			)}
-			{drinksData.status === "loading" && (
-				<p className="error">..loading...</p>
-			)}
-
-			<div className="menuItems">
-				{drinks.length > 0 &&
-					drinks.map((drink) => (
-						<MenuItemDrink
-							key={`foodItem${drink.id}`}
-							drink={drink}
-						/>
-					))}
-			</div>
 		</div>
 	);
 };
