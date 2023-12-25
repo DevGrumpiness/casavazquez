@@ -19,3 +19,11 @@ export interface TMenuItemDrink extends MenuItem {
 	label: "alcoholic" | "hot" | null;
 	availableSizes: DrinkSize[];
 }
+
+export type FoodResponseType = {
+	food: TMenuItemFood[];
+};
+
+export type DrinksResponseType = {
+	drinks: TMenuItemDrink[];
+};
