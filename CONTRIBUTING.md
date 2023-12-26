@@ -1,0 +1,7 @@
+- Assign a ticket to yourself (you can also create a new one)
+- Create a Branch. Make the name reflect the ticket title learn more
+- (maybe run npm install locally)
+- work on your brnach to solve the ticket
+- Create a pull request (with a decent description)
+- link a pull request to the corresponding issu using resrved keywords in the pr description followed by the issue number, like 'closes #2' learn more
+- don't forget your ticket branch with the current main branch from time to time if woking on a ticket takes some time.
