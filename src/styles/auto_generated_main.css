@@ -1,6 +1,51 @@
 .digitalMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.link-container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.link {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 3rem;
+  color: hsl(200, 51%, 35%);
+  border: 3px solid gray;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.link:hover {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: hsl(208, 100%, 97%);
+}
+
+.link:hover {
+  font-size: 3rem;
+  color: hsl(200, 51%, 55%);
+}
+
+hr {
+  width: 80%;
+}
+
+h1 {
+  font-size: 4rem;
 }
 
 .menuItem {
@@ -12,8 +57,53 @@
 }
 
 .digitalMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.link-container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.link {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 3rem;
+  color: hsl(200, 51%, 35%);
+  border: 3px solid gray;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.link:hover {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: hsl(208, 100%, 97%);
+}
+
+.link:hover {
+  font-size: 3rem;
+  color: hsl(200, 51%, 55%);
+}
+
+hr {
+  width: 80%;
+}
+
+h1 {
+  font-size: 4rem;
 }
 
 .menuItem {
@@ -25,8 +115,53 @@
 }
 
 .digitalMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.link-container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.link {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 3rem;
+  color: hsl(200, 51%, 35%);
+  border: 3px solid gray;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.link:hover {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: hsl(208, 100%, 97%);
+}
+
+.link:hover {
+  font-size: 3rem;
+  color: hsl(200, 51%, 55%);
+}
+
+hr {
+  width: 80%;
+}
+
+h1 {
+  font-size: 4rem;
 }
 
 .menuItem {
@@ -38,8 +173,53 @@
 }
 
 .digitalMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.link-container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.link {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 3rem;
+  color: hsl(200, 51%, 35%);
+  border: 3px solid gray;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.link:hover {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: hsl(208, 100%, 97%);
+}
+
+.link:hover {
+  font-size: 3rem;
+  color: hsl(200, 51%, 55%);
+}
+
+hr {
+  width: 80%;
+}
+
+h1 {
+  font-size: 4rem;
 }
 
 .menuItem {
