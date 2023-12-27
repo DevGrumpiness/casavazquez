@@ -4,6 +4,7 @@ import { drinks as mockDrinks, food as mockFood } from "../lib/mockdata";
 import { useFetchData } from "../hooks/useFetchData";
 import { MenuContext } from "../context/MenuContext";
 import Link from "next/link";
+import "./DigitalMenu.scss";
 
 type TFoodData = {
 	food: TMenuItemFood[];
@@ -41,8 +42,14 @@ export const DigitalMenu: React.FC = () => {
 		<div className="digitalMenu">
 			<h1>Welcome</h1>
 			<hr />
-			<Link href="/food">Hungry</Link>
-			<Link href="/drinks">Thirsty</Link>
+			<div className="link-container">
+				<Link className="link" href="/food">
+					Hungry
+				</Link>
+				<Link className="link" href="/drinks">
+					Thirsty
+				</Link>
+			</div>
 		</div>
 	);
 };
