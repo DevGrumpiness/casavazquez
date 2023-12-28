@@ -24,7 +24,7 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem }) => {
 	};
 
 	return (
-		<button className="menuItem" onClick={handleListItemClick}>
+		<button className="listItem" onClick={handleListItemClick}>
 			<Image src={imageUrl} alt={listItem.name} width={70} height={70} />
 			<div className={`content ${!listItem.available && "disabled"}`}>
 				<h3>{listItem.name}</h3>

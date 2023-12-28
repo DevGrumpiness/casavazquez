@@ -1,16 +1,16 @@
 "use client";
-
 import { useParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import MenuItemDetail from "../../../components/MenuItemDetails";
 import { MenuContext } from "../../../context/MenuContext";
+
 import {
 	TMenuItemDrink,
 	DrinksResponseType,
 } from "../../../../interfaces/menuItem";
 import { useFetchData } from "../../../hooks/useFetchData";
 
-export default function DetailPageDrink() {
+const DetailPageDrink: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
 	const [drinks, setDrinks] = useState<TMenuItemDrink[]>([]);
 
@@ -40,4 +40,6 @@ export default function DetailPageDrink() {
 			<MenuItemDetail item={item} />
 		</div>
 	);
-}
+};
+
+export default DetailPageDrink;

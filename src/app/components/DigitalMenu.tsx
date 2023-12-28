@@ -1,9 +1,10 @@
+import "./DigitalMenu.scss";
 import React, { useState, useEffect } from "react";
+
 import { TMenuItemFood, TMenuItemDrink } from "../../interfaces/menuItem";
 import { useFetchData } from "../hooks/useFetchData";
 import { MenuContext } from "../context/MenuContext";
 import Link from "next/link";
-import "./DigitalMenu.scss";
 
 type TFoodData = {
 	food: TMenuItemFood[];
