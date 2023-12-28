@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { TMenuItemFood, TMenuItemDrink } from "../../interfaces/menuItem";
-import { drinks as mockDrinks, food as mockFood } from "../lib/mockdata";
 import { useFetchData } from "../hooks/useFetchData";
 import { MenuContext } from "../context/MenuContext";
 import Link from "next/link";
@@ -42,11 +41,11 @@ export const DigitalMenu: React.FC = () => {
 		<div className="digitalMenu">
 			<h1>Welcome</h1>
 			<hr />
-			<div className="link-container">
-				<Link className="link" href="/food">
+			<div className="menu-link-container">
+				<Link className="menu-link" href="/food">
 					Hungry
 				</Link>
-				<Link className="link" href="/drinks">
+				<Link className="menu-link" href="/drinks">
 					Thirsty
 				</Link>
 			</div>

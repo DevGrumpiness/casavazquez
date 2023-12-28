@@ -1,7 +1,8 @@
-export default function Footer() {
-	return (
-		<footer>
-			<h1>Footer</h1>
-		</footer>
-	);
-}
+import React from "react";
+import Link from "next/link";
+
+const Header: React.FC = () => {
+	return <header></header>;
+};
+
+export default Header;
