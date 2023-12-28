@@ -19,6 +19,7 @@ main {
 header,
 footer {
 	width: 100%;
+	padding: 0 1rem;
 	position: fixed;
 
 	background: #37414b;
@@ -32,6 +33,7 @@ footer {
 header {
 	height: #{$header-height};
 	top: 0;
+	justify-content: start;
 }
 
 footer {
