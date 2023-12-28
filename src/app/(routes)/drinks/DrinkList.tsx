@@ -1,3 +1,4 @@
+import "./DrinkList.scss";
 import React, { useEffect, useState } from "react";
 import { MenuContext } from "../../context/MenuContext";
 import { TMenuItemDrink } from "../../../interfaces/menuItem";
@@ -20,7 +21,7 @@ const DrinkList: React.FC = () => {
 	}, [drinksData]);
 
 	return (
-		<div className="DrinkList">
+		<div className="drinkList">
 			<h1>Our Drinks</h1>
 			<hr />
 			<div className="menuItems">

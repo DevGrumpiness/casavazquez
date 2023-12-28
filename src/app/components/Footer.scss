@@ -1,6 +1,11 @@
 footer {
-	color: white;
-	a {
-		color: white;
+	.nav-link-contaienr {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+
+		a {
+			color: white;
+		}
 	}
 }
