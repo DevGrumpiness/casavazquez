@@ -76,6 +76,7 @@ Make yourself familar with the concepts in the [documentation](https://nextjs.or
 
 -   Sometimes the app runs on a different port, for example on [http://localhost:3001](http://localhost:3001) when 3000 is currently blocked.
 -   sometimes deleting the .next folder can help resolving cache problems
+-   CSS changes dont show? restart npm run dev to have the scss re-generated. Espacially when you created new scss files or changed styles on the highest level
 
 ## Learn More about Next
 
