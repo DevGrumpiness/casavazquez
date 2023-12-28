@@ -102,6 +102,40 @@ h1 {
   margin: 0 auto;
 }
 
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  flex: 1;
+  margin: 80px 0 100px 0;
+}
+
+header,
+footer {
+  width: 100%;
+  position: fixed;
+  background: #37414b;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  height: 80px;
+  top: 0;
+}
+
+footer {
+  height: 100px;
+  bottom: 0;
+}
+
 .digitalMenu {
   display: flex;
   flex-direction: column;
@@ -194,4 +228,38 @@ h1 {
   gap: 8px;
   width: 80%;
   margin: 0 auto;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  flex: 1;
+  margin: 80px 0 100px 0;
+}
+
+header,
+footer {
+  width: 100%;
+  position: fixed;
+  background: #37414b;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  height: 80px;
+  top: 0;
+}
+
+footer {
+  height: 100px;
+  bottom: 0;
 }

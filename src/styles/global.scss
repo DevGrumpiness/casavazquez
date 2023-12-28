@@ -1,2 +1,43 @@
-@import '../app/components/DigitalMenu';
-@import '../app/components/MenuItem';
+@import "../app/components/DigitalMenu";
+@import "../app/components/MenuItem";
+
+$header-height: 80px;
+$footer-height: 100px;
+$main-vertical-padding: calc(#{$header-height} + 1rem) 0
+	calc(#{$footer-height} + 1rem) 0;
+
+body {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+}
+
+main {
+	flex: 1;
+	margin: $header-height 0 $footer-height 0;
+}
+
+header,
+footer {
+	width: 100%;
+	position: fixed;
+
+	background: #37414b;
+	color: white;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+header {
+	height: #{$header-height};
+	top: 0;
+}
+
+footer {
+	height: #{$footer-height};
+	bottom: 0;
+}
