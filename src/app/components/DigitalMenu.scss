@@ -15,13 +15,18 @@
 }
 
 .menu-link {
-	width: 100%;
-	text-align: center;
-	font-size: 3rem;
+	width: 150px;
+	height: 150px;
+	font-size: 2rem;
+
 	color: hsl(200, 51%, 35%);
 	border: 3px solid gray;
 	border-radius: 5px;
 	text-decoration: none;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .menu-link:hover {
@@ -31,10 +36,6 @@
 
 hr {
 	width: 80%;
-}
-
-h1 {
-	font-size: 4rem;
 }
 
 .menuItemList {
