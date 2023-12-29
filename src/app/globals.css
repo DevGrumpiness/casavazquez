@@ -1,7 +1,0 @@
-:root {
-	--lightgray: #ececec;
-}
-
-body {
-	background: var(--lightgray);
-}
