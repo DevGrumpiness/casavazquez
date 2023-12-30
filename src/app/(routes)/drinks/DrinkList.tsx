@@ -22,7 +22,6 @@ const DrinkList: React.FC = () => {
 
 	return (
 		<div className="drinkList">
-			<h1>Our Drinks</h1>
 			<hr />
 			<div className="menuItems">
 				{drinks &&

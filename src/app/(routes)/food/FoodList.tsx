@@ -21,7 +21,6 @@ const FoodList: React.FC = () => {
 
 	return (
 		<div className="foodList">
-			<h1>Our Dishes</h1>
 			<hr />
 			<div className="menuItems">
 				{dishes &&
