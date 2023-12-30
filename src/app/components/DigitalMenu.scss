@@ -63,15 +63,19 @@ hr {
 
 		.listItem-header {
 			display: flex;
-			align-items: flex-end;
+			align-items: flex-start;
 			gap: 1rem;
 			width: 100%;
 
 			.content {
 				display: flex;
+				flex-direction: column;
 				justify-content: space-between;
-				align-items: center;
 				width: 100%;
+
+				h3 {
+					margin-top: 0;
+				}
 			}
 
 			.price {

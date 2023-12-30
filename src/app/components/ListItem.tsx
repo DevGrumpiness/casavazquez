@@ -59,10 +59,8 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem }) => {
 					</span>
 				</div>
 				<div className={`content ${!listItem.available && "disabled"}`}>
-					<div>
-						<h3>{listItem.name}</h3>
-						<span> {listItem.shortDescription} </span>
-					</div>
+					<h3>{listItem.name}</h3>
+					<span> {listItem.shortDescription} </span>
 				</div>
 			</div>
 			<span> {listItem.label} </span>
