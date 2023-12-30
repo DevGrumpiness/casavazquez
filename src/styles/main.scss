@@ -25,18 +25,13 @@ footer {
 	color: white;
 
 	display: flex;
-	justify-content: center;
 	align-items: center;
 }
 
 header {
 	height: #{$header-height};
-	justify-content: start;
-	padding: 0 1rem;
-	top: 0;
 }
 
 footer {
 	height: #{$footer-height};
-	bottom: 0;
 }
