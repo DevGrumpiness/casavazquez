@@ -2,7 +2,8 @@ interface MenuItem {
 	id: number;
 	type: "food" | "drink";
 	name: string;
-	description: string;
+	shortDescription: string;
+	longDescription: string;
 	price: number;
 	imageUrl: string | null;
 	available: boolean;
