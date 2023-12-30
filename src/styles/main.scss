@@ -42,15 +42,6 @@ footer {
 }
 
 .menuItems {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 1rem;
 	.listItem {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-		width: 90%;
-		margin: 0 auto;
 	}
 }

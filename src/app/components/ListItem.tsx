@@ -13,8 +13,12 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem }) => {
 	}
 
 	const router = useRouter();
+	const fallbackImage =
+		listItem.type === "food"
+			? "/media/food_icon.png"
+			: "/media/drinks_icon.png";
+	const imageUrl = listItem.imageUrl ?? fallbackImage;
 
-	const imageUrl = listItem.imageUrl ?? "/media/70x70.png";
 	const handleListItemClick = () => {
 		if (listItem.type === "food") {
 			router.push(`/food/${listItem.id}`);

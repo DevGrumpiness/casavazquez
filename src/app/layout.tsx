@@ -1,4 +1,5 @@
 import "../styles/main.scss";
+import "./components/DigitalMenu.scss";
 import type { Metadata } from "next";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
