@@ -6,9 +6,10 @@ import { useState } from "react";
 
 interface ListItemProps {
 	listItem: TMenuItemDrink | TMenuItemFood;
+	imageUrl: string;
 }
 
-export const ListItem: React.FC<ListItemProps> = ({ listItem }) => {
+export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 	if (!listItem) {
 		return;
 	}
@@ -16,11 +17,6 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem }) => {
 	const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
 	const router = useRouter();
-	const fallbackImage =
-		listItem.type === "food"
-			? "/media/food_icon.png"
-			: "/media/drinks_icon.png";
-	const imageUrl = listItem.imageUrl ?? fallbackImage;
 
 	const handleHeaderClick = () => {
 		console.log(isDetailsOpen);

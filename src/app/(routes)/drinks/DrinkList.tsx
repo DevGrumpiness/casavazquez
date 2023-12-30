@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { MenuContext } from "../../context/MenuContext";
 import { TMenuItemDrink } from "../../../interfaces/menuItem";
 import { ListItem } from "../../components/ListItem";
+import { getFallbackImageUrl } from "../../../services/list-item-service";
 
 const DrinkList: React.FC = () => {
 	const [drinks, setDrinks] = useState<TMenuItemDrink[]>([]);
@@ -27,7 +28,16 @@ const DrinkList: React.FC = () => {
 				{drinks &&
 					drinks.length > 0 &&
 					drinks.map((drink: TMenuItemDrink) => {
-						return <ListItem key={drink.id} listItem={drink} />;
+						return (
+							<ListItem
+								key={drink.id}
+								listItem={drink}
+								imageUrl={
+									drink.imageUrl ??
+									getFallbackImageUrl("drink", drink.subtype)
+								}
+							/>
+						);
 					})}
 			</div>
 		</div>

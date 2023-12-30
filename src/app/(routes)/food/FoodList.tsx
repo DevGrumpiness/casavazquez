@@ -19,6 +19,8 @@ const FoodList: React.FC = () => {
 		}
 	}, [foddData]);
 
+	const fallbackImage = "/media/food_icon.png";
+
 	return (
 		<div className="foodList">
 			<hr />
@@ -26,7 +28,13 @@ const FoodList: React.FC = () => {
 				{dishes &&
 					dishes.length > 0 &&
 					dishes.map((dish: TMenuItemFood) => {
-						return <ListItem key={dish.id} listItem={dish} />;
+						return (
+							<ListItem
+								key={dish.id}
+								listItem={dish}
+								imageUrl={dish.imageUrl ?? fallbackImage}
+							/>
+						);
 					})}
 			</div>
 		</div>
