@@ -1,9 +1,23 @@
+"use client";
+
 import "./Header.scss";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const Header: React.FC = () => {
+	const pathname = usePathname();
+
+	let headerText;
+	if (pathname.includes("food")) {
+		headerText = "Food";
+	} else if (pathname.includes("drinks")) {
+		headerText = "Drinks";
+	} else {
+		headerText = "Welcome";
+	}
+
 	return (
 		<header>
 			<Link href="/">
@@ -15,6 +29,7 @@ const Header: React.FC = () => {
 					className="mainLogo"
 				/>
 			</Link>
+			<h1>{headerText}</h1>
 		</header>
 	);
 };
