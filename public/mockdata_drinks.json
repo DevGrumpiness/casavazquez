@@ -10,7 +10,8 @@
 			"imageUrl": null,
 			"available": true,
 			"label": "alcoholic",
-			"availableSizes": ["standard"]
+			"availableSizes": ["standard"],
+			"subtype": "cocktail"
 		},
 		{
 			"id": 2,
@@ -22,7 +23,8 @@
 			"imageUrl": null,
 			"available": true,
 			"label": null,
-			"availableSizes": ["small", "medium", "large"]
+			"availableSizes": ["small", "medium", "large"],
+			"subtype": "softdrink"
 		},
 		{
 			"id": 3,
@@ -34,7 +36,8 @@
 			"imageUrl": null,
 			"available": false,
 			"label": "alcoholic",
-			"availableSizes": ["standard"]
+			"availableSizes": ["standard"],
+			"subtype": "beer"
 		},
 		{
 			"id": 4,
@@ -46,7 +49,8 @@
 			"imageUrl": null,
 			"available": true,
 			"label": null,
-			"availableSizes": ["medium", "large"]
+			"availableSizes": ["medium", "large"],
+			"subtype": "softdrink"
 		},
 		{
 			"id": 5,
@@ -58,7 +62,8 @@
 			"imageUrl": null,
 			"available": true,
 			"label": "alcoholic",
-			"availableSizes": ["standard"]
+			"availableSizes": ["standard"],
+			"subtype": "cocktail"
 		},
 		{
 			"id": 6,
@@ -70,7 +75,8 @@
 			"imageUrl": null,
 			"available": true,
 			"label": null,
-			"availableSizes": ["small", "standard", "large"]
+			"availableSizes": ["small", "standard", "large"],
+			"subtype": "softdrink"
 		},
 		{
 			"id": 7,
@@ -82,7 +88,8 @@
 			"imageUrl": null,
 			"available": true,
 			"label": "alcoholic",
-			"availableSizes": ["standard"]
+			"availableSizes": ["standard"],
+			"subtype": "cocktail"
 		}
 	]
 }
