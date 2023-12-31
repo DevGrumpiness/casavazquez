@@ -1,7 +1,8 @@
 import { DrinkSubType } from "../interfaces/menuItem";
 
 const fallbackImages = {
-	food: "/media/food_icon.png",
+	food: "/media/fallback_food_1.png",
+	salad: "/media/fallback_salad_1.png",
 	drink: "/media/drinks_icon.png",
 	softdrink: "/media/fallback_softdrink_1.png",
 	beer: "/media/fallback_beer_2-frei.png",
