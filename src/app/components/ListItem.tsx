@@ -1,4 +1,6 @@
 "usec client";
+import "./ListItem.scss";
+
 import { TMenuItemDrink, TMenuItemFood } from "../../interfaces/menuItem";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -16,8 +18,6 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 
 	const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
-	const router = useRouter();
-
 	const handleHeaderClick = () => {
 		console.log(isDetailsOpen);
 		if (isDetailsOpen) {
@@ -32,7 +32,10 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 	};
 
 	return (
-		<div id={String(listItem.id)} className="listItem">
+		<div
+			id={String(listItem.id)}
+			className={`listItem ${isDetailsOpen && "expanded"}`}
+		>
 			<div className="listItem-header" onClick={handleHeaderClick}>
 				<div>
 					<Image

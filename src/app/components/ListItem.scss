@@ -1,0 +1,76 @@
+.menuItems {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.5rem;
+
+	.listItem {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+
+		width: 90%;
+		margin: 0 auto;
+
+		background: transparent;
+		padding: 5px 10px;
+		color: #6b7a8c;
+		border: none;
+		box-shadow: rgba(107, 122, 140, 0.35) 0px 5px 15px;
+
+		.listItem-header {
+			display: flex;
+			align-items: flex-start;
+			gap: 1rem;
+			width: 100%;
+
+			.content {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				width: 100%;
+
+				h3 {
+					margin-top: 0;
+				}
+			}
+
+			.price {
+				color: #6b7a8c;
+				font-weight: 600;
+				font-family: "Courier New", Courier, monospace;
+			}
+		}
+
+		img {
+			width: 40px;
+			height: auto;
+			padding: 4px;
+			transition: width 100ms ease;
+		}
+
+		&.expanded {
+			img {
+				width: 35vw;
+				max-width: 150px;
+			}
+		}
+
+		.listItem-details {
+			overflow: hidden;
+			max-height: 1000px;
+			transition: max-height 100ms ease;
+		}
+
+		.hidden {
+			max-height: 0;
+			overflow: hidden;
+		}
+
+		.expand {
+			opacity: 0.3;
+		}
+	}
+}
