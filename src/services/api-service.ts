@@ -10,4 +10,6 @@ if (!supabaseApiKey) {
 	throw new Error("Missing Supabase API key");
 }
 
-export const supabase = createClient(supabaseUrl, supabaseApiKey);
+export const supabase = createClient(supabaseUrl, supabaseApiKey, {
+	db: { schema: "public" },
+});

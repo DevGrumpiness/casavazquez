@@ -47,7 +47,6 @@ export const MenuProvider = ({ children }: { children: React.ReactNode }) => {
 				loading: false,
 			});
 		});
-		console.log("menuState", menuState);
 	}, []);
 
 	const updateMenuState: UpdateMenuState = (newState) => {
