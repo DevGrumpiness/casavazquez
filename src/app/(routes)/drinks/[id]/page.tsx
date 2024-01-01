@@ -1,7 +1,6 @@
 "use client";
 import { useParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
-import MenuItemDetail from "../../../components/MenuItemDetails";
 import { MenuContext } from "../../../context/MenuContext";
 
 import {
