@@ -31,5 +31,7 @@ module.exports = {
 		quotes: ["error", "double"],
 		"prefer-const": "error",
 		"react/jsx-wrap-multilines": ["error", { return: "parens" }],
+		"react/react-in-jsx-scope": "off",
+		"react/jsx-uses-react": "off",
 	},
 };
