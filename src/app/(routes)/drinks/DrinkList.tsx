@@ -32,8 +32,8 @@ const DrinkList: React.FC = () => {
 							<ListItem
 								key={drink.id}
 								listItem={drink}
-								imageUrl={
-									drink.imageUrl ??
+								imageName={
+									drink.imageName ??
 									getFallbackImageUrl("drink", drink.subtype)
 								}
 							/>

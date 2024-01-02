@@ -32,7 +32,7 @@ const FoodList: React.FC = () => {
 							<ListItem
 								key={dish.id}
 								listItem={dish}
-								imageUrl={dish.imageUrl ?? fallbackImage}
+								imageName={dish.imageName ?? fallbackImage}
 							/>
 						);
 					})}
