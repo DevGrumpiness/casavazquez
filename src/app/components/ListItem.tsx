@@ -2,7 +2,6 @@
 import "./ListItem.scss";
 
 import { TMenuItemDrink, TMenuItemFood } from "../../interfaces/menuItem";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
 

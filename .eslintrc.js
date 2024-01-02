@@ -1,3 +1,5 @@
+const tab = "\t";
+
 module.exports = {
 	env: {
 		browser: true,
@@ -26,7 +28,7 @@ module.exports = {
 	},
 	plugins: ["@typescript-eslint", "react"],
 	rules: {
-		indent: ["warn", "tab"],
+		indent: ["error", "tab"],
 		"linebreak-style": ["warn", "windows"],
 		quotes: ["error", "double"],
 		"prefer-const": "error",

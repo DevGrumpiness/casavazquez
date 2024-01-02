@@ -8,8 +8,6 @@ interface MenuItem {
 	available: boolean;
 }
 
-type DrinkSize = "standard" | "small" | "medium" | "large"; // Drinks that come only in one size should be "standard"
-
 export type DrinkSubType = "softdrink" | "beer" | "cocktail" | "hot";
 
 export interface TMenuItemFood extends MenuItem {
