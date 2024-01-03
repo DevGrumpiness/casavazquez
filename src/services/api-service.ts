@@ -15,10 +15,43 @@ export const supabase = createClient(supabaseUrl, supabaseApiKey, {
 });
 
 export const fetchFromSupabaseBucket = async (bucketName: string) => {
-	const { data, error } = await supabase.storage.from("images").list("", {
+	const { data, error } = await supabase.storage.from(bucketName).list("", {
 		limit: 100,
 		offset: 0,
 		sortBy: { column: "name", order: "asc" },
 	});
-	console.log(data);
+
+	if (error) {
+		console.error("Error fetching files:", error);
+		return;
+	}
+
+	if (data) {
+		const urls = data.map((file) => {
+			const url = supabase.storage
+				.from(bucketName)
+				.getPublicUrl(file.name);
+			console.log(url);
+			return url;
+		});
+
+		return urls;
+	}
+};
+
+export const getImageByNameFromBucket = (
+	bucketName: string,
+	imageName: string | null
+): string | null => {
+	if (!imageName) {
+		return "";
+	}
+
+	const url =
+		supabase.storage.from(bucketName).getPublicUrl(imageName).data
+			.publicUrl ?? "";
+
+	console.log("url", url);
+
+	return url;
 };
