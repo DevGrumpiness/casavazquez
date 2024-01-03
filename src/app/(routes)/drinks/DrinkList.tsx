@@ -4,10 +4,14 @@ import { MenuContext } from "../../context/MenuContext";
 import { TMenuItemDrink } from "../../../interfaces/menuItem";
 import { ListItem } from "../../components/ListItem";
 import { getFallbackImageUrl } from "../../../services/list-item-service";
+import { useFetchFromSupabase } from "../../hooks/useFetchFromSupabase";
 
 const DrinkList: React.FC = () => {
 	const [drinks, setDrinks] = useState<TMenuItemDrink[]>([]);
 	const menuContext = React.useContext(MenuContext);
+	const drinksResponse = useFetchFromSupabase<TMenuItemDrink>("drinks");
+
+	console.log("drinksResponse", drinksResponse.data);
 
 	if (!menuContext) {
 		return <p>menuContext not found</p>;
@@ -16,10 +20,11 @@ const DrinkList: React.FC = () => {
 	const drinksData = menuContext.menuState.drinks;
 
 	useEffect(() => {
-		if (drinksData) {
-			setDrinks([...drinksData]);
+		if (drinksResponse.data) {
+			setDrinks(drinksResponse.data);
+			console.log("drinks after", drinks);
 		}
-	}, [drinksData]);
+	}, [drinksResponse]);
 
 	return (
 		<div className="drinkList">
