@@ -7,10 +7,10 @@ import { useState } from "react";
 
 interface ListItemProps {
 	listItem: TMenuItemDrink | TMenuItemFood;
-	imageName: string;
+	imageUrl: string | null;
 }
 
-export const ListItem: React.FC<ListItemProps> = ({ listItem, imageName }) => {
+export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 	if (!listItem) {
 		return;
 	}
@@ -38,7 +38,7 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageName }) => {
 			<div className="listItem-header" onClick={handleHeaderClick}>
 				<div>
 					<Image
-						src={imageName}
+						src={imageUrl ?? ""}
 						alt={listItem.name}
 						width={70}
 						height={70}

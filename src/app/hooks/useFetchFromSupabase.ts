@@ -17,11 +17,20 @@ export const useFetchFromSupabase = <T>(tableName: string): Response<T> => {
 
 	useEffect(() => {
 		const getTheData = async () => {
+			const { data, error } = await supabase.storage
+				.from("images")
+				.list("", {
+					limit: 100,
+					offset: 0,
+					sortBy: { column: "name", order: "asc" },
+				});
+			console.log(data);
+
 			setStatus("loading");
 			try {
 				const response = await supabase.from(tableName).select();
 				const { data } = await supabase.storage
-					.from("images")
+					.from(tableName)
 					.list("", {
 						limit: 100,
 						offset: 0,

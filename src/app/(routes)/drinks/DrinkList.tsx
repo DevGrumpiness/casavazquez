@@ -5,6 +5,7 @@ import { TMenuItemDrink } from "../../../interfaces/menuItem";
 import { ListItem } from "../../components/ListItem";
 import { getFallbackImageUrl } from "../../../services/list-item-service";
 import { useFetchFromSupabase } from "../../hooks/useFetchFromSupabase";
+import { getImageByNameFromBucket } from "../../../services/api-service";
 
 const DrinkList: React.FC = () => {
 	const [drinks, setDrinks] = useState<TMenuItemDrink[]>([]);
@@ -16,8 +17,6 @@ const DrinkList: React.FC = () => {
 	if (!menuContext) {
 		return <p>menuContext not found</p>;
 	}
-
-	const drinksData = menuContext.menuState.drinks;
 
 	useEffect(() => {
 		if (drinksResponse.data) {
@@ -33,14 +32,16 @@ const DrinkList: React.FC = () => {
 				{drinks &&
 					drinks.length > 0 &&
 					drinks.map((drink: TMenuItemDrink) => {
+						const imageUrl = getImageByNameFromBucket(
+							"images",
+							drink.imageName
+						);
+
 						return (
 							<ListItem
 								key={drink.id}
 								listItem={drink}
-								imageName={
-									drink.imageName ??
-									getFallbackImageUrl("drink", drink.subtype)
-								}
+								imageUrl={imageUrl}
 							/>
 						);
 					})}
