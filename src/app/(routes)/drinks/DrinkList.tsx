@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { MenuContext } from "../../context/MenuContext";
 import { TMenuItemDrink } from "../../../interfaces/menuItem";
 import { ListItem } from "../../components/ListItem";
-import { getFallbackImageUrl } from "../../../services/list-item-service";
 import { useFetchFromSupabase } from "../../hooks/useFetchFromSupabase";
 import { getImageByNameFromBucket } from "../../../services/api-service";
 

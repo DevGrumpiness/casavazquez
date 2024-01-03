@@ -45,6 +45,7 @@ export const useFetchFromSupabase = <T>(tableName: string): Response<T> => {
 				setStatus("success");
 			} catch (error) {
 				setErrorMessage((error as Error).message);
+				console.log(error);
 				setStatus("error");
 			}
 		};
