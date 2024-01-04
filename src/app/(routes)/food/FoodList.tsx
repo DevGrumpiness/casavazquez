@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MenuContext } from "../../context/MenuContext";
 import { TMenuItemFood } from "../../../interfaces/menuItem";
 import { ListItem } from "../../components/ListItem";
+import { getImageByNameFromBucket } from "../../../services/api-service";
 
 const FoodList: React.FC = () => {
 	const [dishes, setDishes] = useState<TMenuItemFood[]>([]);
@@ -19,8 +20,6 @@ const FoodList: React.FC = () => {
 		}
 	}, [foddData]);
 
-	const fallbackImage = "/media/food_icon.png";
-
 	return (
 		<div className="foodList">
 			<hr />
@@ -28,11 +27,15 @@ const FoodList: React.FC = () => {
 				{dishes &&
 					dishes.length > 0 &&
 					dishes.map((dish: TMenuItemFood) => {
+						const imageUrl = getImageByNameFromBucket(
+							"images",
+							dish.imageName
+						);
 						return (
 							<ListItem
 								key={dish.id}
 								listItem={dish}
-								imageName={dish.imageName ?? fallbackImage}
+								imageUrl={imageUrl}
 							/>
 						);
 					})}
