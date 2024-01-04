@@ -81,6 +81,10 @@ Make yourself familar with the concepts in the [documentation](https://nextjs.or
 -   sometimes deleting the .next folder can help resolving cache problems
 -   CSS changes dont show? restart npm run dev to have the scss re-generated. Espacially when you created new scss files or changed styles on the highest level
 
+## Database
+
+We use supabase to store the actual data and images.
+
 ## Learn More about Next
 
 To learn more about Next.js, take a look at the following resources:
