@@ -9,13 +9,15 @@ interface MenuItem {
 }
 
 export type DrinkSubType = "softdrink" | "beer" | "cocktail" | "hot";
+type FoodLabel = "veggie" | "vegan";
+type DrinkLabels = "alcoholic" | "hot";
 
 export interface TMenuItemFood extends MenuItem {
-	label: "veggie" | "vegan" | null;
+	labels: FoodLabel[] | null;
 }
 
 export interface TMenuItemDrink extends MenuItem {
-	label: "alcoholic" | "hot" | null;
+	labels: DrinkLabels[] | null;
 	subtype?: DrinkSubType;
 }
 
