@@ -4,6 +4,11 @@
 	align-items: center;
 	max-width: 1200px;
 	margin: 0 auto;
+
+	hr {
+		width: 80%;
+		margin-bottom: 2rem;
+	}
 }
 
 .menu-link-container {
@@ -32,9 +37,4 @@
 .menu-link:hover {
 	color: aliceblue;
 	background-color: hsl(200, 51%, 35%);
-}
-
-hr {
-	width: 80%;
-	margin-bottom: 2rem;
 }
