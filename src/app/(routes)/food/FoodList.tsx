@@ -22,22 +22,12 @@ const FoodList: React.FC = () => {
 
 	return (
 		<div className="foodList">
-			<hr />
 			<div className="menuItems">
 				{dishes &&
 					dishes.length > 0 &&
 					dishes.map((dish: TMenuItemFood) => {
-						const imageUrl = getImageByNameFromBucket(
-							"images",
-							dish.imageName
-						);
-						return (
-							<ListItem
-								key={dish.id}
-								listItem={dish}
-								imageUrl={imageUrl}
-							/>
-						);
+						const imageUrl = getImageByNameFromBucket("images", dish.imageName);
+						return <ListItem key={dish.id} listItem={dish} imageUrl={imageUrl} />;
 					})}
 			</div>
 		</div>
