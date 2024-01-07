@@ -1,7 +1,6 @@
 $header-height: 80px;
 $footer-height: 100px;
-$main-vertical-padding: calc(#{$header-height} + 1rem) 0
-	calc(#{$footer-height} + 1rem) 0;
+$main-vertical-padding: calc(#{$header-height} + 1rem) 0 calc(#{$footer-height} + 1rem) 0;
 
 body {
 	height: 100vh;
@@ -14,6 +13,8 @@ body {
 main {
 	flex: 1;
 	padding: $main-vertical-padding;
+	max-width: 800px;
+	margin: 0 auto;
 }
 
 header,
