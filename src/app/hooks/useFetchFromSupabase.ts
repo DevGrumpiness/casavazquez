@@ -12,30 +12,29 @@ interface Response<T> {
 export const useFetchFromSupabase = <T>(tableName: string): Response<T> => {
 	const [data, setData] = useState<Response<T>["data"]>(null);
 	const [status, setStatus] = useState<RequestStatus>("idle");
-	const [errorMessage, setErrorMessage] =
-		useState<Response<T>["errorMessage"]>(null);
+	const [errorMessage, setErrorMessage] = useState<Response<T>["errorMessage"]>(null);
 
 	useEffect(() => {
 		const getTheData = async () => {
-			const { data, error } = await supabase.storage
-				.from("images")
-				.list("", {
-					limit: 100,
-					offset: 0,
-					sortBy: { column: "name", order: "asc" },
-				});
+			const { data, error } = await supabase.storage.from("images").list("", {
+				limit: 100,
+				offset: 0,
+				sortBy: { column: "name", order: "asc" },
+			});
 			console.log(data);
 
 			setStatus("loading");
 			try {
-				const response = await supabase.from(tableName).select();
-				const { data } = await supabase.storage
+				const response = await supabase
 					.from(tableName)
-					.list("", {
-						limit: 100,
-						offset: 0,
-						sortBy: { column: "name", order: "asc" },
-					});
+					.select()
+					.order("name", { ascending: true })
+					.order("price", { ascending: true });
+				const { data } = await supabase.storage.from(tableName).list("", {
+					limit: 100,
+					offset: 0,
+					sortBy: { column: "name", order: "asc" },
+				});
 				console.log(data);
 				if (response.error) {
 					throw response.error;
