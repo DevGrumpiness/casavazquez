@@ -28,10 +28,7 @@ export const fetchFromSupabaseBucket = async (bucketName: string) => {
 
 	if (data) {
 		const urls = data.map((file) => {
-			const url = supabase.storage
-				.from(bucketName)
-				.getPublicUrl(file.name);
-			console.log(url);
+			const url = supabase.storage.from(bucketName).getPublicUrl(file.name);
 			return url;
 		});
 
@@ -39,19 +36,11 @@ export const fetchFromSupabaseBucket = async (bucketName: string) => {
 	}
 };
 
-export const getImageByNameFromBucket = (
-	bucketName: string,
-	imageName: string | null
-): string | null => {
+export const getImageByNameFromBucket = (bucketName: string, imageName: string | null): string | null => {
 	if (!imageName) {
 		return "";
 	}
 
-	const url =
-		supabase.storage.from(bucketName).getPublicUrl(imageName).data
-			.publicUrl ?? "";
-
-	console.log("url", url);
-
+	const url = supabase.storage.from(bucketName).getPublicUrl(imageName).data.publicUrl ?? "";
 	return url;
 };

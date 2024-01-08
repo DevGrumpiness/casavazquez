@@ -11,8 +11,6 @@ const DrinkList: React.FC = () => {
 	const menuContext = React.useContext(MenuContext);
 	const drinksResponse = useFetchFromSupabase<TMenuItemDrink>("drinks");
 
-	console.log("drinksResponse", drinksResponse.data);
-
 	if (!menuContext) {
 		return <p>menuContext not found</p>;
 	}
@@ -20,7 +18,6 @@ const DrinkList: React.FC = () => {
 	useEffect(() => {
 		if (drinksResponse.data) {
 			setDrinks(drinksResponse.data);
-			console.log("drinks after", drinks);
 		}
 	}, [drinksResponse]);
 

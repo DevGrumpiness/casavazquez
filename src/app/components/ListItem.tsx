@@ -18,7 +18,6 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 	const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
 	const handleHeaderClick = () => {
-		console.log(isDetailsOpen);
 		if (isDetailsOpen) {
 			return;
 		}
