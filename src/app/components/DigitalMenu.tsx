@@ -27,13 +27,28 @@ export const DigitalMenu: React.FC = () => {
 	return (
 		<div className="digitalMenu">
 			{news.length > 0 ? renderNews() : null}
-			<div className="menu-link-container">
-				<Link className="menu-link" href="/food">
-					Hungry
-				</Link>
-				<Link className="menu-link" href="/drinks">
-					Thirsty
-				</Link>
+
+			<div>
+				<hr></hr>
+				<h3>Aktuelle Öffnungszeiten</h3>
+				<div className="hours">
+					<p>
+						<span>Di-Do</span>
+						<span>17:00-01:00</span>
+					</p>
+					<p>
+						<span>Fr</span>
+						<span>15:00-02:00</span>
+					</p>
+					<p>
+						<span>Sa</span>
+						<span>12:00-02:00</span>
+					</p>
+					<p>
+						<span>So</span>
+						<span>15:00-00:00</span>
+					</p>
+				</div>
 			</div>
 		</div>
 	);
