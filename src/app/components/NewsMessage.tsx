@@ -30,14 +30,14 @@ export default function NewsMessage(props: INewsMessage) {
 
 	return read ? null : (
 		<div className="newsMessage">
-			{imageUrl && <Image src={imageUrl} alt={props.name} width={150} height={150} />}
-			<div>
-				<h3>{props.name}</h3>
-				<p>{props.content}</p>
-			</div>
+			<h3>{props.name}</h3>
 			<span className="closeX" onClick={setReadTrue}>
 				X
 			</span>
+			<div className="container">
+				{imageUrl && <Image src={imageUrl} alt={props.name} width={150} height={150} />}
+				<p>{props.content}</p>
+			</div>
 		</div>
 	);
 }

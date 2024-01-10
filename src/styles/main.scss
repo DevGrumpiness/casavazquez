@@ -2,9 +2,15 @@ $header-height: 80px;
 $footer-height: 100px;
 $main-vertical-padding: calc(#{$header-height} + 1rem) 0 calc(#{$footer-height} + 1rem) 0;
 
+$topo_blue: #37414b;
+
+:root {
+	--topo_blue: #{$topo_blue};
+}
+
 @font-face {
-  font-family: 'Instrument';
-  src: url('../assets/fonts/InstrumentSerif-Regular.ttf') format('truetype');
+	font-family: "Instrument";
+	src: url("../assets/fonts/InstrumentSerif-Regular.ttf") format("truetype");
 }
 
 body {
@@ -27,7 +33,7 @@ footer {
 	width: 100%;
 	position: fixed;
 
-	background: #37414b;
+	background: var(--topo_blue);
 	color: smokewhite;
 
 	display: flex;
