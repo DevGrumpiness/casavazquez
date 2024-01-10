@@ -8,7 +8,7 @@ interface Response<T> {
 	errorMessage?: string | null;
 }
 
-export const useFetchData = <T,>(url: string): Response<T> => {
+export const useFetchData = <T,>(url: string, sortBy: string): Response<T> => {
 	const [data, setData] = useState<T | null>(null);
 	const [status, setStatus] = useState<RequestStatus>("idle");
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);

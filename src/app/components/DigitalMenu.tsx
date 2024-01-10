@@ -15,7 +15,7 @@ export const DigitalMenu: React.FC = () => {
 		}
 	}, [newsResponse]);
 
-	console.log(news);
+	console.log("news", news);
 
 	return (
 		<div className="digitalMenu">

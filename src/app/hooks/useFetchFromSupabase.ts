@@ -9,7 +9,7 @@ interface Response<T> {
 	errorMessage?: string | null;
 }
 
-export const useFetchFromSupabase = <T>(tableName: string): Response<T> => {
+export const useFetchFromSupabase = <T>(tableName: string, sortBy?: string): Response<T> => {
 	const [data, setData] = useState<Response<T>["data"]>(null);
 	const [status, setStatus] = useState<RequestStatus>("idle");
 	const [errorMessage, setErrorMessage] = useState<Response<T>["errorMessage"]>(null);
@@ -19,7 +19,7 @@ export const useFetchFromSupabase = <T>(tableName: string): Response<T> => {
 			const { data, error } = await supabase.storage.from("images").list("", {
 				limit: 100,
 				offset: 0,
-				sortBy: { column: "name", order: "asc" },
+				sortBy: { column: sortBy ?? "id", order: "asc" },
 			});
 			console.log(data);
 
@@ -28,8 +28,7 @@ export const useFetchFromSupabase = <T>(tableName: string): Response<T> => {
 				const response = await supabase
 					.from(tableName)
 					.select()
-					.order("name", { ascending: true })
-					.order("price", { ascending: true });
+					.order(sortBy ?? "id", { ascending: true });
 				const { data } = await supabase.storage.from(tableName).list("", {
 					limit: 100,
 					offset: 0,
