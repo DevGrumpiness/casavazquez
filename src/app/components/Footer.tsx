@@ -8,20 +8,12 @@ export default function Footer() {
 		<footer>
 			<div className="nav-link-contaienr">
 				<Link className="nav-link" href="/food">
-					<Image
-						src="/media/food_icon.png"
-						alt="food"
-						width={50}
-						height={50}
-					/>
+					<Image src="/media/food_icon.png" alt="food" width={50} height={50} />
+					Hungrig
 				</Link>
 				<Link className="nav-link" href="/drinks">
-					<Image
-						src="/media/drinks_icon.png"
-						alt="food"
-						width={50}
-						height={50}
-					/>
+					<Image src="/media/drinks_icon.png" alt="food" width={50} height={50} />
+					Durstig
 				</Link>
 			</div>
 		</footer>

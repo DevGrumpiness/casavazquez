@@ -5,10 +5,17 @@ footer {
 	.nav-link-contaienr {
 		display: flex;
 		align-items: center;
-		gap: 10px;
+		gap: 3rem;
+
+		.nav-link {
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+		}
 
 		a {
 			color: white;
+			text-decoration: none;
 		}
 	}
 }
