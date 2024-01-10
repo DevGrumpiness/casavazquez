@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 export default function NewsMessage(props: INewsMessage) {
 	const [imageUrl, setImageUrl] = useState<string | null>(null);
+	const [read, setRead] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (props.pictureName) {
@@ -15,6 +16,10 @@ export default function NewsMessage(props: INewsMessage) {
 		}
 	}, [props.pictureName]);
 
+	const setReadTrue = () => {
+		setRead(true);
+	};
+
 	return (
 		<div className="newsMessage">
 			{imageUrl && <Image src={imageUrl} alt={props.name} width={200} height={200} />}
@@ -22,6 +27,9 @@ export default function NewsMessage(props: INewsMessage) {
 				<h3>{props.name}</h3>
 				<p>{props.content}</p>
 			</div>
+			<span className="closeX" onClick={setReadTrue}>
+				X
+			</span>
 		</div>
 	);
 }
