@@ -5,11 +5,7 @@ module.exports = {
 		browser: true,
 		es2021: true,
 	},
-	extends: [
-		"eslint:recommended",
-		"plugin:@typescript-eslint/recommended",
-		"plugin:react/recommended",
-	],
+	extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:react/recommended"],
 	overrides: [
 		{
 			env: {
@@ -30,15 +26,12 @@ module.exports = {
 	rules: {
 		indent: ["error", "tab"],
 		"linebreak-style": ["warn", "windows"],
-		quotes: ["error", "double"],
+		quotes: ["warning", "double"],
 		"prefer-const": "error",
 		"react/jsx-wrap-multilines": ["error", { return: "parens" }],
 		"react/react-in-jsx-scope": "off",
 		"react/jsx-uses-react": "off",
 		"react/prop-types": "off",
-		"@typescript-eslint/no-unused-vars": [
-			"error",
-			{ varsIgnorePattern: "error" },
-		],
+		"@typescript-eslint/no-unused-vars": ["error", { varsIgnorePattern: "error" }],
 	},
 };
