@@ -1,7 +1,6 @@
-import "./newsMessage.scss";
+import "./NewsMessage.scss";
 import Image from "next/image";
 import { INewsMessage } from "../../interfaces/news";
-import { useFetchFromSupabase } from "../hooks/useFetchFromSupabase";
 import { getImageByNameFromBucket } from "../../services/api-service";
 import { useEffect, useState } from "react";
 
