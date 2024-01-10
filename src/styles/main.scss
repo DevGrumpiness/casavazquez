@@ -2,6 +2,11 @@ $header-height: 80px;
 $footer-height: 100px;
 $main-vertical-padding: calc(#{$header-height} + 1rem) 0 calc(#{$footer-height} + 1rem) 0;
 
+@font-face {
+  font-family: 'Instrument';
+  src: url('../assets/fonts/InstrumentSerif-Regular.ttf') format('truetype');
+}
+
 body {
 	height: 100vh;
 	display: flex;
