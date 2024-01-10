@@ -1,6 +1,7 @@
-export interface NewsMessage {
-	headline: string;
-	text: string;
+export interface INewsMessage {
+	id: number;
+	name: string;
+	content: string;
 	read: boolean;
-	picture?: string;
+	pictureName?: string;
 }
