@@ -10,6 +10,13 @@ export default function NewsMessage(props: INewsMessage) {
 	const [read, setRead] = useState<boolean>(false);
 
 	useEffect(() => {
+		const readIds = JSON.parse(localStorage.getItem("readIds") || "[]");
+		if (readIds.includes(props.id)) {
+			setRead(true);
+		}
+	}, []);
+
+	useEffect(() => {
 		if (props.pictureName) {
 			const pictureUrl = getImageByNameFromBucket("images", props.pictureName);
 			setImageUrl(pictureUrl);
@@ -18,9 +25,11 @@ export default function NewsMessage(props: INewsMessage) {
 
 	const setReadTrue = () => {
 		setRead(true);
+		const readIds = JSON.parse(localStorage.getItem("readIds") || "[]");
+		localStorage.setItem("readIds", JSON.stringify([...readIds, props.id]));
 	};
 
-	return (
+	return read ? null : (
 		<div className="newsMessage">
 			{imageUrl && <Image src={imageUrl} alt={props.name} width={200} height={200} />}
 			<div>
