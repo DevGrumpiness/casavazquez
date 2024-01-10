@@ -1,0 +1,14 @@
+.newsMessage {
+	display: flex;
+	max-height: 200px;
+	margin: 2rem auto;
+	padding: 1rem;
+	gap: 1rem;
+	background: black;
+	color: aliceblue;
+
+	img {
+		max-height: 150px;
+		width: auto;
+	}
+}
