@@ -1,36 +1,21 @@
-import { TMenuItemFood, TMenuItemDrink } from "../../interfaces/menuItem";
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { MenuContext } from "../context/MenuContext";
 import { useFetchFromSupabase } from "../hooks/useFetchFromSupabase";
 import "./DigitalMenu.scss";
+import { NewsMessage } from "../../interfaces/news";
 
 export const DigitalMenu: React.FC = () => {
-	const menuContext = useContext(MenuContext);
+	const [news, setNews] = useState<NewsMessage[]>([]);
 
-	if (!menuContext) {
-		return <p>MenuContext not found.</p>;
-	}
-
-	const { menuState, updateMenuState } = menuContext;
-
-	const foodResponse = useFetchFromSupabase<TMenuItemFood>("food");
-	const drinksResponse = useFetchFromSupabase<TMenuItemDrink>("drinks");
+	const newsResponse = useFetchFromSupabase<NewsMessage>("news");
 
 	useEffect(() => {
-		if (foodResponse.data && drinksResponse.data) {
-			if (
-				menuState.food !== foodResponse.data ||
-				menuState.drinks !== drinksResponse.data
-			) {
-				updateMenuState({
-					...menuState,
-					food: [...foodResponse.data],
-					drinks: [...drinksResponse.data],
-				});
-			}
+		if (newsResponse.data) {
+			setNews(newsResponse.data);
 		}
-	}, [foodResponse.data, drinksResponse.data]);
+	}, [newsResponse]);
+
+	console.log(news);
 
 	return (
 		<div className="digitalMenu">
