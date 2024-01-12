@@ -5,6 +5,7 @@ import { TMenuItemDrink } from "../../../interfaces/menuItem";
 import { ListItem } from "../../components/ListItem";
 import { useFetchFromSupabase } from "../../hooks/useFetchFromSupabase";
 import { getImageByNameFromBucket } from "../../../services/api-service";
+import FilterChips from "../../components/FilterChips";
 
 const DrinkList: React.FC = () => {
 	const [drinks, setDrinks] = useState<TMenuItemDrink[]>([]);
@@ -23,6 +24,7 @@ const DrinkList: React.FC = () => {
 
 	return (
 		<div className="drinkList">
+			<FilterChips />
 			<div className="menuItems">
 				{drinks &&
 					drinks.length > 0 &&
