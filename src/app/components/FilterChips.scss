@@ -1,0 +1,15 @@
+.filterChips {
+	display: flex;
+	justify-content: center;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+	padding: 0.5em;
+}
+
+.chip {
+	margin: 0.5em;
+	padding: 0.5em;
+	border-radius: 16px;
+	background-color: #f0f0f0;
+	font-size: 0.875em;
+}
