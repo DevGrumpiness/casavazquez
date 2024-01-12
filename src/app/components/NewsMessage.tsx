@@ -9,7 +9,7 @@ export default function NewsMessage(props: INewsMessage) {
 	const [read, setRead] = useState<boolean>(false);
 
 	useEffect(() => {
-		const readIds = JSON.parse(localStorage.getItem("readIds") || "[]");
+		const readIds = JSON.parse(sessionStorage.getItem("readIds") || "[]");
 		if (readIds.includes(props.id)) {
 			setRead(true);
 		}
@@ -24,8 +24,8 @@ export default function NewsMessage(props: INewsMessage) {
 
 	const setReadTrue = () => {
 		setRead(true);
-		const readIds = JSON.parse(localStorage.getItem("readIds") || "[]");
-		localStorage.setItem("readIds", JSON.stringify([...readIds, props.id]));
+		const readIds = JSON.parse(sessionStorage.getItem("readIds") || "[]");
+		sessionStorage.setItem("readIds", JSON.stringify([...readIds, props.id]));
 	};
 
 	return read ? null : (
