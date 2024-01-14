@@ -3,12 +3,25 @@ import React from "react";
 
 const mockFilters = ["Alkoholisch", "Bier", "Cocktails", "Heiß", "Softdrinks", "Sommerdrinks", "Angebote"];
 
-const FilterChips: React.FC = () => {
+interface FilterChipsProps {
+	selectedFilters: string[];
+	setSelectedFilters: (filters: string[]) => void;
+}
+
+const FilterChips: React.FC<FilterChipsProps> = ({ selectedFilters, setSelectedFilters }) => {
+	const handleChipClick = (filter: string) => {
+		if (selectedFilters.includes(filter)) {
+			setSelectedFilters(selectedFilters.filter(f => f !== filter));
+		} else {
+			setSelectedFilters([...selectedFilters, filter]);
+		}
+	};
+
 	return (
 		<div className="scrollHint">
 			<div className="filterChips">
 				{mockFilters.map((filter, index) => (
-					<div key={index} className="chip">
+					<div key={index} className={selectedFilters.includes(filter) ? "chip selected" : "chip"} onClick={() => handleChipClick(filter)}>
 						{filter}
 					</div>
 				))}
