@@ -21,7 +21,10 @@ const FilterChips: React.FC<FilterChipsProps> = ({ selectedFilters, setSelectedF
 		<div className="scrollHint">
 			<div className="filterChips">
 				{mockFilters.map((filter, index) => (
-					<div key={index} className={selectedFilters.includes(filter) ? "chip selected" : "chip"} onClick={() => handleChipClick(filter)}>
+					<div key={index}
+						className={selectedFilters.includes(filter) ? "chip selected" : "chip"}
+						onClick={() => handleChipClick(filter as string)}
+					>
 						{filter}
 					</div>
 				))}

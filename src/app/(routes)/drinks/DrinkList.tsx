@@ -6,6 +6,7 @@ import { ListItem } from "../../components/ListItem";
 import { useFetchFromSupabase } from "../../hooks/useFetchFromSupabase";
 import { getImageByNameFromBucket } from "../../../services/api-service";
 import FilterChips from "../../components/FilterChips";
+import _ from "lodash";
 
 const DrinkList: React.FC = () => {
 	const [drinks, setDrinks] = useState<TMenuItemDrink[]>([]);
@@ -23,7 +24,15 @@ const DrinkList: React.FC = () => {
 		}
 	}, [drinksResponse]);
 
-	const filteredDrinks = drinks.filter(drink => selectedFilters.every(filter => drink.labels?.includes(filter)));
+	const filteredDrinks = _.filter(drinks, (drink: TMenuItemDrink) =>
+		selectedFilters.every((filter) =>
+			drink.label
+				?.toLowerCase()
+				.split(",")
+				.map((label) => label.trim())
+				.includes(filter.toLowerCase())
+		)
+	);
 
 	return (
 		<div className="drinkList">
