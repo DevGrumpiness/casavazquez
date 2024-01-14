@@ -60,7 +60,8 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 			</div>
 			<div className="listItem-footer">
 				<div className="labels-container">
-					{listItem.labels && listItem.labels.map((label) => <span key={label}>{label}</span>)}
+					{listItem.label &&
+						listItem.label.split(",").map((label) => <span key={label.trim()}>{label.trim()}</span>)}
 				</div>
 
 				<div className={`close ${!isDetailsOpen ? "hidden" : ""}`} onClick={handleCloseIconClick}>

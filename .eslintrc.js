@@ -26,7 +26,7 @@ module.exports = {
 	rules: {
 		indent: ["error", "tab"],
 		"linebreak-style": ["warn", "windows"],
-		quotes: ["warning", "double"],
+		quotes: ["warn", "double"],
 		"prefer-const": "error",
 		"react/jsx-wrap-multilines": ["error", { return: "parens" }],
 		"react/react-in-jsx-scope": "off",
