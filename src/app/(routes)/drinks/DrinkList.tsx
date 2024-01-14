@@ -9,6 +9,7 @@ import FilterChips from "../../components/FilterChips";
 
 const DrinkList: React.FC = () => {
 	const [drinks, setDrinks] = useState<TMenuItemDrink[]>([]);
+	const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 	const menuContext = React.useContext(MenuContext);
 	const drinksResponse = useFetchFromSupabase<TMenuItemDrink>("drinks");
 
@@ -22,13 +23,14 @@ const DrinkList: React.FC = () => {
 		}
 	}, [drinksResponse]);
 
+	const filteredDrinks = drinks.filter(drink => selectedFilters.every(filter => drink.labels?.includes(filter)));
+
 	return (
 		<div className="drinkList">
-			<FilterChips />
+			<FilterChips selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
 			<div className="menuItems">
-				{drinks &&
-					drinks.length > 0 &&
-					drinks.map((drink: TMenuItemDrink) => {
+				{filteredDrinks.length > 0 &&
+					filteredDrinks.map((drink: TMenuItemDrink) => {
 						const imageUrl = getImageByNameFromBucket("images", drink.imageName);
 
 						return <ListItem key={drink.id} listItem={drink} imageUrl={imageUrl} />;
