@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { useFetchFromSupabase } from "../hooks/useFetchFromSupabase";
 import "./DigitalMenu.scss";
 import { INewsMessage } from "../../interfaces/news";
