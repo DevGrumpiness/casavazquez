@@ -22,7 +22,6 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 		if (isDetailsOpen) {
 			return;
 		}
-
 		setIsDetailsOpen(true);
 	};
 
@@ -32,7 +31,7 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 
 	const renderLabels = (labelString: string) => {
 		return <ListItemLabels labelString={labelString} />;
-	}
+	};
 
 	return (
 		<div id={String(listItem.id)} className={`listItem ${isDetailsOpen ? "expanded" : ""}`}>
@@ -58,21 +57,19 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 						</div>{" "}
 					</span>
 					<div className={`listItem-details ${!isDetailsOpen ? "hidden" : ""}`}>
-						<hr></hr>
+						<hr />
+						<div className={`labels-container ${!isDetailsOpen ? "hidden" : ""}`}>
+							{listItem.label && renderLabels(listItem.label)}
+						</div>
 						{listItem.longDescription}
 					</div>
 				</div>
 			</div>
-			<div className="listItem-footer">
-				<div className="labels-container">
-					{listItem.label && renderLabels(listItem.label)}
-				</div>
-
-				<div className={`close ${!isDetailsOpen ? "hidden" : ""}`} onClick={handleCloseIconClick}>
-					<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 512 512">
-						<path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z" />
-					</svg>
-				</div>
+			<div className="listItem-footer"></div>
+			<div className={`close ${!isDetailsOpen ? "hidden" : ""}`} onClick={handleCloseIconClick}>
+				<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 512 512">
+					<path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z" />
+				</svg>
 			</div>
 		</div>
 	);
