@@ -4,6 +4,7 @@ import "./ListItem.scss";
 import { TMenuItemDrink, TMenuItemFood } from "../../interfaces/menuItem";
 import Image from "next/image";
 import { useState } from "react";
+import ListItemLabels from "./ListItemLabels";
 
 interface ListItemProps {
 	listItem: TMenuItemDrink | TMenuItemFood;
@@ -28,6 +29,10 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 	const handleCloseIconClick = () => {
 		setIsDetailsOpen(false);
 	};
+
+	const renderLabels = (labelString: string) => {
+		return <ListItemLabels labelString={labelString} />;
+	}
 
 	return (
 		<div id={String(listItem.id)} className={`listItem ${isDetailsOpen ? "expanded" : ""}`}>
@@ -60,8 +65,7 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 			</div>
 			<div className="listItem-footer">
 				<div className="labels-container">
-					{listItem.label &&
-						listItem.label.split(",").map((label) => <span key={label.trim()}>{label.trim()}</span>)}
+					{listItem.label && renderLabels(listItem.label)}
 				</div>
 
 				<div className={`close ${!isDetailsOpen ? "hidden" : ""}`} onClick={handleCloseIconClick}>
