@@ -1,4 +1,4 @@
-import './listItemLabels.scss'
+import './ListItemLabels.scss'
 import React from "react";
 
 interface ListItemLabelProps {
