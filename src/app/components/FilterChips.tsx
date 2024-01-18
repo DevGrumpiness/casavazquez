@@ -29,7 +29,7 @@ const FilterChips: React.FC<FilterChipsProps> = ({ selectedFilters, setSelectedF
 					return (
 						<div key={index} onClick={() => handleChipClick(filter)}>
 							<div className={selected ? "chip selected" : "chip"}>
-								{filter}
+								<span className="filterLabel">{filter}</span>
 								<span className={`closeIcon ${!selected ? 'hide' : ''}`} onClick={unselect(filter)} >X</span>
 							</div>
 						</div>

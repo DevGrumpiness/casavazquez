@@ -46,12 +46,16 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 8px;
+	gap: 4px;
 
 	&.selected {
 		color: #465b6f;
 		background: azure;
 		border: 1px solid #465b6f;
+	}
+
+	.filterLabel {
+		width: 100%;
 	}
 
 	.closeIcon {
