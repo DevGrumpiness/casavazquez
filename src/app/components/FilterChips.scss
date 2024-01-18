@@ -25,7 +25,7 @@
 	flex-wrap: nowrap;
 	overflow-x: auto;
 	padding: 0.5em;
-	padding-left: 160px;
+	padding-left: 90%;
 	margin-bottom: 2rem;
 	scrollbar-width: none;
 	&::-webkit-scrollbar {
@@ -43,9 +43,22 @@
 	min-width: 80px;
 	text-align: center;
 
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+
 	&.selected {
 		color: #465b6f;
 		background: azure;
 		border: 1px solid #465b6f;
+	}
+
+	.closeIcon {
+		padding-right: 3px;
+
+		&.hide {
+			display: none;
+		}
 	}
 }
