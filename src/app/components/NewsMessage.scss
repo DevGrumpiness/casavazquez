@@ -3,7 +3,7 @@
 	font-family: "Instrument";
 
     margin: 2rem auto;
-    padding: 15px;
+    padding: 8px 1rem;
     width: 80vw;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
@@ -15,7 +15,7 @@
 		display: flex;
 		align-items: center;
 		gap: 1rem;
-		padding: 1rem;
+		padding: 0 1rem;
 	}
 
 	h3 {
@@ -29,18 +29,22 @@
 	}
 
 	img {
-		max-height: 140px;
-		max-height: 150px;
+		max-height: 80px;
 		object-fit: contain;
 	}
 
-	img, p {
-		flex: 1;
+	img {
+		width: 25%;
 	}
 
 	.closeX {
 		position: absolute;
-		top: 2px;
-		right: 2px;
+		top: 10px;
+		right: 10px;
+		width: 20px;
+		height: 20px;
+		background-color: #F0F2F5;
+		fill: #edc100;
+		border-radius: 30px;
 	}
 }
