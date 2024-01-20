@@ -32,7 +32,7 @@ export default function NewsMessage(props: INewsMessage) {
 		<div className="newsMessage">
 			<h3>{props.name}</h3>
 			<span className="closeX" onClick={setReadTrue}>
-				X
+				
 			</span>
 			<div className="container">
 				{imageUrl && <Image src={imageUrl} alt={props.name} width={150} height={150} />}
@@ -41,3 +41,4 @@ export default function NewsMessage(props: INewsMessage) {
 		</div>
 	);
 }
+
