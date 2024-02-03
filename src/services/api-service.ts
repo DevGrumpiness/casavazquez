@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { TMenuItemDrink } from "../interfaces/menuItem";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseApiKey = process.env.NEXT_PUBLIC_SUPABASE_API_KEY;
@@ -42,4 +43,24 @@ export const getImageByNameFromBucket = (bucketName: string, imageName: string |
 
 	const url = supabase.storage.from(bucketName).getPublicUrl(imageName).data.publicUrl ?? "";
 	return url;
+};
+
+const setDrink = async (drink: TMenuItemDrink) => {
+	const { data, error } = await supabase.from("drinks").insert([drink]);
+
+	if (error) {
+		console.error("Error inserting drink: ", error);
+	} else {
+		setDrink(drink); 
+	}
+};
+
+const updateDrink = async (id: string, updatedDrink: Partial<TMenuItemDrink>) => {
+	const { data, error } = await supabase.from("drinks").update(updatedDrink).eq("id", id);
+
+	if (error) {
+		console.error("Error updating drink: ", error);
+	} else {
+		setDrink(drinks.map((drink) => (drink.id === id ? { ...drink, ...updatedDrink } : drink)));
+	}
 };
