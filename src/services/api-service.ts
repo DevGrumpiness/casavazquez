@@ -45,22 +45,24 @@ export const getImageByNameFromBucket = (bucketName: string, imageName: string |
 	return url;
 };
 
-const setDrink = async (drink: TMenuItemDrink) => {
+export const setDrink = async (drink: TMenuItemDrink) => {
 	const { data, error } = await supabase.from("drinks").insert([drink]);
-
+  
 	if (error) {
-		console.error("Error inserting drink: ", error);
-	} else {
-		setDrink(drink); 
+	  console.error("Error inserting drink: ", error);
+	  return null;
 	}
-};
-
-const updateDrink = async (id: string, updatedDrink: Partial<TMenuItemDrink>) => {
+  
+	return data;
+  };
+  
+  export const updateDrink = async (id: string, updatedDrink: Partial<TMenuItemDrink>) => {
 	const { data, error } = await supabase.from("drinks").update(updatedDrink).eq("id", id);
-
+  
 	if (error) {
-		console.error("Error updating drink: ", error);
-	} else {
-		setDrink(drinks.map((drink) => (drink.id === id ? { ...drink, ...updatedDrink } : drink)));
+	  console.error("Error updating drink: ", error);
+	  return null;
 	}
-};
+  
+	return data;
+  };
