@@ -5,8 +5,9 @@ import { setDrink, updateDrink } from '../../../services/api-service';
 const AdminPage: React.FC = () => {
   const [drink, setDrinkState] = useState<TMenuItemDrink | null>(null);
 
-  const handleCreateDrink = async (newDrink: TMenuItemDrink) => {
-    const result = await setDrink(newDrink);
+  const handleCreateDrink = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const result = await setDrink(drink);
     if (result) {
       // handle success (e.g., show a success message, update a list of drinks, etc.)
     } else {
@@ -14,8 +15,9 @@ const AdminPage: React.FC = () => {
     }
   };
 
-  const handleUpdateDrink = async (id: string, updatedDrink: Partial<TMenuItemDrink>) => {
-    const result = await updateDrink(id, updatedDrink);
+  const handleUpdateDrink = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const result = await updateDrink(drink.id, drink);
     if (result) {
       // handle success (e.g., show a success message, update the drink in a list of drinks, etc.)
     } else {
@@ -23,7 +25,26 @@ const AdminPage: React.FC = () => {
     }
   };
 
-  // render your form for creating/updating drinks here, and call handleCreateDrink or handleUpdateDrink when the form is submitted
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setDrinkState(prevDrink => ({ ...prevDrink, [name]: value }));
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleCreateDrink}>
+        <input type="text" name="name" value={drink?.name || ''} onChange={handleInputChange} placeholder="Drink name" required />
+        <input type="number" name="price" value={drink?.price || ''} onChange={handleInputChange} placeholder="Drink price" required />
+        <button type="submit">Create Drink</button>
+      </form>
+
+      <form onSubmit={handleUpdateDrink}>
+        <input type="text" name="name" value={drink?.name || ''} onChange={handleInputChange} placeholder="Drink name" required />
+        <input type="number" name="price" value={drink?.price || ''} onChange={handleInputChange} placeholder="Drink price" required />
+        <button type="submit">Update Drink</button>
+      </form>
+    </div>
+  );
 };
 
 export default AdminPage;
