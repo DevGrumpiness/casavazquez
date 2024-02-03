@@ -1,75 +1,29 @@
+import React, { useState } from 'react';
+import { TMenuItemDrink } from '../../../interfaces/menuItem';
+import { setDrink, updateDrink } from '../../../services/api-service';
 
-import { useState, useEffect } from 'react'
-import { supabase } from '../../supabaseClient'
+const AdminPage: React.FC = () => {
+  const [drink, setDrinkState] = useState<TMenuItemDrink | null>(null);
 
-interface AdminProps {
-}
-
-export default function Admin({ }: AdminProps) {
-
-  const [data, setData] = useState<any[]>([])
-
-  useEffect(() => {
-    fetchData()
-  }, [])
-
-  async function fetchData() {
-    const { data: fetchedData, error } = await supabase
-      .from('table')
-      .select()
-    
-    if (error) {
-      console.log(error)
-      return
+  const handleCreateDrink = async (newDrink: TMenuItemDrink) => {
+    const result = await setDrink(newDrink);
+    if (result) {
+      // handle success (e.g., show a success message, update a list of drinks, etc.)
+    } else {
+      // handle error (e.g., show an error message)
     }
+  };
 
-    setData(fetchedData)
-  }
-
-  async function createData(data: any) {
-    const { error } = await supabase
-      .from('table')
-      .insert(data)
-
-    if (error) {
-      console.log(error)
-      return
+  const handleUpdateDrink = async (id: string, updatedDrink: Partial<TMenuItemDrink>) => {
+    const result = await updateDrink(id, updatedDrink);
+    if (result) {
+      // handle success (e.g., show a success message, update the drink in a list of drinks, etc.)
+    } else {
+      // handle error (e.g., show an error message)
     }
+  };
 
-    fetchData()
-  }
+  // render your form for creating/updating drinks here, and call handleCreateDrink or handleUpdateDrink when the form is submitted
+};
 
-  async function updateData(id: string, data: any) {
-    const { error } = await supabase
-      .from('table')
-      .update(data)
-      .eq('id', id)
-
-    if (error) {
-      console.log(error)
-      return
-    }
-
-    fetchData()
-  }
-
-  async function deleteData(id: string) {
-    const { error } = await supabase
-      .from('table')
-      .delete()
-      .eq('id', id)
-
-    if (error) {
-      console.log(error)
-      return
-    }
-
-    fetchData()
-  }
-
-  return (
-    <div>
-    </div>
-  )
-
-}
+export default AdminPage;
