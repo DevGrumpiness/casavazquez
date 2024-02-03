@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import { TMenuItemDrink } from '../../../interfaces/menuItem';
 import { setDrink, updateDrink } from '../../../services/api-service';
