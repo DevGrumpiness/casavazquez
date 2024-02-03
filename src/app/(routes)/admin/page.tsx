@@ -3,48 +3,41 @@ import { TMenuItemDrink } from '../../../interfaces/menuItem';
 import { setDrink, updateDrink } from '../../../services/api-service';
 
 const AdminPage: React.FC = () => {
-  const [drink, setDrinkState] = useState<TMenuItemDrink | null>(null);
+	const [drink, setDrinkState] = useState<TMenuItemDrink | null>(null);
 
-  const handleCreateDrink = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const result = await setDrink(drink);
-    if (result) {
-      // handle success (e.g., show a success message, update a list of drinks, etc.)
-    } else {
-      // handle error (e.g., show an error message)
-    }
-  };
+	const handleCreateDrink = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		if (drink) {
+			const result = await setDrink(drink);
+			if (result) {
+				// handle success
+			} else {
+				// handle error
+			}
+		}
+	};
 
-  const handleUpdateDrink = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const result = await updateDrink(drink.id, drink);
-    if (result) {
-      // handle success (e.g., show a success message, update the drink in a list of drinks, etc.)
-    } else {
-      // handle error (e.g., show an error message)
-    }
-  };
+	const handleUpdateDrink = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		if (drink && drink.id) {
+			const result = await updateDrink(drink.id.toString(), drink);
+			if (result) {
+				// handle success
+			} else {
+				// handle error
+			}
+		}
+	};
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setDrinkState(prevDrink => ({ ...prevDrink, [name]: value }));
-  };
+	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = event.target;
+		setDrinkState((prevDrink) => ({
+			...prevDrink,
+			[name]: name === "price" ? parseFloat(value) : value,
+		}));
+	};
 
-  return (
-    <div>
-      <form onSubmit={handleCreateDrink}>
-        <input type="text" name="name" value={drink?.name || ''} onChange={handleInputChange} placeholder="Drink name" required />
-        <input type="number" name="price" value={drink?.price || ''} onChange={handleInputChange} placeholder="Drink price" required />
-        <button type="submit">Create Drink</button>
-      </form>
-
-      <form onSubmit={handleUpdateDrink}>
-        <input type="text" name="name" value={drink?.name || ''} onChange={handleInputChange} placeholder="Drink name" required />
-        <input type="number" name="price" value={drink?.price || ''} onChange={handleInputChange} placeholder="Drink price" required />
-        <button type="submit">Update Drink</button>
-      </form>
-    </div>
-  );
+	return <div>{/* Forms */}</div>;
 };
 
 export default AdminPage;
