@@ -14,7 +14,7 @@ const DrinkList: React.FC = () => {
 	const menuContext = React.useContext(MenuContext);
 	const drinksResponse = useFetchFromSupabase<TMenuItemDrink>("drinks");
 
-	const filters = ["Alkohol", "alk. frei", "heiß", "Sommer", "Angebot"];
+	const filters = ["Alkohol", "alk. frei", "heiß", "Sommer", "Angebot", "Schnaps"];
 
 	if (!menuContext) {
 		return <p>menuContext not found</p>;
