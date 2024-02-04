@@ -1,68 +1,73 @@
 .scrollHint {
-	position: relative;
-	&:before,
-	&:after {
-		content: "";
-		height: 100%;
-		width: 50px;
-		position: absolute;
-		top: 0;
-		pointer-events: none;
-	}
-	&:before {
-		left: 0;
-		background: linear-gradient(to right, white 0%, rgba(255, 255, 255, 0) 25%);
-	}
-	&:after {
-		right: 0;
-		background: linear-gradient(to left, white 0%, rgba(255, 255, 255, 0) 100%);
-	}
+    position: relative;
+    &:before,
+    &:after {
+        content: "";
+        height: 100%;
+        width: 50px;
+        position: absolute;
+        top: 0;
+        pointer-events: none;
+    }
+    &:before {
+        left: 0;
+        background: linear-gradient(to right, white 0%, rgba(255, 255, 255, 0) 25%);
+    }
+    &:after {
+        right: 0;
+        background: linear-gradient(to left, white 0%, rgba(255, 255, 255, 0) 100%);
+    }
 }
 
 .filterChips {
-	display: flex;
-	justify-content: center;
-	flex-wrap: nowrap;
-	overflow-x: auto;
-	padding: 0.5em;
-	padding-left: 90%;
-	margin-bottom: 2rem;
-	scrollbar-width: none;
-	&::-webkit-scrollbar {
-		display: none;
-	}
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 0.5em;
+    margin-bottom: 2rem;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.filterList {
+    display: flex;
+    flex-direction: row; 
+    justify-content: flex-start;
+    flex-wrap: nowrap;
 }
 
 .chip {
-	margin: 0.5em;
-	padding: 0.5em;
-	border-radius: 16px;
-	background: #465b6f;
-	color: azure;
-	font-size: 0.875em;
-	min-width: 80px;
-	text-align: center;
+    margin: 0.5em;
+    padding: 0.5em;
+    border-radius: 16px;
+    background: #465b6f;
+    color: azure;
+    font-size: 0.875em;
+    min-width: 80px;
+    text-align: center;
 
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
 
-	&.selected {
-		color: #465b6f;
-		background: azure;
-		border: 1px solid #465b6f;
-	}
+    &.selected {
+        color: #465b6f;
+        background: azure;
+        border: 1px solid #465b6f;
+    }
 
-	.filterLabel {
-		width: 100%;
-	}
+    .filterLabel {
+        width: 100%;
+    }
 
-	.closeIcon {
-		padding-right: 3px;
+    .closeIcon {
+        padding-right: 3px;
 
-		&.hide {
-			display: none;
-		}
-	}
+        &.hide {
+            display: none;
+        }
+    }
 }

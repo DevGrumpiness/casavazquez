@@ -1,5 +1,5 @@
 import "./FilterChips.scss";
-import React from "react";
+import React, { computed } from "react";
 
 interface FilterChipsProps {
 	selectedFilters: string[];
@@ -10,33 +10,35 @@ interface FilterChipsProps {
 const FilterChips: React.FC<FilterChipsProps> = ({ selectedFilters, setSelectedFilters, filters }) => {
 	const sortedFilters = [...filters].sort();
 
-
-	const filtersToDisplay = selectedFilters.length > 0 ? selectedFilters : sortedFilters;
+	let filtersToDisplay = selectedFilters.length > 0 ? selectedFilters : sortedFilters;
 
 	const handleChipClick = (filter: string) => {
 		setSelectedFilters([filter]);
 	};
 
-	const unselect = (filter: string) => () => {
+	const unselect = (filter: string) => (event: React.MouseEvent) => {
+		event.stopPropagation();
 		setSelectedFilters(selectedFilters.filter((f) => f !== filter));
 	};
 
 	return (
 		<div className="scrollHint">
 			<div className="filterChips">
-				{filtersToDisplay.map((filter, index) => {
-					const selected = selectedFilters.includes(filter);
-					return (
-						<div key={index} onClick={() => handleChipClick(filter)}>
-							<div className={selected ? "chip selected" : "chip"}>
-								<span className="filterLabel">{filter}</span>
-								<span className={`closeIcon ${!selected ? "hide" : ""}`} onClick={unselect(filter)}>
-									X
-								</span>
+				<div className="filterList">
+					{filtersToDisplay.map((filter, index) => {
+						const selected = selectedFilters.includes(filter);
+						return (
+							<div key={index} onClick={() => handleChipClick(filter)}>
+								<div className={selected ? "chip selected" : "chip"}>
+									<span className="filterLabel">{filter}</span>
+									<span className={`closeIcon ${!selected ? "hide" : ""}`} onClick={unselect(filter)}>
+										X
+									</span>
+								</div>
 							</div>
-						</div>
-					);
-				})}
+						);
+					})}
+				</div>
 			</div>
 		</div>
 	);
