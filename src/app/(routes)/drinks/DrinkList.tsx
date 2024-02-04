@@ -14,6 +14,8 @@ const DrinkList: React.FC = () => {
 	const menuContext = React.useContext(MenuContext);
 	const drinksResponse = useFetchFromSupabase<TMenuItemDrink>("drinks");
 
+	const filters = ["Alkohol", "alk. frei", "heiß", "Sommer", "Angebot"];
+
 	if (!menuContext) {
 		return <p>menuContext not found</p>;
 	}
@@ -36,12 +38,11 @@ const DrinkList: React.FC = () => {
 
 	return (
 		<div className="drinkList">
-			<FilterChips selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
+			<FilterChips filters={filters} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
 			<div className="menuItems">
 				{filteredDrinks.length > 0 &&
 					filteredDrinks.map((drink: TMenuItemDrink) => {
 						const imageUrl = getImageByNameFromBucket("images", drink.imageName);
-
 						return <ListItem key={drink.id} listItem={drink} imageUrl={imageUrl} />;
 					})}
 			</div>
