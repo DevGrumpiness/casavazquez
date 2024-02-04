@@ -10,6 +10,9 @@ interface FilterChipsProps {
 const FilterChips: React.FC<FilterChipsProps> = ({ selectedFilters, setSelectedFilters, filters }) => {
 	const sortedFilters = [...filters].sort();
 
+
+	const filtersToDisplay = selectedFilters.length > 0 ? selectedFilters : sortedFilters;
+
 	const handleChipClick = (filter: string) => {
 		setSelectedFilters([filter]);
 	};
@@ -21,7 +24,7 @@ const FilterChips: React.FC<FilterChipsProps> = ({ selectedFilters, setSelectedF
 	return (
 		<div className="scrollHint">
 			<div className="filterChips">
-				{sortedFilters.map((filter, index) => {
+				{filtersToDisplay.map((filter, index) => {
 					const selected = selectedFilters.includes(filter);
 					return (
 						<div key={index} onClick={() => handleChipClick(filter)}>
