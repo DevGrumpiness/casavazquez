@@ -21,7 +21,6 @@ export const useFetchFromSupabase = <T>(tableName: string, sortBy?: string): Res
 				offset: 0,
 				sortBy: { column: sortBy ?? "id", order: "asc" },
 			});
-			console.log(data);
 
 			setStatus("loading");
 			try {

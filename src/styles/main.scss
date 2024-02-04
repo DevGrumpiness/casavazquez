@@ -1,5 +1,5 @@
-$header-height: 80px;
-$footer-height: 100px;
+$header-height: 40px;
+$footer-height: 70px;
 $main-vertical-padding: calc(#{$header-height} + 1rem) 0 calc(#{$footer-height} + 1rem) 0;
 
 $topo_blue: #37414b;
@@ -33,6 +33,7 @@ header,
 footer {
 	width: 100%;
 	position: fixed;
+	z-index: 10;
 
 	background: var(--topo_blue);
 	color: smokewhite;
