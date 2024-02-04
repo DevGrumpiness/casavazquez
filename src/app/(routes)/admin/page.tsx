@@ -101,7 +101,7 @@ const AdminPage: React.FC = () => {
       {selectedDrink && (
         <form onSubmit={handleUpdateDrink}>
           <input type="text" name="name" value={selectedDrink.name} onChange={handleInputChange} required />
-          {/* Add inputs for the other properties of a drink */}
+      {/* Add inputs for the other properties of a drink */}
           <button type="submit">Update Drink</button>
         </form>
       )}
