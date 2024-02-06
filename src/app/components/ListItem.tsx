@@ -1,9 +1,10 @@
 "usec client";
 import "./ListItem.scss";
+import React, { useState, useContext } from "react";
 
+import { CartContext } from '../context/CartContext';
 import { TMenuItemDrink, TMenuItemFood } from "../../interfaces/menuItem";
 import Image from "next/image";
-import { useState } from "react";
 import ListItemLabels from "./ListItemLabels";
 
 interface ListItemProps {
@@ -15,6 +16,8 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 	if (!listItem) {
 		return;
 	}
+
+	const { addToCart, removeFromCart } = useContext(CartContext);
 
 	const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
@@ -65,7 +68,11 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 					</div>
 				</div>
 			</div>
-			<div className="listItem-footer"></div>
+			<div className="listItem-footer">
+			{/* <span onClick={() => addToCart(listItem)} className="addToCart">+</span> */}
+			{/* <span onClick={() => removeFromCart(listItem)} className="addToCart">-</span> */}
+
+			</div>
 			<div className={`close ${!isDetailsOpen ? "hidden" : ""}`} onClick={handleCloseIconClick}>
 				<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 512 512">
 					<path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z" />
