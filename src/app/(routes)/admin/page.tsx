@@ -1,19 +1,17 @@
-// "use client"
+"use client"
 
-// import React, { useState, useEffect } from 'react';
-// import { TMenuItemDrink, DrinkSubType } from '../../../interfaces/menuItem';
-// import { fetchFromSupabaseBucket } from '../../../services/api-service';
+import React from 'react';
 
-// const AdminPage: React.FC = () => {
+const AdminPage: React.FC = () => {
 //   const [drinks, setDrinks] = useState<TMenuItemDrink[]>([]);
 //   const [selectedDrink, setSelectedDrink] = useState<TMenuItemDrink | null>(null);
 
 //   useEffect(() => {
 //     const loadDrinks = async () => {
 //       const drinkUrls = await fetchFromSupabaseBucket('drinks');
-//       // const drinkPromises = drinkUrls.map(url => fetch(url).then(response => response.json()));
-//       // const drinksData = await Promise.all(drinkPromises);
-//       // setDrinks(drinksData);
+//       const drinkPromises = drinkUrls.map(url => fetch(url).then(response => response.json()));
+//       const drinksData = await Promise.all(drinkPromises);
+//       setDrinks(drinksData);
 //     };
 
 //     loadDrinks();
@@ -25,7 +23,7 @@
 
 //   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 //     const { name, value } = event.target;
-//     // setSelectedDrink(prevDrink => ({ ...prevDrink, [name]: value }));
+//     setSelectedDrink(prevDrink => ({ ...prevDrink, [name]: value }));
 //   };
   
 //   const handleUpdateDrink = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -106,7 +104,8 @@
 //         </form>
 //       )}
 //     </div>
-//   );
-// };
+    //   );
+    return (<>Admin</>)
+};
 
-// export default AdminPage;
+export default AdminPage;
