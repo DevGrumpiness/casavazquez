@@ -11,9 +11,9 @@ const AdminPage: React.FC = () => {
   useEffect(() => {
     const loadDrinks = async () => {
       const drinkUrls = await fetchFromSupabaseBucket('drinks');
-      const drinkPromises = drinkUrls.map(url => fetch(url).then(response => response.json()));
-      const drinksData = await Promise.all(drinkPromises);
-      setDrinks(drinksData);
+      // const drinkPromises = drinkUrls.map(url => fetch(url).then(response => response.json()));
+      // const drinksData = await Promise.all(drinkPromises);
+      // setDrinks(drinksData);
     };
 
     loadDrinks();
@@ -25,7 +25,7 @@ const AdminPage: React.FC = () => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setSelectedDrink(prevDrink => ({ ...prevDrink, [name]: value }));
+    // setSelectedDrink(prevDrink => ({ ...prevDrink, [name]: value }));
   };
   
   const handleUpdateDrink = async (event: React.FormEvent<HTMLFormElement>) => {
