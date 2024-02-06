@@ -1,5 +1,5 @@
 import "./FilterChips.scss";
-import React, { computed } from "react";
+import React from "react";
 
 interface FilterChipsProps {
 	selectedFilters: string[];
