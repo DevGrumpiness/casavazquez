@@ -1,6 +1,5 @@
 import "./DrinkList.scss";
 import React, { useEffect, useState } from "react";
-import { MenuContext } from "../../context/MenuContext";
 import { TMenuItemDrink } from "../../../interfaces/menuItem";
 import { ListItem } from "../../components/ListItem";
 import { useFetchFromSupabase } from "../../hooks/useFetchFromSupabase";
@@ -11,14 +10,9 @@ import _ from "lodash";
 const DrinkList: React.FC = () => {
 	const [drinks, setDrinks] = useState<TMenuItemDrink[]>([]);
 	const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-	const menuContext = React.useContext(MenuContext);
 	const drinksResponse = useFetchFromSupabase<TMenuItemDrink>("drinks");
 
-	const filters = ["Alkohol", "alk. frei", "heiß", "Sommer", "Angebot", "Schnaps"];
-
-	if (!menuContext) {
-		return <p>menuContext not found</p>;
-	}
+	const filters = ["Alkohol", "to go", "alk. frei", "heiß", "Sommer", "Angebot", "Schnaps"];
 
 	useEffect(() => {
 		if (drinksResponse.data) {

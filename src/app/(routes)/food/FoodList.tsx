@@ -1,31 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { MenuContext } from "../../context/MenuContext";
-import { TMenuItemDrink, TMenuItemFood } from "../../../interfaces/menuItem";
+import { TMenuItemFood } from "../../../interfaces/menuItem";
 import { ListItem } from "../../components/ListItem";
 import { getImageByNameFromBucket } from "../../../services/api-service";
 import FilterChips from "../../components/FilterChips";
 import _ from "lodash";
-
+import { useFetchFromSupabase } from "../../hooks/useFetchFromSupabase";
 
 const FoodList: React.FC = () => {
 	const [dishes, setDishes] = useState<TMenuItemFood[]>([]);
 	const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-	const menuContext = React.useContext(MenuContext);
+	const foodResponse = useFetchFromSupabase<TMenuItemFood>("food");
 
-	const filters = ["Fleisch", "Salat", "Vegetarisch", "Vegan", "Dessert", "Snack"];
-
-
-	if (!menuContext) {
-		return <p>menuContext not found</p>;
-	}
-
-	const foddData = menuContext.menuState.food;
+	const filters = ["Fleisch", "Salat", "Vegetarisch", "Vegan", "Dessert", "Snack", "Kuchen"];
 
 	useEffect(() => {
-		if (foddData) {
-			setDishes([...foddData]);
+		if (foodResponse.data) {
+			setDishes(foodResponse.data);
 		}
-	}, [foddData]);
+	}, [foodResponse]);
 
 	const filteredDishes = _.filter(dishes, (dish: TMenuItemFood) =>
 		selectedFilters.every((filter) =>
@@ -35,15 +27,15 @@ const FoodList: React.FC = () => {
 				.map((label) => label.trim())
 				.includes(filter.toLowerCase())
 		)
-	)
+	);
 
 	return (
 		<div className="foodList">
 			<FilterChips filters={filters} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
 			<div className="menuItems">
-				{dishes &&
-					dishes.length > 0 &&
-					dishes.map((dish: TMenuItemFood) => {
+				{filteredDishes &&
+					filteredDishes.length > 0 &&
+					filteredDishes.map((dish: TMenuItemFood) => {
 						const imageUrl = getImageByNameFromBucket("images", dish.imageName);
 						return <ListItem key={dish.id} listItem={dish} imageUrl={imageUrl} />;
 					})}
