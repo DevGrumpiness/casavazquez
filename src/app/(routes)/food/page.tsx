@@ -5,7 +5,7 @@ import { MenuProvider } from "../../context/MenuContext";
 export default function Food() {
 	return (
 		<MenuProvider>
-			<main className="menuItemLsit foodList">
+			<main className="menuItemList foodList">
 				<FoodList />
 			</main>
 		</MenuProvider>

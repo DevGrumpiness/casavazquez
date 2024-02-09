@@ -7,7 +7,7 @@ export default function Food() {
 	return (
 		<MenuProvider>
 			<CartProvider>
-				<main className="menuItemLsit drinkList">
+				<main className="menuItemList drinkList">
 					<DrinkList />
 				</main>
 			</CartProvider>
