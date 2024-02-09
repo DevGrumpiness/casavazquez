@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Footer() {
 
-	const imageSize = 35;
+	const imageSize = 28;
 
 	return (
 		<footer>
