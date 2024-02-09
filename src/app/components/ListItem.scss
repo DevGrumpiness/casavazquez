@@ -87,8 +87,9 @@
 
 		&.expanded {
 			img {
-				width: 35vw;
+				width: auto;
 				max-width: 150px;
+				max-height: 100px;
 			}
 		}
 
