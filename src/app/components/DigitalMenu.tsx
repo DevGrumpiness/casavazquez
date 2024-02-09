@@ -26,7 +26,7 @@ export const DigitalMenu: React.FC = () => {
 	return (
 		<div className="digitalMenu">
 			<div>
-				<h3>&nbsp;Aktuelles:</h3>
+				<h3>Aktuelles:</h3>
 
 				{news.length > 0 ? renderNews() : null}
 			</div>
