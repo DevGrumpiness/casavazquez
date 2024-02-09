@@ -16,39 +16,26 @@ export const useFetchFromSupabase = <T>(tableName: string, sortBy?: string): Res
 
 	useEffect(() => {
 		const getTheData = async () => {
-			const { data, error } = await supabase.storage.from("images").list("", {
-				limit: 100,
-				offset: 0,
-				sortBy: { column: sortBy ?? "id", order: "asc" },
-			});
-
 			setStatus("loading");
 			try {
 				const response = await supabase
 					.from(tableName)
-					.select()
-					.order(sortBy ?? "id", { ascending: true });
-				const { data } = await supabase.storage.from(tableName).list("", {
-					limit: 100,
-					offset: 0,
-					sortBy: { column: "name", order: "asc" },
-				});
-				console.log(data);
+					.select("*")
+					.order(sortBy ?? "subType", { ascending: true });
+
 				if (response.error) {
 					throw response.error;
 				}
 				setData(response.data);
-				console.log(response.data);
 				setStatus("success");
 			} catch (error) {
 				setErrorMessage((error as Error).message);
-				console.log(error);
 				setStatus("error");
 			}
 		};
 
 		getTheData();
-	}, [tableName]);
+	}, [tableName, sortBy]);
 
 	return { data, status, errorMessage };
 };
