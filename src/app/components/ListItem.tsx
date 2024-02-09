@@ -43,13 +43,19 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 				<div className={`listItem-header-content ${!listItem.available ? "disabled" : ""}`}>
 					<div className="name">
 						<h3>{listItem.name}</h3>
-						<span className="price" style={{ paddingLeft: listItem.price < 10 ? "4px" : "" }}>
-							{listItem.price.toLocaleString("de-DE", {
-								style: "decimal",
-								minimumFractionDigits: 2,
-								maximumFractionDigits: 2,
-							})}
-						</span>
+						{listItem.prices.map((price) => {
+							return (
+								<React.Fragment key={price}>
+									<span className="price" style={{ paddingLeft: price < 10 ? "4px" : "" }}>
+										{price.toLocaleString("de-DE", {
+											style: "decimal",
+											minimumFractionDigits: 2,
+											maximumFractionDigits: 2,
+										})}
+									</span>
+								</React.Fragment>
+							);
+						})}
 					</div>
 					<span className="shortDescription">
 						{listItem.shortDescription}
