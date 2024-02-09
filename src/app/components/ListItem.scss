@@ -30,7 +30,13 @@
 			.shortDescription {
 				font-size: 12px;
 				display: flex;
-				justify-content: space-between;
+				flex-direction: column;
+				gap: 8px;
+
+				.price {
+					font-size: 1rem!important;
+					justify-content: flex-end;
+				}
 			}
 
 			display: flex;
@@ -104,5 +110,9 @@
 			position: absolute;
 			right: -5px;
 		}
+	}
+
+	.hidden {
+		display: none;
 	}
 }

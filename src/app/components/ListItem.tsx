@@ -36,16 +36,44 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 		return <ListItemLabels labelString={labelString} />;
 	};
 
+	const renderPrices = () => {
+		return (
+			<div className="listItem-header-prices">
+				{listItem.prices.map((price, index) => {
+					return (
+						<React.Fragment key={price}>
+							<div className="price" style={{ paddingLeft: price < 10 ? "4px" : "" }}>
+								<span>
+									{listItem.variants && listItem.variants.length > 0
+										? `${listItem.variants[index]}...`
+										: ""}
+								</span>
+								<span>
+									{price.toLocaleString("de-DE", {
+										style: "decimal",
+										minimumFractionDigits: 2,
+										maximumFractionDigits: 2,
+									})}
+								</span>
+							</div>
+						</React.Fragment>
+					);
+				})}
+			</div>
+		);
+	};
+
 	return (
 		<div id={String(listItem.id)} className={`listItem ${isDetailsOpen ? "expanded" : ""}`}>
 			<div className="listItem-header-container" onClick={handleHeaderClick}>
 				<Image src={imageUrl ?? ""} alt={listItem.name} width={70} height={70} />
 				<div className={`listItem-header-content ${!listItem.available ? "disabled" : ""}`}>
-					<div className="name">
+					<div>
 						<h3>{listItem.name}</h3>
 					</div>
 					<span className="shortDescription">
 						{listItem.shortDescription}
+						<div className={`${!isDetailsOpen && "hidden"}`}>{renderPrices()}</div>
 						<div className={`expand ${isDetailsOpen ? "hidden" : ""}`} onClick={handleHeaderClick}>
 							<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 512 512">
 								<path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
@@ -60,30 +88,7 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 						{listItem.longDescription}
 					</div>
 				</div>
-				<div className="listItem-header-prices">
-					{listItem.prices.map((price, index) => {
-						console.log("listItem", listItem.variants);
-						console.log(`${listItem.name} listItem ${listItem.variants}`);
-						return (
-							<React.Fragment key={price}>
-								<div className="price" style={{ paddingLeft: price < 10 ? "4px" : "" }}>
-									<span>
-										{listItem.variants && listItem.variants.length > 0
-											? `${listItem.variants[index]}...`
-											: ""}
-									</span>
-									<span>
-										{price.toLocaleString("de-DE", {
-											style: "decimal",
-											minimumFractionDigits: 2,
-											maximumFractionDigits: 2,
-										})}
-									</span>
-								</div>
-							</React.Fragment>
-						);
-					})}
-				</div>
+				<div className={`${isDetailsOpen && "hidden"}`}>{renderPrices()}</div>
 			</div>
 			<div className="listItem-footer">
 				{/* <span onClick={() => addToCart(listItem)} className="addToCart">+</span> */}
