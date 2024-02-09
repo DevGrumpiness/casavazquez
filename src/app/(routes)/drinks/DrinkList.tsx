@@ -30,15 +30,21 @@ const DrinkList: React.FC = () => {
 		)
 	);
 
+	const groupedDrinks = _.groupBy(filteredDrinks, 'subType');
+
 	return (
 		<div className="drinkList">
 			<FilterChips filters={filters} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
 			<div className="menuItems">
-				{filteredDrinks.length > 0 &&
-					filteredDrinks.map((drink: TMenuItemDrink) => {
-						const imageUrl = getImageByNameFromBucket("images", drink.imageName);
-						return <ListItem key={drink.id} listItem={drink} imageUrl={imageUrl} />;
-					})}
+				{Object.entries(groupedDrinks).map(([subType, drinks]) => (
+					<div key={subType}>
+						<h2 className="subType">{subType}</h2>
+						{drinks.map((drink: TMenuItemDrink) => {
+							const imageUrl = getImageByNameFromBucket("images", drink.imageName);
+							return <ListItem key={drink.id} listItem={drink} imageUrl={imageUrl} />;
+						})}
+					</div>
+				))}
 			</div>
 		</div>
 	);
