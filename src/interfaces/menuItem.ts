@@ -1,5 +1,7 @@
 interface MenuItem {
 	id: number;
+	subType: string;
+	prices: number[];
 	name: string;
 	shortDescription: string;
 	longDescription: string;
@@ -11,14 +13,12 @@ export type DrinkSubType = "softdrink" | "beer" | "cocktail" | "hot";
 
 export interface TMenuItemFood extends MenuItem {
 	label: string | null;
-	price: number;
+	variants: string[];
 }
 
 export interface TMenuItemDrink extends MenuItem {
 	label: string | null;
-	prices: number[];
 	quantities: number[];
-	subtype?: DrinkSubType;
 }
 
 export type FoodResponseType = {
