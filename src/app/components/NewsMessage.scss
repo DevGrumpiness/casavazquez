@@ -1,34 +1,41 @@
 .newsMessage {
 	position: relative;
 	font-family: "Instrument";
-    padding: 8px 1rem;
-	border: 1px solid silver;
+    padding: 8px;
+	border: 1px solid rgba(192, 192, 192, .2);
     color: var(--topo_blue);
     background-color: white;
 
 	.container {
 		display: flex;
 		align-items: center;
-		padding: 0 1rem;
-		gap: 10px;
+		gap: 1rem;
+
+		p {
+			font-family: Tahoma;
+			font-size: 14px;
+			line-height: 1.25;
+		}
+
+		> div {
+			flex: 3;
+		}
 	}
 
 	h3 {
-		text-align: center;
 		padding: 0;
 		margin: 4px 0;
 		
 		font-weight: 500;
-		text-transform: capitalize;
+		text-transform: uppercase;
+		font-family: Trebuchet MS;
+		font-size: 15px;
 	}
 
 	img {
-		max-height: 80px;
+		max-height: 50px;
 		object-fit: contain;
-	}
-
-	img {
-		width: 25%;
+		flex: 1;
 	}
 
 	.closeX {
