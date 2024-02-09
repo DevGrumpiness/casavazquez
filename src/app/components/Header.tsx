@@ -11,9 +11,9 @@ const Header: React.FC = () => {
 
 	let headerText;
 	if (pathname.includes("food")) {
-		headerText = "Food";
+		headerText = "Hunger";
 	} else if (pathname.includes("drinks")) {
-		headerText = "Drinks";
+		headerText = "Durst";
 	} else {
 		headerText = "Tom & Polly";
 	}
