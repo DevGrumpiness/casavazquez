@@ -7,7 +7,7 @@ import NewsMessage from "./NewsMessage";
 export const DigitalMenu: React.FC = () => {
 	const [news, setNews] = useState<INewsMessage[]>([]);
 
-	const newsResponse = useFetchFromSupabase<INewsMessage>("news");
+	const newsResponse = useFetchFromSupabase<INewsMessage>("news", "created_at");
 
 	const renderNews = () => {
 		return news.map((newsItem: INewsMessage) => {
