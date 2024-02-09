@@ -12,7 +12,7 @@ const DrinkList: React.FC = () => {
 	const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 	const drinksResponse = useFetchFromSupabase<TMenuItemDrink>("drinks");
 	
-	const filters = ["Alkohol", "to go", "alk. frei", "heiß", "Sommer", "Angebot", "Schnaps"];
+	const filters = ["Alkohol", "to go", "alkoholfrei", "heiß", "Sommer", "Angebot", "Schnaps", "fass", "flasche"];
 
 	useEffect(() => {
 		if (drinksResponse.data) {

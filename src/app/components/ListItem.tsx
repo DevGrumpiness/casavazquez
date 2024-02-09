@@ -2,7 +2,7 @@
 import "./ListItem.scss";
 import React, { useState, useContext } from "react";
 
-import { CartContext } from '../context/CartContext';
+import { CartContext } from "../context/CartContext";
 import { TMenuItemDrink, TMenuItemFood } from "../../interfaces/menuItem";
 import Image from "next/image";
 import ListItemLabels from "./ListItemLabels";
@@ -43,19 +43,6 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 				<div className={`listItem-header-content ${!listItem.available ? "disabled" : ""}`}>
 					<div className="name">
 						<h3>{listItem.name}</h3>
-						{listItem.prices.map((price) => {
-							return (
-								<React.Fragment key={price}>
-									<span className="price" style={{ paddingLeft: price < 10 ? "4px" : "" }}>
-										{price.toLocaleString("de-DE", {
-											style: "decimal",
-											minimumFractionDigits: 2,
-											maximumFractionDigits: 2,
-										})}
-									</span>
-								</React.Fragment>
-							);
-						})}
 					</div>
 					<span className="shortDescription">
 						{listItem.shortDescription}
@@ -73,11 +60,34 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 						{listItem.longDescription}
 					</div>
 				</div>
+				<div className="listItem-header-prices">
+					{listItem.prices.map((price, index) => {
+						console.log("listItem", listItem.variants);
+						console.log(`${listItem.name} listItem ${listItem.variants}`);
+						return (
+							<React.Fragment key={price}>
+								<div className="price" style={{ paddingLeft: price < 10 ? "4px" : "" }}>
+									<span>
+										{listItem.variants && listItem.variants.length > 0
+											? `${listItem.variants[index]}...`
+											: ""}
+									</span>
+									<span>
+										{price.toLocaleString("de-DE", {
+											style: "decimal",
+											minimumFractionDigits: 2,
+											maximumFractionDigits: 2,
+										})}
+									</span>
+								</div>
+							</React.Fragment>
+						);
+					})}
+				</div>
 			</div>
 			<div className="listItem-footer">
-			{/* <span onClick={() => addToCart(listItem)} className="addToCart">+</span> */}
-			{/* <span onClick={() => removeFromCart(listItem)} className="addToCart">-</span> */}
-
+				{/* <span onClick={() => addToCart(listItem)} className="addToCart">+</span> */}
+				{/* <span onClick={() => removeFromCart(listItem)} className="addToCart">-</span> */}
 			</div>
 			<div className={`close ${!isDetailsOpen ? "hidden" : ""}`} onClick={handleCloseIconClick}>
 				<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 512 512">

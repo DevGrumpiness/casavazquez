@@ -12,6 +12,7 @@
 
 		width: 90%;
 		margin: 0 auto;
+		position: relative;
 
 		background: transparent;
 		padding: 5px 10px;
@@ -22,7 +23,8 @@
 		.listItem-header-container {
 			h3 {
 				margin: 0;
-				font-size: 1rem;
+				font-size: 14px;
+				font-family: sans-serif;
 			}
 
 			.shortDescription {
@@ -49,18 +51,25 @@
 				width: 100%;
 			}
 
-			.price {
-				color: #6b7a8c;
-				font-weight: 600;
-				font-family: "Courier New", Courier, monospace;
+			.listItem-header-prices {
+				display: flex;
+				flex-direction: column;
+
+				.price {
+					color: rgba(107, 122, 140, .85);
+					font-weight: 600;
+					font-family: "Courier New", Courier, monospace;
+					font-size: 11px;
+					display: flex;
+					gap: 5px;
+				}
 			}
 		}
 
 		.listItem-footer {
 			display: flex;
-
 		}
-		
+
 		.labels-container {
 			margin-bottom: 8px;
 		}
@@ -91,7 +100,9 @@
 		}
 
 		.expand {
-			opacity: 0.3;
+			opacity: 0.13;
+			position: absolute;
+			right: -5px;
 		}
 	}
 }
