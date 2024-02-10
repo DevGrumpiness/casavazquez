@@ -40,12 +40,17 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 		return (
 			<div className="listItem-header-prices">
 				{listItem.prices.map((price, index) => {
+					const divider = listItem.variants ? listItem.variants[index].length > 4 ? ".." : "..." : '';
+					if (listItem.variants) {
+						
+						console.log("listItem.variants[index].length", listItem.variants[index].length);
+					}
 					return (
 						<React.Fragment key={price}>
 							<div className="price" style={{ paddingLeft: price < 10 ? "4px" : "" }}>
 								<span>
 									{listItem.variants && listItem.variants.length > 0
-										? `${listItem.variants[index]}...`
+										? `${listItem.variants[index]}${divider}`
 										: ""}
 								</span>
 								<span>
