@@ -81,7 +81,8 @@
 		img {
 			width: 30px;
 			height: auto;
-			transition: width 100ms ease;
+			transition: width 150ms ease;
+			max-height: 50px;
 		}
 
 		&.expanded {
