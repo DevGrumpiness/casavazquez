@@ -29,16 +29,21 @@ const FoodList: React.FC = () => {
 		)
 	);
 
+	const groupedDishes = _.groupBy(filteredDishes, "subType");
+
 	return (
 		<div className="foodList">
 			<FilterChips filters={filters} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
 			<div className="menuItems">
-				{filteredDishes &&
-					filteredDishes.length > 0 &&
-					filteredDishes.map((dish: TMenuItemFood) => {
-						const imageUrl = getImageByNameFromBucket("images", dish.imageName);
-						return <ListItem key={dish.id} listItem={dish} imageUrl={imageUrl} />;
-					})}
+				{Object.entries(groupedDishes).map(([subType, drinks]) => (
+					<div key={subType}>
+						<h2 className="subType">{subType}</h2>
+						{drinks.map((drink: TMenuItemFood) => {
+							const imageUrl = getImageByNameFromBucket("images", drink.imageName);
+							return <ListItem key={drink.id} listItem={drink} imageUrl={imageUrl} />;
+						})}
+					</div>
+				))}
 			</div>
 		</div>
 	);

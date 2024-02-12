@@ -49,3 +49,14 @@ header {
 footer {
 	height: #{$footer-height};
 }
+
+.subType {
+	color: #999;
+	opacity: .35;
+	padding-left: 8px;
+	margin: 0;
+}
+
+.listItem-header-prices {
+	min-width: max-content;
+}
