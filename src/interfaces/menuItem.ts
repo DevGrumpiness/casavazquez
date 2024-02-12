@@ -5,7 +5,7 @@ interface MenuItem {
 	name: string;
 	shortDescription: string;
 	longDescription: string;
-	variants: string[];
+	variants: string[] | null;
 	imageName: string | null;
 	available: boolean;
 }
