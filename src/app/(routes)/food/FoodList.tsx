@@ -11,7 +11,7 @@ const FoodList: React.FC = () => {
 	const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 	const foodResponse = useFetchFromSupabase<TMenuItemFood>("food");
 
-	const filters = ["Fleisch", "Salat", "Vegetarisch", "Vegan", "Dessert", "Snack", "Kuchen", "Vorspeise", "Pasta"];
+	const filters = ["Snack", "Vegetarisch", "heiß", "Pasta", "Salat", "Dessert"]
 
 	useEffect(() => {
 		if (foodResponse.data) {
