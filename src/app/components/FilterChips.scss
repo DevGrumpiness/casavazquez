@@ -1,5 +1,9 @@
 .scrollHint {
-    position: relative;
+    position: sticky;
+    top: 40px;
+    z-index: 50;
+    background: rgba(255,255,255,.85);
+
     &:before,
     &:after {
         content: "";
@@ -22,10 +26,12 @@
 .filterChips {
     display: flex;
     flex-wrap: nowrap;
+
     overflow-x: auto;
     padding: 0.5em;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     scrollbar-width: none;
+
     &::-webkit-scrollbar {
         display: none;
     }

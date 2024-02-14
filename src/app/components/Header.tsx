@@ -20,6 +20,8 @@ const Header: React.FC = () => {
 
 	return (
 		<header>
+			<div>
+				
 			<Link href="/">
 				<Image
 					src="/media/logo.png"
@@ -30,6 +32,7 @@ const Header: React.FC = () => {
 				/>
 			</Link>
 			<h1>{headerText}</h1>
+			</div>
 		</header>
 	);
 };
