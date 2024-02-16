@@ -25,7 +25,7 @@ module.exports = {
 	plugins: ["@typescript-eslint", "react"],
     rules: {
         indent: ["off", "tab"],
-        "linebreak-style": ["off", "windows"],
+        'linebreak-style': 0,
         quotes: ["off", "double"],
         "prefer-const": "off",
         "react/jsx-wrap-multilines": ["off", { return: "parens" }],
