@@ -21,17 +21,15 @@ const Header: React.FC = () => {
 	return (
 		<header>
 			<div>
-				
-			<Link href="/">
-				<Image
-					src="/media/logo.png"
-					alt="logo"
-					width={40}
-					height={40}
-					className="mainLogo"
-				/>
-			</Link>
-			<h1>{headerText}</h1>
+				<Link href="/">
+					<Image src="/media/logo.png" alt="logo" width={40} height={40} className="mainLogo" />
+				</Link>
+				<div className="hedaerTitle">
+					<h1>{headerText}</h1>
+					<span>
+						(inoffiziell - ohne Gewähr)
+					</span>
+				</div>
 			</div>
 		</header>
 	);
