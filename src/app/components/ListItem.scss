@@ -20,10 +20,24 @@
 		box-shadow: rgba(17, 17, 26, 0.0561) 0px 1px 0px;
 
 		.listItem-header-container {
+			.istItem-header-name {
+			}
+			
 			h3 {
+				position: relative;
 				margin: 0;
 				font-size: 14px;
 				font-family: sans-serif;
+				width: fit-content;
+			}
+
+			.allergens {
+				position: absolute;
+				top: -2px;
+				left: 102%;
+				font-size: 9px;
+				width: max-content;
+				opacity: .65;
 			}
 
 			.shortDescription {

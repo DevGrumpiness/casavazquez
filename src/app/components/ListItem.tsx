@@ -73,8 +73,8 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 			<div className="listItem-header-container" onClick={handleHeaderClick}>
 				<Image src={imageUrl ?? ""} alt={listItem.name} width={70} height={70} />
 				<div className={`listItem-header-content ${!listItem.available ? "disabled" : ""}`}>
-					<div>
-						<h3>{listItem.name}</h3>
+					<div className="listItem-header-name">
+						<h3>{listItem.name} <span className="allergens">{listItem.allergenIndexes?.join(', ')}</span></h3>
 					</div>
 					<span className="shortDescription">
 						{listItem.shortDescription}
