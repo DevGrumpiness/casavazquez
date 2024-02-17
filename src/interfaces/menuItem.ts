@@ -8,6 +8,7 @@ interface MenuItem {
 	variants: string[] | null;
 	imageName: string | null;
 	available: boolean;
+	allergenIndexes: [] | null;
 }
 
 export type DrinkSubType = "softdrink" | "beer" | "cocktail" | "hot";
