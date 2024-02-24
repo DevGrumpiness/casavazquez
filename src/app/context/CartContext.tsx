@@ -20,7 +20,11 @@ export const CartContext = createContext<CartContextProps>({
     removeFromCart: () => {},
 });
 
-export const CartProvider: React.FC<React.PropsWithChildren<React.ReactNode>> = ({ children }) => {
+interface CartProviderProps {
+    children: React.ReactNode;
+}
+
+export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     const [cart, setCart] = useState<CartItem[]>([]);
 
     const addToCart = (item: TMenuItemDrink | TMenuItemFood, variant: string | null, price: number) => {
