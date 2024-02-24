@@ -94,7 +94,13 @@
 		}
 
 		.listItem-footer {
+			width: 100%;
 			display: flex;
+			justify-content: space-between;
+
+			svg {
+				margin: 8px 0;
+			}
 		}
 
 		.labels-container {

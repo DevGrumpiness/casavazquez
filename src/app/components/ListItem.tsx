@@ -40,11 +40,7 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 		return (
 			<div className="listItem-header-prices">
 				{listItem.prices.map((price, index) => {
-					const divider = listItem.variants ? listItem.variants[index].length > 4 ? ".." : "..." : '';
-					if (listItem.variants) {
-						
-						console.log("listItem.variants[index].length", listItem.variants[index].length);
-					}
+					const divider = listItem.variants ? (listItem.variants[index].length > 4 ? ".." : "...") : "";
 					return (
 						<React.Fragment key={price}>
 							<div className="price" style={{ paddingLeft: price < 10 ? "4px" : "" }}>
@@ -74,7 +70,9 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 				<Image src={imageUrl ?? ""} alt={listItem.name} width={70} height={70} />
 				<div className={`listItem-header-content ${!listItem.available ? "disabled" : ""}`}>
 					<div className="listItem-header-name">
-						<h3>{listItem.name} <span className="allergens">{listItem.allergenIndexes?.join(', ')}</span></h3>
+						<h3>
+							{listItem.name} <span className="allergens">{listItem.allergenIndexes?.join(", ")}</span>
+						</h3>
 					</div>
 					<span className="shortDescription">
 						{listItem.shortDescription}
@@ -95,14 +93,27 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 				<div className={`${isDetailsOpen && "hidden"}`}>{renderPrices()}</div>
 			</div>
 			<div className={`${!isDetailsOpen && "hidden"}`}>{listItem.longDescription}</div>
-			<div className="listItem-footer">
-				<span onClick={() => addToCart(listItem)} className="addToCart">+</span>
-				<span onClick={() => removeFromCart(listItem)} className="addToCart">-</span>
-			</div>
-			<div className={`close ${!isDetailsOpen ? "hidden" : ""}`} onClick={handleCloseIconClick}>
-				<svg xmlns="http://www.w3.org/2000/svg" height="22" width="22" viewBox="0 0 512 512">
-					<path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z" />
+			<div className={`close listItem-footer ${!isDetailsOpen ? "hidden" : ""}`} >
+				<div className="cart_button remove">
+					<span onClick={() => removeFromCart(listItem)} className="addToCart" aria-label="Aus dem Warenkorb entfernen">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="red" viewBox="0 0 24 24">
+							<path d="M0 0h24v24H0z" fill="none"/>
+							<path d="M5 11h14v2H5z"/>
+						</svg>
+					</span></div>
+				{/* <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
+				<svg xmlns="http://www.w3.org/2000/svg" height="22" width="22" viewBox="0 0 384 512" onClick={handleCloseIconClick}>
+					<path fill-opacity="0.5" d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z" />
 				</svg>
+				<div className="cart_button add">
+					<span onClick={() => addToCart(listItem)} className="addToCart" aria-label="Zum Warenkorb hinzufügen">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="green" viewBox="0 0 24 24">
+							<path d="M0 0h24v24H0z" fill="none"/>
+							<path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"/>
+						</svg>
+					</span>
+					
+				</div>
 			</div>
 		</div>
 	);
