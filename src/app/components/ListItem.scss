@@ -50,7 +50,13 @@
 
 				.price {
 					font-size: 1rem!important;
-					justify-content: flex-end;
+					width: 100%;
+					justify-content: space-between;
+					align-items: center;
+					
+					div, span {
+						flex: 1;
+					}
 				}
 			}
 
