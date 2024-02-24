@@ -10,7 +10,10 @@ export const DigitalMenu: React.FC = () => {
 	const newsResponse = useFetchFromSupabase<INewsMessage>("news", "created_at");
 
 	const renderNews = () => {
-		return news.map((newsItem: INewsMessage) => {
+		const currentDate = new Date();
+		return news
+			.filter(newsItem => !newsItem.expiration_day || newsItem.expiration_day >= currentDate)
+			.map((newsItem: INewsMessage) => {
 			return <NewsMessage key={newsItem.id} {...newsItem} />;
 		});
 	};

@@ -4,4 +4,5 @@ export interface INewsMessage {
 	content: string;
 	read: boolean;
 	pictureName?: string;
+	expiration_day?: Date;
 }
