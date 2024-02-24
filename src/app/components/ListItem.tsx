@@ -96,8 +96,8 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 			</div>
 			<div className={`${!isDetailsOpen && "hidden"}`}>{listItem.longDescription}</div>
 			<div className="listItem-footer">
-				{/* <span onClick={() => addToCart(listItem)} className="addToCart">+</span> */}
-				{/* <span onClick={() => removeFromCart(listItem)} className="addToCart">-</span> */}
+				<span onClick={() => addToCart(listItem)} className="addToCart">+</span>
+				<span onClick={() => removeFromCart(listItem)} className="addToCart">-</span>
 			</div>
 			<div className={`close ${!isDetailsOpen ? "hidden" : ""}`} onClick={handleCloseIconClick}>
 				<svg xmlns="http://www.w3.org/2000/svg" height="22" width="22" viewBox="0 0 512 512">
