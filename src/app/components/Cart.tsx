@@ -11,9 +11,8 @@ export const Cart: React.FC = () => {
 	const cartTotal = variantTotals.reduce((total, variantTotal) => total + variantTotal, 0);
 
 	const renderQuantity = (quantity: number, variant: string | null) => {
-		console.log(quantity, variant);
 		if (variant === "0,5l" || variant === "0.5l") {
-			return "X";
+			return "X".repeat(quantity);
 		} else {
 			return "|".repeat(quantity);
 		}
