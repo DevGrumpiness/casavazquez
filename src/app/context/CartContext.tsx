@@ -26,7 +26,9 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
 	const addToCart = (item: CartItem) => {
 		console.log("addToCart", item);
-		setCart((prevCart) => [...prevCart, item]);
+        setCart((prevCart) => [...prevCart, item]);
+		console.log("cart", cart);
+        
     };
     
     const removeFromCart = (item: CartItem) => {
