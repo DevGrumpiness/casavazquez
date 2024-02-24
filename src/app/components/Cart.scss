@@ -1,0 +1,43 @@
+
+.cart_header {
+    padding: 1rem;
+    .legal_hint {
+        font-size: 12px;
+    }
+}
+
+.cart {
+    width: 90vw;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 10px;
+    min-height: 370px;
+    font-family: cursive;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+
+    background: #F6EEE3;
+    border-radius: 10px;
+    height: fit-content;
+    box-shadow: rgba(211, 158, 85, .15) 0px 2px 8px 0px;
+
+    .count {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    p {
+        padding: 0;
+        margin: 0;
+    }
+
+    h3 {
+        margin-left:  auto;
+        text-align: right;
+    }
+
+}

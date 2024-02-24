@@ -3,9 +3,12 @@
 import "../styles/main.scss";
 import "./components/DigitalMenu.scss";
 import type { Metadata } from "next";
+import React, { useContext } from 'react';
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { CartProvider } from "../app/context/CartContext";
+import { Cart } from "./components/Cart";
+import { CartContext } from '../app/context/CartContext';
 
 // export const metadata: Metadata = {
 // 	title: "Create Next App",
@@ -13,6 +16,7 @@ import { CartProvider } from "../app/context/CartContext";
 // };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+	const { cart } = useContext(CartContext);
 	return (
 		<html lang="en">
 			<body>
@@ -20,6 +24,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					<Header />
 					{children}
 					<Footer />
+					<br />
+					<br />
 				</CartProvider>
 			</body>
 		</html>

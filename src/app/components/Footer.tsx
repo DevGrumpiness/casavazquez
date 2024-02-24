@@ -11,10 +11,18 @@ export default function Footer() {
 	const { cart } = React.useContext(CartContext);
 
 	const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+	const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
 	useEffect(() => {
 		console.log("Cart changed:", totalQuantity);
 	}, [cart]);
+
+	const handleCartClick = () => {
+		const element = document.getElementById("cart");
+		if (element) {
+			element.scrollIntoView({ behavior: "smooth" });
+		}
+	};
 
 	return (
 		<footer>
@@ -31,10 +39,12 @@ export default function Footer() {
 					</Link>
 				</div>
 			</div>
-			<div className="footer-element beer-mat-container">
-				{totalQuantity > 0 && (
+			<div className="footer-element beer-mat-container" onClick={handleCartClick}>
+				{cartTotal > 0 && (
 					<div className="beer-mat">
-						<span>{totalQuantity}</span>
+						<span>
+							{new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(cartTotal)}
+						</span>
 					</div>
 				)}
 			</div>

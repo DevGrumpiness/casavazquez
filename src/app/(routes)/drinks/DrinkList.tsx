@@ -6,13 +6,25 @@ import { useFetchFromSupabase } from "../../hooks/useFetchFromSupabase";
 import { getImageByNameFromBucket } from "../../../services/api-service";
 import FilterChips from "../../components/FilterChips";
 import _ from "lodash";
+import { Cart } from "../../components/Cart";
 
 const DrinkList: React.FC = () => {
 	const [drinks, setDrinks] = useState<TMenuItemDrink[]>([]);
 	const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 	const drinksResponse = useFetchFromSupabase<TMenuItemDrink>("drinks");
-	
-	const filters = ["Alkohol", "to go", "alkoholfrei", "heiß", "Sommer", "Angebot", "Schnaps", "Fass", "Flasche", "Wein/Sekt"];
+
+	const filters = [
+		"Alkohol",
+		"to go",
+		"alkoholfrei",
+		"heiß",
+		"Sommer",
+		"Angebot",
+		"Schnaps",
+		"Fass",
+		"Flasche",
+		"Wein/Sekt",
+	];
 
 	useEffect(() => {
 		if (drinksResponse.data) {
@@ -30,7 +42,7 @@ const DrinkList: React.FC = () => {
 		)
 	);
 
-	const groupedDrinks = _.groupBy(filteredDrinks, 'subType');
+	const groupedDrinks = _.groupBy(filteredDrinks, "subType");
 
 	return (
 		<div className="drinkList">
