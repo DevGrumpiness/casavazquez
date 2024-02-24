@@ -14,10 +14,7 @@ const FilterChips: React.FC<FilterChipsProps> = ({ selectedFilters, setSelectedF
 
 	const handleChipClick = (filter: string) => {
 		setSelectedFilters([filter]);
-		const handleChipClick = (filter: string) => {
-			setSelectedFilters([filter]);
-			window.scrollTo({ top: 0, behavior: 'smooth' });
-		};
+		window.scrollTo({ top: 0, behavior: 'smooth' });
 	};
 
 	const unselect = (filter: string) => (event: React.MouseEvent) => {
