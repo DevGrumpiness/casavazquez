@@ -1,4 +1,4 @@
-"usec client";
+"use strict";
 import "./ListItem.scss";
 import React, { useState, useContext } from "react";
 
@@ -6,6 +6,8 @@ import { CartContext } from "../context/CartContext";
 import { TMenuItemDrink, TMenuItemFood } from "../../interfaces/menuItem";
 import Image from "next/image";
 import ListItemLabels from "./ListItemLabels";
+import { AddButton } from "./AddButton";
+import { RemoveButton } from "./RemoveButton";
 
 interface ListItemProps {
 	listItem: TMenuItemDrink | TMenuItemFood;
@@ -14,11 +16,10 @@ interface ListItemProps {
 
 export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 	if (!listItem) {
-		return;
+		return null;
 	}
 
 	const { addToCart, removeFromCart } = useContext(CartContext);
-
 	const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
 	const handleHeaderClick = () => {
@@ -27,11 +28,9 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 		}
 		setIsDetailsOpen(true);
 	};
-
 	const handleCloseIconClick = () => {
 		setIsDetailsOpen(false);
 	};
-
 	const renderLabels = (labelString: string) => {
 		return <ListItemLabels labelString={labelString} />;
 	};
@@ -40,19 +39,15 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 		return (
 			<div className="listItem-header-prices">
 				{listItem.prices.map((price, index) => {
-					const divider = listItem.variants ? listItem.variants[index].length > 4 ? ".." : "..." : '';
-					if (listItem.variants) {
-						
-						console.log("listItem.variants[index].length", listItem.variants[index].length);
-					}
+					const variant = listItem.variants ? listItem.variants[index] : null;
+					const divider = variant ? (variant.length > 4 ? ".." : "...") : "";
 					return (
 						<React.Fragment key={price}>
 							<div className="price" style={{ paddingLeft: price < 10 ? "4px" : "" }}>
-								<span>
-									{listItem.variants && listItem.variants.length > 0
-										? `${listItem.variants[index]}${divider}`
-										: ""}
-								</span>
+								{isDetailsOpen && <RemoveButton item={listItem} variant={variant}  />}
+								<div>
+
+								<span>{variant ? `${variant}${divider}` : ""}</span>
 								<span>
 									{price.toLocaleString("de-DE", {
 										style: "decimal",
@@ -60,6 +55,8 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 										maximumFractionDigits: 2,
 									})}
 								</span>
+								</div>
+								{isDetailsOpen && <AddButton item={listItem} variant={variant} price={price} />}
 							</div>
 						</React.Fragment>
 					);
@@ -74,12 +71,16 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 				<Image src={imageUrl ?? ""} alt={listItem.name} width={70} height={70} />
 				<div className={`listItem-header-content ${!listItem.available ? "disabled" : ""}`}>
 					<div className="listItem-header-name">
-						<h3>{listItem.name} <span className="allergens">{listItem.allergenIndexes?.join(', ')}</span></h3>
+						<h3>
+							{listItem.name} <span className="allergens">{listItem.allergenIndexes?.join(", ")}</span>
+						</h3>
 					</div>
 					<span className="shortDescription">
 						{listItem.shortDescription}
 						<div className={`${!isDetailsOpen && "hidden"}`}>{renderPrices()}</div>
 						<div className={`expand ${isDetailsOpen ? "hidden" : ""}`} onClick={handleHeaderClick}>
+							{/* <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
+
 							<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 512 512">
 								<path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
 							</svg>
@@ -95,13 +96,19 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 				<div className={`${isDetailsOpen && "hidden"}`}>{renderPrices()}</div>
 			</div>
 			<div className={`${!isDetailsOpen && "hidden"}`}>{listItem.longDescription}</div>
-			<div className="listItem-footer">
-				{/* <span onClick={() => addToCart(listItem)} className="addToCart">+</span> */}
-				{/* <span onClick={() => removeFromCart(listItem)} className="addToCart">-</span> */}
-			</div>
-			<div className={`close ${!isDetailsOpen ? "hidden" : ""}`} onClick={handleCloseIconClick}>
-				<svg xmlns="http://www.w3.org/2000/svg" height="22" width="22" viewBox="0 0 512 512">
-					<path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z" />
+			<div className={`close listItem-footer ${!isDetailsOpen ? "hidden" : ""}`} onClick={handleCloseIconClick}>
+				{/* <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					height="22"
+					width="22"
+					viewBox="0 0 384 512"
+					onClick={handleCloseIconClick}
+				>
+					<path
+						fillOpacity="0.5"
+						d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
+					/>
 				</svg>
 			</div>
 		</div>

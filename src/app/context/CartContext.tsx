@@ -1,46 +1,70 @@
-import React, { ReactNode } from "react";
+import React, { createContext, useState } from 'react';
 import { TMenuItemDrink, TMenuItemFood } from "../../interfaces/menuItem";
 
-type CartItem = TMenuItemFood | TMenuItemDrink;
+interface CartItem {
+    name: string;
+    variant: string | null;
+    price: number;
+    quantity: number;
+}
 
-type CartContextValue = {
-	cart: CartItem[];
-	addToCart: (item: CartItem) => void;
-	removeFromCart: (item: CartItem) => void;
-};
+interface CartContextProps {
+    cart: CartItem[];
+    addToCart: (item: TMenuItemDrink | TMenuItemFood, variant: string | null, price: number) => void;
+    removeFromCart: (item: TMenuItemDrink | TMenuItemFood, variant: string | null) => void; // Updated this line
+}
 
-const defaultContextValue: CartContextValue = {
-	cart: [],
-	addToCart: () => {},
-	removeFromCart: () => {},
-};
-
-export const CartContext = React.createContext<CartContextValue>(defaultContextValue);
+export const CartContext = createContext<CartContextProps>({
+    cart: [],
+    addToCart: () => {},
+    removeFromCart: () => {},
+});
 
 interface CartProviderProps {
-	children: React.ReactNode;
+    children: React.ReactNode;
 }
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
-	const [cart, setCart] = React.useState<CartItem[]>([]);
+    const [cart, setCart] = useState<CartItem[]>([]);
 
-	const addToCart = (item: CartItem) => {
-		console.log("addToCart", item);
-		setCart((prevCart) => [...prevCart, item]);
-    };
-    
-    const removeFromCart = (item: CartItem) => {
-        console.log("removeFromCart", item);
+    const addToCart = (item: TMenuItemDrink | TMenuItemFood, variant: string | null, price: number) => {
         setCart((prevCart) => {
-            const index = prevCart.findIndex((cartItem) => cartItem.id === item.id);
-            if (index !== -1) {
-                const newCart = [...prevCart];
-                newCart.splice(index, 1);
-                return newCart;
+            const existingItemIndex = prevCart.findIndex(
+                (cartItem) => cartItem.name === item.name && cartItem.variant === variant
+            );
+
+            if (existingItemIndex > -1) {
+                const updatedItem = { ...prevCart[existingItemIndex], quantity: prevCart[existingItemIndex].quantity + 1 };
+
+                return prevCart.map((item, index) => index === existingItemIndex ? updatedItem : item);
+            } else {
+                return [...prevCart, { name: item.name, variant, price, quantity: 1 }];
             }
-            return prevCart;
         });
     };
-    
-	return <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>{children}</CartContext.Provider>;
+
+    const removeFromCart = (item: TMenuItemDrink | TMenuItemFood, variant: string | null) => {
+        setCart((prevCart) => {
+            const existingItemIndex = prevCart.findIndex(
+                (cartItem) => cartItem.name === item.name && cartItem.variant === variant
+            );
+
+            if (existingItemIndex > -1) {
+                if (prevCart[existingItemIndex].quantity > 1) {
+                    const updatedItem = { ...prevCart[existingItemIndex], quantity: prevCart[existingItemIndex].quantity - 1 };
+                    return prevCart.map((item, index) => index === existingItemIndex ? updatedItem : item);
+                } else {
+                    return prevCart.filter((item, index) => index !== existingItemIndex);
+                }
+            } else {
+                return prevCart;
+            }
+        });
+    };
+
+    return (
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+            {children}
+        </CartContext.Provider>
+    );
 };
