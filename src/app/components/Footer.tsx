@@ -10,9 +10,12 @@ export default function Footer() {
 	const imageSize = 28;
 	const { cart } = React.useContext(CartContext);
 
+	const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+
 	useEffect(() => {
-		console.log("Cart changed:", cart.length);
+		console.log("Cart changed:", totalQuantity);
 	}, [cart]);
+
 	return (
 		<footer>
 			<div className="footer-element"></div>
@@ -29,9 +32,9 @@ export default function Footer() {
 				</div>
 			</div>
 			<div className="footer-element beer-mat-container">
-				{cart && cart.length > 0 && (
+				{totalQuantity > 0 && (
 					<div className="beer-mat">
-						<span>{cart.length}</span>
+						<span>{totalQuantity}</span>
 					</div>
 				)}
 			</div>

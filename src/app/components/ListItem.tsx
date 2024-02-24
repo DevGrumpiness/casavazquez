@@ -44,7 +44,7 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 					return (
 						<React.Fragment key={price}>
 							<div className="price" style={{ paddingLeft: price < 10 ? "4px" : "" }}>
-								{isDetailsOpen && <RemoveButton item={listItem} variant={variant} />}
+								{isDetailsOpen && <RemoveButton item={listItem} variant={variant}  />}
 								<div>
 
 								<span>{variant ? `${variant}${divider}` : ""}</span>
@@ -56,7 +56,7 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 									})}
 								</span>
 								</div>
-								{isDetailsOpen && <AddButton item={listItem} variant={variant} />}
+								{isDetailsOpen && <AddButton item={listItem} variant={variant} price={price} />}
 							</div>
 						</React.Fragment>
 					);
