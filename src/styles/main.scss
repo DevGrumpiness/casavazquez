@@ -60,3 +60,16 @@ footer {
 .listItem-header-prices {
 	min-width: max-content;
 }
+
+$green: rgba(0, 153, 0, .151);
+$red: rgba(153, 0, 0, .151);
+
+@keyframes glow-green {
+	0% { box-shadow: 0 0 5px $green, 0 0 10px $green, 0 0 15px $green, 0 0 20px $green; }
+	100% { box-shadow: none; }
+}
+
+@keyframes glow-red {
+	0% { box-shadow: 0 0 5px $red, 0 0 10px $red, 0 0 15px $red, 0 0 20px $red; }
+	100% { box-shadow: none; }
+}

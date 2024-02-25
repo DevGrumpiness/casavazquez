@@ -19,8 +19,9 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 		return null;
 	}
 
-	const { addToCart, removeFromCart } = useContext(CartContext);
 	const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+	const [glowColor, setGlowColor] = useState('');
+	const [glowColors, setGlowColors] = useState<{ [key: string]: string }>({});
 
 	const handleHeaderClick = () => {
 		if (isDetailsOpen) {
@@ -31,32 +32,48 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 	const handleCloseIconClick = () => {
 		setIsDetailsOpen(false);
 	};
+	const handleAddButtonClick = (variant: string|null) => {
+		if(!variant) {
+			return;
+		}
+		setGlowColors(prev => ({ ...prev, [variant]: 'green' }));
+		setTimeout(() => setGlowColors(prev => ({ ...prev, [variant]: '' })), 500);
+	};
+	
+	const handleRemoveButtonClick = (variant: string|null) => {
+		if(!variant) {
+			return;
+		}
+		setGlowColors(prev => ({ ...prev, [variant]: 'red' }));
+		setTimeout(() => setGlowColors(prev => ({ ...prev, [variant]: '' })), 500);
+	};
+
 	const renderLabels = (labelString: string) => {
 		return <ListItemLabels labelString={labelString} />;
 	};
-
+	
 	const renderPrices = () => {
 		return (
 			<div className="listItem-header-prices">
 				{listItem.prices.map((price, index) => {
 					const variant = listItem.variants ? listItem.variants[index] : null;
 					const divider = variant ? (variant.length > 4 ? ".." : "...") : "";
+					const glowColor = variant ? glowColors[variant] : '';
 					return (
 						<React.Fragment key={price}>
-							<div className="price" style={{ paddingLeft: price < 10 ? "4px" : "" }}>
-								{isDetailsOpen && <RemoveButton item={listItem} variant={variant}  />}
+							<div className={`price ${glowColor}`} style={{ paddingLeft: price < 10 ? "4px" : "" }}>
+								{isDetailsOpen && <RemoveButton onClick={() => handleRemoveButtonClick(variant)} item={listItem} variant={variant} />}
 								<div>
-
-								<span>{variant ? `${variant}${divider}` : ""}</span>
-								<span>
-									{price.toLocaleString("de-DE", {
-										style: "decimal",
-										minimumFractionDigits: 2,
-										maximumFractionDigits: 2,
-									})}
-								</span>
+									<span>{variant ? `${variant}${divider}` : ""}</span>
+									<span>
+										{price.toLocaleString("de-DE", {
+												style: "decimal",
+												minimumFractionDigits: 2,
+												maximumFractionDigits: 2,
+											})}
+									</span>
 								</div>
-								{isDetailsOpen && <AddButton item={listItem} variant={variant} price={price} />}
+								{isDetailsOpen && <AddButton onClick={() => handleAddButtonClick(variant)} item={listItem} variant={variant} price={price} />}
 							</div>
 						</React.Fragment>
 					);

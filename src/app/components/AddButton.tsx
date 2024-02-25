@@ -6,13 +6,15 @@ interface AddButtonProps {
 	item: TMenuItemDrink | TMenuItemFood;
     variant: string | null;
     price: number;
+    onClick: (variant: string|null) => void;
 }
 
-export const AddButton: React.FC<AddButtonProps> = ({ item, variant, price }) => {
+export const AddButton: React.FC<AddButtonProps> = ({ item, variant, price, onClick }) => {
     const { addToCart } = useContext(CartContext);
 
     const handleClick = (event: React.MouseEvent) => {
         event.stopPropagation();
+        onClick(variant);
     
         if (typeof addToCart === 'function') {
             addToCart(item, variant, price);

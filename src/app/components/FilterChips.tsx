@@ -1,5 +1,5 @@
 import "./FilterChips.scss";
-import React from "react";
+import React, { useState } from "react";
 
 interface FilterChipsProps {
 	selectedFilters: string[];
@@ -9,7 +9,7 @@ interface FilterChipsProps {
 
 const FilterChips: React.FC<FilterChipsProps> = ({ selectedFilters, setSelectedFilters, filters }) => {
 	const sortedFilters = [...filters].sort();
-
+	
 	let filtersToDisplay = selectedFilters.length > 0 ? selectedFilters : sortedFilters;
 
 	const handleChipClick = (filter: string) => {

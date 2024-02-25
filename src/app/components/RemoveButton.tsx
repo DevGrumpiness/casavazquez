@@ -5,12 +5,15 @@ import { TMenuItemDrink, TMenuItemFood } from "../../interfaces/menuItem";
 interface RemoveButtonProps {
 	item: TMenuItemDrink | TMenuItemFood;
     variant: string | null;
+    onClick: (variant: string|null) => void;
 }
 
-export const RemoveButton: React.FC<RemoveButtonProps> = ({ item, variant }) => {
+export const RemoveButton: React.FC<RemoveButtonProps> = ({ item, variant, onClick }) => {
     const { removeFromCart } = useContext(CartContext);
 
     const handleClick = () => {
+        onClick(variant);
+        
         if (typeof removeFromCart === 'function') {
             removeFromCart(item, variant);
         } else {
