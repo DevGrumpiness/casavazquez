@@ -31,7 +31,7 @@ export const Cart: React.FC = () => {
 						<p>{`${item.name} (${item.variant} - ${item.price} €)`}</p>
 						<div className="count">
 							{renderQuantity(item.quantity, item.variant)}
-							<span>Total: {item.price * item.quantity}</span>
+							<span>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(item.price * item.quantity)}</span>
 						</div>
 					</div>
 				))}
