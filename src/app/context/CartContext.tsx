@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 import { TMenuItemDrink, TMenuItemFood } from "../../interfaces/menuItem";
 
-interface CartItem {
+export interface CartItem {
     name: string;
     variant: string | null;
     price: number;
@@ -10,8 +10,8 @@ interface CartItem {
 
 interface CartContextProps {
     cart: CartItem[];
-    addToCart: (item: TMenuItemDrink | TMenuItemFood, variant: string | null, price: number) => void;
-    removeFromCart: (item: TMenuItemDrink | TMenuItemFood, variant: string | null) => void; // Updated this line
+    addToCart: (item: CartItem, variant: string | null, price: number) => void;
+    removeFromCart: (item: CartItem, variant: string | null) => void; // Updated this line
 }
 
 export const CartContext = createContext<CartContextProps>({
@@ -27,7 +27,7 @@ interface CartProviderProps {
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     const [cart, setCart] = useState<CartItem[]>([]);
 
-    const addToCart = (item: TMenuItemDrink | TMenuItemFood, variant: string | null, price: number) => {
+    const addToCart = (item: CartItem, variant: string | null, price: number) => {
         setCart((prevCart) => {
             const existingItemIndex = prevCart.findIndex(
                 (cartItem) => cartItem.name === item.name && cartItem.variant === variant
@@ -43,7 +43,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         });
     };
 
-    const removeFromCart = (item: TMenuItemDrink | TMenuItemFood, variant: string | null) => {
+    const removeFromCart = (item: CartItem, variant: string | null) => {
         setCart((prevCart) => {
             const existingItemIndex = prevCart.findIndex(
                 (cartItem) => cartItem.name === item.name && cartItem.variant === variant

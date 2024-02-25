@@ -2,6 +2,8 @@ import "./Cart.scss";
 
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { AddButton } from "./AddButton";
+import { RemoveButton } from "./RemoveButton";
 
 export const Cart: React.FC = () => {
 	const { cart } = useContext(CartContext);
@@ -32,6 +34,10 @@ export const Cart: React.FC = () => {
 						<div className="count">
 							{renderQuantity(item.quantity, item.variant)}
 							<span>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(item.price * item.quantity)}</span>
+						</div>
+						<div className="modify_container">
+						<RemoveButton item={item} variant={item.variant} />
+						<AddButton item={item} variant={item.variant} price={item.price} />
 						</div>
 					</div>
 				))}

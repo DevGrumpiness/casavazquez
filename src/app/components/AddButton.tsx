@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
-import { CartContext } from "../context/CartContext";
-import { TMenuItemDrink, TMenuItemFood } from "../../interfaces/menuItem";
+import { CartContext, CartItem } from "../context/CartContext";
 
 interface AddButtonProps {
-	item: TMenuItemDrink | TMenuItemFood;
+	item: CartItem
     variant: string | null;
     price: number;
-    onClick: (variant: string|null) => void;
+    onClick?: (variant: string|null) => void;
 }
 
 export const AddButton: React.FC<AddButtonProps> = ({ item, variant, price, onClick }) => {
@@ -14,7 +13,10 @@ export const AddButton: React.FC<AddButtonProps> = ({ item, variant, price, onCl
 
     const handleClick = (event: React.MouseEvent) => {
         event.stopPropagation();
-        onClick(variant);
+        
+        if (onClick) {
+            onClick(variant);
+        }
     
         if (typeof addToCart === 'function') {
             addToCart(item, variant, price);

@@ -1,18 +1,19 @@
 import React, { useContext } from "react";
-import { CartContext } from "../context/CartContext";
-import { TMenuItemDrink, TMenuItemFood } from "../../interfaces/menuItem";
+import { CartContext, CartItem } from "../context/CartContext";
 
 interface RemoveButtonProps {
-	item: TMenuItemDrink | TMenuItemFood;
+	item: CartItem;
     variant: string | null;
-    onClick: (variant: string|null) => void;
+    onClick?: (variant: string|null) => void;
 }
 
 export const RemoveButton: React.FC<RemoveButtonProps> = ({ item, variant, onClick }) => {
     const { removeFromCart } = useContext(CartContext);
 
     const handleClick = () => {
-        onClick(variant);
+        if (onClick) {
+            onClick(variant);
+        }
         
         if (typeof removeFromCart === 'function') {
             removeFromCart(item, variant);
