@@ -35,7 +35,7 @@ export const Cart: React.FC = () => {
 							{renderQuantity(item.quantity, item.variant)}
 							<span>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(item.price * item.quantity)}</span>
 						</div>
-						<div className="modify_container">
+						<div className="modification_container">
 						<RemoveButton item={item} variant={item.variant} />
 						<AddButton item={item} variant={item.variant} price={item.price} />
 						</div>

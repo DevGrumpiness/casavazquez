@@ -13,7 +13,7 @@ export const AddButton: React.FC<AddButtonProps> = ({ item, variant, price, onCl
 
     const handleClick = (event: React.MouseEvent) => {
         event.stopPropagation();
-        
+
         if (onClick) {
             onClick(variant);
         }
@@ -27,7 +27,7 @@ export const AddButton: React.FC<AddButtonProps> = ({ item, variant, price, onCl
 
     return (
         <div className="cart_button add" style={{ textAlign: "center" }}>
-            <span onClick={handleClick} className="addToCart" aria-label="Zum Warenkorb hinzufügen">
+            <span onClick={handleClick} className="cartButton addToCart" aria-label="Zum Warenkorb hinzufügen">
                 {/* <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
 
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="green" viewBox="0 0 24 24">
@@ -37,4 +37,5 @@ export const AddButton: React.FC<AddButtonProps> = ({ item, variant, price, onCl
             </span>
         </div>
     );
-};
+}
+;

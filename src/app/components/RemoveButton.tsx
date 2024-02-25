@@ -24,7 +24,7 @@ export const RemoveButton: React.FC<RemoveButtonProps> = ({ item, variant, onCli
 
     return (
         <div className="cart_button remove" style={{ textAlign: "center" }}>
-            <span onClick={handleClick} className="addToCart" aria-label="Aus dem Warenkorb entfernen">
+            <span onClick={handleClick} className="cartButton removeFromCart" aria-label="Aus dem Warenkorb entfernen">
                 {/* <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
 
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="red" viewBox="0 0 24 24">
