@@ -2,7 +2,7 @@
 import "./ListItem.scss";
 import React, { useState, useContext } from "react";
 
-import { CartContext } from "../context/CartContext";
+import { CartItem } from "../context/CartContext";
 import { TMenuItemDrink, TMenuItemFood } from "../../interfaces/menuItem";
 import Image from "next/image";
 import ListItemLabels from "./ListItemLabels";
@@ -62,7 +62,7 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 					return (
 						<React.Fragment key={price}>
 							<div className={`price ${glowColor}`} style={{ paddingLeft: price < 10 ? "4px" : "" }}>
-								{isDetailsOpen && <RemoveButton onClick={() => handleRemoveButtonClick(variant)} item={listItem} variant={variant} />}
+								{isDetailsOpen && <RemoveButton onClick={() => handleRemoveButtonClick(variant)} item={listItem as unknown as CartItem} variant={variant} />}
 								<div>
 									<span>{variant ? `${variant}${divider}` : ""}</span>
 									<span>
@@ -73,7 +73,7 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 											})}
 									</span>
 								</div>
-								{isDetailsOpen && <AddButton onClick={() => handleAddButtonClick(variant)} item={listItem} variant={variant} price={price} />}
+								{isDetailsOpen && <AddButton onClick={() => handleAddButtonClick(variant)} item={listItem as unknown as CartItem}variant={variant} price={price} />}
 							</div>
 						</React.Fragment>
 					);
