@@ -15,11 +15,10 @@ const DrinkList: React.FC = () => {
 
 	const filters = [
 		"Alkohol",
-		"to go",
+		"toGo",
 		"alkoholfrei",
 		"heiß",
-		"Sommer",
-		"Angebot",
+		"MischMasch",
 		"Schnaps",
 		"Fass",
 		"Flasche",
