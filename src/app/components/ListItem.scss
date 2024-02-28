@@ -163,23 +163,15 @@
 			right: -5px;
 		}
 
-		
-        &:active,
-        &:focus {
-            outline: none;
-            background-color: transparent;
-            box-shadow: none;
-        }
+		&:active,
+		&:focus {
+			outline: none;
+			background-color: transparent;
+			box-shadow: none;
+		}
 	}
 
 	.hidden {
 		display: none;
-	}
-
-	.your-list-element-class:active,
-	.your-list-element-class:focus {
-		outline: none;
-		background-color: transparent;
-		box-shadow: none;
 	}
 }
