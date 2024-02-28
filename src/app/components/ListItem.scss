@@ -167,4 +167,11 @@
 	.hidden {
 		display: none;
 	}
+
+	.your-list-element-class:active,
+	.your-list-element-class:focus {
+		outline: none;
+		background-color: transparent;
+		box-shadow: none;
+	}
 }
