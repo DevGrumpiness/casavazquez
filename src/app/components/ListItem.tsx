@@ -60,7 +60,7 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 					const divider = variant ? (variant.length > 4 ? ".." : "...") : "";
 					const glowColor = variant ? glowColors[variant] : '';
 					return (
-						<React.Fragment key={price}>
+						<React.Fragment key={`${price}_${index}`}>
 							<div className={`price ${glowColor}`} style={{ paddingLeft: price < 10 ? "4px" : "" }}>
 								{isDetailsOpen && <RemoveButton onClick={() => handleRemoveButtonClick(variant)} item={listItem as unknown as CartItem} variant={variant} />}
 								<div>
