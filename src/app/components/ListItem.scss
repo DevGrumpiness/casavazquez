@@ -168,10 +168,19 @@
 			outline: none;
 			background-color: transparent;
 			box-shadow: none;
+			-webkit-tap-highlight-color: transparent; // Add this line
 		}
 	}
 
 	.hidden {
 		display: none;
+	}
+
+	&:active,
+	&:focus {
+		outline: none;
+		background-color: transparent;
+		box-shadow: none;
+		-webkit-tap-highlight-color: transparent; // Add this line
 	}
 }
