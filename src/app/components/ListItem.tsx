@@ -1,6 +1,7 @@
 "use strict";
 import "./ListItem.scss";
 import React, { useState, useContext } from "react";
+import { placeholderFoodImage } from "../../assets/img/placeholderImage";
 
 import { CartItem } from "../context/CartContext";
 import { TMenuItemDrink, TMenuItemFood } from "../../interfaces/menuItem";
@@ -20,7 +21,7 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 	}
 
 	const [isDetailsOpen, setIsDetailsOpen] = useState(false);
-	const [glowColor, setGlowColor] = useState('');
+	const [glowColor, setGlowColor] = useState("");
 	const [glowColors, setGlowColors] = useState<{ [key: string]: string }>({});
 
 	const handleHeaderClick = () => {
@@ -32,48 +33,61 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 	const handleCloseIconClick = () => {
 		setIsDetailsOpen(false);
 	};
-	const handleAddButtonClick = (variant: string|null) => {
-		if(!variant) {
+	const handleAddButtonClick = (variant: string | null) => {
+		if (!variant) {
 			return;
 		}
-		setGlowColors(prev => ({ ...prev, [variant]: 'green' }));
-		setTimeout(() => setGlowColors(prev => ({ ...prev, [variant]: '' })), 500);
+		setGlowColors((prev) => ({ ...prev, [variant]: "green" }));
+		setTimeout(() => setGlowColors((prev) => ({ ...prev, [variant]: "" })), 500);
 	};
-	
-	const handleRemoveButtonClick = (variant: string|null) => {
-		if(!variant) {
+
+	const handleRemoveButtonClick = (variant: string | null) => {
+		if (!variant) {
 			return;
 		}
-		setGlowColors(prev => ({ ...prev, [variant]: 'red' }));
-		setTimeout(() => setGlowColors(prev => ({ ...prev, [variant]: '' })), 500);
+		setGlowColors((prev) => ({ ...prev, [variant]: "red" }));
+		setTimeout(() => setGlowColors((prev) => ({ ...prev, [variant]: "" })), 500);
 	};
 
 	const renderLabels = (labelString: string) => {
 		return <ListItemLabels labelString={labelString} />;
 	};
-	
+
 	const renderPrices = () => {
 		return (
 			<div className="listItem-header-prices">
 				{listItem.prices.map((price, index) => {
 					const variant = listItem.variants ? listItem.variants[index] : null;
 					const divider = variant ? (variant.length > 4 ? ".." : "...") : "";
-					const glowColor = variant ? glowColors[variant] : '';
+					const glowColor = variant ? glowColors[variant] : "";
 					return (
 						<React.Fragment key={`${price}_${index}`}>
 							<div className={`price ${glowColor}`} style={{ paddingLeft: price < 10 ? "4px" : "" }}>
-								{isDetailsOpen && <RemoveButton onClick={() => handleRemoveButtonClick(variant)} item={listItem as unknown as CartItem} variant={variant} />}
+								{isDetailsOpen && (
+									<RemoveButton
+										onClick={() => handleRemoveButtonClick(variant)}
+										item={listItem as unknown as CartItem}
+										variant={variant}
+									/>
+								)}
 								<div>
 									<span>{variant ? `${variant}${divider}` : ""}</span>
 									<span>
 										{price.toLocaleString("de-DE", {
-												style: "decimal",
-												minimumFractionDigits: 2,
-												maximumFractionDigits: 2,
-											})}
+											style: "decimal",
+											minimumFractionDigits: 2,
+											maximumFractionDigits: 2,
+										})}
 									</span>
 								</div>
-								{isDetailsOpen && <AddButton onClick={() => handleAddButtonClick(variant)} item={listItem as unknown as CartItem}variant={variant} price={price} />}
+								{isDetailsOpen && (
+									<AddButton
+										onClick={() => handleAddButtonClick(variant)}
+										item={listItem as unknown as CartItem}
+										variant={variant}
+										price={price}
+									/>
+								)}
 							</div>
 						</React.Fragment>
 					);
@@ -85,6 +99,14 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 	return (
 		<div id={String(listItem.id)} className={`listItem ${isDetailsOpen ? "expanded" : ""}`}>
 			<div className="listItem-header-container" onClick={handleHeaderClick}>
+				<Image
+					src={imageUrl ?? ""}
+					alt={listItem.name}
+					width={70}
+					height={70}
+					placeholder="blur"
+					blurDataURL={`data:image/jpg;base64,${placeholderFoodImage}`}
+				/>
 				<Image src={imageUrl ?? ""} alt={listItem.name} width={70} height={70} />
 				<div className={`listItem-header-content ${!listItem.available ? "disabled" : ""}`}>
 					<div className="listItem-header-name">
