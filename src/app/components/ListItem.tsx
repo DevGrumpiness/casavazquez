@@ -107,7 +107,6 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 					placeholder="blur"
 					blurDataURL={`data:image/jpg;base64,${placeholderFoodImage}`}
 				/>
-				<Image src={imageUrl ?? ""} alt={listItem.name} width={70} height={70} />
 				<div className={`listItem-header-content ${!listItem.available ? "disabled" : ""}`}>
 					<div className="listItem-header-name">
 						<h3>
