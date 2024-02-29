@@ -12,10 +12,10 @@ export const DigitalMenu: React.FC = () => {
 	const renderNews = () => {
 		const currentDate = new Date();
 		return news
-			.filter(newsItem => !newsItem.expiration_day || newsItem.expiration_day >= currentDate)
+			.filter((newsItem) => !newsItem.expiration_day || newsItem.expiration_day >= currentDate)
 			.map((newsItem: INewsMessage) => {
-			return <NewsMessage key={newsItem.id} {...newsItem} />;
-		});
+				return <NewsMessage key={newsItem.id} {...newsItem} />;
+			});
 	};
 
 	useEffect(() => {
@@ -30,7 +30,7 @@ export const DigitalMenu: React.FC = () => {
 		<div className="digitalMenu">
 			<div>
 				<h3>Aktuelles:</h3>
-
+				<div className="mobileOptimizedHint">⚠️ Fürs Handy optimiert ⚠️</div>
 				{news.length > 0 ? renderNews() : null}
 			</div>
 
