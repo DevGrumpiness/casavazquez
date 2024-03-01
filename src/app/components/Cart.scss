@@ -58,4 +58,16 @@
 		margin-left: auto;
 		text-align: right;
 	}
+
+	.tipSuggestions {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+	}
+
+	.tipp_input {
+		width: 20%;
+		margin-left: 5px;
+		text-align: right;
+	}
 }
