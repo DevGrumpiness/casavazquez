@@ -23,6 +23,7 @@ body {
 }
 
 main {
+	width: 100vw;
 	flex: 1;
 	padding: $main-vertical-padding;
 	max-width: 800px;
