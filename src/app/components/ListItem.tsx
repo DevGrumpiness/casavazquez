@@ -33,20 +33,17 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 	const handleCloseIconClick = () => {
 		setIsDetailsOpen(false);
 	};
+
 	const handleAddButtonClick = (variant: string | null) => {
-		if (!variant) {
-			return;
-		}
-		setGlowColors((prev) => ({ ...prev, [variant]: "green" }));
-		setTimeout(() => setGlowColors((prev) => ({ ...prev, [variant]: "" })), 500);
+		variant = variant || "default";
+		setGlowColors((prev) => ({ ...prev, [variant as string]: "green" }));
+		setTimeout(() => setGlowColors((prev) => ({ ...prev, [variant as string]: "" })), 500);
 	};
 
 	const handleRemoveButtonClick = (variant: string | null) => {
-		if (!variant) {
-			return;
-		}
-		setGlowColors((prev) => ({ ...prev, [variant]: "red" }));
-		setTimeout(() => setGlowColors((prev) => ({ ...prev, [variant]: "" })), 500);
+		variant = variant || "default";
+		setGlowColors((prev) => ({ ...prev, [variant as string]: "red" }));
+		setTimeout(() => setGlowColors((prev) => ({ ...prev, [variant as string]: "" })), 500);
 	};
 
 	const renderLabels = (labelString: string) => {
@@ -57,9 +54,9 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 		return (
 			<div className="listItem-header-prices">
 				{listItem.prices.map((price, index) => {
-					const variant = listItem.variants ? listItem.variants[index] : null;
+					const variant = listItem.variants ? listItem.variants[index] : 'default';
 					const divider = variant ? (variant.length > 4 ? ".." : "...") : "";
-					const glowColor = variant ? glowColors[variant] : "";
+					const glowColor = glowColors[variant] || '';
 					return (
 						<React.Fragment key={`${price}_${index}`}>
 							<div className={`price ${glowColor}`} style={{ paddingLeft: price < 10 ? "4px" : "" }}>
