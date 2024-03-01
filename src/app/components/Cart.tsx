@@ -17,8 +17,12 @@ export const Cart: React.FC = () => {
 	const handleTipChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
 		setTipInput(value);
-		const tip = (cartTotal / 100) * parseFloat(value);
-		setTipSum(tip);
+		if (!isNaN(parseFloat(value)) && isFinite(parseFloat(value))) {
+			const tip = (cartTotal / 100) * parseFloat(value);
+			setTipSum(tip);
+		} else {
+			setTipSum(0);
+		}
 	};
 
 	const handleTipSuggestionClick = (tip: number) => {
