@@ -8,15 +8,23 @@ import { RemoveButton } from "./RemoveButton";
 export const Cart: React.FC = () => {
 	const { cart } = useContext(CartContext);
 	const [tipSum, setTipSum] = useState(0);
+	const [tipInput, setTipInput] = useState("");
 
 	const variantTotals = cart.map((item) => item.price * item.quantity);
-
 	const cartTotal = variantTotals.reduce((total, variantTotal) => total + variantTotal, 0);
+	const tipSuggestions = [5, 7, 10, 15];
 
 	const handleTipChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
+		setTipInput(value);
 		const tip = (cartTotal / 100) * parseFloat(value);
 		setTipSum(tip);
+	};
+
+	const handleTipSuggestionClick = (tip: number) => {
+		setTipInput(tip.toString());
+		const calculatedTip = (cartTotal / 100) * tip;
+		setTipSum(calculatedTip);
 	};
 
 	const renderQuantity = (quantity: number, variant: string | null) => {
@@ -52,17 +60,33 @@ export const Cart: React.FC = () => {
 						</div>
 					</div>
 				))}
-				<div className="tipSuggestions">
-					<span>
-						Tip:&nbsp;
-						<input className="tipp_input" onChange={handleTipChange} type="number" placeholder="10" />%
-					</span>
-					<div className="tipCalculation">{tipSum.toFixed(2)}</div>
+				<div className="tippContainer">
+					<div className="tipSuggestions">
+						<span>
+							Tip:<br />
+							<input
+								className="tip_input"
+								onChange={handleTipChange}
+								value={tipInput}
+								type="number"
+								placeholder="0"
+							/>
+							%
+						</span>
+						<div className="tipCalculation">{tipSum.toFixed(2)}</div>
+					</div>
+					<div className="tipSuggestionsContainer">
+						{tipSuggestions.map((tip, index) => (
+							<button key={index} onClick={() => handleTipSuggestionClick(tip)}>
+								{tip}%
+							</button>
+						))}
+					</div>
 				</div>
 				<h3>
 					________________
 					<br />
-					Zeche: {new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(cartTotal)}
+					Zeche: {new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(cartTotal + tipSum)}
 				</h3>
 			</div>
 		</>
