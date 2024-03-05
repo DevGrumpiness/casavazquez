@@ -35,13 +35,13 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 	};
 
 	const handleAddButtonClick = (variant: string | null) => {
-		variant = variant || "default";
+		variant = variant || "";
 		setGlowColors((prev) => ({ ...prev, [variant as string]: "green" }));
 		setTimeout(() => setGlowColors((prev) => ({ ...prev, [variant as string]: "" })), 500);
 	};
 
 	const handleRemoveButtonClick = (variant: string | null) => {
-		variant = variant || "default";
+		variant = variant || "";
 		setGlowColors((prev) => ({ ...prev, [variant as string]: "red" }));
 		setTimeout(() => setGlowColors((prev) => ({ ...prev, [variant as string]: "" })), 500);
 	};
@@ -54,7 +54,7 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 		return (
 			<div className="listItem-header-prices">
 				{listItem.prices.map((price, index) => {
-					const variant = listItem.variants ? listItem.variants[index] : 'default';
+					const variant = listItem.variants ? listItem.variants[index] : '';
 					const divider = variant ? (variant.length > 4 ? ".." : "...") : "";
 					const glowColor = glowColors[variant] || '';
 					return (
