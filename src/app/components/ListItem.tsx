@@ -130,7 +130,7 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 				</div>
 				<div className={`${isDetailsOpen && "hidden"}`}>{renderPrices()}</div>
 			</div>
-			<div className={`${!isDetailsOpen && "hidden"}`}>{listItem.longDescription}</div>
+			<div className={`${!isDetailsOpen ? "hidden" : 'longDescription'}`}>{listItem.longDescription}</div>
 			<div className={`close listItem-footer ${!isDetailsOpen ? "hidden" : ""}`} onClick={handleCloseIconClick}>
 				{/* <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
 				<svg
