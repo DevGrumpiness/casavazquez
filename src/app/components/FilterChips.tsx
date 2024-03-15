@@ -10,7 +10,7 @@ interface FilterChipsProps {
 const FilterChips: React.FC<FilterChipsProps> = ({ selectedFilters, setSelectedFilters, filters }) => {
 	const sortedFilters = [...filters].sort();
 	
-	let filtersToDisplay = selectedFilters.length > 0 ? selectedFilters : sortedFilters;
+	let filtersToDisplay = selectedFilters.length > 0 ? selectedFilters : filters;
 
 	const handleChipClick = (filter: string) => {
 		setSelectedFilters([filter]);
