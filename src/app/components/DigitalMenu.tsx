@@ -39,8 +39,8 @@ export const DigitalMenu: React.FC = () => {
 				<h3>Aktuelle Öffnungszeiten</h3>
 				<div className="hours">
 					<p>
-						<span>Di-Do</span>
-						<span>17:00-01:00</span>
+						<span>Mo-Do</span>
+						<span>15:00-01:00</span>
 					</p>
 					<p>
 						<span>Fr</span>
@@ -53,6 +53,21 @@ export const DigitalMenu: React.FC = () => {
 					<p>
 						<span>So</span>
 						<span>15:00-00:00</span>
+					</p>
+					<hr />
+					<h3>Küche</h3>
+					<p>
+						<span>Mo-Fr</span>
+						<span>18:00-22:00</span>
+					</p>
+					<p>
+						<span>Sa</span>
+						<span>12:00-14:00</span>
+						<span>15:00-22:00</span>
+					</p>
+					<p>
+						<span>So</span>
+						<span>16:00-21:00</span>
 					</p>
 				</div>
 			</div>
