@@ -54,7 +54,6 @@ export const DigitalMenu: React.FC = () => {
 						<span>So</span>
 						<span>15:00-00:00</span>
 					</p>
-					<hr />
 					<h3>Küche</h3>
 					<p>
 						<span>Mo-Fr</span>
