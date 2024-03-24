@@ -177,7 +177,7 @@ export const DigitalMenu: React.FC = () => {
 						<p>José Guerrero Vazquez</p>
 						<p>j.gv@outlook.de</p>
 					</div>
-					<div className="legals-repo">
+					{/* <div className="legals-repo">
 						<b>git repository:</b>
 						<p>
 							<a href="https://github.com/DevGrumpiness/GimmeSome">GimmeSome</a>
@@ -186,7 +186,7 @@ export const DigitalMenu: React.FC = () => {
 							Du hast einen Bug gefunden oder eine Idee zur Verbesserung? Stell gerne einen Pull Request
 							oder melde dich unter der angegebenen E-Mail Adresse.
 						</p>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</>
