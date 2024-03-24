@@ -15,14 +15,14 @@ const Header: React.FC = () => {
 	} else if (pathname.includes("drinks")) {
 		headerText = "Durst";
 	} else {
-		headerText = "Tom & Polly";
+		headerText = "To&Po";
 	}
 
 	return (
 		<header>
 			<div>
 				<Link href="/">
-					<Image src="/media/logo.png" alt="logo" width={40} height={40} className="mainLogo" />
+					<Image src="/media/logo_open.png" alt="logo" width={40} height={40} className="mainLogo" />
 				</Link>
 				<div className="hedaerTitle">
 					<h1>{headerText}</h1>
