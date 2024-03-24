@@ -73,7 +73,9 @@ export const DigitalMenu: React.FC = () => {
 				</div>
 				<div className="legals-container">
 					<div className="legals-generall">
-						<p><b>⚠️Hinweis⚠️</b></p>
+						<p>
+							<b>⚠️Hinweis⚠️</b>
+						</p>
 						<p>
 							Alle Angaben sind freiwillig und ohne Gewähr. <br />
 							Dies ist eine private Website. Sie wird hobbymäßig entwickelt. <br />
@@ -88,7 +90,9 @@ export const DigitalMenu: React.FC = () => {
 						</p>
 					</div>
 					<div className="legals-haftungsausschluss">
-							<p><b>Haftungsausschluss</b>:</p>
+						<p>
+							<b>Haftungsausschluss</b>:
+						</p>
 						<p>
 							Die Informationen auf dieser Website dienen nur zu Informationszwecken und stellen keine
 							rechtliche, finanzielle oder professionelle Beratung dar. Obwohl wir uns bemühen, genaue und
@@ -111,7 +115,9 @@ export const DigitalMenu: React.FC = () => {
 						</p>
 					</div>
 					<div className="legals-assets">
-							<p><b>Bilder</b>:</p>
+						<p>
+							<b>Bilder</b>:
+						</p>
 						<p>Auf dieser Website werden freie Bilder von der Plattfor pixabay verwendet.</p>
 						Credits für verwendete Bilder (Links zu den pixaby Seiten der Bildrechtehaber):
 						<br />
@@ -169,9 +175,18 @@ export const DigitalMenu: React.FC = () => {
 					<div className="legals-impressum">
 						<b>Impressum:</b>
 						<p>José Guerrero Vazquez</p>
-						<p>jbmj@outlook.de</p>
+						<p>j.gv@outlook.de</p>
 					</div>
-
+					<div className="legals-repo">
+						<b>git repository:</b>
+						<p>
+							<a href="https://github.com/DevGrumpiness/GimmeSome">GimmeSome</a>
+						</p>
+						<p>
+							Du hast einen Bug gefunden oder eine Idee zur Verbesserung? Stell gerne einen Pull Request
+							oder melde dich unter der angegebenen E-Mail Adresse.
+						</p>
+					</div>
 				</div>
 			</div>
 		</>
