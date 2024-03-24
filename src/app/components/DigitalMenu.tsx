@@ -34,6 +34,7 @@ export const DigitalMenu: React.FC = () => {
 				{news.length > 0 ? renderNews() : null}
 			</div>
 
+				<hr></hr>
 			<div className="hours-container">
 				<hr></hr>
 				<h3>Aktuelle Öffnungszeiten</h3>
