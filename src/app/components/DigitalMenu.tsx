@@ -79,7 +79,7 @@ export const DigitalMenu: React.FC = () => {
 							Dies ist eine private Website. Sie wird hobbymäßig entwickelt. <br />
 							Bei Abweichungen gelten immer die Angaben auf der offiziellen Karte/Website. <br />
 							Die offizielle Karte findet sich unter{" "}
-							<a href="http://www.tomundpolly.de/speisekarte.pdf" target="_blank">
+							<a href="http://www.tomundpolly.de/speisekarte.pdf" rel="noreferrer" target="_blank">
 								www.tomundpolly.de/speisekarte.pdf
 							</a>
 							.
