@@ -22,7 +22,7 @@ const Header: React.FC = () => {
 		<header>
 			<div>
 				<Link href="/">
-					<Image src="/media/logo_open.png" alt="logo" width={40} height={40} className="mainLogo" />
+					<Image src="/media/logo_open.png" alt="logo" width={64} height={70} className="mainLogo" />
 				</Link>
 				<div className="hedaerTitle">
 					<h1>{headerText}</h1>
