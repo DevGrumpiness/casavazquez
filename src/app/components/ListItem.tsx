@@ -93,10 +93,9 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 		);
 	};
 
-
 	return (
 		<div id={String(listItem.id)} className={`listItem ${isDetailsOpen ? "expanded" : ""}`}>
-			<button className="listItem-header-container" onClick={handleHeaderClick} aria-label="Toggle item details">
+			<div className="listItem-header-container" onClick={handleHeaderClick}>
 				<Image
 					src={imageUrl ?? ""}
 					alt={listItem.name}
@@ -114,11 +113,13 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 					<span className="shortDescription">
 						{listItem.shortDescription}
 						<div className={`${!isDetailsOpen && "hidden"}`}>{renderPrices()}</div>
-						<button className={`expand ${isDetailsOpen ? "hidden" : ""}`} onClick={handleHeaderClick} aria-label="Expand item">
+						<div className={`expand ${isDetailsOpen ? "hidden" : ""}`} onClick={handleHeaderClick}>
+							{/* <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
+
 							<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 512 512">
 								<path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
 							</svg>
-						</button>
+						</div>{" "}
 					</span>
 					<div className={`listItem-details ${!isDetailsOpen ? "hidden" : ""}`}>
 						<hr />
@@ -128,9 +129,10 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 					</div>
 				</div>
 				<div className={`${isDetailsOpen && "hidden"}`}>{renderPrices()}</div>
-			</button>
+			</div>
 			<div className={`${!isDetailsOpen ? "hidden" : 'longDescription'}`}>{listItem.longDescription}</div>
-			<button className={`close listItem-footer ${!isDetailsOpen ? "hidden" : ""}`} onClick={handleCloseIconClick} aria-label="Close item details">
+			<div className={`close listItem-footer ${!isDetailsOpen ? "hidden" : ""}`} onClick={handleCloseIconClick}>
+				{/* <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					height="22"
@@ -143,7 +145,7 @@ export const ListItem: React.FC<ListItemProps> = ({ listItem, imageUrl }) => {
 						d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
 					/>
 				</svg>
-			</button>
+			</div>
 		</div>
 	);
 };
