@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import LandingPage from '../views/LandingPage.vue';
 import WineMenu from '../views/WineMenu.vue';
-import SnackMenu from '../views/SnackMenu.vue';
-import DrinkMenu from '../views/DrinkMenu.vue';
+// import SnackMenu from '../views/SnackMenu.vue';
+// import DrinkMenu from '../views/DrinkMenu.vue';
 
 const routes = [
     { path: '/', name: 'LandingPage', component: LandingPage },
-    { path: '/wine', name: 'WineMenu', component: WineMenu },
+    { path: '/vino', name: 'WineMenu', component: WineMenu },
     // { path: '/snack', name: 'SnackMenu', component: SnackMenu },
     // { path: '/drink', name: 'DrinkMenu', component: DrinkMenu },
 ];

@@ -1,6 +1,6 @@
 <template>
   <div class="landing-page p-d-flex p-flex-wrap p-jc-center">
-    <router-link to="/wine" class="tile">
+    <router-link to="/vino" class="tile">
       <Card class="tile-card">
         <div class="tile-content">
           <i class="pi pi-glass tile-icon"></i>

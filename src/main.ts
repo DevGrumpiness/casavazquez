@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import pinia from './store';
 
+import './assets/styles/main.scss';
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
 
