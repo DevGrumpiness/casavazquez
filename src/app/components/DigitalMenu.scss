@@ -1,0 +1,85 @@
+.digitalMenu {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+	align-items: center;
+	margin: 0 auto;
+
+	h1 {
+		text-align: center;
+	}
+	h3 {
+		padding-left: 1rem;
+	}
+
+	hr {
+		width: 94%;
+		margin-bottom: 2rem;
+	}
+
+	.hours-container {
+		margin-bottom: 80px;
+
+		.hours {
+			font-size: smaller;
+			margin: 0 auto;
+
+			p {
+				display: flex;
+				justify-content: space-between;
+				gap: 2rem;
+				margin: 0;
+			}
+		}
+	}
+
+	.legals-container {
+		max-width: 85vw;
+		margin: 0 auto;
+		font-family: calibri;
+	}
+}
+
+
+.menu-link-container {
+	width: 60%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+}
+
+.menu-link {
+	width: 150px;
+	height: 150px;
+	font-size: 2rem;
+
+	color: hsl(200, 51%, 35%);
+	border: 3px solid gray;
+	border-radius: 5px;
+	text-decoration: none;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.menu-link:hover {
+	color: aliceblue;
+	background-color: hsl(200, 51%, 35%);
+}
+
+.mobileOptimizedHint {
+	text-align: center;
+	padding: 4px 8px;
+	width: fit-content;
+	border: 1px solid yellow;
+	margin: 1rem auto;
+}
+
+@media (max-width: 900px) {
+	.mobileOptimizedHint {
+		display: none;
+	}
+}

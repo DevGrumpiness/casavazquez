@@ -1,0 +1,76 @@
+$header-height: 40px;
+$footer-height: 58px;
+$main-vertical-padding: calc(#{$header-height} + 1rem) 0 calc(#{$footer-height} + 1rem) 0;
+
+$topo_blue: #37414b;
+
+:root {
+	--topo_blue: #{$topo_blue};
+}
+
+@font-face {
+	font-family: "Instrument";
+	src: url("../assets/fonts/InstrumentSerif-Regular.ttf") format("truetype");
+}
+
+body {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+	color: var(--topo_blue);
+}
+
+main {
+	width: 100vw;
+	flex: 1;
+	padding: $main-vertical-padding;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+header,
+footer {
+	width: 100%;
+	position: fixed;
+	z-index: 10;
+
+	background: var(--topo_blue);
+	color: smokewhite;
+
+	display: flex;
+	align-items: center;
+}
+
+header {
+	height: #{$header-height};
+}
+
+footer {
+	height: #{$footer-height};
+}
+
+.subType {
+	color: #999;
+	opacity: .35;
+	padding-left: 8px;
+	margin: 0;
+}
+
+.listItem-header-prices {
+	min-width: max-content;
+}
+
+$green: rgba(0, 153, 0, .151);
+$red: rgba(153, 0, 0, .151);
+
+@keyframes glow-green {
+	0% { box-shadow: 0 0 5px $green, 0 0 10px $green, 0 0 15px $green, 0 0 20px $green; }
+	100% { box-shadow: none; }
+}
+
+@keyframes glow-red {
+	0% { box-shadow: 0 0 5px $red, 0 0 10px $red, 0 0 15px $red, 0 0 20px $red; }
+	100% { box-shadow: none; }
+}

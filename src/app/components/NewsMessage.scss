@@ -1,0 +1,54 @@
+.newsMessage {
+	position: relative;
+	font-family: -apple-system, system-ui;
+    padding: 8px;
+    border: 2px solid rgb(55 65 75 / 3%);
+    color: var(--topo_blue);
+    background-color: white;
+
+	.container {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+
+		p {
+			font-family: Tahoma;
+			font-size: 13px;
+			margin: 4px 8px 0 0;
+			line-height: 1.4;
+		}
+
+		> div {
+			flex: 3;
+		}
+	}
+
+	h3 {
+		padding: 0;
+		margin: 4px 0;
+		
+		font-weight: 500;
+		font-family: -apple-system, system-ui;
+		font-size: 15px;
+	}
+
+	img {
+		max-height: 50px;
+		max-width: 55px;
+		object-fit: contain;
+		flex: 1;
+	}
+
+	.closeX {
+		display: none;
+
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		width: 20px;
+		height: 20px;
+		background-color: #F0F2F5;
+		fill: #495358;
+		border-radius: 30px;
+	}
+}

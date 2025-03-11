@@ -1,0 +1,70 @@
+{
+	"food": [
+		{
+			"id": 1,
+			"type": "food",
+			"name": "Cheeseburger",
+			"shortDescription": "A juicy cheeseburger with a beef patty, cheese, lettuce, and tomato",
+			"longDescription": "A delicious cheeseburger made with a juicy beef patty, melted cheese, fresh lettuce, tomato, and other toppings sandwiched between a toasted bun.",
+			"price": 8.99,
+			"imageUrl": null,
+			"available": true,
+			"label": null
+		},
+		{
+			"id": 2,
+			"type": "food",
+			"name": "Veggie Pizza",
+			"shortDescription": "Delicious pizza topped with a variety of vegetables",
+			"longDescription": "A tasty veggie pizza with a crispy crust and topped with a flavorful tomato sauce and loads of sliced vegetables like mushrooms, onions, peppers, olives, etc.",
+			"price": 10.5,
+			"imageUrl": null,
+			"available": true,
+			"label": "veggie"
+		},
+		{
+			"id": 3,
+			"type": "food",
+			"name": "Chicken Wings",
+			"shortDescription": "Spicy and savory chicken wings served with a side of sauce",
+			"longDescription": "Juicy chicken wings fried until crispy and tossed in a spicy buffalo style sauce. Served with a side of blue cheese or ranch dressing.",
+			"price": 7.99,
+			"imageUrl": null,
+			"available": false,
+			"label": null
+		},
+		{
+			"id": 4,
+			"type": "food",
+			"name": "Garden Salad",
+			"shortDescription": "Fresh garden salad with a mix of greens, tomatoes, and cucumbers",
+			"longDescription": "A healthy salad made with a variety of mixed greens, slices of vine-ripened tomatoes, cucumbers, carrots, and other fresh vegetables. Topped with your choice of dressing.",
+			"price": 6.99,
+			"imageUrl": null,
+			"available": true,
+			"label": "vegan"
+		},
+		{
+			"id": 5,
+			"type": "food",
+			"name": "Steak",
+			"shortDescription": "Grilled steak cooked to your liking, served with vegetables",
+			"longDescription": "A juicy, flavorful grilled steak cooked to your preferred doneness. Served with a side of fresh, seasonal vegetables.",
+			"price": 15.99,
+			"imageUrl": null,
+			"available": true,
+			"label": null
+		},
+		{
+			"id": 6,
+			"type": "food",
+			"name": "Grilled Cheese Sandwich",
+			"shortDescription": "Classic grilled cheese sandwich with melted cheese on toasted bread",
+			"longDescription": "A nostalgic, gooey grilled cheese sandwich made with melted cheese between slices of golden brown toasted bread. A comforting classic!",
+			"price": 5.99,
+			"imageUrl": null,
+			"available": true,
+			"label": null
+		}
+	]
+}
