@@ -4,8 +4,8 @@ export interface Wine {
     id: number;
     name: string;
     prices: {
-        '0.1l': string;
-        '0.2l': string;
+        '0.1l'?: string;
+        '0.2l'?: string;
         flasche: string;
     };
     color: Color;
@@ -14,6 +14,7 @@ export interface Wine {
     shortDescription?: string;
     longDescription?: string;
     image?: string | null;
+    characteristics?: string;
 }
 
 export const dummyWines: Wine[] = [
@@ -26,7 +27,8 @@ export const dummyWines: Wine[] = [
         origin: 'Frankreich',
         shortDescription: 'Ein kräftiger Rotwein mit Noten dunkler Früchte.',
         longDescription: 'Dieser Cabernet Sauvignon bietet einen intensiven Geschmack von dunklen Beeren und dezenten Eichennoten.',
-        image: null
+        image: null,
+        characteristics: 'Trocken, tanninreich, kräftig'
     },
     {
         id: 2,
@@ -37,7 +39,8 @@ export const dummyWines: Wine[] = [
         origin: 'Italien',
         shortDescription: 'Geschmeidig und samtig, perfekt für entspannte Abende.',
         longDescription: 'Dieser Merlot bietet einen sanften Abgang mit Noten von Pflaume und einem dezenten Eichenaroma.',
-        image: null
+        image: null,
+        characteristics: 'Halbtrocken, fruchtig, weich'
     },
     {
         id: 3,
@@ -48,6 +51,7 @@ export const dummyWines: Wine[] = [
         origin: 'Kalifornien',
         shortDescription: 'Ein spritziger Weißwein mit einem Hauch von Zitrus.',
         longDescription: 'Dieser Chardonnay ist bekannt für seine erfrischende Säure und den zarten Geschmack tropischer Früchte.',
-        image: null
+        image: null,
+        characteristics: 'Trocken, frisch, fruchtig'
     }
 ];

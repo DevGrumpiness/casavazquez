@@ -55,7 +55,7 @@ const filteredWines = computed(() => {
       padding: 0.5rem 1rem;
       border: 1px solid $primary-color;
       background-color: #fff;
-      color: $primary-color;
+      color: $dark-color;
       border-radius: 4px;
       cursor: pointer;
       transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;

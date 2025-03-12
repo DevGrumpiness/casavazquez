@@ -2,25 +2,30 @@
   <div class="wine-item card" @click="toggle">
     <!-- Zusammengeklappte Ansicht -->
     <div class="collapsed-view">
-      <img :src="wine.image ? wine.image : defaultImage" alt="Weinbild" class="wine-image" />
+      <img :src="wine.image ? wine.image : defaultImage" alt="Weinbild" class="wine-image"/>
       <div class="wine-summary">
         <h2>{{ wine.name }}</h2>
+        <p class="characteristics" v-if="wine.characteristics">
+          {{ wine.characteristics }}
+        </p>
         <p class="grape"> {{ wine.grape }}</p>
-        <p class="price" v-if="wine.prices['0.1l']">
-          <strong>0,1l:</strong> {{ wine.prices['0.1l'] }}
-        </p>
-        <p class="price" v-if="wine.prices['0.2l']">
-          <strong>0,2l:</strong> {{ wine.prices['0.2l'] }}
-        </p>
-        <p class="price">
-          <strong>Flasche:</strong> {{ wine.prices.flasche }}
-        </p>
+        <div class="prices">
+          <p class="price" v-if="wine.prices['0.1l']">
+            <strong>0,1l:</strong> {{ wine.prices['0.1l'] }}
+          </p>
+          <p class="price" v-if="wine.prices['0.2l']">
+            <strong>0,2l:</strong> {{ wine.prices['0.2l'] }}
+          </p>
+          <p class="price">
+            <strong>Flasche:</strong> {{ wine.prices.flasche }}
+          </p>
+        </div>
       </div>
     </div>
-      <div class="accordion-toggle">
-        <i :class="{'pi': true, 'pi-chevron-down': !isOpen, 'pi-chevron-up': isOpen}" />
-        <span class="toggle-label">{{ isOpen ? 'Weniger Infos' : 'Mehr Infos' }}</span>
-      </div>
+    <div class="accordion-toggle">
+      <i :class="{'pi': true, 'pi-chevron-down': !isOpen, 'pi-chevron-up': isOpen}"/>
+<!--      <span class="toggle-label">{{ isOpen ? 'Weniger Infos' : 'Mehr Infos' }}</span>-->
+    </div>
 
     <!-- Ausgeklappte Ansicht -->
     <transition name="accordion">
@@ -34,13 +39,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import type { Wine } from '../interfaces/vino';
+import {ref} from 'vue';
+import type {Wine} from '../interfaces/vino';
 import 'primeicons/primeicons.css';
 
-const props = defineProps<{
-  wine: Wine;
-}>();
+const {wine} = defineProps<{ wine: Wine }>();
 
 const isOpen = ref(false);
 // Verwende den relativen Pfad zum Default-Bild
@@ -75,18 +78,27 @@ function toggle() {
       border-radius: 8px;
       margin-right: 1rem;
     }
+
     .wine-summary {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+
       h2 {
         font-size: 1rem;
         margin-bottom: 0.3rem;
-        color: $primary-color;
+        color: $dark-color;
       }
+
+      .prices {
+        align-self: end;
+      }
+
       .grape,
+      .characteristics,
       .price {
-        font-size: 13px;
+        font-size: 12px;
         margin-bottom: 0.3rem;
-        color: $primary-color;
       }
     }
   }
@@ -111,6 +123,7 @@ function toggle() {
       margin-right: 0.5rem;
       color: $accent-color;
     }
+
     .toggle-label {
       font-size: 12px;
       color: $primary-color;
@@ -120,10 +133,10 @@ function toggle() {
   .expanded-view {
     padding: 0 1rem 1rem;
     border-top: 1px solid lighten($primary-color, 40%);
+
     p {
       margin: 0.5rem 0;
       font-size: 0.95rem;
-      color: $primary-color;
     }
   }
 }
@@ -133,10 +146,12 @@ function toggle() {
 .accordion-leave-active {
   transition: max-height 0.3s ease;
 }
+
 .accordion-enter-from,
 .accordion-leave-to {
   max-height: 0;
 }
+
 .accordion-enter-to,
 .accordion-leave-from {
   max-height: 500px;

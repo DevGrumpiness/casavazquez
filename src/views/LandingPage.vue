@@ -1,37 +1,27 @@
 <template>
   <div class="landing-page p-d-flex p-flex-wrap p-jc-center">
+    <!-- Weine (als aktiver Link) -->
     <router-link to="/vino" class="tile">
       <Card class="tile-card">
-        <div class="tile-content">
-          <i class="pi pi-glass tile-icon"></i>
+        <template #title>
           <h2 class="tile-title">Weine</h2>
-        </div>
+        </template>
+      </Card>
+    </router-link><router-link to="/casavazquez" class="tile">
+      <Card class="tile-card">
+        <template #title>
+          <h2 class="tile-title">Getränke</h2>
+        </template>
+      </Card>
+    </router-link><router-link to="/casavazquez" class="tile">
+      <Card class="tile-card">
+        <template #title>
+          <h2 class="tile-title">Snacks</h2>
+        </template>
       </Card>
     </router-link>
 
-    <div class="tile disabled">
-      <Card class="tile-card">
-        <div class="tile-content">
-          <i class="pi pi-coffee tile-icon"></i>
-          <h2 class="tile-title">Getränke</h2>
-          <div class="overlay">
-            <span>Bald..</span>
-          </div>
-        </div>
-      </Card>
-    </div>
 
-    <div class="tile disabled">
-      <Card class="tile-card">
-        <div class="tile-content">
-          <i class="pi pi-apple tile-icon"></i>
-          <h2 class="tile-title">Snacks</h2>
-          <div class="overlay">
-            <span>Bald..</span>
-          </div>
-        </div>
-      </Card>
-    </div>
   </div>
 </template>
 
@@ -49,20 +39,15 @@ import Card from 'primevue/card';
   margin: 1rem;
   position: relative;
   text-decoration: none;
+}
 
-  .tile-card {
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    .tile-content {
-      text-align: center;
-      padding: 2rem 1rem;
-      position: relative;
-    }
-  }
+.tile-card {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
 
-  &:hover:not(.disabled) .tile-card {
-    transform: translateY(-5px);
-  }
+.tile:hover:not(.disabled) .tile-card {
+  transform: translateY(-5px);
 }
 
 .tile-icon {
@@ -78,20 +63,20 @@ import Card from 'primevue/card';
 .disabled {
   opacity: 0.5;
   pointer-events: none;
+}
 
-  .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #333;
-  }
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
 }
 </style>

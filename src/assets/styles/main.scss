@@ -1,3 +1,8 @@
+$primary-color: #e5e5ec;
+$accent-color: #b58900;
+$dark-color: #323c4d;
+$toggle-bg: rgba(255, 255, 255, 0.9);
+
 *,
 *::before,
 *::after {
@@ -9,8 +14,7 @@
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  background-color: #f9f9f9;
-  color: #333;
+  background: $dark-color;
 }
 
 .app-container {
@@ -109,8 +113,3 @@ a {
   font-weight: normal;
   font-style: normal;
 }
-
-
-$primary-color: #333;
-$accent-color: #b58900;
-$toggle-bg: rgba(255, 255, 255, 0.9);

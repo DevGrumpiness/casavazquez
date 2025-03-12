@@ -5,7 +5,7 @@ import WineMenu from '../views/WineMenu.vue';
 // import DrinkMenu from '../views/DrinkMenu.vue';
 
 const routes = [
-    { path: '/', name: 'LandingPage', component: LandingPage },
+    { path: '/casavazquez', name: 'LandingPage', component: LandingPage },
     { path: '/vino', name: 'WineMenu', component: WineMenu },
     // { path: '/snack', name: 'SnackMenu', component: SnackMenu },
     // { path: '/drink', name: 'DrinkMenu', component: DrinkMenu },
