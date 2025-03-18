@@ -7,7 +7,7 @@
       <div class="filter-buttons">
         <button class="filter-button" :class="{ active: veggie }" @click="toggleVeggie">
           <i class="pi pi-times" v-if="veggie" style="font-size: 8px"></i>
-          <i class="pi pi-seedling "></i> Nur Veggie
+          Nur Veggie
         </button>
       </div>
     </header>
@@ -136,7 +136,7 @@ $font-family: 'Helvetica Neue', Arial, sans-serif;
 
 .filter-button {
   background-color: $background-color;
-  border: 2px solid $accent-color;
+  border: 1px solid $accent-color;
   color: $accent-color;
   padding: 4px 8px;
   border-radius: 4px;
@@ -147,12 +147,7 @@ $font-family: 'Helvetica Neue', Arial, sans-serif;
   display: flex;
   margin: 0 auto;
   gap: 4px;
-  font-size: .5rem;
-
-  &:hover {
-    background-color: $accent-color;
-    color: $background-color;
-  }
+  font-size: 10px;
 
   &.active {
     background-color: $accent-color;
