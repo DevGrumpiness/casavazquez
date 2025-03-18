@@ -1,6 +1,6 @@
 $primary-color: #e5e5ec;
 $accent-color: #b58900;
-$dark-color: #323c4d;
+$dark-color: #221d32;
 $toggle-bg: rgba(255, 255, 255, 0.9);
 
 *,
@@ -19,11 +19,10 @@ body {
 
 .app-container {
   max-width: 700px;
-  min-height: 80vh;
   margin: 1rem auto;
   padding: 3rem 2rem;
 
-  background: url('/src/assets/images/papyrus_2.jpg');
+  //background: url('/src/assets/images/papyrus_2.jpg');
   background-size: 100% 100%;
   background-origin: content-box;
 }
@@ -110,6 +109,13 @@ a {
 @font-face {
   font-family: 'Great Vibes';
   src: url('../../assets/fonts/GreatVibes-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'King Red';
+  src: url('../../assets/fonts/kingred.otf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }

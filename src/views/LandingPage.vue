@@ -13,7 +13,7 @@
           <h2 class="tile-title">Getränke</h2>
         </template>
       </Card>
-    </router-link><router-link to="/casavazquez" class="tile">
+    </router-link><router-link to="/snacks" class="tile">
       <Card class="tile-card disabled">
         <template #title>
           <h2 class="tile-title">Snacks</h2>
