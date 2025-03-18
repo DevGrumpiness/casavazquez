@@ -1,38 +1,38 @@
 <template>
-  <div class="wine-item card" @click="toggle">
+  <div class="snack-item card" @click="toggle">
     <!-- Zusammengeklappte Ansicht -->
-    <div class="collapsed-view">
-      <img :src="wine.image ? wine.image : defaultImage" alt="Weinbild" class="wine-image"/>
-      <div class="wine-summary">
-        <h2>{{ wine.name }}</h2>
-        <p class="characteristics" v-if="wine.characteristics">
-          {{ wine.characteristics }}
+    <div class="collapsed-snack">
+      <img :src="snack.image ? snack.image : defaultImage" alt="Weinbild" class="snack-image"/>
+      <div class="snack-summary">
+        <h2>{{ snack.name }}</h2>
+        <p class="characteristics" v-if="snack.characteristics">
+          {{ snack.characteristics }}
         </p>
-        <p class="grape"> {{ wine.grape }}</p>
+        <p class="grape"> {{ snack.grape }}</p>
         <div class="prices">
-          <p class="price" v-if="wine.prices['0.1l']">
-            <strong>0,1l:</strong> {{ wine.prices['0.1l'] }}
+          <p class="price" v-if="snack.prices['0.1l']">
+            <strong>0,1l:</strong> {{ snack.prices['0.1l'] }}
           </p>
-          <p class="price" v-if="wine.prices['0.2l']">
-            <strong>0,2l:</strong> {{ wine.prices['0.2l'] }}
+          <p class="price" v-if="snack.prices['0.2l']">
+            <strong>0,2l:</strong> {{ snack.prices['0.2l'] }}
           </p>
           <p class="price">
-            <strong>Flasche:</strong> {{ wine.prices.flasche }}
+            <strong>Flasche:</strong> {{ snack.prices.flasche }}
           </p>
         </div>
       </div>
     </div>
     <div class="accordion-toggle">
       <i :class="{'pi': true, 'pi-chevron-down': !isOpen, 'pi-chevron-up': isOpen}"/>
-<!--      <span class="toggle-label">{{ isOpen ? 'Weniger Infos' : 'Mehr Infos' }}</span>-->
+      <!--      <span class="toggle-label">{{ isOpen ? 'Weniger Infos' : 'Mehr Infos' }}</span>-->
     </div>
 
     <!-- Ausgeklappte Ansicht -->
     <transition name="accordion">
       <div class="expanded-view" v-if="isOpen">
-        <p v-if="wine.origin"><strong>Herkunft:</strong> {{ wine.origin }}</p>
-        <p v-if="wine.shortDescription"><strong>Beschreibung:</strong> {{ wine.shortDescription }}</p>
-        <p v-if="wine.longDescription">{{ wine.longDescription }}</p>
+        <p v-if="snack.origin"><strong>Herkunft:</strong> {{ snack.origin }}</p>
+        <p v-if="snack.shortDescription"><strong>Beschreibung:</strong> {{ snack.shortDescription }}</p>
+        <p v-if="snack.longDescription">{{ snack.longDescription }}</p>
       </div>
     </transition>
   </div>
@@ -43,11 +43,11 @@ import {ref} from 'vue';
 import type {Wine} from '../interfaces/vino';
 import 'primeicons/primeicons.css';
 
-const {wine} = defineProps<{ wine: Wine }>();
+const {snack} = defineProps<{ snack: Wine }>();
 
 const isOpen = ref(false);
 // Verwende den relativen Pfad zum Default-Bild
-const defaultImage = wine.color === 'white'
+const defaultImage = snack.color === 'white'
     ? new URL('../assets/images/default_vino_white.png', import.meta.url).href
     : new URL('../assets/images/default_vino_red.png', import.meta.url).href;
 
@@ -59,7 +59,7 @@ function toggle() {
 <style scoped lang="scss">
 @import "../assets/styles/main.scss";
 
-.wine-item {
+.snack-item {
   position: relative;
   cursor: pointer;
   overflow: hidden;
@@ -74,14 +74,14 @@ function toggle() {
     align-items: center;
     padding: 1rem;
 
-    .wine-image {
+    .snack-image {
       height: 80px;
       object-fit: cover;
       border-radius: 8px;
       margin-right: 1rem;
     }
 
-    .wine-summary {
+    .snack-summary {
       flex: 1;
       display: flex;
       flex-direction: column;

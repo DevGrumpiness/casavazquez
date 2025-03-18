@@ -4,23 +4,24 @@
     <router-link to="/vino" class="tile">
       <Card class="tile-card">
         <template #title>
-          <h2 class="tile-title">Weine</h2>
+          <h2 class="tile-title">Vino</h2>
         </template>
       </Card>
     </router-link><router-link to="/casavazquez" class="tile">
-      <Card class="tile-card">
+      <Card class="tile-card disabled">
         <template #title>
           <h2 class="tile-title">Getränke</h2>
         </template>
       </Card>
     </router-link><router-link to="/casavazquez" class="tile">
-      <Card class="tile-card">
+      <Card class="tile-card disabled">
         <template #title>
           <h2 class="tile-title">Snacks</h2>
         </template>
       </Card>
     </router-link>
 
+    <h1 class="wip-hint">🚧👷‍♂️Die Seite befindet sich noch im Aufbau👷‍♂️🚧</h1>
 
   </div>
 </template>
@@ -30,6 +31,8 @@ import Card from 'primevue/card';
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/styles/main.scss";
+
 .landing-page {
   padding: 2rem;
 }
@@ -44,6 +47,19 @@ import Card from 'primevue/card';
 .tile-card {
   cursor: pointer;
   transition: transform 0.2s ease;
+  background: #323c4d;
+  color: #d1cbb8;
+
+  max-width: 220px;
+  text-align: center;
+  margin: 0 auto;
+
+  .disabled {
+    opacity: 0.6;
+    h2 {
+      color: grey;
+    }
+  }
 }
 
 .tile:hover:not(.disabled) .tile-card {
@@ -78,5 +94,12 @@ import Card from 'primevue/card';
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;
+}
+
+.wip-hint {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top:  2rem;
+  color: $dark-color;
 }
 </style>

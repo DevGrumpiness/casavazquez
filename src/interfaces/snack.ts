@@ -1,13 +1,7 @@
-type Color = 'red' | 'white' | 'rosé';
-
-export interface Wine {
+export interface Snack {
     id: number;
     name: string;
-    prices: {
-        '0.1l'?: string;
-        '0.2l'?: string;
-        flasche: string;
-    };
+    variants: string[];
     color: Color;
     grape: string;
     origin?: string;
