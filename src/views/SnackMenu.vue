@@ -3,13 +3,20 @@
     <header class="snacks-header">
       <h1 class="snacks-title">SNACKS</h1>
       <p class="snacks-subtitle">FÜR DEN KLEINEN HUNGER</p>
+      <!-- Veggie Filter Button mit Icon -->
+      <div class="filter-buttons">
+        <button class="filter-button" :class="{ active: veggie }" @click="toggleVeggie">
+          <i class="pi pi-times" v-if="veggie" style="font-size: 8px"></i>
+          <i class="pi pi-seedling "></i> Nur Veggie
+        </button>
+      </div>
     </header>
 
     <ul class="snacks-list">
       <li class="snacks-item veggie">
         <div class="snack-text">
           <span class="snacks-name">Nachos mit Dip</span>
-          <span class="snacks-description">z.B. mit Aioli / Guacamole / Salsa </span>
+          <span class="snacks-description">z.B. mit Aioli / Guacamole / Salsa</span>
         </div>
         <span class="snacks-price">4,9</span>
       </li>
@@ -27,7 +34,8 @@
         </div>
         <span class="snacks-price">4,9</span>
       </li>
-      <li class="snacks-item">
+      <!-- Nicht-vegane Snacks nur anzeigen, wenn veggie false -->
+      <li class="snacks-item" v-if="!veggie">
         <div class="snack-text">
           <span class="snacks-name">Plato de Jamón</span>
           <span class="snacks-description">(80g) + Brot</span>
@@ -41,28 +49,30 @@
         </div>
         <span class="snacks-price">7,5</span>
       </li>
-      <li class="snacks-item">
+      <li class="snacks-item" v-if="!veggie">
         <div class="snack-text">
           <span class="snacks-name">Plato Mixto</span>
-          <span class="snacks-description">(130g) + Brot </span>
+          <span class="snacks-description">(130g) + Brot</span>
         </div>
         <span class="snacks-price">14</span>
       </li>
-      <br/>
-      <br/>
+    </ul>
+
+    <ul class="snacks-extras">
       <li class="snacks-item extra veggie">
         <span class="snacks-name">Extra Trüffel-Käse (30g)</span>
         <span class="snacks-price">3</span>
-        <li class="snacks-item extra veggie">
-          <span class="snacks-name">Extra Dip</span>
-          <span class="snacks-price">0,7</span>
-        </li>
-        <li class="snacks-item extra veggie">
-          <span class="snacks-name">Extra Baguette</span>
-          <span class="snacks-price">2</span>
-        </li>
+      </li>
+      <li class="snacks-item extra veggie">
+        <span class="snacks-name">Extra Dip</span>
+        <span class="snacks-price">0,7</span>
+      </li>
+      <li class="snacks-item extra veggie">
+        <span class="snacks-name">Extra Baguette</span>
+        <span class="snacks-price">2</span>
       </li>
     </ul>
+
     <p class="snacks-note">
       Unsere Snacks & Platten sind ideal zum Teilen und bieten eine köstliche Begleitung zu unseren Drinks.
     </p>
@@ -70,7 +80,11 @@
 </template>
 
 <script setup lang="ts">
-const veggie = false;
+import { ref } from 'vue';
+const veggie = ref(false);
+function toggleVeggie() {
+  veggie.value = !veggie.value;
+}
 </script>
 
 <style lang="scss" scoped>
@@ -86,7 +100,6 @@ $font-family: 'Helvetica Neue', Arial, sans-serif;
   padding: 2rem 1rem;
   max-width: 90%;
   margin: 20% auto;
-
   border: 2px solid $accent-color;
   border-radius: 8px;
 }
@@ -99,12 +112,10 @@ $font-family: 'Helvetica Neue', Arial, sans-serif;
 .snacks-title {
   text-transform: uppercase;
   letter-spacing: 0.1rem;
-  background: #221d32;
-
+  background: $background-color;
   width: min-content;
   margin: 0 auto;
   padding: 0 1rem;
-
   color: $accent-color;
   font-size: 2rem;
   font-family: 'King Red';
@@ -118,7 +129,42 @@ $font-family: 'Helvetica Neue', Arial, sans-serif;
   color: $accent-color;
 }
 
-/* Liste der Snacks */
+.filter-buttons {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.filter-button {
+  background-color: $background-color;
+  border: 2px solid $accent-color;
+  color: $accent-color;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  display: flex;
+  margin: 0 auto;
+  gap: 4px;
+  font-size: .5rem;
+
+  &:hover {
+    background-color: $accent-color;
+    color: $background-color;
+  }
+
+  &.active {
+    background-color: $accent-color;
+    color: $background-color;
+  }
+}
+
+.filter-icon {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
 .snacks-list {
   list-style: none;
   margin: 0;
@@ -126,15 +172,24 @@ $font-family: 'Helvetica Neue', Arial, sans-serif;
   margin-bottom: 1.5rem;
 }
 
-/* Einzelner Snack */
 .snacks-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.8rem;
 
-  .snacks-name {
-    font-size: 1rem;
+  .snack-text {
+    display: flex;
+    flex-direction: column;
+
+    .snacks-name {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    .snacks-description {
+      font-size: 0.7rem;
+      font-style: italic;
+    }
   }
 
   .snacks-price {
@@ -142,23 +197,9 @@ $font-family: 'Helvetica Neue', Arial, sans-serif;
     color: $accent-color;
   }
 
-  .snack-text {
-    display: flex;
-    flex-direction: column;
-
-    .snacks-name {
-      font-weight: bold;
-    }
-
-    .snacks-description {
-      font-size: .7rem;
-      font-style: italic;
-    }
-  }
-
   &.extra {
     span {
-      font-size: .7rem;
+      font-size: 0.7rem;
     }
   }
 }
@@ -166,7 +207,7 @@ $font-family: 'Helvetica Neue', Arial, sans-serif;
 .snacks-extras {
   margin-bottom: 2rem;
 
-  p {
+  li {
     display: flex;
     justify-content: space-between;
     margin: 0.2rem 0;
