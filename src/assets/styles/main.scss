@@ -17,6 +17,31 @@ body {
   background: $dark-color;
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ceaa72 #221d32;
+}
+
+*::-webkit-scrollbar {
+  width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #221d32;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #ceaa72;
+  border-radius: 10px;
+  border: 3px none #ffffff;
+}
+
+#app {
+  max-width: 500px;
+  margin: 0 auto;
+  max-height: 90vh;
+}
+
 .app-container {
   max-width: 700px;
   margin: 1rem auto;
@@ -119,3 +144,4 @@ a {
   font-weight: normal;
   font-style: normal;
 }
+

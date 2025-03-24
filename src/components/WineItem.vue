@@ -115,7 +115,7 @@ function toggle() {
     align-items: center;
     padding: 0.5rem 0;
     background-color: $toggle-bg;
-    border-top: 1px solid lighten($primary-color, 40%);
+    border-top: 1px solid $primary-color;
     font-size: 1.5rem;
     color: $primary-color;
     user-select: none;
@@ -134,7 +134,7 @@ function toggle() {
 
   .expanded-view {
     padding: 0 1rem 1rem;
-    border-top: 1px solid lighten($primary-color, 40%);
+    border-top: 1px solid $primary-color;
 
     p {
       margin: 0.5rem 0;

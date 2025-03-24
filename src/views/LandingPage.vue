@@ -14,7 +14,7 @@
         </template>
       </Card>
     </router-link><router-link to="/snacks" class="tile">
-      <Card class="tile-card disabled">
+      <Card class="tile-card">
         <template #title>
           <h2 class="tile-title">Snacks</h2>
         </template>
