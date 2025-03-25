@@ -160,10 +160,6 @@ function toggleVeggie() {
 </script>
 
 <style lang="scss" scoped>
-$background-color: #221d32;
-$text-color: #c8c0b3;
-$accent-color: #ceaa72;
-$font-family: 'Helvetica Neue', Arial, sans-serif;
 
 hr {
   width: 0%; // test
@@ -172,10 +168,6 @@ hr {
   border-color: #ceaa72;
 }
 
-.filter-buttons {
-  display: flex;
-  justify-content: center;
-}
 
 .snacks-menu {
   background-color: $background-color;
@@ -239,33 +231,6 @@ hr {
   letter-spacing: 0.1rem;
   color: $accent-color;
   text-align: center;
-}
-
-.filter-button {
-  background-color: $background-color;
-  border: 1px solid $accent-color;
-  color: $accent-color;
-  padding: 4px 8px;
-  border-radius: 4px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 10px;
-  text-align: center;
-  margin: 1rem 0;
-
-  &.active {
-    background-color: $accent-color;
-    color: $background-color;
-  }
-}
-
-.filter-icon {
-  margin-right: 0.5rem;
-  font-size: 1.2rem;
 }
 
 .snack-enter-active, .snack-leave-active {

@@ -1,4 +1,12 @@
 <template>
+  <!-- Filter-Button -->
+  <div class="filter-buttons">
+    <button class="filter-button" :class="{ active: nonAlcoholic }" @click="toggleNonAlcoholic">
+      <i class="pi pi-times" v-if="nonAlcoholic" style="font-size: 8px"></i>
+      Nur alkoholfrei
+    </button>
+  </div>
+
   <!--    Softdrinks-->
   <section class="drinks-menu-section">
     <header class="drinks-header">
@@ -6,9 +14,9 @@
       <p class="drinks-subtitle">Getränke</p>
     </header>
 
-    <div class="scrollContainer">
+    <div class="scrollContainer" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in softdrinks" :key="drink.name" class="drinks-item">
+        <li v-for="drink in nonAlcoholic ? softdrinks.filter(d => !d.alcoholic) : softdrinks" :key="drink.name" class="drinks-item">
           <div class="drink-text">
             <span class="drinks-name">{{ drink.name }}</span>
           </div>
@@ -25,9 +33,9 @@
       <p class="drinks-subtitle">Bierchen</p>
     </header>
 
-    <div class="scrollContainer">
+    <div class="scrollContainer" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in beers" :key="drink.name" class="drinks-item">
+        <li v-for="drink in nonAlcoholic ? beers.filter(d => !d.alcoholic) : beers" :key="drink.name" class="drinks-item">
           <div class="drink-text">
             <span class="drinks-name">{{ drink.name }}</span>
           </div>
@@ -38,15 +46,15 @@
   </section>
 
   <!--    Spritz-->
-  <section class="drinks-menu-section">
+  <section class="drinks-menu-section" v-if="!nonAlcoholic">
     <header class="drinks-header">
       <h1 class="drinks-title">Spritz</h1>
       <p class="drinks-subtitle">lecker</p>
     </header>
 
-    <div class="scrollContainer">
+    <div class="scrollContainer" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in spritz" :key="drink.name" class="drinks-item">
+        <li v-for="drink in nonAlcoholic ? spritz.filter(d => !d.alcoholic) : spritz" :key="drink.name" class="drinks-item">
           <div class="drink-text">
             <span class="drinks-name">{{ drink.name }}</span>
           </div>
@@ -60,7 +68,7 @@
   </section>
 
   <!--    Gin Cocktails-->
-  <section class="drinks-menu-section">
+  <section class="drinks-menu-section" v-if="!nonAlcoholic">
     <header class="drinks-header">
       <h1 class="drinks-title">Gin</h1>
       <p class="drinks-subtitle">N°3 Drinks</p>
@@ -71,9 +79,9 @@
     </p>
     <br>
     <img src="../assets/images/no32.png" class="no3bottle" alt="no3 Gin" />
-    <div class="scrollContainer">
+    <div class="scrollContainer" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in no3" :key="drink.name" class="drinks-item">
+        <li v-for="drink in nonAlcoholic ? no3.filter(d => !d.alcoholic) : no3" :key="drink.name" class="drinks-item">
           <div class="drink-text">
             <span class="drinks-name">{{ drink.name }}</span>
           </div>
@@ -93,14 +101,14 @@
   </section>
 
   <!--   Cocktails-->
-  <section class="drinks-menu-section">
+  <section class="drinks-menu-section" v-if="!nonAlcoholic">
     <header class="drinks-header">
       <h1 class="drinks-title">Cócteles</h1>
       <p class="drinks-subtitle">Cocktails</p>
     </header>
-    <div class="scrollContainer">
+    <div class="scrollContainer" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in cocktails" :key="drink.name" class="drinks-item">
+        <li v-for="drink in nonAlcoholic ? cocktails.filter(d => !d.alcoholic) : cocktails" :key="drink.name" class="drinks-item">
           <div class="drink-text">
             <span class="drinks-name">{{ drink.name }}</span>
           </div>
@@ -120,9 +128,9 @@
       <h1 class="drinks-title">0%</h1>
       <p class="drinks-subtitle">Alkoholfreie Optionen</p>
     </header>
-    <div class="scrollContainer">
+    <div class="scrollContainer" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in zeroAlc" :key="drink.name" class="drinks-item">
+        <li v-for="drink in nonAlcoholic ? zeroAlc.filter(d => !d.alcoholic) : zeroAlc" :key="drink.name" class="drinks-item">
           <div class="drink-text">
             <span class="drinks-name">{{ drink.name }}</span>
           </div>
@@ -134,63 +142,67 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+
+const nonAlcoholic = ref(false);
+function toggleNonAlcoholic() {
+  nonAlcoholic.value = !nonAlcoholic.value;
+}
 
 const beers = [
-  {name: "Krombacher Radler", volume: "0,33l", price: "3,7€", category: "Bier"},
-  {name: "Krombacher Weizen", volume: "0,50l", price: "5,9€", category: "Bier", description: "Alkoholisch"},
-  {name: "Krombacher Weizen 0,0%", volume: "0,50l", price: "5,5€", category: "Bier", description: "Alkoholfrei"},
-  {name: "Estrella de Galicia Especial", volume: "0,20l", price: "2,5€", category: "Bier"},
-  {name: "Krombacher Pils (0,0%)", volume: "0,33l", price: "3,5€", category: "Bier"},
-  {name: "Krombacher Pils", volume: "0,33l", price: "3,9€", category: "Bier"},
-  {name: "San Miguel", volume: "0,33l", price: "3,9€", category: "Bier"},
-  {name: "Estrella de Galicia", volume: "0,33l", price: "3,9€", category: "Bier"}
-]
+  { name: "Krombacher Radler", volume: "0,33l", price: "3,7€", category: "Bier", alcoholic: true },
+  { name: "Krombacher Weizen", volume: "0,50l", price: "5,9€", category: "Bier", alcoholic: true },
+  { name: "Krombacher Weizen 0,0%", volume: "0,50l", price: "5,5€", category: "Bier", alcoholic: false },
+  { name: "Estrella de Galicia Especial", volume: "0,20l", price: "2,5€", category: "Bier", alcoholic: true },
+  { name: "Krombacher Pils (0,0%)", volume: "0,33l", price: "3,5€", category: "Bier", alcoholic: false },
+  { name: "Krombacher Pils", volume: "0,33l", price: "3,9€", category: "Bier", alcoholic: true },
+  { name: "San Miguel", volume: "0,33l", price: "3,9€", category: "Bier", alcoholic: true },
+  { name: "Estrella de Galicia", volume: "0,33l", price: "3,9€", category: "Bier", alcoholic: true }
+];
 
 const softdrinks = [
-  {name: "Eistee von Rauch", volume: "0,33l", price: "3,9€", category: "Softdrink"},
-  {name: "Bio Saftschorle von Rauch", volume: "0,33l", price: "3,7€", category: "Softdrink"},
-  {name: "Thomas Henry", volume: "0,20l", price: "2,5€", category: "Softdrink"},
-  {name: "Coca Cola Zero", volume: "0,33l", price: "3,9€", category: "Softdrink"},
-  {name: "Wasser Classic/Naturell", volume: "0,75l", price: "6,9€", category: "Softdrink"},
-]
+  { name: "Eistee von Rauch", volume: "0,33l", price: "3,9€", category: "Softdrink", alcoholic: false },
+  { name: "Bio Saftschorle von Rauch", volume: "0,33l", price: "3,7€", category: "Softdrink", alcoholic: false },
+  { name: "Thomas Henry", volume: "0,20l", price: "2,5€", category: "Softdrink", alcoholic: false },
+  { name: "Coca Cola Zero", volume: "0,33l", price: "3,9€", category: "Softdrink", alcoholic: false },
+  { name: "Wasser Classic/Naturell", volume: "0,75l", price: "6,9€", category: "Softdrink", alcoholic: false }
+];
 
 const cocktails = [
-  {name: "Pisco Sour", price: "10,5€", category: "Cocktail"},
-  {name: "Espresso Martini", price: "10,5€", category: "Cocktail"},
-  {name: "Whisky Sour", price: "10,5€", category: "Cocktail"},
-  {name: "Mojito / Frucht-Mojito", price: "10,5€", category: "Cocktail"},
-  {name: "Caipirinha", price: "10,5€", category: "Cocktail"},
-]
+  { name: "Pisco Sour", price: "10,5€", category: "Cocktail", alcoholic: true },
+  { name: "Espresso Martini", price: "10,5€", category: "Cocktail", alcoholic: true },
+  { name: "Whisky Sour", price: "10,5€", category: "Cocktail", alcoholic: true },
+  { name: "Mojito / Frucht-Mojito", price: "10,5€", category: "Cocktail", alcoholic: true },
+  { name: "Caipirinha", price: "10,5€", category: "Cocktail", alcoholic: true }
+];
 
 const spritz = [
-  {name: "Limoncello", price: "8,5€", category: "Cocktail"},
-  {name: "Aperol", price: "8,5€", category: "Cocktail"},
-  {name: "Sarti", price: "8,5€", category: "Cocktail"},
+  { name: "Limoncello", price: "8,5€", category: "Cocktail", alcoholic: true },
+  { name: "Aperol", price: "8,5€", category: "Cocktail", alcoholic: true },
+  { name: "Sarti", price: "8,5€", category: "Cocktail", alcoholic: true }
 ];
 
 const no3 = [
-  {name: "Negroni", price: "10,5€", category: "Cocktail"},
-  {name: "Gin Fizz", price: "10,5€", category: "Cocktail"},
-  {name: "Gin Tonic", price: "9,5€", category: "Cocktail"},
-  {name: "Tom Collins", price: "9,5€", category: "Cocktail"},
-]
+  { name: "Negroni", price: "10,5€", category: "Cocktail", alcoholic: true },
+  { name: "Gin Fizz", price: "10,5€", category: "Cocktail", alcoholic: true },
+  { name: "Gin Tonic", price: "9,5€", category: "Cocktail", alcoholic: true },
+  { name: "Tom Collins", price: "9,5€", category: "Cocktail", alcoholic: true }
+];
 
 const zeroAlc = [
-  {name: "Mojito / Frucht Mojito", price: "9€", category: "Cocktail"},
-  {name: "Caipirinha", price: "9€", category: "Cocktail"},
-  {name: "Gin Fizz", price: "9€", category: "Cocktail"},
-  {name: "Gin Tonic", price: "7,5€", category: "Cocktail"},
-  {name: "Aperol Spritz", price: "7,5€", category: "Cocktail"},
-  {name: "Sarti Spritz", price: "7,5€", category: "Cocktail"},
-  {name: "Limoncello Spritz", price: "7,5€", category: "Cocktail"},
-]
+  { name: "Mojito / Frucht Mojito", price: "9€", category: "Cocktail", alcoholic: false },
+  { name: "Caipirinha", price: "9€", category: "Cocktail", alcoholic: false },
+  { name: "Gin Fizz", price: "9€", category: "Cocktail", alcoholic: false },
+  { name: "Gin Tonic", price: "7,5€", category: "Cocktail", alcoholic: false },
+  { name: "Aperol Spritz", price: "7,5€", category: "Cocktail", alcoholic: false },
+  { name: "Sarti Spritz", price: "7,5€", category: "Cocktail", alcoholic: false },
+  { name: "Limoncello Spritz", price: "7,5€", category: "Cocktail", alcoholic: false }
+];
 </script>
 
+
 <style lang="scss" scoped>
-$background-color: #221d32;
-$text-color: #c8c0b3;
-$accent-color: #ceaa72;
-$font-family: 'Helvetica Neue', Arial, sans-serif;
+@import "../assets/styles/main.scss";
 
 .drinks-menu-section {
   background-color: $background-color;
