@@ -40,7 +40,7 @@
     text-decoration: none;
     color: $dark-color;
     font-size: 1rem;
-    padding: 0.5rem;
+    padding: 0 0.5rem;
 
     &.active {
       font-weight: bold;
@@ -48,8 +48,8 @@
     }
 
     .nav-icon {
-      width: 32px;
-      height: 32px;
+      width: 24px;
+      height: 24px;
     }
   }
 }

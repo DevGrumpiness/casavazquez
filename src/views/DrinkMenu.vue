@@ -11,7 +11,6 @@
         <li v-for="drink in softdrinks" :key="drink.name" class="drinks-item">
           <div class="drink-text">
             <span class="drinks-name">{{ drink.name }}</span>
-            <span class="drinks-description">{{ drink.short_desc }}</span>
           </div>
           <span class="drinks-price">{{ drink.price }}</span>
         </li>
@@ -31,12 +30,33 @@
         <li v-for="drink in beers" :key="drink.name" class="drinks-item">
           <div class="drink-text">
             <span class="drinks-name">{{ drink.name }}</span>
-            <span class="drinks-description">{{ drink.short_desc }}</span>
           </div>
           <span class="drinks-price">{{ drink.price }}</span>
         </li>
       </transition-group>
     </div>
+  </section>
+
+  <!--    Spritz-->
+  <section class="drinks-menu-section">
+    <header class="drinks-header">
+      <h1 class="drinks-title">Spritz</h1>
+      <p class="drinks-subtitle">lecker</p>
+    </header>
+
+    <div class="scrollContainer">
+      <transition-group name="drink" tag="ul" class="drinks-list">
+        <li v-for="drink in spritz" :key="drink.name" class="drinks-item">
+          <div class="drink-text">
+            <span class="drinks-name">{{ drink.name }}</span>
+          </div>
+          <span class="drinks-price">{{ drink.price }}</span>
+        </li>
+      </transition-group>
+    </div>
+    <p class="drinks-note">
+      Achtet auch auf unsere Aktionen!
+    </p>
   </section>
 
   <!--    Gin Cocktails-->
@@ -45,16 +65,17 @@
       <h1 class="drinks-title">Gin</h1>
       <p class="drinks-subtitle">N°3 Drinks</p>
     </header>
+    <br>
     <p class="drinks-note">
       Unsere Gin-Cocktails und Longdrinks bereiten wir mit dem hochwertigen N°3 Gin zu.
     </p>
-    <img src="../assets/images/no32.png" alt="no3 Gin" />
+    <br>
+    <img src="../assets/images/no32.png" class="no3bottle" alt="no3 Gin" />
     <div class="scrollContainer">
       <transition-group name="drink" tag="ul" class="drinks-list">
         <li v-for="drink in no3" :key="drink.name" class="drinks-item">
           <div class="drink-text">
             <span class="drinks-name">{{ drink.name }}</span>
-            <span class="drinks-description">{{ drink.short_desc }}</span>
           </div>
           <span class="drinks-price">{{ drink.price }}</span>
         </li>
@@ -82,7 +103,6 @@
         <li v-for="drink in cocktails" :key="drink.name" class="drinks-item">
           <div class="drink-text">
             <span class="drinks-name">{{ drink.name }}</span>
-            <span class="drinks-description">{{ drink.short_desc }}</span>
           </div>
           <span class="drinks-price">{{ drink.price }}</span>
         </li>
@@ -105,7 +125,6 @@
         <li v-for="drink in zeroAlc" :key="drink.name" class="drinks-item">
           <div class="drink-text">
             <span class="drinks-name">{{ drink.name }}</span>
-            <span class="drinks-description">{{ drink.short_desc }}</span>
           </div>
           <span class="drinks-price">{{ drink.price }}</span>
         </li>
@@ -115,7 +134,6 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue';
 
 const beers = [
   {name: "Krombacher Radler", volume: "0,33l", price: "3,7€", category: "Bier"},
@@ -285,5 +303,12 @@ $font-family: 'Helvetica Neue', Arial, sans-serif;
   display: flex;
   align-items: center;
   gap: .5rem;
+}
+
+.no3bottle {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  height: 120px;
 }
 </style>
