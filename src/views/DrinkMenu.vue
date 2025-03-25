@@ -94,8 +94,24 @@
     </p>
   </section>
 
-  <p class="drinks-note">
-  </p>
+  <!--   0 Alk-->
+  <section class="drinks-menu-section">
+    <header class="drinks-header">
+      <h1 class="drinks-title">0%</h1>
+      <p class="drinks-subtitle">Alkoholfreie Optionen</p>
+    </header>
+    <div class="scrollContainer">
+      <transition-group name="drink" tag="ul" class="drinks-list">
+        <li v-for="drink in zeroAlc" :key="drink.name" class="drinks-item">
+          <div class="drink-text">
+            <span class="drinks-name">{{ drink.name }}</span>
+            <span class="drinks-description">{{ drink.short_desc }}</span>
+          </div>
+          <span class="drinks-price">{{ drink.price }}</span>
+        </li>
+      </transition-group>
+    </div>
+  </section>
 </template>
 
 <script setup lang="ts">
