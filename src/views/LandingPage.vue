@@ -21,7 +21,7 @@
       </Card>
     </router-link>
 
-    <h1 class="wip-hint">🚧👷‍♂️Die Seite befindet sich noch im Aufbau👷‍♂️🚧</h1>
+    <h1 class="wip-hint">🚧👷‍♂️Wir überarbeiten diese Seite gerade für Euch👷‍♂️🚧</h1>
 
   </div>
 </template>
@@ -100,6 +100,6 @@ import Card from 'primevue/card';
   text-align: center;
   font-size: 1.5rem;
   margin-top:  2rem;
-  color: $dark-color;
+  color: $accent-color;
 }
 </style>

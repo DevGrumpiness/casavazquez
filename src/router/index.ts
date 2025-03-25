@@ -7,8 +7,8 @@ import SnackMenu from '../views/SnackMenu.vue';
 const routes = [
     { path: '/casavazquez', name: 'LandingPage', component: LandingPage },
     { path: '/vino', name: 'WineMenu', component: WineMenu },
+    { path: '/drinks', name: 'DrinkMenu', component: DrinkMenu },
     { path: '/snacks', name: 'SnackMenu', component: SnackMenu },
-    // { path: '/drink', name: 'DrinkMenu', component: DrinkMenu },
 ];
 
 export default createRouter({

@@ -1,9 +1,10 @@
-<script setup lang="ts">
-</script>
 <template>
-  <router-view class="app-container"/>
+  <div class="app-container">
+    <router-view />
+    <NavigationBar />
+  </div>
 </template>
 
-<style scoped>
-
-</style>
+<script setup lang="ts">
+import NavigationBar from './components/NavigationBar.vue';
+</script>

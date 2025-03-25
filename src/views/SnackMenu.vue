@@ -83,7 +83,7 @@
       <div class="snack-section">
         <hr>
         <br>
-        <h3 class="snacks-subtitle">Bocadillo</h3>
+        <h3 class="snacks-subtitle">Albondigas</h3>
         <p class="snacks-note">
           Diese traditionellen spanischen Fleischbällchen werden in einer aromatischen Tomatensauce serviert und mit
           Gewürzen, Knoblauch und Petersilie verfeinert.

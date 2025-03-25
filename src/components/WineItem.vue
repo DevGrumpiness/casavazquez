@@ -68,6 +68,7 @@ function toggle() {
   flex-direction: column;
   margin-bottom: 1rem;
   padding-bottom: 2.5rem;
+  color: $dark-color;
 
   .collapsed-view {
     display: flex;
@@ -89,7 +90,6 @@ function toggle() {
       h2 {
         font-size: 1rem;
         margin-bottom: 0.3rem;
-        color: $dark-color;
       }
 
       .prices {
