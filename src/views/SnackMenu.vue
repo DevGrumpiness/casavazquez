@@ -107,19 +107,31 @@
         <br>
         <h3 class="snacks-subtitle">Coca</h3>
         <p class="snacks-note">
-          Coca ist ein traditionelles spanisches Flachbrot, das mit mediterranen Zutaten belegt wird, vergleichbar mit
+          Coca ist ein traditionelles spanisches Flachbrot, das mit mediterranen Zutaten belegt wird. Die Portion ist vergleichbar mit
           einer Pizza.
         </p>
         <ul class="snacks-extras">
           <li class="snacks-item extra veggie">
             <span class="snacks-name"><b>Vegetarisch</b><br>Fleischbällchen Rind/Schwein in hausgemachter Salsa und mit Brot serviert</span>
-            <span class="snacks-price">8,90</span>
+            <span class="snacks-price">12,90</span>
           </li>
           <li class="snacks-item extra">
           </li>
           <li class="snacks-item extra">
-            <span class="snacks-name">4 Stück</span>
-            <span class="snacks-price">10,90</span>
+            <span class="snacks-name">+ Burrata</span>
+            <span class="snacks-price">+4</span>
+          </li>
+          <li class="snacks-item extra">
+            <span class="snacks-name">+ Serrano</span>
+            <span class="snacks-price">+4</span>
+          </li>
+          <li class="snacks-item extra">
+            <span class="snacks-name">+ Garnelen</span>
+            <span class="snacks-price">+4</span>
+          </li>
+          <li class="snacks-item extra">
+            <span class="snacks-name">+ Garnelen & Serrano</span>
+            <span class="snacks-price">+6</span>
           </li>
         </ul>
       </div>

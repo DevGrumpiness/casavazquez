@@ -7,8 +7,9 @@
           <h2 class="tile-title">Vino</h2>
         </template>
       </Card>
-    </router-link><router-link to="/casavazquez" class="tile">
-      <Card class="tile-card disabled">
+    </router-link>
+    <router-link to="/drinks" class="tile">
+      <Card class="tile-card">
         <template #title>
           <h2 class="tile-title">Getränke</h2>
         </template>

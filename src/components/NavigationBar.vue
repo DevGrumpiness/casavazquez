@@ -4,7 +4,7 @@
       <img src="../assets/images/icons8-zuhause-64.png" alt="Home" class="nav-icon" />
     </router-link>
     <router-link to="/vino" class="nav-link" active-class="active">
-      <img src="../assets/images/icons8-wein-80.png" alt="Vino" class="nav-icon" />
+      <img src="../assets/images/icons8-bar-50.png" alt="Vino" class="nav-icon" />
     </router-link>
     <router-link to="/drinks" class="nav-link" active-class="active">
       <img src="../assets/images/icons8-drinks-64.png" alt="Getränke" class="nav-icon" />
