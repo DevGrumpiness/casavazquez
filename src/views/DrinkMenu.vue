@@ -14,7 +14,7 @@
       <p class="drinks-subtitle">Getränke</p>
     </header>
 
-    <div class="scrollContainer" :class="nonAlcoholic && 'non-alcoholic'">
+    <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
         <li v-for="drink in nonAlcoholic ? softdrinks.filter(d => !d.alcoholic) : softdrinks" :key="drink.name" class="drinks-item">
           <div class="drink-text">
@@ -33,7 +33,7 @@
       <p class="drinks-subtitle">Bierchen</p>
     </header>
 
-    <div class="scrollContainer" :class="nonAlcoholic && 'non-alcoholic'">
+    <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
         <li v-for="drink in nonAlcoholic ? beers.filter(d => !d.alcoholic) : beers" :key="drink.name" class="drinks-item">
           <div class="drink-text">
@@ -52,7 +52,7 @@
       <p class="drinks-subtitle">lecker</p>
     </header>
 
-    <div class="scrollContainer" :class="nonAlcoholic && 'non-alcoholic'">
+    <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
         <li v-for="drink in nonAlcoholic ? spritz.filter(d => !d.alcoholic) : spritz" :key="drink.name" class="drinks-item">
           <div class="drink-text">
@@ -63,6 +63,7 @@
       </transition-group>
     </div>
     <p class="drinks-note">
+      (alkoholfrei für 7,50)<br><br>
       Achtet auch auf unsere Aktionen!
     </p>
   </section>
@@ -79,7 +80,7 @@
     </p>
     <br>
     <img src="../assets/images/no32.png" class="no3bottle" alt="no3 Gin" />
-    <div class="scrollContainer" :class="nonAlcoholic && 'non-alcoholic'">
+    <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
         <li v-for="drink in nonAlcoholic ? no3.filter(d => !d.alcoholic) : no3" :key="drink.name" class="drinks-item">
           <div class="drink-text">
@@ -106,7 +107,7 @@
       <h1 class="drinks-title">Cócteles</h1>
       <p class="drinks-subtitle">Cocktails</p>
     </header>
-    <div class="scrollContainer" :class="nonAlcoholic && 'non-alcoholic'">
+    <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
         <li v-for="drink in nonAlcoholic ? cocktails.filter(d => !d.alcoholic) : cocktails" :key="drink.name" class="drinks-item">
           <div class="drink-text">
@@ -128,7 +129,7 @@
       <h1 class="drinks-title">0%</h1>
       <p class="drinks-subtitle">Alkoholfreie Optionen</p>
     </header>
-    <div class="scrollContainer" :class="nonAlcoholic && 'non-alcoholic'">
+    <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
         <li v-for="drink in nonAlcoholic ? zeroAlc.filter(d => !d.alcoholic) : zeroAlc" :key="drink.name" class="drinks-item">
           <div class="drink-text">
@@ -214,7 +215,6 @@ const zeroAlc = [
   border: 2px solid $accent-color;
   border-radius: 8px;
   position: relative;
-
   margin-bottom: 20%;
 }
 
@@ -246,7 +246,7 @@ const zeroAlc = [
   text-align: center;
 }
 
-.scrollContainer {
+.drinks-content {
   overflow-y: auto;
   max-height: 68vh;
   padding: 1rem;
@@ -272,7 +272,6 @@ const zeroAlc = [
 
     .drinks-name {
       font-size: 1rem;
-      font-weight: bold;
     }
 
     .drinks-description {

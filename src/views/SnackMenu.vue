@@ -160,6 +160,7 @@ function toggleVeggie() {
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/styles/main.scss";
 
 hr {
   width: 0%; // test
