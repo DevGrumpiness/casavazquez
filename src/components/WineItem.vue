@@ -59,6 +59,10 @@ function toggle() {
 <style scoped lang="scss">
 @import "../assets/styles/main.scss";
 
+strong {
+  color: $accent-color;
+}
+
 .wine-item {
   position: relative;
   cursor: pointer;
@@ -103,6 +107,9 @@ function toggle() {
 
       .prices {
         align-self: end;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
       }
 
       .grape,
@@ -145,7 +152,7 @@ function toggle() {
 
     p {
       margin: 0.5rem 0;
-      font-size: 0.95rem;
+      font-size: 0.75rem;
     }
 
     transform: translateZ(0);

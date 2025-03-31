@@ -2,7 +2,7 @@
   <!-- Filter-Button -->
   <div class="filter-buttons">
     <button class="filter-button" :class="{ active: nonAlcoholic }" @click="toggleNonAlcoholic">
-      <i class="pi pi-times" v-if="nonAlcoholic" style="font-size: 8px"></i>
+       <i class="pi pi-times" v-if="nonAlcoholic" style="font-size: 8px"></i>
       Nur alkoholfrei
     </button>
   </div>
@@ -140,6 +140,8 @@
       </transition-group>
     </div>
   </section>
+  <br>
+  <br>
 </template>
 
 <script setup lang="ts">
@@ -209,7 +211,7 @@ const zeroAlc = [
   background-color: $background-color;
   color: $text-color;
   font-family: $font-family;
-  padding: 2rem 1rem;
+  padding: 2rem 1rem 0 1rem;
   max-width: 90%;
   margin: 10% auto;
   border: 2px solid $accent-color;

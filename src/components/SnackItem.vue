@@ -138,7 +138,7 @@ function toggle() {
 
     p {
       margin: 0.5rem 0;
-      font-size: 0.95rem;
+      font-size: 13px;
     }
 
     transform: translateZ(0);

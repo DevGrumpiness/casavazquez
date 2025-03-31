@@ -52,6 +52,7 @@ const filteredWines = computed(() => {
   border: 2px solid $accent-color;
   border-radius: 8px;
   position: relative;
+  height: 100%;
 }
 
 .wine-header {
@@ -85,6 +86,7 @@ const filteredWines = computed(() => {
 .filter-buttons {
   text-align: center;
   margin: 3rem 0 1rem;
+
   button {
     padding: 0.5rem 1rem;
     border: 1px solid $primary-color;
@@ -94,11 +96,13 @@ const filteredWines = computed(() => {
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
     margin-right: 0.5rem;
+
     &:hover {
       background-color: $accent-color;
       color: #fff;
       border-color: $accent-color;
     }
+
     &.active {
       background-color: $accent-color;
       color: #fff;

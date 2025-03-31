@@ -112,26 +112,32 @@
         </p>
         <ul class="snacks-extras">
           <li class="snacks-item extra veggie">
-            <span class="snacks-name"><b>Vegetarisch</b><br>Fleischbällchen Rind/Schwein in hausgemachter Salsa und mit Brot serviert</span>
-            <span class="snacks-price">12,90</span>
+            <span class="snacks-name"><b>Vegetarisch</b><br>mit aromatischen Zutaten belegt wie Artischocken, halb-getrocknete Tomaten, eignelegte Zwiebeln, frische Cherry-Tomaten, Ruccola</span>
+            <span class="snacks-price">10,90</span>
+          </li>
+          <br>
+          <li class="snacks-item extra veggie">
+            <span class="snacks-name"><b>Wahlweise zusätzlich:</b></span>
           </li>
           <li class="snacks-item extra">
+            <span class="snacks-name">+ Chorizo</span>
+            <span class="snacks-price">+ 3,50</span>
           </li>
           <li class="snacks-item extra">
             <span class="snacks-name">+ Burrata</span>
-            <span class="snacks-price">+4</span>
+            <span class="snacks-price">+ 4,00</span>
           </li>
           <li class="snacks-item extra">
             <span class="snacks-name">+ Serrano</span>
-            <span class="snacks-price">+4</span>
+            <span class="snacks-price">+ 4,00</span>
           </li>
           <li class="snacks-item extra">
             <span class="snacks-name">+ Garnelen</span>
-            <span class="snacks-price">+4</span>
+            <span class="snacks-price">+ 4,00</span>
           </li>
           <li class="snacks-item extra">
             <span class="snacks-name">+ Garnelen & Serrano</span>
-            <span class="snacks-price">+6</span>
+            <span class="snacks-price">+ 6,00</span>
           </li>
         </ul>
       </div>
