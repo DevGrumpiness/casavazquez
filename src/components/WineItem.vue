@@ -68,7 +68,16 @@ function toggle() {
   flex-direction: column;
   margin-bottom: 1rem;
   padding-bottom: 2.5rem;
-  color: $dark-color;
+  color: white;
+  border: 1px solid $accent-color;
+
+  .card {
+    background-color: transparent;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+  }
 
   .collapsed-view {
     display: flex;
@@ -114,8 +123,7 @@ function toggle() {
     justify-content: center;
     align-items: center;
     padding: 0.5rem 0;
-    background-color: $toggle-bg;
-    border-top: 1px solid $primary-color;
+    background-color: transparent;
     font-size: 1.5rem;
     color: $primary-color;
     user-select: none;
@@ -134,7 +142,6 @@ function toggle() {
 
   .expanded-view {
     padding: 0 1rem 1rem;
-    border-top: 1px solid $primary-color;
 
     p {
       margin: 0.5rem 0;
