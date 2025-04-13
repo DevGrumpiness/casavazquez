@@ -42,16 +42,15 @@ body {
 }
 
 #app {
-  max-width: 500px;
+  max-width: 570px;
   margin: 0 auto;
-  max-height: 90vh;
 }
 
 .app-container {
   max-width: 700px;
   margin: 1rem auto;
   padding: 1rem 0 60px 0;
-  height: calc(100vh - 60px);
+  overflow: auto;
 }
 
 .container {
@@ -100,6 +99,16 @@ a {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
+}
+
+.note {
+  font-size: 0.7rem;
+  line-height: 1.4;
+  margin: 0 auto;
+  text-align: center;
+  color: $accent-color;
+  max-width: 90%;
+  padding-bottom: 1rem;
 }
 
 @media (min-width: 768px) {

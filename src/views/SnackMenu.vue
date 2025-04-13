@@ -5,68 +5,100 @@
       Nur Veggie
     </button>
   </div>
+
   <section class="snacks-menu">
     <header class="snacks-header">
       <h1 class="snacks-title">SNACKS</h1>
       <p class="snacks-subtitle">FÜR DEN KLEINEN HUNGER</p>
     </header>
 
-    <div class="scrollContainer" :class="veggie && 'veggie'">
-      <transition-group name="snack" tag="ul" class="snacks-list">
-        <li v-for="(snack) in snacks" :key="snack.name" class="snacks-item" :class="snack.veggie && 'veggie'">
+    <div class="scrollContainer">
+      <div class="snack-section">
+        <li
+            v-for="snack in filteredSnacks"
+            :key="snack.name"
+            class="basic-snacks-item"
+        >
           <div class="snack-text">
             <span class="snacks-name">{{ snack.name }}</span>
+            <img v-if="snack.onm" class="onmLogo" :src="onmLogo" alt="Olive und Meer" @click="showOnmInfo = true"/>
+            <BaseModal v-model="showOnmInfo">
+              <div style="display: flex;margin-bottom: 1rem; gap: 1rem">
+                <h2 >Von <i>Olive & Meer</i></h2>
+                <img class="onmLogo" :src="onmLogo"/>
+              </div>
+              <p>Unser Lieblings-Laden für Spanische Weine und Feinkost. Dir schmecken die Oliven? Dann statte doch <i>Raquel</i> mal
+                einen Besuch ab. </p>
+              <p style="text-align: right">Warendorfer Str. 61, 48145 Münster</p>
+            </BaseModal>
             <span class="snacks-description">{{ snack.description }}</span>
           </div>
           <span class="snacks-price">{{ snack.price }}</span>
         </li>
-      </transition-group>
 
-      <ul class="snacks-extras">
-        <li class="snacks-item extra veggie">
-          <span class="snacks-name">Extra Trüffel-Käse (30g)</span>
-          <span class="snacks-price">3</span>
-        </li>
-        <li class="snacks-item extra veggie">
-          <span class="snacks-name">Extra Dip</span>
-          <span class="snacks-price">0,7</span>
-        </li>
-        <li class="snacks-item extra veggie">
-          <span class="snacks-name">Extra Baguette</span>
-          <span class="snacks-price">2</span>
-        </li>
+        <ul class="snacks-extras">
+          <li class="snacks-item extra veggie">
+            <span class="snacks-name">Extra Trüffel-Käse zur Plato (50g)</span>
+            <span class="snacks-price">5,5</span>
+          </li>
+          <li class="snacks-item extra veggie">
+            <span class="snacks-name">Extra Dip</span>
+            <span class="snacks-price">0,7</span>
+          </li>
+          <li class="snacks-item extra veggie">
+            <span class="snacks-name">Extra Baguette</span>
+            <span class="snacks-price">2</span>
+          </li>
 
-        <p class="snacks-note">
-          Unsere Snacks & Platten sind ideal zum Teilen und bieten eine köstliche Begleitung zu unseren Drinks.
-        </p>
-      </ul>
+          <p class="snacks-note">
+            Unsere Snacks & Platten sind ideal zum Teilen und bieten eine köstliche Begleitung zu unseren Drinks.
+          </p>
+        </ul>
+      </div>
 
-      <div class="snack-section">
-        <hr>
-        <br>
-        <br>
-        <br>
+      <div class="snack-section" v-if="!veggie">
+        <hr/>
+        <br/>
         <h3 class="snacks-subtitle">Bocadillo</h3>
         <p class="snacks-note">
           Bocadillos sind ein fester Bestandteil der spanischen Esskultur.
-          <br>
+          <br/>
           Knusprige aufgebackenes Baguette mit herzhaftem Belag wie Jamón Serrano, Queso und frischer Tomate.
         </p>
         <ul class="snacks-extras">
-          <li class="snacks-item extra veggie">
-            <span class="snacks-name"><b>Bocadillo (Sandwich)</b><br>mit Burrata & Tomate</span>
+          <li class="snacks-item extra">
+            <span class="snacks-name"><b>Bocadillo (Sandwich)</b><br/>mit Burrata & Tomate</span>
             <span class="snacks-price">10,50</span>
           </li>
-          <li class="snacks-item extra" v-if="!veggie">
-            <span class="snacks-name">+ hauchdünnem Schinken</span>
+          <li class="snacks-item extra">
+            <span class="snacks-name">+ Jamón</span>
             <span class="snacks-price">+ 3</span>
           </li>
         </ul>
       </div>
 
       <div class="snack-section">
-        <hr>
-        <br>
+        <hr/>
+        <br/>
+        <h3 class="snacks-subtitle">Ceviche</h3>
+        <p class="snacks-note">
+          Der "Fisch-Salat" mit Ursprung in Südamerika ist eine wahre Delikatesse.
+          <br/>
+          <br/>
+          Unsere Variante ist besonders frisch, mit einem Mix aus der Süße von Mango und Cherrytomaten, feinem Meersalz und aromatischem Himbeeressig. Je nach Verfügbarkeit bereiten wir Ceviche mit weißem Fischfilet oder Lachs zu. Alternativ mit geräucherten Garnelen.
+          <p class="today-hint">Heute ({{new Date().toLocaleDateString()}}) mit geräucherten Garnelen verfügbar.</p>
+        </p>
+        <ul class="snacks-extras">
+          <li class="snacks-item extra">
+            <span class="snacks-name"><b>Portion Ceviche</b><br/>mit Brot</span>
+            <span class="snacks-price">10,50</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="snack-section" v-if="!veggie">
+        <hr/>
+        <br/>
         <h3 class="snacks-subtitle">Chorizo in Salsa</h3>
         <p class="snacks-note">
           Chorizo ist eine der bekanntesten spanischen Wurstsorten mit würzigem Aroma und tiefer roter Farbe, ideal als
@@ -74,68 +106,79 @@
         </p>
         <ul class="snacks-extras">
           <li class="snacks-item extra">
-            <span class="snacks-name"><b>Chorizo</b><br>würzige spanische Frischwurst in Tomatensalsa und mit Brot serviert</span>
+            <span class="snacks-name"><b>Chorizo</b><br/>würzige spanische Frischwurst in Tomatensalsa und mit Brot serviert</span>
             <span class="snacks-price">7,50</span>
           </li>
         </ul>
       </div>
 
-      <div class="snack-section">
-        <hr>
-        <br>
+      <div class="snack-section" v-if="!veggie">
+        <hr/>
+        <br/>
         <h3 class="snacks-subtitle">Albondigas</h3>
         <p class="snacks-note">
-          Diese traditionellen spanischen Fleischbällchen werden in einer aromatischen Tomatensauce serviert und mit
-          Gewürzen, Knoblauch und Petersilie verfeinert.
+          Fleischbällchen in hausgemachter Tomaten-Salsa.
         </p>
         <ul class="snacks-extras">
-          <li class="snacks-item extra veggie">
-            <span class="snacks-name"><b>Albondigas</b><br>Fleischbällchen Rind/Schwein in hausgemachter Salsa und mit Brot serviert</span>
+          <li class="snacks-item extra">
+            <span class="snacks-name"><b>Albondigas (3 Stück)</b><br/>Fleischbällchen Rind/Schwein in hausgemachter Salsa und mit Brot serviert</span>
             <span class="snacks-price">8,90</span>
           </li>
           <li class="snacks-item extra">
-          </li>
-          <li class="snacks-item extra">
             <span class="snacks-name">4 Stück</span>
-            <span class="snacks-price">10,90</span>
+            <span class="snacks-price">11,50</span>
           </li>
         </ul>
       </div>
 
       <div class="snack-section">
-        <hr>
-        <br>
+        <hr/>
+        <br/>
+        <h3 class="snacks-subtitle">Montaditos</h3>
+        <p class="snacks-note">
+          Belegte kleine Brote. Perfekt zum Teilen. Auf unsere Montaditos locos legen wir leckere mediterrane Verduras wie eingelegte Oliven und Peperoni, sowie Frischkäse, saftige Tomate und Chorizo-Wurst.
+        </p>
+        <ul class="snacks-extras">
+          <li class="snacks-item extra">
+            <span class="snacks-name"><b>Gemischte Montaditos</b><br>Auf Wunsch vegetarisch / vegan</span>
+            <span class="snacks-price">8,90</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="snack-section">
+        <hr/>
+        <br/>
         <h3 class="snacks-subtitle">Coca</h3>
         <p class="snacks-note">
-          Coca ist ein traditionelles spanisches Flachbrot, das mit mediterranen Zutaten belegt wird. Die Portion ist vergleichbar mit
-          einer Pizza.
+          Coca ist ein traditionelles spanisches Flachbrot, das mit mediterranen Zutaten belegt wird. Die Portion ist
+          vergleichbar mit einer Pizza.
         </p>
         <ul class="snacks-extras">
           <li class="snacks-item extra veggie">
-            <span class="snacks-name"><b>Vegetarisch</b><br>mit aromatischen Zutaten belegt wie Artischocken, halb-getrocknete Tomaten, eignelegte Zwiebeln, frische Cherry-Tomaten, Ruccola</span>
-            <span class="snacks-price">10,90</span>
+            <span class="snacks-name"><b>Vegetarisch</b><br/>mit Artischocken, halb-getrockneten Tomaten, eingelegten Zwiebeln, Cherry-Tomaten, Rucola</span>
+            <span class="snacks-price">12,90</span>
           </li>
-          <br>
           <li class="snacks-item extra veggie">
             <span class="snacks-name"><b>Wahlweise zusätzlich:</b></span>
           </li>
-          <li class="snacks-item extra">
+          <li class="snacks-item extra" v-if="!veggie">
             <span class="snacks-name">+ Chorizo</span>
-            <span class="snacks-price">+ 3,50</span>
+            <span class="snacks-price">+ 3,90</span>
           </li>
           <li class="snacks-item extra">
             <span class="snacks-name">+ Burrata</span>
-            <span class="snacks-price">+ 4,00</span>
+            <span class="snacks-price">+ 4,50</span>
           </li>
-          <li class="snacks-item extra">
+          <li class="snacks-item extra" v-if="!veggie">
             <span class="snacks-name">+ Serrano</span>
-            <span class="snacks-price">+ 4,00</span>
+            <span class="snacks-price">+ 3,90</span>
           </li>
-          <li class="snacks-item extra">
+          <li class="snacks-item extra" v-if="!veggie">
             <span class="snacks-name">+ Garnelen</span>
-            <span class="snacks-price">+ 4,00</span>
+            <span class="snacks-price">+ 3,90</span>
           </li>
-          <li class="snacks-item extra">
+          <li class="snacks-item extra" v-if="!veggie">
             <span class="snacks-name">+ Garnelen & Serrano</span>
             <span class="snacks-price">+ 6,00</span>
           </li>
@@ -146,19 +189,26 @@
 </template>
 
 <script setup lang="ts">
+import {ref, computed} from "vue";
+import onmLogo from "../assets/images/Logo-Olive-Meer_klein.png"
+import BaseModal from "../components/BaseModal.vue";
 
-import {ref} from "vue";
+const veggie = ref(false)
+const showOnmInfo = ref(false)
 
-const snacks = ([
+const snacks = [
   {name: 'Nachos mit Dip', description: 'z.B. mit Aioli / Guacamole / Salsa', price: '4,9', veggie: true},
-  {name: 'Oliven Mix', description: '', price: '4,9', veggie: true},
+  {name: 'Oliven Mix', description: '', price: '4,9', veggie: true, onm: true},
   {name: 'Baguette mit Dips', description: '', price: '4,9', veggie: true},
-  {name: 'Plato de Jamón', description: '(80g) + Brot', price: '7,5', veggie: false},
-  {name: 'Plato de Quesos', description: '(50g) + Brot', price: '7,5', veggie: true},
-  {name: 'Plato Mixto', description: 'Jamón & Quesos + Brot', price: '14', veggie: false}
-]);
+  {name: 'Plato de Jamón', description: '(80g) + Brot', price: '8,5', veggie: false},
+  {name: 'Plato de Quesos', description: '(80g) + Brot', price: '8,5', veggie: true},
+  {name: 'Plato Mixto', description: 'Gemischte Paltte mit Jamón & Quesos + Brot', price: '15,5', veggie: false},
+  {name: 'Verduras', description: 'Mix von mediterranem Gemüse wie Artischockenherzen, Oliven, gegrillte Paprika, eingelegte Zwiebeln etc + Brot', price: '8,5', veggie: true}
+];
 
-const veggie = ref(false);
+const filteredSnacks = computed(() =>
+    veggie.value ? snacks.filter(s => s.veggie) : snacks
+);
 
 function toggleVeggie() {
   veggie.value = !veggie.value;
@@ -169,8 +219,7 @@ function toggleVeggie() {
 @import "../assets/styles/main.scss";
 
 hr {
-  width: 0%; // test
-  display: none;
+  width: 33%;
   margin: 0 auto;
   border-color: #ceaa72;
 }
@@ -191,9 +240,7 @@ hr {
 
   .scrollContainer {
     overflow: scroll;
-    max-height: 68vh;
 
-    //box-shadow: 0px -11px 22px rgb(206 170 114 / 5%);
     padding: 1rem;
     border-radius: 5px;
 
@@ -203,6 +250,7 @@ hr {
           display: none;
         }
       }
+
       .snack-section {
         &:not(.veggie) {
           display: none;
@@ -232,11 +280,26 @@ hr {
   font-weight: normal;
 }
 
+.snack-text {
+  position: relative;
+
+  img {
+    position: absolute;
+    right: -50px;
+    height: 30px;
+    transform: rotate(-15deg);
+  }
+}
+
+.onmLogo {
+  height: 35px;
+  transform: rotate(-15deg);
+}
+
 .snacks-subtitle {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
-  color: $accent-color;
   text-align: center;
 }
 
@@ -254,17 +317,16 @@ hr {
 }
 
 .snack-section {
-  min-height: 40vh;
 }
 
-.snacks-list {
+.basic-snacks-list {
   list-style: none;
   margin: 0;
   padding: 0;
   margin-bottom: 1.5rem;
 }
 
-.snacks-item {
+.basic-snacks-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -319,4 +381,8 @@ hr {
   max-width: 90%;
 }
 
+.today-hint {
+  color: white;
+  margin: 1rem auto;
+}
 </style>

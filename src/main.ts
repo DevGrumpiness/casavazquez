@@ -7,6 +7,9 @@ import './assets/styles/main.scss';
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
 
+import { setDefaultOptions } from 'date-fns'
+import { de } from 'date-fns/locale'
+setDefaultOptions({ locale: de })
 const app = createApp(App);
 
 app.use(router);

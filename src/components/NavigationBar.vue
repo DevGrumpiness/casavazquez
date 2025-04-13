@@ -1,6 +1,6 @@
 <template>
   <nav class="navigation-bar">
-    <router-link to="/casavazquez" class="nav-link" active-class="active">
+    <router-link to="/home" class="nav-link" active-class="active">
       <img src="../assets/images/icons8-zuhause-64.png" alt="Home" class="nav-icon" />
     </router-link>
     <router-link to="/vino" class="nav-link" active-class="active">

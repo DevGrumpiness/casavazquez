@@ -62,7 +62,7 @@
         </li>
       </transition-group>
     </div>
-    <p class="drinks-note">
+    <p class="note">
       (alkoholfrei für 7,50)<br><br>
       Achtet auch auf unsere Aktionen!
     </p>
@@ -75,7 +75,7 @@
       <p class="drinks-subtitle">N°3 Drinks</p>
     </header>
     <br>
-    <p class="drinks-note">
+    <p class="note">
       Unsere Gin-Cocktails und Longdrinks bereiten wir mit dem hochwertigen N°3 Gin zu.
     </p>
     <br>
@@ -93,7 +93,7 @@
 
     <div class="no3-desc">
       <img src="../assets/images/no3.png" alt="no3 Gin"/>
-      <p class="drinks-note">
+      <p class="note">
         “No. 3 ist ein unvergleichlicher Ultra-Premium London Dry Gin, entstanden aus dem Streben nach Perfektion, um
         den besten Gin der Welt zu kreieren. Er bietet die perfekte Balance aus drei entscheidenden Aromen: Wacholder,
         Zitrus und Gewürzen. Dadurch ist er erfrischend im Geschmack und klassisch im Stil.”
@@ -118,7 +118,7 @@
       </transition-group>
     </div>
 
-    <p class="drinks-note">
+    <p class="note">
       Dein Lieblings-Cocktail ist nicht dabei? <br>Frag uns gerne! :)
     </p>
   </section>
@@ -153,21 +153,21 @@ function toggleNonAlcoholic() {
 }
 
 const beers = [
-  { name: "Krombacher Radler", volume: "0,33l", price: "3,7€", category: "Bier", alcoholic: true },
+  { name: "Krombacher Radler", volume: "0,33l", price: "3,5€", category: "Bier", alcoholic: true },
   { name: "Krombacher Weizen", volume: "0,50l", price: "5,9€", category: "Bier", alcoholic: true },
   { name: "Krombacher Weizen 0,0%", volume: "0,50l", price: "5,5€", category: "Bier", alcoholic: false },
   { name: "Estrella de Galicia Especial", volume: "0,20l", price: "2,5€", category: "Bier", alcoholic: true },
   { name: "Krombacher Pils (0,0%)", volume: "0,33l", price: "3,5€", category: "Bier", alcoholic: false },
-  { name: "Krombacher Pils", volume: "0,33l", price: "3,9€", category: "Bier", alcoholic: true },
-  { name: "San Miguel", volume: "0,33l", price: "3,9€", category: "Bier", alcoholic: true },
-  { name: "Estrella de Galicia", volume: "0,33l", price: "3,9€", category: "Bier", alcoholic: true }
+  { name: "Krombacher Pils", volume: "0,33l", price: "3,5€", category: "Bier", alcoholic: true },
+  { name: "San Miguel", volume: "0,33l", price: "3,7€", category: "Bier", alcoholic: true },
+  { name: "Estrella de Galicia", volume: "0,33l", price: "3,7€", category: "Bier", alcoholic: true }
 ];
 
 const softdrinks = [
-  { name: "Eistee von Rauch", volume: "0,33l", price: "3,9€", category: "Softdrink", alcoholic: false },
-  { name: "Bio Saftschorle von Rauch", volume: "0,33l", price: "3,7€", category: "Softdrink", alcoholic: false },
+  { name: "Eistee von Rauch", volume: "0,33l", price: "3,3€", category: "Softdrink", alcoholic: false },
+  { name: "Bio Saftschorle von Rauch", volume: "0,33l", price: "3,3€", category: "Softdrink", alcoholic: false },
   { name: "Thomas Henry", volume: "0,20l", price: "2,5€", category: "Softdrink", alcoholic: false },
-  { name: "Coca Cola Zero", volume: "0,33l", price: "3,9€", category: "Softdrink", alcoholic: false },
+  { name: "Coca Cola Zero", volume: "0,33l", price: "3,4€", category: "Softdrink", alcoholic: false },
   { name: "Wasser Classic/Naturell", volume: "0,75l", price: "6,9€", category: "Softdrink", alcoholic: false }
 ];
 
@@ -188,7 +188,7 @@ const spritz = [
 const no3 = [
   { name: "Negroni", price: "10,5€", category: "Cocktail", alcoholic: true },
   { name: "Gin Fizz", price: "10,5€", category: "Cocktail", alcoholic: true },
-  { name: "Gin Tonic", price: "9,5€", category: "Cocktail", alcoholic: true },
+  { name: "Gin Tonic", price: "7,9€", category: "Cocktail", alcoholic: true },
   { name: "Tom Collins", price: "9,5€", category: "Cocktail", alcoholic: true }
 ];
 
@@ -250,7 +250,6 @@ const zeroAlc = [
 
 .drinks-content {
   overflow-y: auto;
-  max-height: 68vh;
   padding: 1rem;
   border-radius: 5px;
 }
@@ -299,28 +298,20 @@ const zeroAlc = [
 }
 
 .drink-enter-to, .drink-leave-from {
-  max-height: 100px;
   opacity: 1;
 }
 
-.drinks-note {
-  font-size: 0.7rem;
-  line-height: 1.4;
-  margin: 0 auto;
-  text-align: center;
-  color: $accent-color;
-  max-width: 90%;
-}
 
 .no3-desc {
   display: flex;
   align-items: center;
   gap: .5rem;
+  padding-bottom: .5rem;
 }
 
 .no3bottle {
   position: absolute;
-  top: 25%;
+  top: 33%;
   left: 50%;
   height: 120px;
 }

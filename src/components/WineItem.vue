@@ -24,7 +24,6 @@
     </div>
     <div class="accordion-toggle">
       <i :class="{'pi': true, 'pi-chevron-down': !isOpen, 'pi-chevron-up': isOpen}"/>
-<!--      <span class="toggle-label">{{ isOpen ? 'Weniger Infos' : 'Mehr Infos' }}</span>-->
     </div>
 
     <!-- Ausgeklappte Ansicht -->
@@ -46,10 +45,12 @@ import 'primeicons/primeicons.css';
 const {wine} = defineProps<{ wine: Wine }>();
 
 const isOpen = ref(false);
-// Verwende den relativen Pfad zum Default-Bild
-const defaultImage = wine.color === 'white'
-    ? new URL('../assets/images/default_vino_white.png', import.meta.url).href
-    : new URL('../assets/images/default_vino_red.png', import.meta.url).href;
+const defaultImage =
+    wine.color === 'white'
+        ? new URL('../assets/images/default_vino_white.png', import.meta.url).href
+        : wine.color === 'red'
+            ? new URL('../assets/images/default_vino_red.png', import.meta.url).href
+            : new URL('../assets/images/default_vino_rose.png', import.meta.url).href
 
 function toggle() {
   isOpen.value = !isOpen.value;

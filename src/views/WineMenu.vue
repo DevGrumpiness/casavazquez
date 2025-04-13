@@ -1,21 +1,26 @@
 <template>
   <section class="wine-menu-section">
     <header class="wine-header">
-      <h1 class="wine-title">Vinos</h1>
-      <p class="wine-subtitle">Weine</p>
+      <h1 class="wine-title">Vino</h1>
     </header>
+    <p class="note">Unsere hochwertigen Hausweine gibt es für<br> 6€ (0.2l) bzw. 19€ (0.75l).</p>
+    <div v-if="selectedColor === 'rosé' && isHappyHour" class="happy-hour-hint">🎉 Happy Hour 🎉! Mo-Fr bis 19 Uhr zu jeder Flasche Rosé eine Plato Mixto aufs Haus.</div>
     <div class="filter-buttons">
       <button :class="{ active: selectedColor === '' }" @click="selectedColor = ''">Alle</button>
       <button :class="{ active: selectedColor === 'red' }" @click="selectedColor = 'red'">Rot</button>
       <button :class="{ active: selectedColor === 'white' }" @click="selectedColor = 'white'">Weiß</button>
       <button :class="{ active: selectedColor === 'rosé' }" @click="selectedColor = 'rosé'">Rosé</button>
     </div>
+    <div class="happy-hour-container">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span>{{roseLabel}}</span>
+    </div>
     <div class="scrollContainer">
       <transition-group name="wine" tag="ul" class="wine-list">
         <WineItem v-for="wine in filteredWines" :key="wine.id" :wine="wine" />
       </transition-group>
-      <img class="rose-image" v-if="selectedColor === 'rosé'" src="../assets/images/rose.png" alt="Rosé" />
-      <span v-if="selectedColor === 'rosé'" class="coming-soon">..kommt noch</span>
     </div>
   </section>
 </template>
@@ -25,12 +30,25 @@ import { ref, onMounted, computed } from 'vue';
 import { type Wine } from "../interfaces/vino.ts";
 import { dummyWines } from "../data/vinos.ts";
 import WineItem from '../components/WineItem.vue';
+import { useNow } from '@vueuse/core';
+
+const now = useNow();
+const isHappyHour = computed(() => {
+  const date = now.value;
+  const day = date.getDay();
+  const hour = date.getHours();
+  return day >= 1 && day <= 5 && hour < 19;
+});
 
 const wines = ref<Wine[]>([]);
 const selectedColor = ref<string>('');
 
 onMounted(() => {
   wines.value = dummyWines;
+});
+
+const roseLabel = computed(() => {
+  return isHappyHour.value ? 'Happy Hour 🎉' : '';
 });
 
 const filteredWines = computed(() => {
@@ -52,7 +70,6 @@ const filteredWines = computed(() => {
   border: 2px solid $accent-color;
   border-radius: 8px;
   position: relative;
-  height: 100%;
 }
 
 .wine-header {
@@ -75,6 +92,22 @@ const filteredWines = computed(() => {
   font-weight: normal;
 }
 
+.happy-hour-hint {
+  text-align: center;
+}
+
+.happy-hour-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+
+  span{
+    flex: 1;
+    font-size: 11px;
+    text-align: center;
+  }
+}
+
 .wine-subtitle {
   font-size: 0.7rem;
   text-transform: uppercase;
@@ -85,7 +118,7 @@ const filteredWines = computed(() => {
 
 .filter-buttons {
   text-align: center;
-  margin: 3rem 0 1rem;
+  margin: 3rem 0 0 0;
 
   button {
     padding: 0.5rem 1rem;
@@ -96,6 +129,7 @@ const filteredWines = computed(() => {
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
     margin-right: 0.5rem;
+    flex: auto;
 
     &:hover {
       background-color: $accent-color;
@@ -113,8 +147,7 @@ const filteredWines = computed(() => {
 
 .scrollContainer {
   overflow-y: auto;
-  max-height: 68vh;
-  padding: 1rem;
+  padding: 1rem 0;
   border-radius: 5px;
 }
 
