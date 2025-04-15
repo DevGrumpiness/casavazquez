@@ -184,6 +184,37 @@
           </li>
         </ul>
       </div>
+
+      <div class="snack-section bundle">
+        <hr/>
+        <br/>
+        <h3 class="snacks-subtitle">Bundles</h3>
+        <p class="snacks-note">Perfekt zu zweit oder dritt – spart euch den Einzelpreis und genießt mehr für weniger.</p>
+        <ul class="snacks-extras">
+          <li class="snacks-item extra veggie">
+            <span class="snacks-name"><b>Bundle A</b><br/>1 x FL Hauswein + 1 x Wasser 0,75l + 1 x Coca Veggie</span>
+            <span class="snacks-price">34,50</span>
+          </li>
+          <li class="snacks-item extra">
+            <span class="snacks-name"><b>Bundle B</b><br/>1 x FL Hauswein + 1 x Wasser 0,75l<br/>+ Käse-Schinkenplatte + Chorizo</span>
+            <span class="snacks-price">43,50</span>
+          </li>
+          <li class="snacks-item extra">
+            <span class="snacks-name"><b>Bundle C</b><br/>2 oder 3 Cocktails<br/>+ 1 x Wasser 0,75l + Nachos mit Dip</span>
+            <span class="snacks-price" style="text-align: right">2 Pers: 29,50<br/>3 Pers: 42,90</span>
+          </li>
+          <li class="snacks-item extra veggie">
+            <span class="snacks-name"><b>Bundle D</b><br/>2 oder 3 alkoholfreie Spritz<br/>+ Plato Queso + Saftschorlen + Nachos mit Dip</span>
+            <span class="snacks-price" style="text-align: right">2 Pers: 34,80<br/>3 Pers: 39,50</span>
+          </li>
+          <li class="snacks-item extra veggie">
+            <span class="snacks-name"><b>Dessert zu einem Bundle</b></span>
+            <span class="snacks-price">5,00</span>
+          </li>
+        </ul>
+      </div>
+
+
     </div>
   </section>
 </template>
@@ -301,6 +332,12 @@ hr {
   text-transform: uppercase;
   letter-spacing: 0.1rem;
   text-align: center;
+}
+
+.bundle {
+  li {
+    margin-bottom: 1rem!important;
+  }
 }
 
 .snack-enter-active, .snack-leave-active {
