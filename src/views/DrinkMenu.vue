@@ -2,7 +2,7 @@
   <!-- Filter-Button -->
   <div class="filter-buttons">
     <button class="filter-button" :class="{ active: nonAlcoholic }" @click="toggleNonAlcoholic">
-       <i class="pi pi-times" v-if="nonAlcoholic" style="font-size: 8px"></i>
+      <i class="pi pi-times" v-if="nonAlcoholic" style="font-size: 8px"></i>
       Nur alkoholfrei
     </button>
   </div>
@@ -16,9 +16,12 @@
 
     <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in nonAlcoholic ? softdrinks.filter(d => !d.alcoholic) : softdrinks" :key="drink.name" class="drinks-item">
+        <li v-for="drink in nonAlcoholic ? softdrinks.filter(d => !d.alcoholic) : softdrinks" :key="drink.name"
+            class="drinks-item">
           <div class="drink-text">
-            <span class="drinks-name">{{ drink.name }}</span>
+            <span class="drinks-name">{{ drink.name }}
+              <sup v-if="drink.allergens" class="allergen-indices">{{ drink.allergens.join(',') }}</sup>
+            </span>
           </div>
           <span class="drinks-price">{{ drink.price }}</span>
         </li>
@@ -35,9 +38,12 @@
 
     <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in nonAlcoholic ? beers.filter(d => !d.alcoholic) : beers" :key="drink.name" class="drinks-item">
+        <li v-for="drink in nonAlcoholic ? beers.filter(d => !d.alcoholic) : beers" :key="drink.name"
+            class="drinks-item">
           <div class="drink-text">
-            <span class="drinks-name">{{ drink.name }}</span>
+            <span class="drinks-name">{{ drink.name }}
+            <sup v-if="drink.allergens" class="allergen-indices">{{ drink.allergens.join(',') }}</sup>
+            </span>
           </div>
           <span class="drinks-price">{{ drink.price }}</span>
         </li>
@@ -54,9 +60,12 @@
 
     <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in nonAlcoholic ? spritz.filter(d => !d.alcoholic) : spritz" :key="drink.name" class="drinks-item">
+        <li v-for="drink in nonAlcoholic ? spritz.filter(d => !d.alcoholic) : spritz" :key="drink.name"
+            class="drinks-item">
           <div class="drink-text">
-            <span class="drinks-name">{{ drink.name }}</span>
+            <span class="drinks-name">{{ drink.name }}
+            <sup v-if="drink.allergens" class="allergen-indices">{{ drink.allergens.join(',') }}</sup>
+            </span>
           </div>
           <span class="drinks-price">{{ drink.price }}</span>
         </li>
@@ -79,12 +88,14 @@
       Unsere Gin-Cocktails und Longdrinks bereiten wir mit dem hochwertigen N°3 Gin zu.
     </p>
     <br>
-    <img src="../assets/images/no32.png" class="no3bottle" alt="no3 Gin" />
+    <img src="../assets/images/no32.png" class="no3bottle" alt="no3 Gin"/>
     <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
         <li v-for="drink in nonAlcoholic ? no3.filter(d => !d.alcoholic) : no3" :key="drink.name" class="drinks-item">
           <div class="drink-text">
-            <span class="drinks-name">{{ drink.name }}</span>
+            <span class="drinks-name">{{ drink.name }}
+            <sup v-if="drink.allergens" class="allergen-indices">{{ drink.allergens.join(',') }}</sup>
+            </span>
           </div>
           <span class="drinks-price">{{ drink.price }}</span>
         </li>
@@ -109,9 +120,13 @@
     </header>
     <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in nonAlcoholic ? cocktails.filter(d => !d.alcoholic) : cocktails" :key="drink.name" class="drinks-item">
+        <li v-for="drink in nonAlcoholic ? cocktails.filter(d => !d.alcoholic) : cocktails" :key="drink.name"
+            class="drinks-item">
           <div class="drink-text">
-            <span class="drinks-name">{{ drink.name }}</span>
+            <span class="drinks-name">{{ drink.name }}
+              <sup v-if="drink.allergens" class="allergen-indices">{{ drink.allergens.join(',') }}
+              </sup>
+            </span>
           </div>
           <span class="drinks-price">{{ drink.price }}</span>
         </li>
@@ -131,9 +146,12 @@
     </header>
     <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in nonAlcoholic ? zeroAlc.filter(d => !d.alcoholic) : zeroAlc" :key="drink.name" class="drinks-item">
+        <li v-for="drink in nonAlcoholic ? zeroAlc.filter(d => !d.alcoholic) : zeroAlc" :key="drink.name"
+            class="drinks-item">
           <div class="drink-text">
-            <span class="drinks-name">{{ drink.name }}</span>
+            <span class="drinks-name">{{ drink.name }}
+            <sup v-if="drink.allergens" class="allergen-indices">{{ drink.allergens.join(',') }}</sup>
+            </span>
           </div>
           <span class="drinks-price">{{ drink.price }}</span>
         </li>
@@ -142,64 +160,200 @@
   </section>
   <br>
   <br>
+  <div class="allergen-section">
+    <h3>Allergene und Zusatzstoffe</h3>
+    <p>
+      In unseren Gerichten sind teilweise Zusatzstoffe und allergene Stoffe (wie z.b. Milch,
+      Senf, Gluten etc.) enthalten. Bei weiteren Fragen zu den Produkten wenden Sie sich
+      bitte an unser Personal.
+    </p>
+    <table class="allergen-table">
+      <thead>
+      <tr>
+        <th>Index</th>
+        <th>Hinweis</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>1</td>
+        <td>mit Farbstoff</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>mit Konservierungsstoff</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>mit Geschmacksverstärker</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>geschwefelt / enthält Sulfit</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>geschwärzt</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>mit Phosphat</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>mit Süßungsmitteln</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>koffeinhaltig</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>enthält Gluten (Weizen)</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>enthält Gluten (Gerste)</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>enthält Ei</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>enthält Nüsse / Erdnüsse</td>
+      </tr>
+      <tr>
+        <td>13</td>
+        <td>enthält Laktose / Milch</td>
+      </tr>
+      <tr>
+        <td>14</td>
+        <td>enthält Sellerie</td>
+      </tr>
+      <tr>
+        <td>15</td>
+        <td>enthält Senf</td>
+      </tr>
+      <tr>
+        <td>24</td>
+        <td>chininhaltig</td>
+      </tr>
+      <tr>
+        <td>25</td>
+        <td>enthält Gluten (Roggen)</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import {ref} from "vue";
 
 const nonAlcoholic = ref(false);
+
 function toggleNonAlcoholic() {
   nonAlcoholic.value = !nonAlcoholic.value;
 }
 
 const beers = [
-  { name: "Krombacher Radler", volume: "0,33l", price: "3,5€", category: "Bier", alcoholic: true },
-  { name: "Krombacher Weizen", volume: "0,50l", price: "5,9€", category: "Bier", alcoholic: true },
-  { name: "Krombacher Weizen 0,0%", volume: "0,50l", price: "5,5€", category: "Bier", alcoholic: false },
-  { name: "Estrella de Galicia Especial", volume: "0,20l", price: "2,5€", category: "Bier", alcoholic: true },
-  { name: "Krombacher Pils (0,0%)", volume: "0,33l", price: "3,5€", category: "Bier", alcoholic: false },
-  { name: "Krombacher Pils", volume: "0,33l", price: "3,5€", category: "Bier", alcoholic: true },
-  { name: "San Miguel", volume: "0,33l", price: "3,7€", category: "Bier", alcoholic: true },
-  { name: "Estrella de Galicia", volume: "0,33l", price: "3,7€", category: "Bier", alcoholic: true }
+  {name: "Krombacher Radler", volume: "0,33l", price: "3,5€", category: "Bier", alcoholic: true, allergens: [4, 10]},
+  {name: "Krombacher Weizen", volume: "0,50l", price: "5,9€", category: "Bier", alcoholic: true, allergens: [4, 9, 10]},
+  {
+    name: "Krombacher Weizen 0,0%",
+    volume: "0,50l",
+    price: "5,5€",
+    category: "Bier",
+    alcoholic: false,
+    allergens: [4, 9, 10]
+  },
+  {
+    name: "Estrella de Galicia Especial",
+    volume: "0,20l",
+    price: "2,5€",
+    category: "Bier",
+    alcoholic: true,
+    allergens: [4, 10]
+  },
+  {
+    name: "Krombacher Pils (0,0%)",
+    volume: "0,33l",
+    price: "3,5€",
+    category: "Bier",
+    alcoholic: false,
+    allergens: [4, 10]
+  },
+  {name: "Krombacher Pils", volume: "0,33l", price: "3,5€", category: "Bier", alcoholic: true, allergens: [4, 10]},
+  {name: "San Miguel", volume: "0,33l", price: "3,7€", category: "Bier", alcoholic: true, allergens: [4, 10]},
+  {name: "Estrella de Galicia", volume: "0,33l", price: "3,7€", category: "Bier", alcoholic: true, allergens: [4, 10]}
 ];
 
 const softdrinks = [
-  { name: "Eistee von Rauch", volume: "0,33l", price: "3,3€", category: "Softdrink", alcoholic: false },
-  { name: "Bio Saftschorle von Rauch", volume: "0,33l", price: "3,3€", category: "Softdrink", alcoholic: false },
-  { name: "Thomas Henry", volume: "0,20l", price: "2,5€", category: "Softdrink", alcoholic: false },
-  { name: "Coca Cola Zero", volume: "0,33l", price: "3,4€", category: "Softdrink", alcoholic: false },
-  { name: "Wasser Classic/Naturell", volume: "0,75l", price: "6,9€", category: "Softdrink", alcoholic: false }
+  {
+    name: "Eistee von Rauch",
+    volume: "0,33l",
+    price: "3,3€",
+    category: "Softdrink",
+    alcoholic: false,
+    allergens: [1, 2, 8]
+  },
+  {
+    name: "Bio Saftschorle von Rauch",
+    volume: "0,33l",
+    price: "3,3€",
+    category: "Softdrink",
+    alcoholic: false,
+    allergens: []
+  },
+  {name: "Thomas Henry", volume: "0,20l", price: "2,5€", category: "Softdrink", alcoholic: false, allergens: [24]},
+  {
+    name: "Coca Cola Zero",
+    volume: "0,33l",
+    price: "3,4€",
+    category: "Softdrink",
+    alcoholic: false,
+    allergens: [1, 7, 8]
+  },
+  {
+    name: "Wasser Classic/Naturell",
+    volume: "0,75l",
+    price: "6,9€",
+    category: "Softdrink",
+    alcoholic: false,
+    allergens: []
+  }
 ];
 
 const cocktails = [
-  { name: "Pisco Sour", price: "10,5€", category: "Cocktail", alcoholic: true },
-  { name: "Espresso Martini", price: "10,5€", category: "Cocktail", alcoholic: true },
-  { name: "Whisky Sour", price: "10,5€", category: "Cocktail", alcoholic: true },
-  { name: "Mojito / Frucht-Mojito", price: "10,5€", category: "Cocktail", alcoholic: true },
-  { name: "Caipirinha", price: "10,5€", category: "Cocktail", alcoholic: true }
+  {name: "Pisco Sour", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: [11]},
+  {name: "Espresso Martini", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: [8, 13]},
+  {name: "Whisky Sour", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: [11]},
+  {name: "Mojito / Frucht-Mojito", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: []},
+  {name: "Caipirinha", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: []}
 ];
 
 const spritz = [
-  { name: "Limoncello", price: "8,5€", category: "Cocktail", alcoholic: true },
-  { name: "Aperol", price: "8,5€", category: "Cocktail", alcoholic: true },
-  { name: "Sarti", price: "8,5€", category: "Cocktail", alcoholic: true }
+  {name: "Limoncello", price: "8,5€", category: "Cocktail", alcoholic: true, allergens: [1, 4]},
+  {name: "Aperol", price: "8,5€", category: "Cocktail", alcoholic: true, allergens: [1, 4]},
+  {name: "Sarti", price: "8,5€", category: "Cocktail", alcoholic: true, allergens: [1, 4]}
 ];
 
 const no3 = [
-  { name: "Negroni", price: "10,5€", category: "Cocktail", alcoholic: true },
-  { name: "Gin Fizz", price: "10,5€", category: "Cocktail", alcoholic: true },
-  { name: "Gin Tonic", price: "7,9€", category: "Cocktail", alcoholic: true },
-  { name: "Tom Collins", price: "9,5€", category: "Cocktail", alcoholic: true }
+  {name: "Negroni", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: [4]},
+  {name: "Gin Fizz", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: [11]},
+  {name: "Gin Tonic", price: "7,9€", category: "Cocktail", alcoholic: true, allergens: [24]},
+  {name: "Tom Collins", price: "9,5€", category: "Cocktail", alcoholic: true, allergens: []}
 ];
 
 const zeroAlc = [
-  { name: "Mojito / Frucht Mojito", price: "9€", category: "Cocktail", alcoholic: false },
-  { name: "Caipirinha", price: "9€", category: "Cocktail", alcoholic: false },
-  { name: "Gin Fizz", price: "9€", category: "Cocktail", alcoholic: false },
-  { name: "Gin Tonic", price: "7,5€", category: "Cocktail", alcoholic: false },
-  { name: "Aperol Spritz", price: "7,5€", category: "Cocktail", alcoholic: false },
-  { name: "Sarti Spritz", price: "7,5€", category: "Cocktail", alcoholic: false },
-  { name: "Limoncello Spritz", price: "7,5€", category: "Cocktail", alcoholic: false }
+  {name: "Mojito / Frucht Mojito", price: "9€", category: "Cocktail", alcoholic: false, allergens: []},
+  {name: "Caipirinha", price: "9€", category: "Cocktail", alcoholic: false, allergens: []},
+  {name: "Gin Fizz", price: "9€", category: "Cocktail", alcoholic: false, allergens: [11]},
+  {name: "Gin Tonic", price: "7,5€", category: "Cocktail", alcoholic: false, allergens: [24]},
+  {name: "Aperol Spritz", price: "7,5€", category: "Cocktail", alcoholic: false, allergens: [1, 4]},
+  {name: "Limoncello Spritz", price: "7,5€", category: "Cocktail", alcoholic: false, allergens: [1, 4]}
 ];
 </script>
 
@@ -273,6 +427,10 @@ const zeroAlc = [
 
     .drinks-name {
       font-size: 1rem;
+
+      .allergen-indices {
+        font-size: 10px;
+      }
     }
 
     .drinks-description {
@@ -314,5 +472,51 @@ const zeroAlc = [
   top: 33%;
   left: 50%;
   height: 120px;
+}
+
+.allergen-section {
+  padding: 1rem;
+}
+
+.allergen-table {
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  border-collapse: collapse;
+  font-family: sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  color: black;
+}
+
+.allergen-table thead {
+  background-color: #f4f4f4;
+}
+
+.allergen-table th,
+.allergen-table td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.allergen-table th {
+  color: #333;
+  font-weight: 600;
+}
+
+.allergen-table tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.allergen-table tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+@media (max-width: 600px) {
+  .allergen-table {
+    font-size: 0.85rem;
+  }
 }
 </style>
