@@ -36,7 +36,7 @@ export const notifications: Array<Notification> = [
     },
     {
         title: "Let's Spritz 🍹!",
-        text: "Jeden Mittwoch gibt es bei uns alle möglichen Spritz für nur 6,50 - Alkoholfrei für 5,90 (Auf die Gesundheit!✨).",
+        text: "Jeden Tag HAPPY HOUR Spritz für nur 5€ bis 19 Uhr und Mittwochs nach der Happy Hour für nur 6,50 - Alkoholfrei für 5,90 (Auf die Gesundheit!✨).",
         image: "icons8-strandcocktail-96.png",
         createdAt: new Date('2025-03-31T10:24:00')
     },

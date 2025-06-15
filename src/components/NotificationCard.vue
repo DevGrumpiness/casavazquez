@@ -5,7 +5,7 @@
       <div class="notification-content">
         <div class="notification-header">
           <h3 class="notification-title">{{ title }}</h3>
-          <span class="notification-age">{{ timeAgo }}</span>
+<!--          <span class="notification-age">{{ timeAgo }}</span>-->
         </div>
         <p class="notification-text">{{ text }}</p>
       </div>
@@ -58,9 +58,6 @@ const timeAgo = useTimeAgo(new Date(props.createdAt), {
 @import "../assets/styles/main.scss";
 
 .notification-card {
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  padding: 12px;
   transition: box-shadow 0.2s ease-in-out;
   border: 1px solid lightgrey;
 
@@ -78,6 +75,13 @@ const timeAgo = useTimeAgo(new Date(props.createdAt), {
     font-size: .75rem;
     color: #0095f6;
   }
+
+  background-color: #fff8f0;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid #ceaa724d;
 }
 .notification-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
