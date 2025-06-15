@@ -1,18 +1,24 @@
 import type {Notification} from "../interfaces/notification.ts";
 
-export const notifications:Array<Notification> = [
+export const notifications: Array<Notification> = [
     {
-        title: "Rosé Happy Hour 🍷",
-        text: "Zu jedem Rosé gibt’s im April eine Käse-Schinkenplatte aufs Haus! Gilt Mo–Fr bis 19 Uhr.",
+        title: "Rabatt für Studies 🙌💸 ",
+        text: "Fragt nach unseren Rabatten und erzählt es weiter.",
         image: undefined,
         createdAt: new Date('2025-04-08T10:24:00')
     },
-    {
-        title: "Mittwoch 23.04.",
-        text:"SAVE THE DATE! Großes erwartet Euch!",
-        image: undefined,
-        createdAt: new Date('2025-04-08T10:24:00')
-    },
+    // {
+    //     title: "Oberdorfer Fassbier 🍺",
+    //     text: "Frisch gezapft schmeckt immer noch am besten. Oberdorfer 0.3l für 3,80€ - (erstmal) nur für kurze Zeit.",
+    //     image: undefined,
+    //     createdAt: new Date('2025-04-08T10:24:00')
+    // },
+    // {
+    //     title: "Rosé Happy Hour 🍷",
+    //     text: "Zu jeder Flasche Rosé gibt’s im Mai eine kleine Käse-Schinkenplatte aufs Haus! Gilt Mi–Fr bis 19 Uhr.",
+    //     image: undefined,
+    //     createdAt: new Date('2025-04-08T10:24:00')
+    // },
     {
         title: "Folge uns unauffällig!",
         text: "Auf instagram informieren wir Euch immer über aktuelle Aktionen und Events. Folge uns, um nichts zu verpassen! ",
@@ -36,7 +42,7 @@ export const notifications:Array<Notification> = [
     },
     {
         title: "Schon probiert?",
-        text: "Unser Yuzu Spritz ist gefährlich lecker! Vielleicht sogar besser als Aperol Spritz? Entscheide selbst..! Heute leider ausverkauft :/",
+        text: "Unser Yuzu Spritz ist gefährlich lecker! Vielleicht sogar besser als Aperol Spritz? Entscheide selbst..! /",
         image: "yuzu.jpg",
         roundedImage: true,
         createdAt: new Date('2025-04-01T10:24:00')

@@ -14,6 +14,18 @@
     />
   </div>
 
+  <div class="tile-navigation">
+    <router-link class="nav-link" to="/vino">
+      <div class="navigation-tile">Weine</div>
+    </router-link>
+    <router-link class="nav-link" to="/drinks">
+      <div class="navigation-tile">Getränke</div>
+    </router-link>
+    <router-link class="nav-link" to="/snacks">
+      <div class="navigation-tile">Snacks</div>
+    </router-link>
+  </div>
+
   <div class="impressum">
     <h1>Impressum</h1>
     <p>
@@ -60,18 +72,26 @@
 
   </div>
   <div class="sources-link">Icons by <a href="https://icons8.com/">icons8.com</a></div>
-  <div class="easter-egg" @click="handleClick" :style="{ transform: 'scale(' + scale + ')' }" :class="{ 'shake': isShaking }">
-    <template v-if="clickCount < 5">
-      <img :src="osterei" alt="Osertei" class="egg-icon" />
-    </template>
-    <template v-else>
-      <div class="voucher">
-        <h2>Gutschein!</h2>
-        <p>Herzlichen Glückwunsch – Du hast ein Osterei gefunden! Zeig uns diesen Gutschein und du erhältst ein gratis Osterbier!</p>
-        <p>(pro Person 1x einlösbar)</p>
-      </div>
-    </template>
-  </div>
+  <!--  <div class="easter-egg" @click="handleClick" :style="{ transform: 'scale(' + scale + ')' }" :class="{ 'shake': isShaking }">-->
+  <!--    <template v-if="clickCount < 5">-->
+  <!--      <img :src="osterei" alt="Osertei" class="egg-icon" />-->
+  <!--    </template>-->
+  <!--    <template v-else>-->
+  <!--      <div class="voucher">-->
+  <!--        <h2>Gutschein!</h2>-->
+  <!--        <p>Herzlichen Glückwunsch – Du hast ein Osterei gefunden! Zeig uns diesen Gutschein und du erhältst ein gratis Osterbier!</p>-->
+  <!--        <p>(pro Person 1x einlösbar)</p>-->
+  <!--      </div>-->
+  <!--    </template>-->
+  <!--  </div>-->
+
+  <router-link
+      to="/showroom"
+      class="nav-link showroom-link"
+      active-class="active"
+  >
+    🖼️
+  </router-link>
 </template>
 
 <script setup lang="ts">
@@ -79,13 +99,14 @@ import {ref} from "vue";
 import {notifications} from "../data/notifications.ts";
 import NotificationCard from "../components/NotificationCard.vue";
 import osterei from "../assets/images/icons8-easter-64.png"
+import NavigationBar from "../components/NavigationBar.vue";
 
 const clickCount = ref(0)
 const scale = ref(1)
 const isShaking = ref(false)
 
 function handleClick() {
-  if (clickCount.value < 4) {
+  if (clickCount.value < 2) {
     clickCount.value++;
     scale.value *= 1.21;
   } else {
@@ -126,8 +147,43 @@ h1 {
   }
 }
 
+.tile-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  justify-content: center;
+  padding: 1rem;
+
+  .nav-link {
+    text-decoration: none;
+  }
+
+  .navigation-tile {
+    width: 25vw;
+    max-width: 200px;
+    aspect-ratio: 1 / 1;
+    background: #1e1e2f;
+    border: 2px solid #ceaa72;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ceaa72;
+    font-family: "King Red", serif;
+    font-size: 1.2rem;
+    text-align: center;
+    transition: transform 0.2s ease, background 0.3s;
+
+    &:hover {
+      background: #2a2a3f;
+      transform: scale(1.05);
+      cursor: pointer;
+    }
+  }
+}
+
 .sources-link {
-  padding:  1rem;
+  padding: 1rem;
 
   a {
     text-decoration: underline;
@@ -148,7 +204,7 @@ h1 {
   text-align: right;
 
   img {
-    margin-right:  10%;
+    margin-right: 10%;
   }
 }
 
@@ -166,9 +222,11 @@ h1 {
   color: #ceaa72;
   transform: unset;
 }
+
 .voucher h2 {
   margin: 0;
 }
+
 .voucher p {
   margin: 0.5rem 0 0;
 }

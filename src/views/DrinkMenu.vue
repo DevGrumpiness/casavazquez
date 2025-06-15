@@ -1,4 +1,9 @@
 <template>
+
+  <!--  <div class="hint">-->
+  <!--    Bundle des Tages 12,-  <br> 1 Glas Hauswein weiß <br>+ 1 x Käseplatte-->
+  <!--  </div>-->
+
   <!-- Filter-Button -->
   <div class="filter-buttons">
     <button class="filter-button" :class="{ active: nonAlcoholic }" @click="toggleNonAlcoholic">
@@ -19,9 +24,12 @@
         <li v-for="drink in nonAlcoholic ? softdrinks.filter(d => !d.alcoholic) : softdrinks" :key="drink.name"
             class="drinks-item">
           <div class="drink-text">
-            <span class="drinks-name">{{ drink.name }}
+            <span class="drinks-name">{{ drink.name }} &nbsp;{{ drink.volume }}
               <sup v-if="drink.allergens" class="allergen-indices">{{ drink.allergens.join(',') }}</sup>
             </span>
+            <div class="new-label" v-if="drink.neu">
+              NEU
+            </div>
           </div>
           <span class="drinks-price">{{ drink.price }}</span>
         </li>
@@ -33,19 +41,19 @@
   <section class="drinks-menu-section">
     <header class="drinks-header">
       <h1 class="drinks-title">Cerveza</h1>
-      <p class="drinks-subtitle">Bierchen</p>
+      <p class="drinks-subtitle">Flaschen-Bierchen</p>
     </header>
 
     <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
         <li v-for="drink in nonAlcoholic ? beers.filter(d => !d.alcoholic) : beers" :key="drink.name"
             class="drinks-item">
-          <div class="drink-text">
+          <div v-if="drink.available !== false" class="drink-text">
             <span class="drinks-name">{{ drink.name }}
             <sup v-if="drink.allergens" class="allergen-indices">{{ drink.allergens.join(',') }}</sup>
             </span>
           </div>
-          <span class="drinks-price">{{ drink.price }}</span>
+          <span v-if="drink.available !== false" class="drinks-price">{{ drink.price }}</span>
         </li>
       </transition-group>
     </div>
@@ -72,7 +80,7 @@
       </transition-group>
     </div>
     <p class="note">
-      (alkoholfrei für 7,50)<br><br>
+      (*alkoholfrei für 7,50)<br><br>
       Achtet auch auf unsere Aktionen!
     </p>
   </section>
@@ -275,7 +283,9 @@ const beers = [
     price: "2,5€",
     category: "Bier",
     alcoholic: true,
-    allergens: [4, 10]
+    allergens: [4, 10],
+    available: false,
+
   },
   {
     name: "Krombacher Pils (0,0%)",
@@ -285,9 +295,42 @@ const beers = [
     alcoholic: false,
     allergens: [4, 10]
   },
-  {name: "Krombacher Pils", volume: "0,33l", price: "3,5€", category: "Bier", alcoholic: true, allergens: [4, 10]},
-  {name: "San Miguel", volume: "0,33l", price: "3,7€", category: "Bier", alcoholic: true, allergens: [4, 10]},
-  {name: "Estrella de Galicia", volume: "0,33l", price: "3,7€", category: "Bier", alcoholic: true, allergens: [4, 10]}
+  {
+    name: "Brinkshoff's N°1",
+    volume: "0,33l",
+    price: "3,5€",
+    category: "Bier",
+    alcoholic: true,
+    allergens: [4, 10],
+    available: true,
+  },
+  {
+    name: "San Miguel",
+    volume: "0,33l",
+    price: "3,7€",
+    category: "Bier",
+    alcoholic: true,
+    allergens: [4, 10],
+    available: false
+  },
+  {
+    name: "Krombacher Pils",
+    volume: "0,33l",
+    price: "3,5€",
+    category: "Bier",
+    alcoholic: true,
+    allergens: [4, 10],
+    available: false,
+  },
+  {
+    name: "Estrella de Galicia",
+    volume: "0,33l",
+    price: "3,7€",
+    category: "Bier",
+    alcoholic: true,
+    allergens: [4, 10],
+    available: false
+  }
 ];
 
 const softdrinks = [
@@ -323,11 +366,21 @@ const softdrinks = [
     category: "Softdrink",
     alcoholic: false,
     allergens: []
+  },
+  {
+    name: "Vital-Wasser",
+    volume: "1l Karaffe",
+    price: "6,9€",
+    category: "Softdrink",
+    alcoholic: false,
+    allergens: [],
+    neu: true
   }
 ];
 
 const cocktails = [
   {name: "Pisco Sour", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: [11]},
+  {name: "Yuzu Sour", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: [11]},
   {name: "Espresso Martini", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: [8, 13]},
   {name: "Whisky Sour", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: [11]},
   {name: "Mojito / Frucht-Mojito", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: []},
@@ -335,9 +388,10 @@ const cocktails = [
 ];
 
 const spritz = [
-  {name: "Limoncello", price: "8,5€", category: "Cocktail", alcoholic: true, allergens: [1, 4]},
-  {name: "Aperol", price: "8,5€", category: "Cocktail", alcoholic: true, allergens: [1, 4]},
-  {name: "Sarti", price: "8,5€", category: "Cocktail", alcoholic: true, allergens: [1, 4]}
+  {name: "*Limoncello", price: "8,5€", category: "Cocktail", alcoholic: true, allergens: [1, 4]},
+  {name: "*Aperol", price: "8,5€", category: "Cocktail", alcoholic: true, allergens: [1, 4]},
+  {name: "Sarti", price: "8,5€", category: "Cocktail", alcoholic: true, allergens: [1, 4]},
+  {name: "Yuzu", price: "8,5€", category: "Cocktail", alcoholic: true, allergens: [1, 4]},
 ];
 
 const no3 = [
@@ -420,10 +474,12 @@ const zeroAlc = [
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.8rem;
+  position: relative;
 
   .drink-text {
     display: flex;
     flex-direction: column;
+    position: relative;
 
     .drinks-name {
       font-size: 1rem;
@@ -433,10 +489,33 @@ const zeroAlc = [
       }
     }
 
+    .new-label {
+      position: absolute;
+      top: 0.25rem;
+      right: -50px;
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 0.25rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      transform: rotate(10deg);
+      transform-origin: top right;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+      .drinks-item:hover & {
+        transform: rotate(0deg) scale(1.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+    }
+
     .drinks-description {
       font-size: 0.7rem;
       font-style: italic;
     }
+
   }
 
   .drinks-price {
@@ -485,13 +564,13 @@ const zeroAlc = [
   border-collapse: collapse;
   font-family: sans-serif;
   font-size: 0.95rem;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.62);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
   color: black;
 }
 
 .allergen-table thead {
-  background-color: #f4f4f4;
+  background-color: rgba(244, 244, 244, 0.79);
 }
 
 .allergen-table th,
@@ -507,7 +586,7 @@ const zeroAlc = [
 }
 
 .allergen-table tbody tr:nth-child(even) {
-  background-color: #fafafa;
+  background-color: rgba(250, 250, 250, 0.54);
 }
 
 .allergen-table tbody tr:hover {

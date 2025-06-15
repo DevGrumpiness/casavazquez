@@ -1,10 +1,17 @@
 <template>
+
+<!--  <div class="hint">-->
+<!--    Bundle des Tages 12,- <br> 1 Glas Hauswein weiß <br>+ 1 x Käseplatte-->
+<!--  </div>-->
   <section class="wine-menu-section">
+
     <header class="wine-header">
       <h1 class="wine-title">Vino</h1>
     </header>
-    <p class="note">Unsere hochwertigen Hausweine gibt es für<br> 6€ (0.2l) bzw. 19€ (0.75l).</p>
-    <div v-if="selectedColor === 'rosé' && isHappyHour" class="happy-hour-hint">🎉 Happy Hour 🎉! Mo-Fr bis 19 Uhr zu jeder Flasche Rosé eine Plato Mixto aufs Haus.</div>
+    <p class="note">Unsere hochwertigen Hausweine gibt es für<br> 6,60€ (0.2l) bzw. 19€ (0.75l).</p>
+    <div v-if="selectedColor === 'rosé' && false" class="happy-hour-hint">🎉 Happy Hour 🎉! Mo-Fr bis 19 Uhr zu
+      jeder Flasche Rosé eine Plato Mixto aufs Haus.
+    </div>
     <div class="filter-buttons">
       <button :class="{ active: selectedColor === '' }" @click="selectedColor = ''">Alle</button>
       <button :class="{ active: selectedColor === 'red' }" @click="selectedColor = 'red'">Rot</button>
@@ -15,22 +22,22 @@
       <span></span>
       <span></span>
       <span></span>
-      <span>{{roseLabel}}</span>
+      <span>{{ roseLabel }}</span>
     </div>
     <div class="scrollContainer">
       <transition-group name="wine" tag="ul" class="wine-list">
-        <WineItem v-for="wine in filteredWines" :key="wine.id" :wine="wine" />
+        <WineItem v-for="wine in filteredWines" :key="wine.id" :wine="wine"/>
       </transition-group>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
-import { type Wine } from "../interfaces/vino.ts";
-import { dummyWines } from "../data/vinos.ts";
+import {ref, onMounted, computed} from 'vue';
+import {type Wine} from "../interfaces/vino.ts";
+import {vinos} from "../data/vinos.ts";
 import WineItem from '../components/WineItem.vue';
-import { useNow } from '@vueuse/core';
+import {useNow} from '@vueuse/core';
 
 const now = useNow();
 const isHappyHour = computed(() => {
@@ -44,10 +51,11 @@ const wines = ref<Wine[]>([]);
 const selectedColor = ref<string>('');
 
 onMounted(() => {
-  wines.value = dummyWines;
+  wines.value = vinos;
 });
 
 const roseLabel = computed(() => {
+  return ''
   return isHappyHour.value ? 'Happy Hour 🎉' : '';
 });
 
@@ -59,6 +67,10 @@ const filteredWines = computed(() => {
 
 <style lang="scss" scoped>
 @import "../assets/styles/main.scss";
+
+.note {
+  font-size:  1rem;
+}
 
 .wine-menu-section {
   background-color: $background-color;
@@ -101,7 +113,7 @@ const filteredWines = computed(() => {
   display: flex;
   justify-content: space-evenly;
 
-  span{
+  span {
     flex: 1;
     font-size: 11px;
     text-align: center;

@@ -1,5 +1,5 @@
 <template>
-  <div class="wine-item card" @click="toggle">
+  <div  v-if="wine.available"  class="wine-item card" @click="toggle">
     <!-- Zusammengeklappte Ansicht -->
     <div class="collapsed-view">
       <img :src="wine.image ? wine.image : defaultImage" alt="Weinbild" class="wine-image"/>

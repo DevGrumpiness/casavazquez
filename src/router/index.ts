@@ -3,6 +3,7 @@ import LandingPage from '../views/LandingPage.vue';
 import WineMenu from '../views/WineMenu.vue';
 import SnackMenu from '../views/SnackMenu.vue';
 import DrinkMenu from '../views/DrinkMenu.vue';
+import Showroom from '../views/Showroom.vue';
 
 const routes = [
     {
@@ -30,17 +31,19 @@ const routes = [
         component: SnackMenu,
     },
     {
+        path: '/showroom',
+        name: 'Showroom',
+        component: Showroom,
+    },
+    {
         path: '/:pathMatch(.*)*',
         redirect: '/home',
     },
 ];
 
 const router = createRouter({
-    history: createWebHistory('/casavazquez/'),
+    history: createWebHistory(),
     routes,
-    scrollBehavior() {
-        return { top: 0 };
-    },
 });
 
 export default router;

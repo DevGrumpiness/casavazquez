@@ -1,5 +1,14 @@
 <template>
-  <div class="filter-buttons">
+  <div class="hint" style="display: block">
+    Heute <b>nur Buffet</b> mit Selbstbedienung <br/>
+    <ul>
+      <li>Satt werden für 14,00 (immer wieder nachnehmen)</li>
+      <li>Oder 1 x Teller voll machen für 8,50</li>
+    </ul>
+    <br />
+    🍽️ Guten Appetit! 😊
+  </div>
+  <div class="filter-buttons" style="display: none">
     <button class="filter-button" :class="{ active: veggie }" @click="toggleVeggie">
       <i class="pi pi-times" v-if="veggie" style="font-size: 8px"></i>
       Nur Veggie
@@ -9,8 +18,10 @@
   <section class="snacks-menu">
     <header class="snacks-header">
       <h1 class="snacks-title">SNACKS</h1>
-      <p class="snacks-subtitle">FÜR DEN KLEINEN HUNGER</p>
+<!--      <p class="snacks-subtitle">FÜR DEN KLEINEN HUNGER</p>-->
+      <p class="snacks-subtitle">(Vieles im Buffet enthalten)</p>
     </header>
+
 
     <div class="scrollContainer">
       <div class="snack-section">
@@ -24,10 +35,11 @@
             <img v-if="snack.onm" class="onmLogo" :src="onmLogo" alt="Olive und Meer" @click="showOnmInfo = true"/>
             <BaseModal v-model="showOnmInfo">
               <div style="display: flex;margin-bottom: 1rem; gap: 1rem">
-                <h2 >Von <i>Olive & Meer</i></h2>
+                <h2>Von <i>Olive & Meer</i></h2>
                 <img class="onmLogo" :src="onmLogo"/>
               </div>
-              <p>Unser Lieblings-Laden für Spanische Weine und Feinkost. Dir schmecken die Oliven? Dann statte doch <i>Raquel</i> mal
+              <p>Unser Lieblings-Laden für Spanische Weine und Feinkost. Dir schmecken die Oliven? Dann statte doch <i>Raquel</i>
+                mal
                 einen Besuch ab. </p>
               <p style="text-align: right">Warendorfer Str. 61, 48145 Münster</p>
             </BaseModal>
@@ -42,12 +54,16 @@
             <span class="snacks-price">5,5</span>
           </li>
           <li class="snacks-item extra veggie">
-            <span class="snacks-name">Extra Dip</span>
+            <span class="snacks-name">Extra Dip (Aioli/Salsa)</span>
             <span class="snacks-price">0,7</span>
           </li>
           <li class="snacks-item extra veggie">
+            <span class="snacks-name">Extra hausgemachte Guacamole (AUSVERKAUFT)</span>
+            <span class="snacks-price">1,20</span>
+          </li>
+          <li class="snacks-item extra veggie">
             <span class="snacks-name">Extra Baguette</span>
-            <span class="snacks-price">2</span>
+            <span class="snacks-price">2,50</span>
           </li>
 
           <p class="snacks-note">
@@ -59,16 +75,16 @@
       <div class="snack-section" v-if="!veggie">
         <hr/>
         <br/>
-        <h3 class="snacks-subtitle">Bocadillo</h3>
+        <h3 class="snacks-subtitle">Burrata Tomate/Jamón</h3>
         <p class="snacks-note">
-          Bocadillos sind ein fester Bestandteil der spanischen Esskultur.
+          Leckere Burrata mit aromatischen Tomaten.
           <br/>
-          Knusprige aufgebackenes Baguette mit herzhaftem Belag wie Jamón Serrano, Queso und frischer Tomate.
+          Dazu etwas Brot. Wir empfehlen unsere frisch aufgeschnittenen Schinken dazu. 👌
         </p>
         <ul class="snacks-extras">
           <li class="snacks-item extra">
-            <span class="snacks-name"><b>Bocadillo (Sandwich)</b><br/>mit Burrata & Tomate</span>
-            <span class="snacks-price">10,50</span>
+            <span class="snacks-name"><b>Burrata & Tomate</b></span>
+            <span class="snacks-price">7,9</span>
           </li>
           <li class="snacks-item extra">
             <span class="snacks-name">+ Jamón</span>
@@ -77,16 +93,18 @@
         </ul>
       </div>
 
-      <div class="snack-section">
+      <div class="snack-section inactive">
         <hr/>
         <br/>
-        <h3 class="snacks-subtitle">Ceviche</h3>
+        <h3 class="snacks-subtitle">"Ceviche"</h3>
         <p class="snacks-note">
           Der "Fisch-Salat" mit Ursprung in Südamerika ist eine wahre Delikatesse.
           <br/>
           <br/>
-          Unsere Variante ist besonders frisch, mit einem Mix aus der Süße von Mango und Cherrytomaten, feinem Meersalz und aromatischem Himbeeressig. Je nach Verfügbarkeit bereiten wir Ceviche mit weißem Fischfilet oder Lachs zu. Alternativ mit geräucherten Garnelen.
-          <p class="today-hint">Heute ({{new Date().toLocaleDateString()}}) mit geräucherten Garnelen verfügbar.</p>
+          Unsere Fisch-Salat "Ceviche"-Art ist besonders frisch, mit einem Mix aus der Süße von Mango und Cherrytomaten,
+          feinem Meersalz und aromatischem Himbeeressig.
+          <!--          <p class="today-hint">Heute ({{ new Date().toLocaleDateString() }}) mit geräucherten Garnelen zubereitet.</p>-->
+          <p class="today-hint" style="text-align: center">AUSVERKAUFT</p>
         </p>
         <ul class="snacks-extras">
           <li class="snacks-item extra">
@@ -112,7 +130,47 @@
         </ul>
       </div>
 
-      <div class="snack-section" v-if="!veggie">
+      <div class="snack-section">
+        <hr/>
+        <br/>
+        <!--        <span style="opacity: 1!important">Heute nicht verfügbar</span>-->
+        <h3 class="snacks-subtitle">Coca </h3>
+        <p class="snacks-note">
+          Coca ist ein traditionelles spanisches Flachbrot, das mit mediterranen Zutaten belegt wird. Die Portion ist
+          vergleichbar mit einer Pizza.
+        </p>
+        <ul class="snacks-extras">
+          <li class="snacks-item extra veggie">
+            <span class="snacks-name"><b>Vegetarisch</b><br/>mit guten Dingen aus dem Garten wie zB Artischockenherzen, getrockneten Tomaten, eingelegten Zwiebeln, Cherry-Tomaten, Rucola</span>
+            <span class="snacks-price">14,90</span>
+          </li>
+          <li class="snacks-item extra veggie">
+            <span class="snacks-name"><b>Wahlweise zusätzlich:</b></span>
+          </li>
+          <li class="snacks-item extra" v-if="!veggie">
+            <span class="snacks-name">+ Chorizo</span>
+            <span class="snacks-price">+ 3,90</span>
+          </li>
+                    <li class="snacks-item extra">
+                      <span class="snacks-name">+ Burrata</span>
+                      <span class="snacks-price">+ 4,50</span>
+                    </li>
+          <li class="snacks-item extra" v-if="!veggie">
+            <span class="snacks-name">+ Serrano</span>
+            <span class="snacks-price">+ 3,90</span>
+          </li>
+          <li class="snacks-item extra" v-if="!veggie">
+            <span class="snacks-name">+ Garnelen</span>
+            <span class="snacks-price">+ 3,90</span>
+          </li>
+                    <li class="snacks-item extra" v-if="!veggie">
+                      <span class="snacks-name">+ Garnelen & Serrano</span>
+                      <span class="snacks-price">+ 6,00</span>
+                    </li>
+        </ul>
+      </div>
+
+      <div class="snack-section inactive" v-if="!veggie">
         <hr/>
         <br/>
         <h3 class="snacks-subtitle">Albondigas</h3>
@@ -131,88 +189,49 @@
         </ul>
       </div>
 
-      <div class="snack-section">
-        <hr/>
-        <br/>
-        <h3 class="snacks-subtitle">Montaditos</h3>
-        <p class="snacks-note">
-          Belegte kleine Brote. Perfekt zum Teilen. Auf unsere Montaditos locos legen wir leckere mediterrane Verduras wie eingelegte Oliven und Peperoni, sowie Frischkäse, saftige Tomate und Chorizo-Wurst.
-        </p>
-        <ul class="snacks-extras">
-          <li class="snacks-item extra">
-            <span class="snacks-name"><b>Gemischte Montaditos</b><br>Auf Wunsch vegetarisch / vegan</span>
-            <span class="snacks-price">8,90</span>
-          </li>
-        </ul>
-      </div>
+      <!--      <div class="snack-section">-->
+      <!--        <hr/>-->
+      <!--        <br/>-->
+      <!--        <h3 class="snacks-subtitle">Montaditos</h3>-->
+      <!--        <p class="snacks-note">-->
+      <!--          Belegte kleine Brote. Perfekt zum Teilen. Auf unsere Montaditos locos legen wir leckere mediterrane Verduras wie eingelegte Oliven und Peperoni, sowie Frischkäse, saftige Tomate und Chorizo-Wurst.-->
+      <!--        </p>-->
+      <!--        <ul class="snacks-extras">-->
+      <!--          <li class="snacks-item extra">-->
+      <!--            <span class="snacks-name"><b>Gemischte Montaditos</b><br>Auf Wunsch vegetarisch / vegan</span>-->
+      <!--            <span class="snacks-price">8,90</span>-->
+      <!--          </li>-->
+      <!--        </ul>-->
+      <!--      </div>-->
 
-      <div class="snack-section">
-        <hr/>
-        <br/>
-        <h3 class="snacks-subtitle">Coca</h3>
-        <p class="snacks-note">
-          Coca ist ein traditionelles spanisches Flachbrot, das mit mediterranen Zutaten belegt wird. Die Portion ist
-          vergleichbar mit einer Pizza.
-        </p>
-        <ul class="snacks-extras">
-          <li class="snacks-item extra veggie">
-            <span class="snacks-name"><b>Vegetarisch</b><br/>mit Artischocken, halb-getrockneten Tomaten, eingelegten Zwiebeln, Cherry-Tomaten, Rucola</span>
-            <span class="snacks-price">12,90</span>
-          </li>
-          <li class="snacks-item extra veggie">
-            <span class="snacks-name"><b>Wahlweise zusätzlich:</b></span>
-          </li>
-          <li class="snacks-item extra" v-if="!veggie">
-            <span class="snacks-name">+ Chorizo</span>
-            <span class="snacks-price">+ 3,90</span>
-          </li>
-          <li class="snacks-item extra">
-            <span class="snacks-name">+ Burrata</span>
-            <span class="snacks-price">+ 4,50</span>
-          </li>
-          <li class="snacks-item extra" v-if="!veggie">
-            <span class="snacks-name">+ Serrano</span>
-            <span class="snacks-price">+ 3,90</span>
-          </li>
-          <li class="snacks-item extra" v-if="!veggie">
-            <span class="snacks-name">+ Garnelen</span>
-            <span class="snacks-price">+ 3,90</span>
-          </li>
-          <li class="snacks-item extra" v-if="!veggie">
-            <span class="snacks-name">+ Garnelen & Serrano</span>
-            <span class="snacks-price">+ 6,00</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="snack-section bundle">
-        <hr/>
-        <br/>
-        <h3 class="snacks-subtitle">Bundles</h3>
-        <p class="snacks-note">Perfekt zu zweit oder dritt – spart euch den Einzelpreis und genießt mehr für weniger.</p>
-        <ul class="snacks-extras">
-          <li class="snacks-item extra veggie">
-            <span class="snacks-name"><b>Bundle A</b><br/>1 x FL Hauswein + 1 x Wasser 0,75l + 1 x Coca Veggie</span>
-            <span class="snacks-price">34,50</span>
-          </li>
-          <li class="snacks-item extra">
-            <span class="snacks-name"><b>Bundle B</b><br/>1 x FL Hauswein + 1 x Wasser 0,75l<br/>+ Käse-Schinkenplatte + Chorizo</span>
-            <span class="snacks-price">43,50</span>
-          </li>
-          <li class="snacks-item extra">
-            <span class="snacks-name"><b>Bundle C</b><br/>2 oder 3 Cocktails<br/>+ 1 x Wasser 0,75l + Nachos mit Dip</span>
-            <span class="snacks-price" style="text-align: right">2 Pers: 29,50<br/>3 Pers: 42,90</span>
-          </li>
-          <li class="snacks-item extra veggie">
-            <span class="snacks-name"><b>Bundle D</b><br/>2 oder 3 alkoholfreie Spritz<br/>+ Plato Queso + Saftschorlen + Nachos mit Dip</span>
-            <span class="snacks-price" style="text-align: right">2 Pers: 34,80<br/>3 Pers: 39,50</span>
-          </li>
-          <li class="snacks-item extra veggie">
-            <span class="snacks-name"><b>Dessert zu einem Bundle</b></span>
-            <span class="snacks-price">5,00</span>
-          </li>
-        </ul>
-      </div>
+      <!--      <div class="snack-section bundle">-->
+      <!--        <hr/>-->
+      <!--        <br/>-->
+      <!--        <h3 class="snacks-subtitle">Bundles</h3>-->
+      <!--        <p class="snacks-note">Perfekt zu zweit oder dritt – spart euch den Einzelpreis und genießt mehr für weniger.</p>-->
+      <!--        <ul class="snacks-extras">-->
+      <!--          <li class="snacks-item extra veggie">-->
+      <!--            <span class="snacks-name"><b>Bundle A</b><br/>1 x FL Hauswein + 1 x Wasser 0,75l + 1 x Coca Veggie</span>-->
+      <!--            <span class="snacks-price">34,50</span>-->
+      <!--          </li>-->
+      <!--          <li class="snacks-item extra">-->
+      <!--            <span class="snacks-name"><b>Bundle B</b><br/>1 x FL Hauswein + 1 x Wasser 0,75l<br/>+ Käse-Schinkenplatte + Chorizo</span>-->
+      <!--            <span class="snacks-price">43,50</span>-->
+      <!--          </li>-->
+      <!--          <li class="snacks-item extra">-->
+      <!--            <span class="snacks-name"><b>Bundle C</b><br/>2 oder 3 Cocktails<br/>+ 1 x Wasser 0,75l + Nachos mit Dip</span>-->
+      <!--            <span class="snacks-price" style="text-align: right">2 Pers: 29,50<br/>3 Pers: 42,90</span>-->
+      <!--          </li>-->
+      <!--          <li class="snacks-item extra veggie">-->
+      <!--            <span class="snacks-name"><b>Bundle D</b><br/>2 oder 3 alkoholfreie Spritz<br/>+ Plato Queso + Saftschorlen + Nachos mit Dip</span>-->
+      <!--            <span class="snacks-price" style="text-align: right">2 Pers: 34,80<br/>3 Pers: 39,50</span>-->
+      <!--          </li>-->
+      <!--          <li class="snacks-item extra veggie">-->
+      <!--            <span class="snacks-name"><b>Dessert zu einem Bundle</b></span>-->
+      <!--            <span class="snacks-price">5,00</span>-->
+      <!--          </li>-->
+      <!--        </ul>-->
+      <!--      </div>-->
 
 
     </div>
@@ -228,13 +247,24 @@ const veggie = ref(false)
 const showOnmInfo = ref(false)
 
 const snacks = [
-  {name: 'Nachos mit Dip', description: 'z.B. mit Aioli / Guacamole / Salsa', price: '4,9', veggie: true},
+  {name: 'Nachos mit Aioli Dip', description: '', price: '4,9', veggie: true},
   {name: 'Oliven Mix', description: '', price: '4,9', veggie: true, onm: true},
-  {name: 'Baguette mit Dips', description: '', price: '4,9', veggie: true},
+  // {name: 'Baguette mit Dips', description: '', price: '4,9', veggie: true},
   {name: 'Plato de Jamón', description: '(80g) + Brot', price: '8,5', veggie: false},
   {name: 'Plato de Quesos', description: '(80g) + Brot', price: '8,5', veggie: true},
-  {name: 'Plato Mixto', description: 'Gemischte Paltte mit Jamón & Quesos + Brot', price: '15,5', veggie: false},
-  {name: 'Verduras', description: 'Mix von mediterranem Gemüse wie Artischockenherzen, Oliven, gegrillte Paprika, eingelegte Zwiebeln etc + Brot', price: '8,5', veggie: true}
+  {name: 'Plato Mixto', description: 'Gemischte Platte mit Jamón & Quesos + Brot', price: '15,5', veggie: false},
+  {
+    name: 'Verduras',
+    description: 'Mix von Gemüse wie Artischockenherzen, Oliven, gegrillte Paprika, gefüllte Peperoni, eingelegte Zwiebeln, Encurtidos und Ähnliches ca. 250g + Brot. Auf Wunsch vegan.',
+    price: '9,5',
+    veggie: true
+  },
+  {
+    name: 'Picoteo (ab 2P - pro Person:)',
+    description: 'Von Allem etwas. Jamón, Queso, Verduras, Oliven. ( auf Wunsch veggie)',
+    price: '15,5',
+    veggie: true
+  },
 ];
 
 const filteredSnacks = computed(() =>
@@ -248,6 +278,16 @@ function toggleVeggie() {
 
 <style lang="scss" scoped>
 @import "../assets/styles/main.scss";
+
+ul {
+  list-style: none;
+}
+
+.hint {
+  text-shadow: 1px 1px 2px #ceaa72;
+  border: 2px solid #ceaa72;
+  background-color: transparent;
+}
 
 hr {
   width: 33%;
@@ -289,6 +329,10 @@ hr {
       }
     }
   }
+}
+
+.inactive {
+  opacity: .5;
 }
 
 .snacks-header {
@@ -336,7 +380,7 @@ hr {
 
 .bundle {
   li {
-    margin-bottom: 1rem!important;
+    margin-bottom: 1rem !important;
   }
 }
 
@@ -376,6 +420,7 @@ hr {
     .snacks-description {
       font-size: 0.7rem;
       font-style: italic;
+      padding-right: 4px;
     }
   }
 

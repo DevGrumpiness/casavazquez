@@ -1,7 +1,7 @@
 type Color = 'red' | 'white' | 'rosé';
 
 export interface Wine {
-    id: number;
+    id: string|number;
     name: string;
     prices: {
         '0.1l'?: string;

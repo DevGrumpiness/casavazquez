@@ -35,6 +35,7 @@ function close() {
   justify-content: center;
   z-index: 50;
   padding: 1rem;
+  color: black;
 }
 
 .modal-content {
