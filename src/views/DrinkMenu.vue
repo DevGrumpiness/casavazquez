@@ -268,7 +268,9 @@ function toggleNonAlcoholic() {
 
 const beers = [
   {name: "Krombacher Radler", volume: "0,33l", price: "3,5€", category: "Bier", alcoholic: true, allergens: [4, 10]},
-  {name: "Krombacher Weizen", volume: "0,50l", price: "5,9€", category: "Bier", alcoholic: true, allergens: [4, 9, 10]},
+  {name: "Tegernseer Helles 0,2", volume: "0,2l", price: "2,9€", category: "Bier", alcoholic: true, allergens: [4, 10]},
+  {name: "Tegernseer Helles 0,4", volume: "0,5l", price: "5,5€", category: "Bier", alcoholic: true, allergens: [4, 10]},
+  {name: "Krombacher Weizen", volume: "0,50l", price: "5,9€", category: "Bier", alcoholic: true, allergens: [4, 9, 10], available: false},
   {
     name: "Krombacher Weizen 0,0%",
     volume: "0,50l",
@@ -302,12 +304,12 @@ const beers = [
     category: "Bier",
     alcoholic: true,
     allergens: [4, 10],
-    available: true,
+    available: false,
   },
   {
     name: "San Miguel",
     volume: "0,33l",
-    price: "3,7€",
+    price: "3,9€",
     category: "Bier",
     alcoholic: true,
     allergens: [4, 10],
@@ -316,7 +318,7 @@ const beers = [
   {
     name: "Krombacher Pils",
     volume: "0,33l",
-    price: "3,5€",
+    price: "3,9",
     category: "Bier",
     alcoholic: true,
     allergens: [4, 10],
@@ -325,7 +327,7 @@ const beers = [
   {
     name: "Estrella de Galicia",
     volume: "0,33l",
-    price: "3,7€",
+    price: "3,9€",
     category: "Bier",
     alcoholic: true,
     allergens: [4, 10],
@@ -337,7 +339,7 @@ const softdrinks = [
   {
     name: "Eistee von Rauch",
     volume: "0,33l",
-    price: "3,3€",
+    price: "3,9€",
     category: "Softdrink",
     alcoholic: false,
     allergens: [1, 2, 8]
@@ -345,7 +347,7 @@ const softdrinks = [
   {
     name: "Bio Saftschorle von Rauch",
     volume: "0,33l",
-    price: "3,3€",
+    price: "3,9€",
     category: "Softdrink",
     alcoholic: false,
     allergens: []
@@ -354,7 +356,7 @@ const softdrinks = [
   {
     name: "Coca Cola Zero",
     volume: "0,33l",
-    price: "3,4€",
+    price: "3,9€",
     category: "Softdrink",
     alcoholic: false,
     allergens: [1, 7, 8]
@@ -384,7 +386,10 @@ const cocktails = [
   {name: "Espresso Martini", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: [8, 13]},
   {name: "Whisky Sour", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: [11]},
   {name: "Mojito / Frucht-Mojito", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: []},
-  {name: "Caipirinha", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: []}
+  {name: "Caipirinha", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: []},
+  {name: "Cosmopolitan", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: []},
+  {name: "Moscow Mule", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: []},
+  {name: "White Russian", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: [11]}
 ];
 
 const spritz = [
@@ -504,6 +509,8 @@ const zeroAlc = [
       transform: rotate(10deg);
       transform-origin: top right;
       transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      opacity: .5;
+
 
       .drinks-item:hover & {
         transform: rotate(0deg) scale(1.05);

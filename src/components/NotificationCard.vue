@@ -5,7 +5,7 @@
       <div class="notification-content">
         <div class="notification-header">
           <h3 class="notification-title">{{ title }}</h3>
-<!--          <span class="notification-age">{{ timeAgo }}</span>-->
+          <span v-if="false" class="notification-age">{{ timeAgo }}</span>
         </div>
         <p class="notification-text">{{ text }}</p>
       </div>

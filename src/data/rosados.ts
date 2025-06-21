@@ -2,8 +2,8 @@ import type {Wine} from "../interfaces/vino.ts";
 
 export const rosados: Wine[] = [
     {
-        id: 21,
         name: 'Calalenta ("Kühle Nacht")',
+        id: 21,
         prices: {
             '0.1l': '4,00€',
             '0.2l': '7,50€',
@@ -19,8 +19,8 @@ export const rosados: Wine[] = [
         available: false
     },
     {
-        id: 822,
         name: "Knipser 'Rosé 24'",
+        id: 822,
         prices: {
             '0.1l': '6,50€',
             '0.2l': '12,50€',
@@ -36,8 +36,8 @@ export const rosados: Wine[] = [
         available: true
     },
     {
-        id: 22,
         name: 'Rosa Dei Frati',
+        id: 22,
         prices: {
             '0.1l': '6,00€',
             '0.2l': '11,50€',
@@ -53,8 +53,8 @@ export const rosados: Wine[] = [
         available: false
     },
     {
-        id: 23,
         name: 'Arrogant Frog',
+        id: 23,
         prices: {
             '0.1l': '4,80€',
             '0.2l': '8,90€',
@@ -70,8 +70,8 @@ export const rosados: Wine[] = [
         available: true
     },
     {
-        "id": 28,
         "name": "Guv’nor Rosé",
+        "id": 28,
         "prices": {
             "0.1l": "4,50€",
             "0.2l": "8,50€",
@@ -87,8 +87,8 @@ export const rosados: Wine[] = [
         "available": true
     },
     {
-        id: 26,
         name: 'El Coto Rosado',
+        id: 26,
         prices: {
             '0.1l': '4,00€',
             '0.2l': '7,50€',
@@ -101,13 +101,12 @@ export const rosados: Wine[] = [
         longDescription: 'Der El Coto Rosado präsentiert sich in einem blassen Lachsrosa und besticht durch ein Bouquet von frischen Erdbeeren und roten Johannisbeeren. Am Gaumen zeigt er sich rund und elegant mit einer lebendigen Frische, die ihn zu einem idealen Begleiter für Salate, Geflügelgerichte und Meeresfrüchte macht. Genießen Sie ihn gut gekühlt.',
         image: null,
         characteristics: 'Trocken, frisch, fruchtig, elegant',
-        available: false
+        available: true
     },
-
     {
-        id: 24,
         name: 'Minuty Rosé',
-        prices: {'0.1l': '5,00€', '0.2l': '9,00€', 'flasche': '€32,50'},
+        id: 24,
+        prices: {'0.1l': '6,50€', '0.2l': '11,50€', 'flasche': '€38,50'},
         color: 'rosé',
         grape: 'Grenache, Cinsault, Syrah',
         origin: 'Frankreich, Côtes de Provence',
@@ -115,12 +114,11 @@ export const rosados: Wine[] = [
         longDescription: 'Der M de Minuty Rosé ist ein eleganter Roséwein aus der Provence mit einer zarten, lachsfarbenen Erscheinung. Er verführt mit feinen Aromen von weißen Blüten, Erdbeeren, Johannisbeeren und einem Hauch Zitrus. Leicht, trocken und lebendig am Gaumen – mit einem frischen Abgang und ausgewogener Säure. Ideal zu mediterraner Küche oder als stilvoller Aperitif.',
         image: null,
         characteristics: 'Trocken, frisch, leicht, zitrus, floral',
-        available: false
+        available: true
     },
-
     {
-        id: 28,
         name: 'PINK St. Laurent Rosé',
+        id: 28,
         prices: {
             '0.1l': '4,50€',
             '0.2l': '8,50€',
@@ -133,12 +131,11 @@ export const rosados: Wine[] = [
         longDescription: 'Der PINK St. Laurent Rosé von Tina Pfaffmann aus der Pfalz präsentiert sich halbtrocken mit lebendigen Aromen von Rumtopf, Mon Cheri-Kirsche und wildem Beerenmus. Eine Restsüße von 11,7 g/l sowie eine feine Säurestruktur sorgen für ein ausgewogenes Mundgefühl und erfrischenden Abgang.',
         image: null,
         characteristics: 'Halbtrocken, fruchtig, leicht, aromatisch, rosé, frisch',
-        available: true
+        available: false
     },
-
     {
-        id: 117,
         name: 'Miraval',
+        id: 117,
         prices: {'flasche': '€49,00'},
         color: 'rosé',
         grape: 'Cinsault, Grenache, Syrah, Rolle',

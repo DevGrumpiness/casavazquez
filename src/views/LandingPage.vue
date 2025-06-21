@@ -14,8 +14,12 @@
       <router-link class="nav-link" to="/snacks">
         <div class="navigation-tile">Snacks</div>
       </router-link>
+      <router-link class="nav-link" to="/showroom">
+        <div class="navigation-tile">Galerie</div>
+      </router-link>
     </section>
-
+    <br >
+    <br >
     <section aria-label="Aktuelle Neuigkeiten">
       <h2>Aktuelles aus der Casa Vazquez</h2>
       <div class="landing-page container">
@@ -36,62 +40,89 @@
     <section aria-label="Über Casa Vazquez">
       <h2>Willkommen bei unserer Bar in Münster!</h2>
       <p>
-        Du warst noch nie bei uns und fragst dich, was wir bieten?<br />
-        Wir laden zum gemütlichen Verweilen an der Warendorfer Straße ein. <br />
+        Du warst noch nie bei uns und fragst dich, was wir bieten?<br/>
+        Wir laden zum gemütlichen Verweilen an der Warendorfer Straße ein. <br/>
         Leckere Drinks und Snacks und eine Auswahl an besonderen Weinen
-        versüßen dir den Feierabend. <br />
+        versüßen dir den Feierabend. <br/>
         Ganz ungezwungen – wie bei Freunden.
       </p>
     </section>
 
-    <section class="impressum" aria-label="Impressum">
-      <h2>Impressum</h2>
-      <address>
-        Casa Vazquez Münster – José Benjamin Marco Joaquin Guerrero Vazquez<br />
-        Warendorfer Str. 113<br />
-        48145 Münster, Deutschland<br />
-        USt-ID: 33750944916 NAST1<br />
-        Telefon: +49 176 4278 7953<br />
-        E-Mail: info@casavazquez.de
-      </address>
+    <div class="impressum">
+      <h1>Impressum</h1>
       <p>
-        Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:<br />
+        Angaben gemäß § 5 TMG:<br>
+        Casa Vazquez Münster – José Benjamin Marco Joaquin Guerrero Vazquez<br>
+        Warendorfer Str 113<br>
+        48145 Münster<br>
+        Deutschland
+      </p>
+      <p>Ust: 33750944916 NAST1</p>
+      <p>
+        Kontakt:<br>
+        Telefon: +49 176 4278 7953<br>
+        E-Mail: info@casavazquez.de
+      </p>
+      <p>
+        Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:<br>
         José Benjamin Marco Joaquin Guerrero Vazquez (siehe Anschrift)
       </p>
-      <p><strong>Haftungsausschluss</strong></p>
       <p>
-        Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf
-        diesen Seiten nach den allgemeinen Gesetzen verantwortlich. [...]
+        Haftungsausschluss (Disclaimer):
       </p>
       <p>
-        Unser Angebot enthält Links zu externen Webseiten Dritter [...].<br />
-        Die Inhalte und Werke auf dieser Website unterliegen dem deutschen
-        Urheberrecht.
+        Haftung für Inhalte:<br>
+        Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen
+        Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet,
+        übermittelte
+        oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige
+        Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen bleiben hiervon
+        unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten
+        Rechtsverletzung möglich.
       </p>
-    </section>
+      <p>
+        Haftung für Links:<br>
+        Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb
+        können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist
+        stets
+        der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+      </p>
+      <p>
+        Urheberrecht:<br>
+        Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen
+        Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen
+        des
+        Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+      </p>
+
+    </div>
+      <div v-if="false" class="easter-egg" @click="handleClick" :style="{ transform: 'scale(' + scale + ')' }" :class="{ 'shake': isShaking }">
+        <template v-if="clickCount < 5">
+          <img :src="osterei" alt="Osertei" class="egg-icon" />
+        </template>
+        <template v-else>
+          <div class="voucher">
+            <h2>Gutschein!</h2>
+            <p>Herzlichen Glückwunsch – Du hast ein Osterei gefunden! Zeig uns diesen Gutschein und du erhältst ein gratis Osterbier!</p>
+            <p>(pro Person 1x einlösbar)</p>
+          </div>
+        </template>
+      </div>
 
     <footer>
       <div class="sources-link">
         Icons by <a href="https://icons8.com/" target="_blank" rel="noopener">icons8.com</a>
       </div>
 
-      <router-link
-          to="/showroom"
-          class="nav-link showroom-link"
-          active-class="active"
-      >
-        🖼️ Showroom
-      </router-link>
     </footer>
   </main>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { notifications } from "../data/notifications.ts";
+import {ref} from "vue";
+import {notifications} from "../data/notifications.ts";
 import NotificationCard from "../components/NotificationCard.vue";
 import osterei from "../assets/images/icons8-easter-64.png";
-import NavigationBar from "../components/NavigationBar.vue";
 
 const clickCount = ref(0);
 const scale = ref(1);
@@ -139,39 +170,38 @@ h1, h2, h3 {
 }
 
 .tile-navigation {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
   justify-content: center;
   padding: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
 
   .nav-link {
     text-decoration: none;
   }
 
   .navigation-tile {
-    width: 50vw;
-    max-width: 200px;
     aspect-ratio: 1 / 1;
     background: #1e1e2f;
-    border: 2px solid #ceaa72;
+    border: 1.5px solid #ceaa72;
     border-radius: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #ceaa72;
     font-family: "King Red", serif;
-    font-size: 2rem;
-    text-align: center;
+    font-size: 1.2rem;
     transition: transform 0.2s ease, background 0.3s;
 
     &:hover {
       background: #2a2a3f;
       transform: scale(1.05);
-      cursor: pointer;
     }
   }
 }
+
 
 .sources-link {
   padding: 1rem;
@@ -216,9 +246,15 @@ h1, h2, h3 {
 }
 
 @keyframes shake {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(5deg); }
-  75% { transform: rotate(-5deg); }
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
 }
 
 .shake {

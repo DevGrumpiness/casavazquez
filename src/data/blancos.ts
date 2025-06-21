@@ -3,8 +3,8 @@ import type {Wine} from "../interfaces/vino.ts";
 export const blancos: Wine[] = [
 
     {
-        id: 'w19',
         name: 'Marqués de Riscal',
+        id: 'w19',
         prices: {
             'flasche': '34,50€'
         },
@@ -18,8 +18,25 @@ export const blancos: Wine[] = [
         available: true
     },
     {
-        id: 'w18',
+        name: 'Epicuro Chardonnay‑Fiano Puglia IGT',
+        id: 'w_epicuro_chardonnay_fiano',
+        prices: {
+            '0.1l': '4,00€',
+            '0.2l': '7,50€',
+            'flasche': '24,00€'
+        },
+        color: 'white',
+        grape: '70% Chardonnay, 30% Fiano',
+        origin: 'Italien, Apulien (Puglia IGT)',
+        shortDescription: 'WENIG SÄURE - Trocken‑ bis halbtrockene Cuvée mit exotischen Früchten und feiner Würze.',
+        longDescription: 'Der Epicuro Chardonnay‑Fiano von Femar Vini aus Apulien vereint die frische Saftigkeit des Chardonnay mit den würzig‑aromatischen Akzenten der einheimischen Fiano‑Traube. In der Nase mischen sich Aromen von Birne, Apfel, Ananas, Limette und Bananen mit Anklängen von Akazienhonig und grünen Kräutern. Am Gaumen präsentiert sich der Wein frisch und saftig mit viel Schmelz, feiner Zitrus‑Frische und einer seidigen Textur – ideal zu Meeresfrüchten, Fisch, Antipasti oder leichten Salaten.',
+        image: null,
+        characteristics: 'trocken‑halbtrocken, exotisch‑fruchtig, würzig, frisch, geschmeidig',
+        available: true
+    },
+    {
         name: 'Karl Pfaffmann Grauer Burgunder',
+        id: 'w18',
         prices: {
             '0.1l': '4,50€',
             '0.2l': '8,50€',
@@ -35,8 +52,8 @@ export const blancos: Wine[] = [
         available: true
     },
     {
-        id: 'w20',
         name: 'Colli Vaibò Lugana',
+        id: 'w20',
         prices: {
             '0.1l': '5,50€',
             '0.2l': '10,50€',
@@ -52,8 +69,8 @@ export const blancos: Wine[] = [
         available: false
     },
     {
-        id: 'w118',
         name: 'Nebla Vicente Gandia Verdejo',
+        id: 'w118',
         prices: {
             '0.1l': '4,00€',
             '0.2l': '7,50€',
@@ -71,8 +88,8 @@ export const blancos: Wine[] = [
         available: true
     },
     {
-        id: 'w1',
         name: 'El Coto Blanco',
+        id: 'w1',
         prices: {
             '0.1l': '4,00€',
             '0.2l': '7,50€',
@@ -88,12 +105,12 @@ export const blancos: Wine[] = [
         available: true
     },
     {
-        id: 174,
         name: 'Julian',
+        id: 174,
         prices: {
             '0.1l': '6,500€',
             '0.2l': '11,50€',
-            flasche: '38,50€'
+            'flasche': '38,50€'
         },
         color: 'white',
         grape: 'Bronner',
@@ -106,10 +123,9 @@ export const blancos: Wine[] = [
         characteristics: 'Trocken, Orange Wine, exotisch, floral, mineralisch',
         available: true
     },
-
     {
-        "id": 27,
         "name": "Pompaelo Blanc de Noir",
+        "id": 27,
         prices: {
             '0.1l': '6,50€',
             '0.2l': '11,90€',
@@ -124,9 +140,10 @@ export const blancos: Wine[] = [
         "characteristics": "Trocken, fruchtig, frisch, weiß, Garnacha, elegant",
         "available": true
     },
+
     // {
-    //     id: 4,
     //     name: 'Dr. Bürklin-Wolf Riesling 2022',
+    //     id: 4,
     //     prices: {'flasche': '€37,50'},
     //     color: 'white',
     //     grape: 'Riesling',

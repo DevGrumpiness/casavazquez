@@ -2,8 +2,8 @@ import type {Wine} from "../interfaces/vino.ts";
 
 export const tintos: Wine[] = [
     {
-        id: 'r29',
         name: 'the guv`nor',
+        id: 'r29',
         prices: {
             '0.1l': '4,00€',
             '0.2l': '7,50€',
@@ -16,11 +16,11 @@ export const tintos: Wine[] = [
         longDescription: 'Diese unkomplizierte Cuvée aus Tempranillo und Syrah ist der perfekte Rotwein für den Feierabend oder eine gemütliche Runde mit Freunden. Da auf einen Barrique-Ausbau bewusst verzichtet wurde, kommen die intensiven Fruchtaromen voll zur Geltung, und der ordentliche Restzuckergehalt macht ihn ausgesprochen süffig. Im Glas strahlt er in sattem Kirschrot, im Bouquet entfalten sich Noten dunkler Beeren und Früchte, untermalt von feinen Röstnuancen. Am Gaumen zeigt er einen guten Körper, bleibt dabei sehr ausgewogen und hinterlässt ein rundes, harmonisches Gesamtbild.',
         image: null,
         characteristics: 'Halbtrocken, fruchtig, interessant',
-        available: true
+        available: false
     },
     {
-        id: 'r2',
         name: 'David Moreno',
+        id: 'r2',
         prices: {'0.1l': "4,80€", '0.2l': "8,90€", 'flasche': '€29,50'},
         color: 'red',
         grape: 'Tempranillo',
@@ -33,8 +33,8 @@ export const tintos: Wine[] = [
         available: true
     },
     {
-        id: 'r31',
         name: 'Viña Albali - Gran Reserva',
+        id: 'r31',
         prices: {
             '0.1l': '4,00€',
             '0.2l': '7,50€',
@@ -50,8 +50,22 @@ export const tintos: Wine[] = [
         available: true
     },
     {
-        id: 'r30',
+        name: 'Marques de Cáceres',
+        id: 3,
+        prices: {'flasche': '€37,50'},
+        color: 'red',
+        grape: 'Tempranillo',
+        origin: 'Rioja DOCa',
+        shortDescription:
+            'Fruchtig-frischer Wein mit dunklen Früchten und würzigem Holz im Geschmack.',
+        longDescription: 'Marqués de Cáceres – ein Synonym für herausragende Qualität – präsentiert in diesem Wein eine harmonische Vereinigung der Rebsorten Tempranillo, Garnacha und Graciano. Diese Crianza besticht durch ein Bouquet dunkler Früchte und sonnenreifer Kirschen, untermalt von würzigen Nuancen von Vanille, Nelke und Lakritze, die durch den Einsatz von gewürztem Eichenholz noch intensiviert werden. Am Gaumen zeigt sich der Wein frisch und fruchtig, mit feinen Anklängen von Erdbeeren und Himbeeren, während seine festen Tannine für eine strukturierte Textur sorgen, die hervorragend zu gerösteten Nüssen und mineralischen Noten passt.',
+        image: null,
+        characteristics: 'Trocken, würzig',
+        available: true
+    },
+    {
         name: 'Aventura - Vinos del Viento',
+        id: 'r30',
         prices: {
             '0.1l': '4,00€',
             '0.2l': '7,50€',
@@ -67,25 +81,8 @@ export const tintos: Wine[] = [
         available: false
     },
     {
-        id: 'w173',
-        name: 'Dicatum',
-        prices: {
-            flasche: '69,00€'
-        },
-        color: 'red',
-        grape: 'Sangiovese',
-        origin: 'Italien, Toskana',
-        shortDescription:
-            'Ein kraftvoll gereifter Sangiovese mit Tiefe und Eleganz aus der toskanischen Fattoria Montellori.',
-        longDescription:
-            'Der Dicatum 2010 von Fattoria Montellori ist ein reinsortiger Sangiovese aus einem exzellenten Jahrgang. In der Nase zeigt er Aromen von getrockneten Kirschen, Leder, Gewürzen und einem Hauch Tabak. Am Gaumen überzeugt er mit dichter Struktur, feinkörnigem Tannin und einer beeindruckenden Länge. Die Reife verleiht ihm eine komplexe, fast samtige Tiefe. Ein Wein für besondere Anlässe – elegant, charaktervoll und langlebig.',
-        image: null,
-        characteristics: 'Trocken, gereift, Kirsche, Leder, Tabak',
-        available: true
-    },
-    {
-        id: 17,
         name: 'Barón de Ley Rioja Reserva ',
+        id: 17,
         prices: {'flasche': '€39,50'},
         color: 'red',
         grape: 'Tempranillo, Graciano, Maturana',
@@ -99,8 +96,22 @@ export const tintos: Wine[] = [
         available: true
     },
     {
-        id: 16,
+        name: 'EMBOCADERO',
+        id: 1,
+        prices: {'flasche': '€39,50'},
+        color: 'red',
+        grape: '100% Tinto Fino',
+        origin: 'Ribera del Duero',
+        shortDescription: 'Eleganter, trockener Rotwein mit lebendigen Beeren- und Zedernholznoten.',
+        longDescription: 'Embocadero Ribera del Duero 2021 – Dieser trockene Rotwein aus der renommierten Region Ribera del Duero besticht durch eine elegante, feinkörnige Tanninstruktur und animierende Säure. Sein lang anhaltender Abgang ist von Nuancen geprägt, die an Zedernholz erinnern. Im Bouquet entfalten sich lebendige Fruchtnoten von Schlehen, dunklen Beeren und Pflaumen, ergänzt durch subtile Anklänge von Lorbeer, Süßholz und einem Hauch Vanille. Am Gaumen setzt sich der Wein mit einer weichen Holznote in saftige Aromen von Kirsch, Schlehen und Beeren fort – ein harmonischer Wein, der Tiefe und Finesse vereint.',
+        image: null,
+        characteristics: 'Trocken, vollmundig, tiefrot, ehrlich',
+        available: false
+    },
+
+    {
         name: 'Borgo Scopeto Chianti Classico Riserva 2017 DOCG',
+        id: 16,
         prices: {'flasche': '€45,00'},
         color: 'red',
         grape: 'Sangiovese',
@@ -114,8 +125,8 @@ export const tintos: Wine[] = [
         available: true
     },
     {
-        id: 15,
         name: 'Raineri Zovetto Dogliani 2018',
+        id: 15,
         prices: {'flasche': '€32,50'},
         color: 'red',
         grape: 'Barbera | Dolcetto',
@@ -129,8 +140,8 @@ export const tintos: Wine[] = [
         available: true
     },
     {
-        id: 14,
         name: 'CASTELLO DI BIBBIONE Chianti Classico Riserva 2017',
+        id: 14,
         prices: {'flasche': '€39,00'},
         color: 'red',
         grape: 'Sangiovese',
@@ -144,8 +155,8 @@ export const tintos: Wine[] = [
         available: true
     },
     {
-        id: 13,
         name: "1934 CVS Canicatti 2019",
+        id: 13,
         prices: {'flasche': '€39,50'},
         color: 'red',
         grape: "Nero d'Avola",
@@ -159,8 +170,8 @@ export const tintos: Wine[] = [
         available: true
     },
     {
-        id: 11,
         name: 'Barolo Terre dei Roveri 2020',
+        id: 11,
         prices: {'flasche': '€55,00'},
         color: 'red',
         grape: 'Nebbiolo',
@@ -174,30 +185,20 @@ export const tintos: Wine[] = [
         available: true
     },
     {
-        id: 3,
-        name: 'Marques de Cáceres',
-        prices: {'flasche': '€37,50'},
+        name: 'Dicatum',
+        id: 'w173',
+        prices: {
+            flasche: '69,00€'
+        },
         color: 'red',
-        grape: 'Tempranillo',
-        origin: 'Rioja DOCa',
+        grape: 'Sangiovese',
+        origin: 'Italien, Toskana',
         shortDescription:
-            'Fruchtig-frischer Wein mit dunklen Früchten und würzigem Holz im Geschmack.',
-        longDescription: 'Marqués de Cáceres – ein Synonym für herausragende Qualität – präsentiert in diesem Wein eine harmonische Vereinigung der Rebsorten Tempranillo, Garnacha und Graciano. Diese Crianza besticht durch ein Bouquet dunkler Früchte und sonnenreifer Kirschen, untermalt von würzigen Nuancen von Vanille, Nelke und Lakritze, die durch den Einsatz von gewürztem Eichenholz noch intensiviert werden. Am Gaumen zeigt sich der Wein frisch und fruchtig, mit feinen Anklängen von Erdbeeren und Himbeeren, während seine festen Tannine für eine strukturierte Textur sorgen, die hervorragend zu gerösteten Nüssen und mineralischen Noten passt.',
+            'Ein kraftvoll gereifter Sangiovese mit Tiefe und Eleganz aus der toskanischen Fattoria Montellori.',
+        longDescription:
+            'Der Dicatum 2010 von Fattoria Montellori ist ein reinsortiger Sangiovese aus einem exzellenten Jahrgang. In der Nase zeigt er Aromen von getrockneten Kirschen, Leder, Gewürzen und einem Hauch Tabak. Am Gaumen überzeugt er mit dichter Struktur, feinkörnigem Tannin und einer beeindruckenden Länge. Die Reife verleiht ihm eine komplexe, fast samtige Tiefe. Ein Wein für besondere Anlässe – elegant, charaktervoll und langlebig.',
         image: null,
-        characteristics: 'Trocken, würzig',
+        characteristics: 'Trocken, gereift, Kirsche, Leder, Tabak',
         available: true
-    },
-    {
-        id: 1,
-        name: 'EMBOCADERO',
-        prices: {'flasche': '€39,50'},
-        color: 'red',
-        grape: '100% Tinto Fino',
-        origin: 'Ribera del Duero',
-        shortDescription: 'Eleganter, trockener Rotwein mit lebendigen Beeren- und Zedernholznoten.',
-        longDescription: 'Embocadero Ribera del Duero 2021 – Dieser trockene Rotwein aus der renommierten Region Ribera del Duero besticht durch eine elegante, feinkörnige Tanninstruktur und animierende Säure. Sein lang anhaltender Abgang ist von Nuancen geprägt, die an Zedernholz erinnern. Im Bouquet entfalten sich lebendige Fruchtnoten von Schlehen, dunklen Beeren und Pflaumen, ergänzt durch subtile Anklänge von Lorbeer, Süßholz und einem Hauch Vanille. Am Gaumen setzt sich der Wein mit einer weichen Holznote in saftige Aromen von Kirsch, Schlehen und Beeren fort – ein harmonischer Wein, der Tiefe und Finesse vereint.',
-        image: null,
-        characteristics: 'Trocken, vollmundig, tiefrot, ehrlich',
-        available: false
     },
 ]

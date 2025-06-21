@@ -8,7 +8,7 @@ import Showroom from '../views/Showroom.vue';
 const routes = [
     {
         path: '/',
-        redirect: '/home', // Redirect root to landing
+        redirect: '/home',
     },
     {
         path: '/home',
@@ -42,7 +42,7 @@ const routes = [
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory('/casavazquez/'),
     routes,
 });
 

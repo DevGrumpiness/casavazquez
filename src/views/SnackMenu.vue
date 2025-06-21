@@ -1,13 +1,22 @@
 <template>
   <div class="hint" style="display: block">
-    Heute <b>nur Buffet</b> mit Selbstbedienung <br/>
-    <ul>
-      <li>Satt werden für 14,00 (immer wieder nachnehmen)</li>
-      <li>Oder 1 x Teller voll machen für 8,50</li>
-    </ul>
-    <br />
-    🍽️ Guten Appetit! 😊
+    Heute mit <b> Buffet</b> mit Selbstbedienung <br/>
+    <p>Beim Buffet findest du Bambus-Schälchen, die du mit deinen Lieblings Snacks <b>voll</b>machen kannst.</p>
+    <p>Am Ende zählen wir einfach die Schälchen und berechnen jeweils 2,50€ (mit Brot-Flatrate - solange der Vorrat reicht)</p>
+    <br/>
+    <p>🍽️ Guten Appetit! 😊</p>
+    <p>(Was du am Buffet nicht findest, kannst du à la carte bestellen. Bitte auf längere Wartezeiten einstellen)</p>
+
+    <details style="margin-top: 1rem">
+      <summary style="cursor: pointer">Portionenzähler (optional)</summary>
+      <div style="margin-top: 0.5rem; display: flex; align-items: center; gap: 1rem; justify-content: center">
+        <button @click="decrementCounter" style="font-size: 1.5rem">−</button>
+        <span style="font-size: 1.5rem">{{ portionCount }}</span>
+        <button @click="incrementCounter" style="font-size: 1.5rem">+</button>
+      </div>
+    </details>
   </div>
+
   <div class="filter-buttons" style="display: none">
     <button class="filter-button" :class="{ active: veggie }" @click="toggleVeggie">
       <i class="pi pi-times" v-if="veggie" style="font-size: 8px"></i>
@@ -18,7 +27,7 @@
   <section class="snacks-menu">
     <header class="snacks-header">
       <h1 class="snacks-title">SNACKS</h1>
-<!--      <p class="snacks-subtitle">FÜR DEN KLEINEN HUNGER</p>-->
+      <!--      <p class="snacks-subtitle">FÜR DEN KLEINEN HUNGER</p>-->
       <p class="snacks-subtitle">(Vieles im Buffet enthalten)</p>
     </header>
 
@@ -72,31 +81,10 @@
         </ul>
       </div>
 
-      <div class="snack-section" v-if="!veggie">
-        <hr/>
-        <br/>
-        <h3 class="snacks-subtitle">Burrata Tomate/Jamón</h3>
-        <p class="snacks-note">
-          Leckere Burrata mit aromatischen Tomaten.
-          <br/>
-          Dazu etwas Brot. Wir empfehlen unsere frisch aufgeschnittenen Schinken dazu. 👌
-        </p>
-        <ul class="snacks-extras">
-          <li class="snacks-item extra">
-            <span class="snacks-name"><b>Burrata & Tomate</b></span>
-            <span class="snacks-price">7,9</span>
-          </li>
-          <li class="snacks-item extra">
-            <span class="snacks-name">+ Jamón</span>
-            <span class="snacks-price">+ 3</span>
-          </li>
-        </ul>
-      </div>
-
       <div class="snack-section inactive">
         <hr/>
         <br/>
-        <h3 class="snacks-subtitle">"Ceviche"</h3>
+        <h3 class="snacks-subtitle">Salat "Ceviche" Art</h3>
         <p class="snacks-note">
           Der "Fisch-Salat" mit Ursprung in Südamerika ist eine wahre Delikatesse.
           <br/>
@@ -104,7 +92,7 @@
           Unsere Fisch-Salat "Ceviche"-Art ist besonders frisch, mit einem Mix aus der Süße von Mango und Cherrytomaten,
           feinem Meersalz und aromatischem Himbeeressig.
           <!--          <p class="today-hint">Heute ({{ new Date().toLocaleDateString() }}) mit geräucherten Garnelen zubereitet.</p>-->
-          <p class="today-hint" style="text-align: center">AUSVERKAUFT</p>
+          <p class="today-hint" style="text-align: center">(Findest du am Buffet)</p>
         </p>
         <ul class="snacks-extras">
           <li class="snacks-item extra">
@@ -114,13 +102,15 @@
         </ul>
       </div>
 
-      <div class="snack-section" v-if="!veggie">
+      <div class="snack-section inactive" v-if="!veggie">
         <hr/>
         <br/>
         <h3 class="snacks-subtitle">Chorizo in Salsa</h3>
         <p class="snacks-note">
           Chorizo ist eine der bekanntesten spanischen Wurstsorten mit würzigem Aroma und tiefer roter Farbe, ideal als
           herzhafter Snack.
+          <p class="today-hint" style="text-align: center">(Findest du am Buffet)</p>
+
         </p>
         <ul class="snacks-extras">
           <li class="snacks-item extra">
@@ -151,10 +141,10 @@
             <span class="snacks-name">+ Chorizo</span>
             <span class="snacks-price">+ 3,90</span>
           </li>
-                    <li class="snacks-item extra">
-                      <span class="snacks-name">+ Burrata</span>
-                      <span class="snacks-price">+ 4,50</span>
-                    </li>
+          <li class="snacks-item extra">
+            <span class="snacks-name">+ Burrata</span>
+            <span class="snacks-price">+ 4,50</span>
+          </li>
           <li class="snacks-item extra" v-if="!veggie">
             <span class="snacks-name">+ Serrano</span>
             <span class="snacks-price">+ 3,90</span>
@@ -163,14 +153,35 @@
             <span class="snacks-name">+ Garnelen</span>
             <span class="snacks-price">+ 3,90</span>
           </li>
-                    <li class="snacks-item extra" v-if="!veggie">
-                      <span class="snacks-name">+ Garnelen & Serrano</span>
-                      <span class="snacks-price">+ 6,00</span>
-                    </li>
+          <li class="snacks-item extra" v-if="!veggie">
+            <span class="snacks-name">+ Garnelen & Serrano</span>
+            <span class="snacks-price">+ 6,00</span>
+          </li>
         </ul>
       </div>
 
-      <div class="snack-section inactive" v-if="!veggie">
+      <div class="snack-section" v-if="!veggie">
+        <hr/>
+        <br/>
+        <h3 class="snacks-subtitle">Burrata Tomate/Jamón</h3>
+        <p class="snacks-note">
+          Leckere Burrata mit aromatischen Tomaten.
+          <br/>
+          Dazu etwas Brot. Wir empfehlen unsere frisch aufgeschnittenen Schinken dazu. 👌
+        </p>
+        <ul class="snacks-extras">
+          <li class="snacks-item extra">
+            <span class="snacks-name"><b>Burrata & Tomate</b></span>
+            <span class="snacks-price">7,9</span>
+          </li>
+          <li class="snacks-item extra">
+            <span class="snacks-name">+ Jamón "Bernd Spezial"</span>
+            <span class="snacks-price">+ 3</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="snack-section" v-if="!veggie">
         <hr/>
         <br/>
         <h3 class="snacks-subtitle">Albondigas</h3>
@@ -239,7 +250,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref, computed} from "vue";
+import { ref, computed, onMounted } from "vue";
 import onmLogo from "../assets/images/Logo-Olive-Meer_klein.png"
 import BaseModal from "../components/BaseModal.vue";
 
@@ -249,7 +260,6 @@ const showOnmInfo = ref(false)
 const snacks = [
   {name: 'Nachos mit Aioli Dip', description: '', price: '4,9', veggie: true},
   {name: 'Oliven Mix', description: '', price: '4,9', veggie: true, onm: true},
-  // {name: 'Baguette mit Dips', description: '', price: '4,9', veggie: true},
   {name: 'Plato de Jamón', description: '(80g) + Brot', price: '8,5', veggie: false},
   {name: 'Plato de Quesos', description: '(80g) + Brot', price: '8,5', veggie: true},
   {name: 'Plato Mixto', description: 'Gemischte Platte mit Jamón & Quesos + Brot', price: '15,5', veggie: false},
@@ -274,6 +284,44 @@ const filteredSnacks = computed(() =>
 function toggleVeggie() {
   veggie.value = !veggie.value;
 }
+
+const portionCount = ref(0)
+const storageKey = 'buffetCounter'
+const ttlKey = 'buffetCounterTTL'
+
+function loadCounter() {
+  const stored = localStorage.getItem(storageKey)
+  const ttl = localStorage.getItem(ttlKey)
+  const now = Date.now()
+  if (stored && ttl && parseInt(ttl) > now) {
+    portionCount.value = parseInt(stored)
+  } else {
+    localStorage.removeItem(storageKey)
+    localStorage.removeItem(ttlKey)
+  }
+}
+
+function saveCounter() {
+  const now = Date.now()
+  localStorage.setItem(storageKey, portionCount.value.toString())
+  localStorage.setItem(ttlKey, (now + 12 * 60 * 60 * 1000).toString())
+}
+
+function incrementCounter() {
+  portionCount.value++
+  saveCounter()
+}
+
+function decrementCounter() {
+  if (portionCount.value > 0) {
+    portionCount.value--
+    saveCounter()
+  }
+}
+
+onMounted(() => {
+  loadCounter()
+})
 </script>
 
 <style lang="scss" scoped>
@@ -295,7 +343,6 @@ hr {
   border-color: #ceaa72;
 }
 
-
 .snacks-menu {
   background-color: $background-color;
   color: $text-color;
@@ -306,12 +353,10 @@ hr {
   padding: 0 0.5rem;
   margin: 10% auto;
   position: relative;
-
   padding-top: 3rem;
 
   .scrollContainer {
     overflow: scroll;
-
     padding: 1rem;
     border-radius: 5px;
 
