@@ -24,7 +24,12 @@
       <span></span>
       <span>{{ roseLabel }}</span>
     </div>
-    <div class="scrollContainer">
+    <br />
+    <div v-if="shouldUseApi && loading" class="spinner">
+      <h3>Bin kurz im Weinkeller..</h3>
+      <div class="spinner-icon"></div>
+    </div>
+    <div v-else class="scrollContainer">
       <transition-group name="wine" tag="ul" class="wine-list">
         <WineItem v-for="wine in filteredWines" :key="wine.id" :wine="wine"/>
       </transition-group>
@@ -35,9 +40,13 @@
 <script setup lang="ts">
 import {ref, onMounted, computed} from 'vue';
 import {type Wine} from "../interfaces/vino.ts";
-import {vinos} from "../data/vinos.ts";
 import WineItem from '../components/WineItem.vue';
 import {useNow} from '@vueuse/core';
+import {useWineMenu} from "./useWineMenu.ts";
+import {vinos as staticVinos}  from '../data/vinos.ts'
+
+const  {loadVinos, loading, vinos} = useWineMenu();
+const shouldUseApi = false;
 
 const now = useNow();
 const isHappyHour = computed(() => {
@@ -50,8 +59,13 @@ const isHappyHour = computed(() => {
 const wines = ref<Wine[]>([]);
 const selectedColor = ref<string>('');
 
-onMounted(() => {
-  wines.value = vinos;
+onMounted(async () => {
+  if (!shouldUseApi) {
+    wines.value = staticVinos;
+    return;
+  }
+  await loadVinos();
+  wines.value = vinos.value;
 });
 
 const roseLabel = computed(() => {

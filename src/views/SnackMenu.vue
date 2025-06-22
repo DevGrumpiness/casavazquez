@@ -1,6 +1,6 @@
 <template>
   <div class="hint" style="display: block">
-    Heute mit <b> Buffet</b> mit Selbstbedienung <br/>
+    Heute <b> Buffet</b> mit Selbstbedienung <br/>
     <p>Beim Buffet findest du Bambus-Schälchen, die du mit deinen Lieblings Snacks <b>voll</b>machen kannst.</p>
     <p>Am Ende zählen wir einfach die Schälchen und berechnen jeweils 2,50€ (mit Brot-Flatrate - solange der Vorrat reicht)</p>
     <br/>

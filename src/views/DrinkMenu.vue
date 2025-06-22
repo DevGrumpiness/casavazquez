@@ -267,10 +267,39 @@ function toggleNonAlcoholic() {
 }
 
 const beers = [
-  {name: "Krombacher Radler", volume: "0,33l", price: "3,5€", category: "Bier", alcoholic: true, allergens: [4, 10]},
-  {name: "Tegernseer Helles 0,2", volume: "0,2l", price: "2,9€", category: "Bier", alcoholic: true, allergens: [4, 10]},
-  {name: "Tegernseer Helles 0,4", volume: "0,5l", price: "5,5€", category: "Bier", alcoholic: true, allergens: [4, 10]},
-  {name: "Krombacher Weizen", volume: "0,50l", price: "5,9€", category: "Bier", alcoholic: true, allergens: [4, 9, 10], available: false},
+  {
+    name: "Krombacher Radler",
+    volume: "0,33l",
+    price: "3,5€",
+    category: "Bier",
+    alcoholic: true,
+    allergens: [4, 10],
+    available: false,
+  },
+  {
+    name: "Tegernseer Helles 0,2",
+    volume: "0,2l",
+    price: "2,9€",
+    category: "Bier",
+    alcoholic: true,
+    allergens: [4, 10]
+  },
+  {
+    name: "Tegernseer Helles 0,4",
+    volume: "0,5l",
+    price: "5,5€",
+    category: "Bier",
+    alcoholic: true,
+    allergens: [4, 10]
+  },
+  {
+    name: "Krombacher Weizen",
+    volume: "0,50l",
+    price: "5,9€",
+    category: "Bier",
+    alcoholic: true,
+    allergens: [4, 9, 10], available: false
+  },
   {
     name: "Krombacher Weizen 0,0%",
     volume: "0,50l",
@@ -287,7 +316,6 @@ const beers = [
     alcoholic: true,
     allergens: [4, 10],
     available: false,
-
   },
   {
     name: "Krombacher Pils (0,0%)",

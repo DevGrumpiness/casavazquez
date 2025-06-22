@@ -1,4 +1,4 @@
-import type {Notification} from "../interfaces/notification.ts";
+import type {Notification} from "../website/src/interfaces/notification.ts";
 
 export const notifications: Array<Notification> = [
     {

@@ -1,4 +1,4 @@
-import type {Wine} from "../interfaces/vino.ts";
+import type {Wine} from "../website/src/interfaces/vino.ts";
 
 export const tintos: Wine[] = [
     {
@@ -36,9 +36,9 @@ export const tintos: Wine[] = [
         name: 'Viña Albali - Gran Reserva',
         id: 'r31',
         prices: {
-            '0.1l': '4,00€',
-            '0.2l': '7,50€',
-            'flasche': '25,00€'
+            '0.1l': '4,50€',
+            '0.2l': '9',
+            'flasche': '28,50€'
         },
         color: 'red',
         grape: 'Tempranillo',

@@ -1,4 +1,4 @@
-import type {Wine} from "../interfaces/vino.ts";
+import type {Wine} from "../website/src/interfaces/vino.ts";
 
 export const blancos: Wine[] = [
 
