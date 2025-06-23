@@ -2,6 +2,23 @@ import type {Wine} from "../website/src/interfaces/vino.ts";
 
 export const rosados: Wine[] = [
     {
+        name: 'Hauswein rosé',
+        id: 'Hauswein_rose',
+        prices: {
+            '0.1l': '3,50€',
+            '0.2l': '6,60€',
+            'flasche': '19,00€'
+        },
+        color: 'rosé',
+        grape: '',
+        origin: '',
+        shortDescription: '',
+        longDescription: '',
+        image: null,
+        characteristics: 'Einfach ein leckeres Glas Rosé zum fairen Preis. trocken, fruchtig, erschwinglich',
+        available: true
+    },
+    {
         name: 'Calalenta ("Kühle Nacht")',
         id: 21,
         prices: {

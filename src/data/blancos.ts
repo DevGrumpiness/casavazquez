@@ -3,18 +3,20 @@ import type {Wine} from "../website/src/interfaces/vino.ts";
 export const blancos: Wine[] = [
 
     {
-        name: 'Marqués de Riscal',
-        id: 'w19',
+        name: 'Hauswein weiß',
+        id: 'Hauswein_weiss',
         prices: {
-            'flasche': '34,50€'
+            '0.1l': '3,50€',
+            '0.2l': '6,60€',
+            'flasche': '19,00€'
         },
         color: 'white',
-        grape: '100% Verdejo',
-        origin: 'Rueda, Spanien',
-        shortDescription: 'Trocken, fruchtbetonter Weißwein aus Rueda mit eleganten Kräuter- und Zitrusnoten.',
-        longDescription: 'Der Marqués de Riscal Verdejo aus der spanischen Region Rueda ist ein erfrischender, trockener Weißwein mit intensiven Aromen von tropischen Früchten und Zitrus. Noten von Fenchel und frischen Kräutern verleihen ihm eine elegante Komplexität, während seine lebhafte Säure für eine angenehme Frische sorgt. Perfekt als Aperitif oder zu leichten Speisen und Meeresfrüchten.',
+        grape: '',
+        origin: '',
+        shortDescription: '',
+        longDescription: '',
         image: null,
-        characteristics: 'Trocken, fruchtbetont, elegant, weiß, erfrischend',
+        characteristics: 'Einfach ein leckeres Glas Weißwein zum fairen Preis. trocken, fruchtig, erschwinglich',
         available: true
     },
     {
@@ -52,21 +54,19 @@ export const blancos: Wine[] = [
         available: true
     },
     {
-        name: 'Colli Vaibò Lugana',
-        id: 'w20',
+        name: 'Marqués de Riscal (Flasche)',
+        id: 'w19',
         prices: {
-            '0.1l': '5,50€',
-            '0.2l': '10,50€',
-            'flasche': '32,50€'
+            'flasche': '34,50€'
         },
         color: 'white',
-        grape: '100% Trebbiano di Lugana (Turbiana)',
-        origin: 'Lombardei, Italien',
-        shortDescription: 'Trocken, fruchtig-frischer Lugana aus dem lombardischen Anbaugebiet.',
-        longDescription: 'Der Colli Vaibò Lugana DOC ist ein lebendiger Weißwein aus der Lombardei, der sich durch seine fruchtigen Aromen von Zitrus und Pfirsich auszeichnet. Mit seiner ausgewogenen Säure und dezenten Mineralität eignet er sich hervorragend als Begleiter zu Fisch- und Pastagerichten. Die charakteristischen Noten der Turbiana-Traube verleihen diesem Lugana eine angenehme Frische und Eleganz.',
+        grape: '100% Verdejo',
+        origin: 'Rueda, Spanien',
+        shortDescription: 'Trocken, fruchtbetonter Weißwein aus Rueda mit eleganten Kräuter- und Zitrusnoten.',
+        longDescription: 'Der Marqués de Riscal Verdejo aus der spanischen Region Rueda ist ein erfrischender, trockener Weißwein mit intensiven Aromen von tropischen Früchten und Zitrus. Noten von Fenchel und frischen Kräutern verleihen ihm eine elegante Komplexität, während seine lebhafte Säure für eine angenehme Frische sorgt. Perfekt als Aperitif oder zu leichten Speisen und Meeresfrüchten.',
         image: null,
-        characteristics: 'Trocken, fruchtig, frisch, weiß, italienisch',
-        available: false
+        characteristics: 'Trocken, fruchtbetont, elegant, weiß, erfrischend',
+        available: true
     },
     {
         name: 'Nebla Vicente Gandia Verdejo',
@@ -86,6 +86,23 @@ export const blancos: Wine[] = [
         image: null,
         characteristics: 'Trocken, leicht, Mango, grünes Gras',
         available: true
+    },
+    {
+        name: 'Colli Vaibò Lugana',
+        id: 'w20',
+        prices: {
+            '0.1l': '5,50€',
+            '0.2l': '10,50€',
+            'flasche': '32,50€'
+        },
+        color: 'white',
+        grape: '100% Trebbiano di Lugana (Turbiana)',
+        origin: 'Lombardei, Italien',
+        shortDescription: 'Trocken, fruchtig-frischer Lugana aus dem lombardischen Anbaugebiet.',
+        longDescription: 'Der Colli Vaibò Lugana DOC ist ein lebendiger Weißwein aus der Lombardei, der sich durch seine fruchtigen Aromen von Zitrus und Pfirsich auszeichnet. Mit seiner ausgewogenen Säure und dezenten Mineralität eignet er sich hervorragend als Begleiter zu Fisch- und Pastagerichten. Die charakteristischen Noten der Turbiana-Traube verleihen diesem Lugana eine angenehme Frische und Eleganz.',
+        image: null,
+        characteristics: 'Trocken, fruchtig, frisch, weiß, italienisch',
+        available: false
     },
     {
         name: 'El Coto Blanco',
@@ -108,9 +125,9 @@ export const blancos: Wine[] = [
         name: 'Julian',
         id: 174,
         prices: {
-            '0.1l': '6,500€',
-            '0.2l': '11,50€',
-            'flasche': '38,50€'
+            '0.1l': '5,00€',
+            '0.2l': '9,50€',
+            'flasche': '32,50€'
         },
         color: 'white',
         grape: 'Bronner',

@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <div class="accordion-toggle">
+    <div class="accordion-toggle" v-if="wine.longDescription?.length !== 0">
       <i :class="{'pi': true, 'pi-chevron-down': !isOpen, 'pi-chevron-up': isOpen}"/>
     </div>
 

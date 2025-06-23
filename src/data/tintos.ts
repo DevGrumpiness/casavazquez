@@ -2,6 +2,23 @@ import type {Wine} from "../website/src/interfaces/vino.ts";
 
 export const tintos: Wine[] = [
     {
+        name: 'Hauswein rot',
+        id: 'Hauswein_rot',
+        prices: {
+            '0.1l': '3,50€',
+            '0.2l': '6,60€',
+            'flasche': '19,00€'
+        },
+        color: 'red',
+        grape: '',
+        origin: '',
+        shortDescription: '',
+        longDescription: '',
+        image: null,
+        characteristics: 'Einfach ein leckeres Glas vino tinto zum fairen Preis. trocken, fruchtig, erschwinglich',
+        available: true
+    },
+    {
         name: 'the guv`nor',
         id: 'r29',
         prices: {
