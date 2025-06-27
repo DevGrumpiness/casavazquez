@@ -1,0 +1,16 @@
+[
+  {
+    "id": "b01",
+    "name": "Maybach Grauburgunder",
+    "prices": {
+      "0.2l": "6,60€",
+      "flasche": "18,00€"
+    },
+    "color": "white",
+    "grape": "Grauburgunder",
+    "origin": "Deutschland",
+    "shortDescription": "Frischer, fruchtiger Weißwein mit feiner Säure.",
+    "longDescription": "Ein Grauburgunder mit Aromen von Apfel, Birne und Zitrus. Trocken ausgebaut und ideal zu leichten Gerichten.",
+    "image": null
+  }
+]
