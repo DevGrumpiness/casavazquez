@@ -131,7 +131,7 @@ export const rosados: Wine[] = [
         longDescription: 'Der M de Minuty Rosé ist ein eleganter Roséwein aus der Provence mit einer zarten, lachsfarbenen Erscheinung. Er verführt mit feinen Aromen von weißen Blüten, Erdbeeren, Johannisbeeren und einem Hauch Zitrus. Leicht, trocken und lebendig am Gaumen – mit einem frischen Abgang und ausgewogener Säure. Ideal zu mediterraner Küche oder als stilvoller Aperitif.',
         image: null,
         characteristics: 'Trocken, frisch, leicht, zitrus, floral',
-        available: true
+        available: false
     },
     {
         name: 'PINK St. Laurent Rosé',
