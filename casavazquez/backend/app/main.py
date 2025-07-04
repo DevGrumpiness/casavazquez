@@ -32,9 +32,10 @@ class ResponseVino(BaseModel):
 
 BASE_DIR = Path(__file__).resolve().parent.parent   # backend/
 DATA_DIR = BASE_DIR / "staticdata"                 # backend/staticdata
-JSON_FILE = DATA_DIR / "tintos.json"               # backend/staticdata/tintos.json
-
-vinos = json.loads(JSON_FILE.read_text(encoding="utf-8"))
+TINTOS = json.loads((DATA_DIR / "tintos.json").read_text(encoding="utf-8"))
+ROSADOS = json.loads((DATA_DIR / "rosados.json").read_text(encoding="utf-8"))
+BLANCOS = json.loads((DATA_DIR / "blancos.json").read_text(encoding="utf-8"))
+vinos = [*TINTOS, *ROSADOS, *BLANCOS]
 
 #
 # @app.post("/login")
@@ -49,7 +50,7 @@ vinos = json.loads(JSON_FILE.read_text(encoding="utf-8"))
 #     )
 #
 
-@app.post("/vinos/", response_model=ResponseVino)
+@app.post("/addvinos/", response_model=ResponseVino)
 async def add_vino_to_db(vino: Vino):
     vinos.append(vino)
     return {"message": f"{vino}€"}

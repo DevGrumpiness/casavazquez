@@ -12,5 +12,19 @@
     "shortDescription": "Sommerlicher Rosé mit floraler Note.",
     "longDescription": "Leicht gekühlt entfaltet der Rosato von Epicuro Aromen von Erdbeere, weißen Blüten und frischer Säure. Perfekt für laue Abende.",
     "image": null
+  },
+  {
+    "id": "r01",
+    "name": "Epicuro Rosato",
+    "prices": {
+      "0.2l": "6,60€",
+      "flasche": "17,50€"
+    },
+    "color": "rosé",
+    "grape": "Chardonnay & Fiano",
+    "origin": "Italien",
+    "shortDescription": "Sommerlicher Rosé mit floraler Note.",
+    "longDescription": "Leicht gekühlt entfaltet der Rosato von Epicuro Aromen von Erdbeere, weißen Blüten und frischer Säure. Perfekt für laue Abende.",
+    "image": null
   }
 ]

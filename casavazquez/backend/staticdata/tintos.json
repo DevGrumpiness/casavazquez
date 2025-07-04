@@ -12,5 +12,19 @@
     "shortDescription": "Klassischer Rioja mit Vanille und Eichenholz.",
     "longDescription": "Ein ausgewogener Crianza aus der Rioja mit Aromen von Kirsche, Vanille und Toast. Gereift in Barriques – perfekt zu Fleisch und Käse.",
     "image": null
+  },
+  {
+    "id": "t01",
+    "name": "El Coto Crianza",
+    "prices": {
+      "0.2l": "6,60€",
+      "flasche": "19,00€"
+    },
+    "color": "red",
+    "grape": "Tempranillo",
+    "origin": "Rioja, Spanien",
+    "shortDescription": "Klassischer Rioja mit Vanille und Eichenholz.",
+    "longDescription": "Ein ausgewogener Crianza aus der Rioja mit Aromen von Kirsche, Vanille und Toast. Gereift in Barriques – perfekt zu Fleisch und Käse.",
+    "image": null
   }
 ]
