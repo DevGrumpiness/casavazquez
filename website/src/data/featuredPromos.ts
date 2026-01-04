@@ -1,6 +1,6 @@
-import scheibelImage from "../assets/images/scheibel_marille.png";
-import roseImage from "../assets/images/riscal_rose.png";
 import giftCardImage from "../assets/images/gutschein.jpg";
+import roseImage from "../assets/images/riscal_rose.png";
+import scheibelImage from "../assets/images/scheibel_marille.png";
 
 export interface FeaturedPromo {
   id: string;
