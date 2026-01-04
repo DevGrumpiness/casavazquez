@@ -4,6 +4,17 @@
       <h1>Casa Vazquez – Weinbar & Cocktails in Münster</h1>
     </header>
 
+    <section class="promo-card" aria-label="MwSt-Senkung Aktion">
+      <div class="promo-card__glow"></div>
+      <div class="promo-card__content">
+        <p class="promo-card__eyebrow">MwSt-Senkung Special</p>
+        <h2 class="promo-card__headline">Im Januar 50€ Gutschein kaufen und nur 40€ bezahlen!</h2>
+        <p class="promo-card__detail">
+          Perfekt für eure Afterwork-Abende: sichert euch jetzt den vergünstigten Gutschein - nur im Januar!
+        </p>
+      </div>
+    </section>
+
     <!-- Announcement Modal -->
     <!-- <BaseModal v-model="showAnnouncement">
       <div style="display:flex;flex-direction:column;gap:0.75rem">
@@ -247,6 +258,93 @@ h3 {
       background: #2a2a3f;
       transform: scale(1.05);
     }
+  }
+}
+
+.promo-card {
+  position: relative;
+  overflow: hidden;
+  margin: 2rem auto 0;
+  padding: 1.5rem;
+  max-width: 720px;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(206, 170, 114, 0.4);
+  background: radial-gradient(circle at top right, rgba(250, 223, 173, 0.18), transparent 60%),
+    linear-gradient(145deg, rgba(12, 12, 18, 0.96), rgba(34, 24, 18, 0.9));
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+}
+
+.promo-card__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 215, 160, 0.55), transparent 45%),
+    radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.25), transparent 35%);
+  filter: blur(5px);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.promo-card__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  color: #f9f1e4;
+}
+
+.promo-card__eyebrow {
+  margin: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-family: "King Red", serif;
+  color: rgba(249, 241, 228, 0.8);
+  text-align: center;
+}
+
+.promo-card__headline {
+  margin: 0;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  line-height: 1.2;
+}
+
+.promo-card__detail {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(249, 241, 228, 0.9);
+  text-align: center;
+
+}
+
+.promo-card__cta {
+  align-self: flex-start;
+  padding: 0.65rem 1.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(249, 241, 228, 0.3);
+  background: rgba(206, 170, 114, 0.15);
+  color: #f9f1e4;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: transform 0.2s ease, background 0.3s ease, border 0.3s ease;
+}
+
+.promo-card__cta:hover {
+  transform: translateY(-2px);
+  background: rgba(206, 170, 114, 0.3);
+  border-color: rgba(249, 241, 228, 0.6);
+}
+
+@media (max-width: 640px) {
+  .promo-card {
+    margin: 1.5rem 1rem 0;
+    padding: 1.25rem;
+  }
+
+  .promo-card__cta {
+    width: 100%;
+    text-align: center;
   }
 }
 

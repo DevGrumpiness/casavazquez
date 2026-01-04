@@ -1,5 +1,4 @@
 import scheibelImage from "../assets/images/scheibel_marille.png";
-import silvesterImage from "../assets/images/silvester.png";
 import roseImage from "../assets/images/riscal_rose.png";
 import giftCardImage from "../assets/images/gutschein.jpg";
 
@@ -18,11 +17,10 @@ export const featuredPromos: FeaturedPromo[] = [
     image: scheibelImage,
   },
   {
-    id: "silvester",
-      title: "Silvester-Tickets",
-    
-    description: "Jetzt erhältlich - 49€ inklusive Aperitif, kaltem Buffet, und Prosecco um Mitternacht",
-    image: silvesterImage
+    id: "mwst-gutschein",
+    title: "MwSt-Senkung Special",
+    description: "Nur im Januar: Zahle 40€ und erhalte einen 50€ Gutschein – perfekt für eure Casa-Abende.",
+    image: giftCardImage
   },
   {
     id: "limited-rose",
@@ -30,10 +28,10 @@ export const featuredPromos: FeaturedPromo[] = [
     description: " Unsere Winter Rosé von Marqués de Riscal und Baron de Ley  – 34,50€ solange der Vorrat reicht",
     image: roseImage
   },
-  {
-    id: "gift-card",
-    title: "Geschenkgutschein",
-    description: "Verschenke Abende mit leckeren Drinks und Tapas - vor Ort erhältlich",
-    image: giftCardImage
-  }
+  // {
+  //   id: "gift-card",
+  //   title: "Geschenkgutschein",
+  //   description: "Verschenke Abende mit leckeren Drinks und Tapas - vor Ort erhältlich",
+  //   image: giftCardImage
+  // }
 ];
