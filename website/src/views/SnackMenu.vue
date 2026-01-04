@@ -596,7 +596,7 @@ function formatAllergenDescription(codes?: number[]) {
 const sliderItems = featuredPromos;
 
 const snacks: SnackItem[] = [
-  { name: 'Nachos mit Aioli Dip', description: '', price: '5', veggie: true, keto: false, allergens: [11, 15] },
+  { name: 'Nachos mit Dip (Salsa/Aioli)', description: '', price: '6,5', veggie: true, keto: false, allergens: [11, 15] },
   { name: 'Brot Aioli Dip', description: '', price: '5', veggie: true, keto: false, allergens: [9, 11, 15] },
   { name: 'Oliven Mix', description: '', price: '5', veggie: true, onm: true, keto: true, image: olivenMixImage },
   { name: 'Kroketten + Dip', description: 'gefüllt mit Käse & Jalapeños', price: '7,5', veggie: false, available: true, keto: false, image: croquetasBoletus, allergens: [9, 11, 13] },
