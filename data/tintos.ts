@@ -72,7 +72,7 @@ export const tintos: Wine[] = [
     {
         name: 'David Moreno',
         id: 'r2',
-        prices: {'0.1l': "4,80€", '0.2l': "8,90€", 'flasche': '€29,50'},
+        prices: {'0.1l': "4,50€", '0.2l': "8,50€", 'flasche': '€29,50'},
         color: 'red',
         grape: 'Tempranillo',
         origin: 'Rioja DOCa',

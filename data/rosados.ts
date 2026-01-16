@@ -56,9 +56,9 @@ export const rosados: Wine[] = [
         name: 'Arrogant Frog',
         id: 23,
         prices: {
-            '0.1l': '4,80€',
-            '0.2l': '8,90€',
-            'flasche': '27,50€'
+            '0.1l': '5,00€',
+            '0.2l': '9,00€',
+            'flasche': '31€'
         },
         color: 'rosé',
         grape: 'Syrah',

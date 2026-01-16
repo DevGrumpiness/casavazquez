@@ -40,7 +40,7 @@ export const blancos: Wine[] = [
         prices: {
             '0.1l': '4,50€',
             '0.2l': '8,50€',
-            'flasche': '29,90€'
+            'flasche': '29,50€'
         },
         color: 'white',
         grape: '100% Grauburgunder (Pinot Gris)',

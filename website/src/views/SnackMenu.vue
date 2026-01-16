@@ -472,6 +472,7 @@ import pancehta from "../assets/images/tapasclub/pancheta.png";
 import calamares from "../assets/images/tapasclub/calamares.png";
 import mixtoImage from "../assets/images/tapasclub/mixto.png";
 import flammImage from "../assets/images/tapasclub/flamm.png";
+import pommesImage from "../assets/images/pommes.png";
 
 interface SnackItem {
   name: string;
@@ -597,11 +598,14 @@ const sliderItems = featuredPromos;
 
 const snacks: SnackItem[] = [
   { name: 'Nachos mit Dip (Salsa/Aioli)', description: '', price: '6,5', veggie: true, keto: false, allergens: [11, 15] },
-  { name: 'Brot Aioli Dip', description: '', price: '5', veggie: true, keto: false, allergens: [9, 11, 15] },
-  { name: 'Oliven Mix', description: '', price: '5', veggie: true, onm: true, keto: true, image: olivenMixImage },
+  { name: 'Brot Aioli Dip', description: '', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 15] },
+  { name: 'Süßkartoffel-Pommes', description: '', price: '6', veggie: true, keto: false, image: pommesImage, allergens: [11, 15] },
+  { name: 'Süßkartoffel-Pommes groß', description: '', price: '9', veggie: true, keto: false, image: pommesImage, allergens: [11, 15] },
+  { name: 'Oliven Mix', description: '', price: '6', veggie: true, onm: true, keto: true, image: olivenMixImage },
   { name: 'Kroketten + Dip', description: 'gefüllt mit Käse & Jalapeños', price: '7,5', veggie: false, available: true, keto: false, image: croquetasBoletus, allergens: [9, 11, 13] },
   { name: 'Croquetas con Chorizo', description: 'kleine Kroketten mit Chorizo-Füllung', price: '7,5', veggie: false, keto: false, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
   { name: 'Croquetas de Boletus', description: 'kleine Kroketten mit Steinpilz-Füllung', price: '7,5', veggie: false, keto: false, available: true, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
+  
   {
     name: 'Frango Piri Piri',
     description: 'würzige kleine Hähnchen Flügel mit Piri Piri Paprika Gewürz (pikant) oder Knoblauch-Marinade',
@@ -610,12 +614,13 @@ const snacks: SnackItem[] = [
     keto: true,
     image: polloPiripiri,
     allergens: [14, 16],
-    traceAllergens: [4, 9, 12, 13, 15, 17, 22]
+    traceAllergens: [4, 9, 12, 13, 15, 17, 22],
+    available: false
   },
   { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: false, image: tortillaImage, allergens: [11, 13] },
   { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: false, keto: true, image: tortillaImage, allergens: [11, 13] },
   { name: 'Champiñones', description: 'eingelegte Champignons mit und ohne Frischkäse-Füllung', price: '7,5', veggie: true, keto: false, image: champignonsImage, available: true, allergens: [9, 11, 13] },
-  { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16] },
+  { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: false },
 
   { name: 'Dátiles con Bacon', description: 'Datteln im Speckmantel', price: '7,5', veggie: false, keto: false, image: datillesImage, allergens: [26] },
   {

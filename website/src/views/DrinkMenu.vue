@@ -472,7 +472,7 @@ const softdrinks: Drink[] = [
     allergens: [1, 7, 8]
   },
   {
-    name: "Wasser Classic 1l Karaffe",
+    name: "Tafelwasser Classic 1l Karaffe",
     volume: "1l",
     price: "6,9€",
     category: "Softdrink",
@@ -490,11 +490,11 @@ const softdrinks: Drink[] = [
 ];
 
 const cocktails: Drink[] = [
-  { name: "Yuzu Sour", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: [11] },
-  { name: "Espresso Martini", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: [8, 13] },
-  { name: "Whisky Sour", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: [11] },
-  { name: "Cosmopolitan", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: [] },
-  { name: "Skinny Bitch", price: "7,5€", category: "Cocktail", alcoholic: true, allergens: [] },
+  { name: "Yuzu Sour", price: "12€", category: "Cocktail", alcoholic: true, allergens: [11] },
+  { name: "Espresso Martini", price: "12€", category: "Cocktail", alcoholic: true, allergens: [8, 13] },
+  { name: "Whisky Sour", price: "12€", category: "Cocktail", alcoholic: true, allergens: [11] },
+  { name: "Cosmopolitan", price: "11€", category: "Cocktail", alcoholic: true, allergens: [4] },
+  { name: "Skinny Bitch", price: "9€", category: "Cocktail", alcoholic: true, allergens: [4] },
 ];
 
 const spritz: Drink[] = [
@@ -506,16 +506,17 @@ const spritz: Drink[] = [
 ];
 
 const bubbles: Drink[] = [
-  { name: "Prosecco Rosé 0,1l", price: "7,5€", category: "Bubbles", alcoholic: true, allergens: [4] },
-  { name: "Crémant Rosé 0,1l", price: "11€", category: "Bubbles", alcoholic: true, allergens: [4] },
-  { name: "Cava Brut 0,1l", price: "8€", category: "Bubbles", alcoholic: true, allergens: [4] }
+  { name: "Prosecco 0,1l", price: "6€", category: "Bubbles", alcoholic: true, allergens: [4] },
+  { name: "Prosecco 0,75l", price: "29,5€", category: "Bubbles", alcoholic: true, allergens: [4] },
+  { name: "Crémant Rosé 0,75l", price: "34,5€", category: "Bubbles", alcoholic: true, allergens: [4] },
+  { name: "Cava Brut 0,75l", price: "44,5€", category: "Bubbles", alcoholic: true, allergens: [4] }
 ];
 
 const no3: Drink[] = [
-  { name: "Negroni", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: [4] },
-  { name: "Gin Fizz", price: "10,5€", category: "Cocktail", alcoholic: true, allergens: [11] },
-  { name: "Gin Tonic", price: "7,9€", category: "Cocktail", alcoholic: true, allergens: [24] },
-  { name: "Tom Collins", price: "7,5€", category: "Cocktail", alcoholic: true, allergens: [] }
+  { name: "Negroni", price: "12€", category: "Cocktail", alcoholic: true, allergens: [4] },
+  { name: "Gin Fizz", price: "12€", category: "Cocktail", alcoholic: true, allergens: [11] },
+  { name: "Gin Tonic", price: "9€", category: "Cocktail", alcoholic: true, allergens: [24] },
+  { name: "Tom Collins", price: "9€", category: "Cocktail", alcoholic: true, allergens: [] }
 ];
 
 const schnapps: Drink[] = [
