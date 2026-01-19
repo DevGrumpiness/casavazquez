@@ -602,7 +602,7 @@ const snacks: SnackItem[] = [
   { name: 'Süßkartoffel-Pommes', description: '', price: '6', veggie: true, keto: false, image: pommesImage, allergens: [11, 15] },
   { name: 'Süßkartoffel-Pommes groß', description: '', price: '9', veggie: true, keto: false, image: pommesImage, allergens: [11, 15] },
   { name: 'Oliven Mix', description: '', price: '6', veggie: true, onm: true, keto: true, image: olivenMixImage },
-  { name: 'Kroketten + Dip', description: 'gefüllt mit Käse & Jalapeños', price: '7,5', veggie: false, available: true, keto: false, image: croquetasBoletus, allergens: [9, 11, 13] },
+  { name: 'Kroketten + Dip', description: 'gefüllt mit Käse & Jalapeños', price: '7,5', veggie: false, keto: false, image: croquetasBoletus, allergens: [9, 11, 13], available: false },
   { name: 'Croquetas con Chorizo', description: 'kleine Kroketten mit Chorizo-Füllung', price: '7,5', veggie: false, keto: false, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
   { name: 'Croquetas de Boletus', description: 'kleine Kroketten mit Steinpilz-Füllung', price: '7,5', veggie: false, keto: false, available: true, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
   
@@ -615,12 +615,12 @@ const snacks: SnackItem[] = [
     image: polloPiripiri,
     allergens: [14, 16],
     traceAllergens: [4, 9, 12, 13, 15, 17, 22],
-    available: false
+    available: true
   },
   { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: false, image: tortillaImage, allergens: [11, 13] },
   { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: false, keto: true, image: tortillaImage, allergens: [11, 13] },
   { name: 'Champiñones', description: 'eingelegte Champignons mit und ohne Frischkäse-Füllung', price: '7,5', veggie: true, keto: false, image: champignonsImage, available: true, allergens: [9, 11, 13] },
-  { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: false },
+  { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
 
   { name: 'Dátiles con Bacon', description: 'Datteln im Speckmantel', price: '7,5', veggie: false, keto: false, image: datillesImage, allergens: [26] },
   {
@@ -629,7 +629,7 @@ const snacks: SnackItem[] = [
     price: '9,5',
     veggie: false,
     keto: true,
-    available: false,
+    available: true,
     image: pancehta,
     allergens: [9, 16, 26]
   },
@@ -638,6 +638,15 @@ const snacks: SnackItem[] = [
  {
     name: 'Rote Bete-Ingwer Bällchen',
     description: 'Veganer Snack aus proteinreichen Kichererbsen, Rote Bete und Ingwer mit Karotten-Quinoa Panade',
+    price: '7,5',
+    veggie: true,
+    keto: false,
+    image: rotebete,
+    allergens: [9, 27, 28, 29, 30]
+  },
+ {
+    name: 'Harissa-GrilledPepper Bällchen',
+    description: 'Veganer Snack aus proteinreichen Kichererbsen, mit Harissa und gegrillter Paprika.',
     price: '7,5',
     veggie: true,
     keto: false,
