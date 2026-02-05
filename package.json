@@ -8,7 +8,7 @@
   "scripts": {
     "start": "npx tsx index.ts",
     "dev": "npx tsx index.ts",
-    "deploy": "npm --prefix website run build && gcloud run deploy casavazquez-website-update --source=. --region=europe-central2 --allow-unauthenticated"
+    "deploy": "npm --prefix website run build && gcloud run deploy casavazquez-website-update --source=. --region=europe-central2 --allow-unauthenticated --clear-base-image"
   },
   "type": "module",
   "keywords": [],

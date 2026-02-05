@@ -4,7 +4,7 @@
       <h1>Casa Vazquez – Weinbar & Cocktails in Münster</h1>
     </header>
 
-    <section class="promo-card" aria-label="MwSt-Senkung Aktion">
+    <!-- <section class="promo-card" aria-label="MwSt-Senkung Aktion">
       <div class="promo-card__glow"></div>
       <div class="promo-card__content">
         <p class="promo-card__eyebrow">MwSt-Senkung Special</p>
@@ -12,8 +12,9 @@
         <p class="promo-card__detail">
           Perfekt für eure Afterwork-Abende: sichert euch jetzt den vergünstigten Gutschein - nur im Januar!
         </p>
+        <p style="font-size: smaller; text-align: center;">(1x pro Person und pro Abend einlösbar. Gültig ab 1. Tag nach dem Kauf.) </p>
       </div>
-    </section>
+    </section> -->
 
     <!-- Announcement Modal -->
     <!-- <BaseModal v-model="showAnnouncement">
@@ -41,6 +42,9 @@
       <router-link class="nav-link" to="/wine-tasting">
         <div class="navigation-tile">Tasting</div>
       </router-link>
+      <!-- <router-link class="nav-link" to="/cocktails">
+        <div class="navigation-tile cocktail-tinder-tile">Cocktail Tinder 🍸</div>
+      </router-link> -->
     </section>
     <br>
     <br>
@@ -257,6 +261,18 @@ h3 {
     &:hover {
       background: #2a2a3f;
       transform: scale(1.05);
+    }
+
+    &.cocktail-tinder-tile {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+      border-color: #667eea;
+      color: #fff;
+      font-size: 1rem;
+
+      &:hover {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+        border-color: #764ba2;
+      }
     }
   }
 }

@@ -16,22 +16,17 @@ export const featuredPromos: FeaturedPromo[] = [
     description: "Hochwertige Brände von Scheibel, um den Abend abzurunden. Jetzt probieren!",
     image: scheibelImage,
   },
-  {
-    id: "mwst-gutschein",
-    title: "MwSt-Senkung Special",
-    description: "Nur im Januar: Zahle 40€ und erhalte einen 50€ Gutschein – perfekt für eure Casa-Abende.",
-    image: giftCardImage
-  },
+
   {
     id: "limited-rose",
     title: "Limited Winter Rosé",
     description: " Unsere Winter Rosé von Marqués de Riscal und Baron de Ley  – 34,50€ solange der Vorrat reicht",
     image: roseImage
   },
-  // {
-  //   id: "gift-card",
-  //   title: "Geschenkgutschein",
-  //   description: "Verschenke Abende mit leckeren Drinks und Tapas - vor Ort erhältlich",
-  //   image: giftCardImage
-  // }
+  {
+    id: "valentine",
+    title: "Valentinstag",
+    description: "Denk dran rechtzeitig zu reservieren!",
+    image: giftCardImage
+  }
 ];

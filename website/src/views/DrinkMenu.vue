@@ -171,31 +171,8 @@
     </div>
   </section>
 
-  <!--   Cocktails-->
-  <section class="drinks-menu-section" v-if="!nonAlcoholic">
-    <header class="drinks-header">
-      <h1 class="drinks-title">Cócteles</h1>
-      <p class="drinks-subtitle">Cocktails</p>
-    </header>
-    <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
-      <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in nonAlcoholic ? cocktails.filter(d => !d.alcoholic) : cocktails" :key="drink.name"
-          class="drinks-item">
-          <div class="drink-text">
-            <span class="drinks-name">{{ drink.name }}
-              <sup v-if="drink.allergens" class="allergen-indices">{{ drink.allergens.join(',') }}
-              </sup>
-            </span>
-          </div>
-          <span class="drinks-price">{{ drink.price }}</span>
-        </li>
-      </transition-group>
-    </div>
-
-    <p class="note">
-      Dein Lieblings-Cocktail ist nicht dabei? <br>Frag uns gerne! :)
-    </p>
-  </section>
+  <!-- Cocktail Tinder -->
+  <CocktailTinder v-if="showCocktailTinder" id="cocktail-tinder" v-show="!nonAlcoholic" />
 
   <!--   0 Alk-->
   <section class="drinks-menu-section">
@@ -217,6 +194,25 @@
       </transition-group>
     </div>
   </section>
+
+  <!--   Cocktails Link -->
+  <section class="drinks-menu-section" v-if="!nonAlcoholic">
+    <header class="drinks-header">
+      <h1 class="drinks-title">Cócteles</h1>
+      <p class="drinks-subtitle">Cocktails</p>
+    </header>
+    <div class="drinks-content cocktails-link-section">
+      <router-link to="/cocktails" class="cocktails-cta">
+        <div class="cocktails-cta-content">
+          <span class="cocktails-emoji">🍸</span>
+          <h3>Entdecke unsere Cocktails</h3>
+          <p>Klassiker & Signature Drinks</p>
+          <span class="cta-arrow">→</span>
+        </div>
+      </router-link>
+    </div>
+  </section>
+
   <br>
   <br>
   <div class="allergen-section">
@@ -333,8 +329,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import FeaturedSlider from "../components/FeaturedSlider.vue";
+import { CocktailTinder } from "../components/CocktailTinder";
 import { featuredPromos } from "../data/featuredPromos";
 import scheibelImage from "../assets/images/scheibel_marille.png";
 
@@ -357,6 +354,13 @@ function toggleNonAlcoholic() {
   nonAlcoholic.value = !nonAlcoholic.value;
 }
 
+// Feature flag for testing
+const showCocktailTinder = computed(() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get('test') === 'cocktails';
+});
+
+
 const beers: Drink[] = [
   {
     name: "Krombacher Radler",
@@ -368,7 +372,7 @@ const beers: Drink[] = [
     available: true,
   },
   {
-    name: "Helles vom Fass 0,2",
+    name: "Estrella vom Fass 0,2",
     volume: "0,2l",
     price: "2,9€",
     category: "Bier",
@@ -377,7 +381,7 @@ const beers: Drink[] = [
     available: true
   },
   {
-    name: "Helles vom Fass 0,4",
+    name: "Estrella vom Fass 0,4",
     volume: "0,4l",
     price: "5,5€",
     category: "Bier",
@@ -418,7 +422,7 @@ const beers: Drink[] = [
     allergens: [4, 10],
   },
   {
-    name: "San Miguel",
+    name: "Oberdorfer Helles",
     volume: "0,33l",
     price: "3,9€",
     category: "Bier",
@@ -426,20 +430,11 @@ const beers: Drink[] = [
     allergens: [4, 10],
     available: true
   },
-  {
-    name: "Estrella Damm",
-    volume: "0,33l",
-    price: "3,9€",
-    category: "Bier",
-    alcoholic: true,
-    allergens: [4, 10],
-    available: true
-  }
 ];
 
 const softdrinks: Drink[] = [
   {
-    name: "Eistee von Rauch",
+    name: "Eistee von Rauch (Granateapfel, Crenberry)",
     volume: "0,33l",
     price: "3,9€",
     category: "Softdrink",
@@ -447,7 +442,7 @@ const softdrinks: Drink[] = [
     allergens: [1, 2, 8]
   },
   {
-    name: "Bio Saftschorle von Rauch",
+    name: "Bio Saftschorle von Rauch (Maracuja, Rhabarber)",
     volume: "0,33l",
     price: "3,9€",
     category: "Softdrink",
@@ -480,6 +475,22 @@ const softdrinks: Drink[] = [
     allergens: []
   },
   {
+    name: "Wasser Classic Fl. 0,75l",
+    volume: "0,75l",
+    price: "6,9€",
+    category: "Softdrink",
+    alcoholic: false,
+    allergens: []
+  },
+  {
+    name: "Wasser Classic Fl. 0,25l",
+    volume: "0,75l",
+    price: "2,9€",
+    category: "Softdrink",
+    alcoholic: false,
+    allergens: []
+  },
+  {
     name: "Wasser Naturell Fl. 0,75l",
     volume: "0,75l",
     price: "6,9€",
@@ -487,14 +498,6 @@ const softdrinks: Drink[] = [
     alcoholic: false,
     allergens: []
   },
-];
-
-const cocktails: Drink[] = [
-  { name: "Yuzu Sour", price: "12€", category: "Cocktail", alcoholic: true, allergens: [11] },
-  { name: "Espresso Martini", price: "12€", category: "Cocktail", alcoholic: true, allergens: [8, 13] },
-  { name: "Whisky Sour", price: "12€", category: "Cocktail", alcoholic: true, allergens: [11] },
-  { name: "Cosmopolitan", price: "11€", category: "Cocktail", alcoholic: true, allergens: [4] },
-  { name: "Skinny Bitch", price: "9€", category: "Cocktail", alcoholic: true, allergens: [4] },
 ];
 
 const spritz: Drink[] = [
@@ -807,4 +810,104 @@ const zeroAlc: Drink[] = [
   line-height: 1;
   cursor: pointer;
 }
+
+.cocktails-link-section {
+  padding: 2rem 1rem;
+}
+
+.cocktails-cta {
+  display: block;
+  text-decoration: none;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15));
+  border: 2px solid rgba(206, 170, 114, 0.4);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(206, 170, 114, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgba(206, 170, 114, 0.6);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+
+    &::before {
+      left: 100%;
+    }
+
+    .cta-arrow {
+      transform: translateX(8px);
+    }
+  }
+}
+
+.cocktails-cta-content {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+
+  .cocktails-emoji {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  h3 {
+    font-size: 1.75rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #bbb;
+    margin-bottom: 1rem;
+  }
+
+  .cta-arrow {
+    display: inline-block;
+    font-size: 1.5rem;
+    color: $accent-color;
+    transition: transform 0.3s ease;
+  }
+}
+
+@media (max-width: 768px) {
+  .cocktails-cta-content {
+    .cocktails-emoji {
+      font-size: 2.5rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
+}
 </style>
+

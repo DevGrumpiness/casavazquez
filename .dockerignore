@@ -1,0 +1,38 @@
+# Node modules
+node_modules/
+website/node_modules/
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.idea/
+.vscode/
+
+# Source files (we only need the built dist)
+website/src/
+website/public/
+
+# Build configs (not needed in container)
+website/tsconfig*.json
+website/vite.config.ts
+website/vue.config.js
+tsconfig.json
+vue.config.js
+
+# Documentation
+docs/
+*.md
+README.md
+
+# Development files
+.prettier.json
+backend/
+
+# Test files
+**/__pycache__/
+**/tests/
+
+# Build artifacts we don't need
+.vite/

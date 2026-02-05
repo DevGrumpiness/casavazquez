@@ -9,6 +9,9 @@
     <router-link to="/drinks" class="nav-link" active-class="active">
       <img src="../assets/images/icons8-drinks-64.png" alt="Getränke" class="nav-icon"/>
     </router-link>
+    <!-- <router-link to="/cocktails" class="nav-link cocktail-tinder-nav" active-class="active" aria-label="Cocktails">
+      🍸
+    </router-link> -->
     <router-link to="/snacks" class="nav-link" active-class="active">
       <img src="../assets/images/icons8-snack-64.png" alt="Snacks" class="nav-icon"/>
     </router-link>
@@ -61,6 +64,17 @@
     align-items: center;
     font-family: 'King Red', serif;
     color: $accent-color;
+  }
+
+  .cocktail-tinder-nav {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.2) rotate(10deg);
+    }
   }
 
   .showroom-link {

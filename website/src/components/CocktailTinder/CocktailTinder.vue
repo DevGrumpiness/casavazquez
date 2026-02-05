@@ -1,0 +1,568 @@
+<template>
+  <section class="cocktail-tinder-section">
+    <!-- Baustelle Info -->
+    <div class="ct-baustelle-info">
+      <span class="baustelle-icon">🚧</span>
+      <p class="baustelle-text">
+        <strong>Baustelle:</strong> Diese Funktion befindet sich noch in der Entwicklung. Rezepte/Name/Design sind noch nicht final. Ihr könnt aber schon mal testen und Feedback geben! 🙂
+      </p>
+      <span class="baustelle-icon">🚧</span>
+    </div>
+
+    <div class="ct-header">
+      <h1 class="ct-title">Cocktail Tinder 🍸</h1>
+      <p class="ct-subtitle">Swipe für deinen perfekten Cocktail</p>
+    </div>
+
+    <!-- Swipe Counter -->
+    <div class="ct-counter">
+      <span>{{ currentCardIndex + 1 }} / {{ allCocktails.length }}</span>
+      <span v-if="likedCocktails.length > 0" class="ct-match-badge">💚 {{ likedCocktails.length }} Match{{ likedCocktails.length !== 1 ? 'es' : '' }}</span>
+    </div>
+
+    <!-- Match Notification Toast -->
+    <transition name="toast">
+      <div v-if="showMatchToast" class="ct-match-toast">
+        <span class="toast-icon">💚</span>
+        <span class="toast-text">Match! {{ lastMatchedCocktail?.femaleName }}</span>
+      </div>
+    </transition>
+
+    <!-- Restart Message -->
+    <RestartMessage
+      :show="showRestartMessage"
+      :match-count="likedCocktails.length"
+      :matches="likedCocktails"
+      :personalities="personalities"
+      @restart="restartSwiping"
+      @view="viewCocktailDetails"
+    />
+
+    <!-- Swipeable Cards Stack -->
+    <div v-if="!showRestartMessage" class="ct-card-stack">
+      <CocktailCard
+        v-for="(cocktail, index) in visibleCards"
+        :key="`${currentCardIndex}-${cocktail.id}-${index}`"
+        :cocktail="cocktail"
+        :is-top="index === 0"
+        :swipe-direction="swipeDirection"
+        :is-dragging="isDragging"
+        :card-transform="cardTransform"
+        :personality-emoji="getPersonalityEmoji(cocktail.personality)"
+        :personality-name="getPersonalityName(cocktail.personality)"
+        :style="getCardStyle(index)"
+        @swipe-left="swipeLeft"
+        @swipe-right="swipeRight"
+        @update-transform="cardTransform = $event"
+        @update-dragging="isDragging = $event"
+        @update-swipe-direction="swipeDirection = $event"
+      />
+    </div>
+
+    <!-- Action Buttons -->
+    <div v-if="!showRestartMessage" class="ct-swipe-actions">
+      <button @click="swipeLeft" class="ct-action-btn ct-action-nope" aria-label="Pass">
+        <span class="ct-action-icon">✕</span>
+      </button>
+      <button @click="swipeRight" class="ct-action-btn ct-action-like" aria-label="Like">
+        <span class="ct-action-icon">♥</span>
+      </button>
+    </div>
+
+    <!-- Instruction -->
+    <div v-if="!showRestartMessage" class="ct-instruction">
+      <p>← Swipe oder nutze die Buttons →</p>
+    </div>
+
+    <!-- Matches Section - Always visible, prominent -->
+    <div v-if="!showRestartMessage && likedCocktails.length > 0" class="ct-matches-banner">
+      <h3 class="ct-banner-title">🎉 Deine Matches ({{ likedCocktails.length }})</h3>
+      <p class="ct-banner-subtitle">Klick auf einen Cocktail für Details</p>
+    </div>
+
+    <!-- Matches Section -->
+    <MatchesGrid
+      v-if="!showRestartMessage"
+      :matches="likedCocktails"
+      :personalities="personalities"
+      @view="viewCocktailDetails"
+      @remove="removeMatch"
+    />
+
+    <!-- Detail Card Modal -->
+    <CocktailDetailModal
+      :show="showDetailCard"
+      :cocktail="detailCocktail"
+      :personality-emoji="detailCocktail ? getPersonalityEmoji(detailCocktail.personality) : ''"
+      :personality-name="detailCocktail ? getPersonalityName(detailCocktail.personality) : ''"
+      @close="closeDetailCard"
+      @remove="removeMatch"
+      @order="orderCocktail"
+    />
+  </section>
+</template>
+
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import type { Cocktail, CocktailPersonality } from '../../interfaces/cocktail';
+import { cocktails as cocktailsData } from '../../data/cocktails';
+import CocktailCard from './CocktailCard.vue';
+import MatchesGrid from './MatchesGrid.vue';
+import CocktailDetailModal from './CocktailDetailModal.vue';
+import RestartMessage from './RestartMessage.vue';
+
+interface Personality {
+  type: CocktailPersonality;
+  name: string;
+  emoji: string;
+  description: string;
+}
+
+const personalities: Personality[] = [
+  { type: 'bitter', name: 'Verbittert', emoji: '🎩', description: 'Herb, intensiv und charakterstark' },
+  { type: 'sweet', name: 'Süß', emoji: '🍓', description: 'Süß, fruchtig und unwiderstehlich' },
+  { type: 'mysterious', name: 'Mysteriös', emoji: '🌙', description: 'Dunkel, komplex und rätselhaft' },
+  { type: 'bitchy', name: 'Bitchy', emoji: '🔥', description: 'Scharf, würzig und unvergesslich' },
+  { type: 'adventurous', name: 'Abenteuerlustig', emoji: '🗺️', description: 'Mutig, einzigartig und experimentell' },
+  { type: 'virgin', name: 'Virgin', emoji: '😇', description: 'Alkoholfrei, erfrischend und leicht' },
+  { type: 'fruity', name: 'Fruchtig', emoji: '🍇', description: 'Fruchtig-frisch und ausgewogen' },
+];
+
+const allCocktails = computed(() => {
+  console.log('📋 All cocktails loaded:', cocktailsData.length, 'cocktails');
+  cocktailsData.forEach((c, i) => {
+    console.log(`  ${i}: ID ${c.id} - ${c.femaleName}/${c.maleName} (${c.personality})`);
+  });
+  return cocktailsData;
+});
+const currentCardIndex = ref(0);
+const likedCocktails = ref<Cocktail[]>([]);
+const showRestartMessage = ref(false);
+const swipeDirection = ref<'left' | 'right' | null>(null);
+const cardTransform = ref('');
+const isDragging = ref(false);
+const showDetailCard = ref(false);
+const detailCocktail = ref<Cocktail | null>(null);
+const isAnimating = ref(false);
+const showMatchToast = ref(false);
+const lastMatchedCocktail = ref<Cocktail | null>(null);
+
+const visibleCards = computed(() => {
+  const cards = [];
+  for (let i = 0; i < 3 && currentCardIndex.value + i < allCocktails.value.length; i++) {
+    cards.push(allCocktails.value[currentCardIndex.value + i]);
+  }
+  console.log('🎴 Visible cards:', {
+    currentIndex: currentCardIndex.value,
+    totalCocktails: allCocktails.value.length,
+    visibleCards: cards.map(c => `${c.id}: ${c.femaleName}/${c.maleName}`)
+  });
+  return cards;
+});
+
+const getCardStyle = (index: number) => {
+  const isTop = index === 0;
+  const baseStyle = {
+    zIndex: 10 - index,
+  };
+  
+  if (isTop) {
+    return baseStyle;
+  }
+  
+  return {
+    ...baseStyle,
+    transform: `scale(${1 - index * 0.05}) translateY(${index * 10}px)`
+  };
+};
+
+const getPersonalityEmoji = (personality: CocktailPersonality): string => {
+  const p = personalities.find(p => p.type === personality);
+  return p?.emoji || '🍸';
+};
+
+const getPersonalityName = (personality: CocktailPersonality): string => {
+  const p = personalities.find(p => p.type === personality);
+  return p?.name || '';
+};
+
+const swipeLeft = () => {
+  if (currentCardIndex.value >= allCocktails.value.length || isAnimating.value) {
+    console.log('⛔ Swipe left blocked:', { currentIndex: currentCardIndex.value, isAnimating: isAnimating.value });
+    return;
+  }
+  
+  const currentCocktail = allCocktails.value[currentCardIndex.value];
+  console.log('👈 Swipe LEFT:', { 
+    index: currentCardIndex.value, 
+    cocktail: `${currentCocktail.id}: ${currentCocktail.femaleName}/${currentCocktail.maleName}` 
+  });
+  
+  isAnimating.value = true;
+  swipeDirection.value = 'left';
+  cardTransform.value = '';
+  setTimeout(() => {
+    currentCardIndex.value++;
+    swipeDirection.value = null;
+    isAnimating.value = false;
+    console.log('✅ Swipe left complete. New index:', currentCardIndex.value);
+    checkIfFinished();
+  }, 400);
+};
+
+const swipeRight = () => {
+  if (currentCardIndex.value >= allCocktails.value.length || isAnimating.value) {
+    console.log('⛔ Swipe right blocked:', { currentIndex: currentCardIndex.value, isAnimating: isAnimating.value });
+    return;
+  }
+  
+  const currentCocktail = allCocktails.value[currentCardIndex.value];
+  console.log('👉 Swipe RIGHT:', { 
+    index: currentCardIndex.value, 
+    cocktail: `${currentCocktail.id}: ${currentCocktail.femaleName}/${currentCocktail.maleName}` 
+  });
+  
+  isAnimating.value = true;
+  swipeDirection.value = 'right';
+  cardTransform.value = '';
+  likedCocktails.value.push(currentCocktail);
+  
+  // Show match toast notification
+  lastMatchedCocktail.value = currentCocktail;
+  showMatchToast.value = true;
+  setTimeout(() => {
+    showMatchToast.value = false;
+  }, 2000);
+  
+  setTimeout(() => {
+    currentCardIndex.value++;
+    swipeDirection.value = null;
+    isAnimating.value = false;
+    console.log('✅ Swipe right complete. New index:', currentCardIndex.value);
+    checkIfFinished();
+  }, 400);
+};
+
+const checkIfFinished = () => {
+  console.log('🏁 Check if finished:', { 
+    currentIndex: currentCardIndex.value, 
+    totalCocktails: allCocktails.value.length,
+    isFinished: currentCardIndex.value >= allCocktails.value.length
+  });
+  if (currentCardIndex.value >= allCocktails.value.length) {
+    showRestartMessage.value = true;
+    console.log('🎉 All cocktails swiped! Matches:', likedCocktails.value.map(c => `${c.femaleName}/${c.maleName}`));
+  }
+};
+
+const restartSwiping = () => {
+  console.log('🔄 Restarting...');
+  currentCardIndex.value = 0;
+  likedCocktails.value = [];
+  showRestartMessage.value = false;
+  isAnimating.value = false;
+};
+
+const viewCocktailDetails = (cocktail: Cocktail) => {
+  detailCocktail.value = cocktail;
+  showDetailCard.value = true;
+};
+
+const closeDetailCard = () => {
+  showDetailCard.value = false;
+  detailCocktail.value = null;
+};
+
+const orderCocktail = (_cocktail: Cocktail) => {
+  // Navigate to cocktails page
+  window.location.href = '/cocktails';
+};
+
+const removeMatch = (cocktail: Cocktail) => {
+  const index = likedCocktails.value.findIndex(c => c.id === cocktail.id);
+  if (index !== -1) {
+    likedCocktails.value.splice(index, 1);
+  }
+  closeDetailCard();
+};
+</script>
+
+<style lang="scss" scoped>
+.cocktail-tinder-section {
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 2rem 1rem;
+  min-height: 600px;
+}
+
+.ct-baustelle-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 2px solid #f59e0b;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+  
+  .baustelle-icon {
+    font-size: 1.5rem;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  .baustelle-text {
+    color: #78350f;
+    font-size: 1rem;
+    margin: 0;
+    text-align: center;
+    
+    strong {
+      font-weight: 700;
+    }
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.ct-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.ct-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ct-subtitle {
+  font-size: 1.125rem;
+  color: #999;
+}
+
+.ct-counter {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: #aaa;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.ct-match-badge {
+  background: linear-gradient(135deg, #48bb78, #38a169);
+  color: white;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(72, 187, 120, 0.4);
+  animation: bounceIn 0.5s ease;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.ct-match-toast {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #48bb78, #38a169);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(72, 187, 120, 0.4);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.toast-icon {
+  font-size: 1.5rem;
+  animation: heartbeat 0.6s ease infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.toast-enter-active {
+  animation: slideDown 0.3s ease;
+}
+
+.toast-leave-active {
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateX(-50%) translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-50%) translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.ct-card-stack {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 500px;
+  margin: 0 auto 2rem;
+}
+
+.ct-swipe-actions {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.ct-action-btn {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  
+  &:hover {
+    transform: scale(1.1);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.ct-action-nope {
+  background: linear-gradient(135deg, #f56565, #c53030);
+  
+  .ct-action-icon {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+}
+
+.ct-action-like {
+  background: linear-gradient(135deg, #48bb78, #38a169);
+  
+  .ct-action-icon {
+    color: white;
+    font-size: 2rem;
+  }
+}
+
+.ct-instruction {
+  text-align: center;
+  margin-top: 1rem;
+  
+  p {
+    font-size: 0.9rem;
+    color: #888;
+    font-style: italic;
+  }
+}
+
+.ct-matches-banner {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(72, 187, 120, 0.15), rgba(56, 161, 105, 0.15));
+  border: 2px solid rgba(72, 187, 120, 0.5);
+  border-radius: 16px;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(72, 187, 120, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(72, 187, 120, 0.5);
+  }
+}
+
+.ct-banner-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #48bb78;
+  margin-bottom: 0.5rem;
+}
+
+.ct-banner-subtitle {
+  font-size: 1rem;
+  color: #aaa;
+}
+
+@media (max-width: 768px) {
+  .ct-title {
+    font-size: 2rem;
+  }
+  
+  .ct-card-stack {
+    max-width: 100%;
+    height: 480px;
+  }
+  
+  .ct-action-btn {
+    width: 60px;
+    height: 60px;
+  }
+}
+</style>

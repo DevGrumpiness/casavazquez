@@ -1,7 +1,7 @@
 <template>
   <FeaturedSlider :items="sliderItems" />
 
-  <section class="flamm-feature" aria-label="Flammkuchen Highlight">
+  <!-- <section class="flamm-feature" aria-label="Flammkuchen Highlight">
     <div class="flamm-content">
       <span class="flamm-kicker">GANZ NEU AUF DER KARTE</span>
       <h2>Elsässer Flammkuchen</h2>
@@ -16,7 +16,7 @@
     <figure class="flamm-figure">
       <img class="flamm-photo" :src="flammImage" alt="Knuspriger Flammkuchen" loading="lazy" />
     </figure>
-  </section>
+  </section> -->
 
   <!-- <div class="supply-hint" role="status" aria-live="polite">
     Aufgrund einer Lieferverzögerung unseres Zulieferers sind einige Tapas erst ab nächster Woche wieder erhältlich. Danke für euer Verständnis!
@@ -468,10 +468,10 @@ import nuggetsImage from "../assets/images/tapasclub/nuggets.png";
 // import zwiebelringeImage from "../assets/images/tapasclub/zwiebelringe.png";
 import rotebete from "../assets/images/tapasclub/rotebete_baellchen.png";
 import pancehta from "../assets/images/tapasclub/pancheta.png";
-// import veggieSticksImage from "../assets/images/tapasclub/sticks.png";
+import veggieSticksImage from "../assets/images/tapasclub/sticks.png";
 import calamares from "../assets/images/tapasclub/calamares.png";
 import mixtoImage from "../assets/images/tapasclub/mixto.png";
-import flammImage from "../assets/images/tapasclub/flamm.png";
+// import flammImage from "../assets/images/tapasclub/flamm.png";
 import pommesImage from "../assets/images/pommes.png";
 
 interface SnackItem {
@@ -597,18 +597,18 @@ function formatAllergenDescription(codes?: number[]) {
 const sliderItems = featuredPromos;
 
 const snacks: SnackItem[] = [
-  { name: 'Nachos mit Dip (Salsa/Aioli)', description: '', price: '6,5', veggie: true, keto: false, allergens: [11, 15] },
-  { name: 'Brot Aioli Dip', description: '', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 15] },
+  { name: 'Nachos mit Dip (Salsa/Aioli/Guacamole)', description: '', price: '6,5', veggie: true, keto: false, allergens: [11, 15] },
+  { name: 'Brot Aioli/Guacamole Dip', description: '', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 15] },
   { name: 'Süßkartoffel-Pommes', description: '', price: '6', veggie: true, keto: false, image: pommesImage, allergens: [11, 15] },
   { name: 'Süßkartoffel-Pommes groß', description: '', price: '9', veggie: true, keto: false, image: pommesImage, allergens: [11, 15] },
   { name: 'Oliven Mix', description: '', price: '6', veggie: true, onm: true, keto: true, image: olivenMixImage },
-  { name: 'Kroketten + Dip', description: 'gefüllt mit Käse & Jalapeños', price: '7,5', veggie: false, keto: false, image: croquetasBoletus, allergens: [9, 11, 13], available: false },
+  { name: 'Kroketten + Dip', description: 'gefüllt mit Käse & Jalapeños', price: '7,5', veggie: false, keto: false, image: croquetasBoletus, allergens: [9, 11, 13], available: true },
   { name: 'Croquetas con Chorizo', description: 'kleine Kroketten mit Chorizo-Füllung', price: '7,5', veggie: false, keto: false, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
   { name: 'Croquetas de Boletus', description: 'kleine Kroketten mit Steinpilz-Füllung', price: '7,5', veggie: false, keto: false, available: true, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
   
   {
-    name: 'Frango Piri Piri',
-    description: 'würzige kleine Hähnchen Flügel mit Piri Piri Paprika Gewürz (pikant) oder Knoblauch-Marinade',
+    name: 'Pollo Al Ajillo',
+    description: 'Gegarte, marinierte Hähnchen Flügel mit Knoblauch',
     price: '8,5',
     veggie: false,
     keto: true,
@@ -617,8 +617,8 @@ const snacks: SnackItem[] = [
     traceAllergens: [4, 9, 12, 13, 15, 17, 22],
     available: true
   },
-  { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: false, image: tortillaImage, allergens: [11, 13] },
-  { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: false, keto: true, image: tortillaImage, allergens: [11, 13] },
+  { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
+  { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
   { name: 'Champiñones', description: 'eingelegte Champignons mit und ohne Frischkäse-Füllung', price: '7,5', veggie: true, keto: false, image: champignonsImage, available: true, allergens: [9, 11, 13] },
   { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
 
@@ -629,7 +629,7 @@ const snacks: SnackItem[] = [
     price: '9,5',
     veggie: false,
     keto: true,
-    available: true,
+    available: false,
     image: pancehta,
     allergens: [9, 16, 26]
   },
@@ -651,6 +651,51 @@ const snacks: SnackItem[] = [
     veggie: true,
     keto: false,
     image: rotebete,
+    allergens: [9, 27, 28, 29, 30]
+  },
+ {
+    name: 'Vegane Erbsen Minz Sticks',
+    description: 'Veganund lecker.',
+    price: '7,5',
+    veggie: true,
+    keto: false,
+    image: veggieSticksImage,
+    allergens: [9, 27, 28, 29, 30]
+  },
+ {
+    name: 'Grillgemüse',
+    description: 'Gemischtes Grillgemüse Antipasti-Art.',
+    price: '7,5',
+    veggie: true,
+    keto: false,
+    image: undefined,
+    allergens: [9, 27, 28, 29, 30]
+  },
+ {
+    name: 'Gambas Empanadas',
+    description: 'Gambas mit einer köstlich subtil gewürzten knusprigen Kruste mit Knoblauch und Petersilie. ',
+    price: '7,5',
+    veggie: false,
+    keto: false,
+    image: undefined,
+    allergens: [9, 27, 28, 29, 30]
+  },
+ {
+    name: 'Empanadillas de Atun / Pollo 4Stk',
+    description: 'Klassiker unter den spanischen Empanadas mit einer Füllung aus Thunfisch und Tomaten oder Hähnchen - Du entscheidest ',
+    price: '7,5',
+    veggie: false,
+    keto: false,
+    image: undefined,
+    allergens: [9, 27, 28, 29, 30]
+  },
+ {
+    name: 'Costillas Picantes',
+    description: 'Gegrillte, würzige Rippchen, losgeschnitten.',
+    price: '7,5',
+    veggie: false,
+    keto: true,
+    image: undefined,
     allergens: [9, 27, 28, 29, 30]
   },
 ];
