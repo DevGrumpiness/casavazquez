@@ -664,7 +664,7 @@ const snacks: SnackItem[] = [
   },
  {
     name: 'Grillgemüse',
-    description: 'Gemischtes Grillgemüse Antipasti-Art.',
+    description: 'Gemischtes Grillgemüse Antipasti-Art (lauwarm).',
     price: '7,5',
     veggie: true,
     keto: false,

@@ -1,15 +1,10 @@
-import type {Notification} from "../website/src/interfaces/notification";
+import type { Notification } from "../website/src/interfaces/notification";
 
 export const notifications: Array<Notification> = [
-    {
-        title: "Albondigas sind back ",
-        text: "Ab sofort gibt es wieder Fleischbällchen in unserer Hausgemachten Salsa",
-        image: undefined,
-        createdAt: new Date('2025-04-08T10:24:00')
-    },
+
     {
         title: "Live Musik ",
-        text: "Am 26.10. | 04.11. | 02.12. - Keine Reservierung. Einfach vorbeikommen!",
+        text: "Am 27.02. | 28.03. - DuoM rundet Euren Abend mit Musik und Witz ab. ",
         image: undefined,
         createdAt: new Date('2025-04-08T10:24:00')
     },
@@ -48,7 +43,7 @@ export const notifications: Array<Notification> = [
     },
     {
         title: "Let's Spritz 🍹!",
-        text: "Jeden Tag HAPPY HOUR Spritz für nur 5€ bis 19 Uhr und Mittwochs nach der Happy Hour für nur 6,50 - Alkoholfrei für 5,90 (Auf die Gesundheit!✨).",
+        text: "Jeden Tag HAPPY HOUR Spritz für nur 5€ bis 19 Uhr und Mittwochs nach der Happy Hour für nur 6,50 ✨",
         image: "icons8-strandcocktail-96.png",
         createdAt: new Date('2025-03-31T10:24:00')
     },

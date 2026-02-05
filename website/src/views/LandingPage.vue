@@ -1,7 +1,10 @@
 <template>
   <main>
     <header class="hero">
-      <h1 style="font-display: swap;">Casa Vazquez – Weinbar, Tapas & Cocktails in Münster</h1>
+      <div class="hero-content">
+        <h1>Casa Vazquez Münster – Weinbar, Tapas & Cocktails</h1>
+        <p class="hero-location">Warendorfer Str 113 · 48145 Münster</p>
+      </div>
     </header>
 
     <!-- <section class="promo-card" aria-label="MwSt-Senkung Aktion">
@@ -46,10 +49,9 @@
         <div class="navigation-tile cocktail-tinder-tile">Cocktail Tinder 🍸</div>
       </router-link> -->
     </section>
-    <br>
-    <br>
-    <section aria-label="Aktuelle Neuigkeiten">
-      <h2>Aktuelles aus der Casa Vazquez</h2>
+    
+    <section class="news-section" aria-label="Aktuelle Neuigkeiten">
+      <h2>Aktuelles</h2>
       <div class="landing-page container">
         <NotificationCard v-for="note in combinedNotifications" :key="note.title" :title="note.title"
           :created-at="note.createdAt" :image="note.image" :text="note.text" :roundedImage="note.roundedImage"
@@ -57,15 +59,21 @@
       </div>
     </section>
 
-    <section aria-label="Über Casa Vazquez">
-      <h2>Willkommen bei unserer Bar in Münster!</h2>
-      <p>
-        Du warst noch nie bei uns und fragst dich, was wir bieten?<br />
-        Wir laden zum gemütlichen Verweilen an der Warendorfer Straße ein. <br />
-        Leckere Drinks und Snacks und eine Auswahl an besonderen Weinen
-        versüßen dir den Feierabend. <br />
-        Ganz ungezwungen – wie bei Freunden.
-      </p>
+    <section class="about-section" aria-label="Über Casa Vazquez">
+      <div class="about-content">
+        <h2>Willkommen!</h2>
+        <p>
+          Du warst noch nie bei uns und fragst dich, was wir bieten?
+        </p>
+        <p>
+          Wir laden zum gemütlichen Verweilen an der Warendorfer Straße ein.
+          Leckere Drinks und Snacks und eine Auswahl an besonderen Weinen
+          versüßen dir den Feierabend.
+        </p>
+        <p class="about-tagline">
+          Ganz ungezwungen – wie bei Freunden.
+        </p>
+      </div>
     </section>
 
     <div class="impressum">
@@ -219,11 +227,43 @@ h3 {
 }
 
 section {
-  padding: .5rem;
+  padding: 1rem;
 }
 
 .hero {
-  padding: 0 1rem;
+  padding: 3rem 1rem;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(139, 111, 71, 0.1) 0%, transparent 100%);
+  margin-bottom: 2rem;
+}
+
+.hero-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  margin: 0 0 0.5rem;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: $accent-color;
+  margin: 0 0 0.5rem;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.hero-location {
+  font-size: 0.95rem;
+  color: rgba(200, 192, 179, 0.7);
+  margin: 0;
+  font-style: italic;
 }
 
 .landing-page {
@@ -239,9 +279,9 @@ section {
 .tile-navigation {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 1.2rem;
   justify-content: center;
-  padding: 1rem;
+  padding: 2rem 1rem;
   max-width: 600px;
   margin: 0 auto;
 
@@ -251,20 +291,42 @@ section {
 
   .navigation-tile {
     aspect-ratio: 1 / 1;
-    background: #1e1e2f;
-    border: 1.5px solid #ceaa72;
-    border-radius: 1rem;
+    background: linear-gradient(145deg, #1a1a28 0%, #1e1e2f 100%);
+    border: 1.5px solid rgba(206, 170, 114, 0.4);
+    border-radius: 1.2rem;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #ceaa72;
     font-family: "King Red", serif;
     font-size: 1.2rem;
-    transition: transform 0.2s ease, background 0.3s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(206, 170, 114, 0.15), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
 
     &:hover {
-      background: #2a2a3f;
-      transform: scale(1.05);
+      background: linear-gradient(145deg, #242438 0%, #2a2a3f 100%);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(206, 170, 114, 0.2);
+      border-color: rgba(206, 170, 114, 0.6);
+
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    &:active {
+      transform: translateY(-2px);
     }
 
     &.cocktail-tinder-tile {
@@ -372,7 +434,49 @@ section {
 .sources-link {
   padding: 1rem;
   text-align: center;
+  margin-top: 2rem;
+}
 
+.news-section {
+  padding: 2rem 1rem;
+  background: rgba(139, 111, 71, 0.03);
+}
+
+.news-section h2 {
+  margin-bottom: 1.5rem;
+}
+
+.about-section {
+  padding: 3rem 1rem;
+  margin: 2rem 0;
+}
+
+.about-content {
+  max-width: 650px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-content h2 {
+  margin-bottom: 1.5rem;
+}
+
+.about-content p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(200, 192, 179, 0.95);
+  margin: 0 0 1rem;
+}
+
+.about-tagline {
+  font-style: italic;
+  font-size: 1.1rem;
+  color: $accent-color !important;
+  margin-top: 1.5rem !important;
+  font-weight: 300;
+}
+
+.sources-link {
   a {
     text-decoration: underline;
   }
