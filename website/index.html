@@ -7,9 +7,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Language" content="de" />
 
+  <!-- Inline critical CSS for above-the-fold content -->
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      background: #221d32;
+      color: #c8c0b3;
+      margin: 0
+    }
+
+    #app {
+      max-width: 570px;
+      margin: 0 auto
+    }
+
+    .app-container {
+      max-width: 700px;
+      margin: 1rem auto;
+      padding: 1rem 0;
+      overflow: auto
+    }
+
+    .hero {
+      padding: 0 1rem
+    }
+
+    .hero h1 {
+      font-family: Georgia, serif;
+      text-align: center;
+      font-weight: 100;
+      color: #8B6F47;
+      font-style: italic;
+      margin: 0;
+      font-size: 1.8rem
+    }
+
+    .tile-navigation {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      padding: 1rem;
+      max-width: 600px;
+      margin: 0 auto
+    }
+
+    .navigation-tile {
+      aspect-ratio: 1/1;
+      background: #1e1e2f;
+      border: 1.5px solid #ceaa72;
+      border-radius: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #ceaa72;
+      font-family: Georgia, serif;
+      font-size: 1.2rem;
+      font-style: italic
+    }
+  </style>
+
   <!-- SEO Meta Tags -->
   <meta name="description"
-    content="Bar Casa Vazquez in Münster – Ihre Weinbar für spanische Weine, Cocktails und Tapas. Genießen Sie authentische spanische Küche, Weinproben und erlesene Drinks in gemütlicher Atmosphäre." />
+    content="Bar Casa Vazquez in Münster – Deine Weinbar für spanische Weine, Cocktails und Tapas. Genießen Sie authentische spanische Küche, Weinproben und erlesene Drinks in gemütlicher Atmosphäre." />
   <meta name="keywords"
     content="Bar Münster, Weinbar Münster, Cocktailbar Münster, Tapas Münster, spanische Bar Münster, Weinprobe Münster, Casa Vazquez, spanische Weine, Cocktails, Tapas Bar, Wine Tasting Münster, spanisches Restaurant Münster" />
   <meta name="author" content="Casa Vazquez" />

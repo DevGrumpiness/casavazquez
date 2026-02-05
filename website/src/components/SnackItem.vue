@@ -2,7 +2,7 @@
   <div class="snack-item card" @click="toggle">
     <!-- Zusammengeklappte Ansicht -->
     <div class="collapsed-snack">
-      <img :src="snack.image ? snack.image : defaultImage" alt="Weinbild" class="snack-image"/>
+      <img :src="snack.image ? snack.image : defaultImage" :alt="snack.name" class="snack-image"/>
       <div class="snack-summary">
         <h2>{{ snack.name }}</h2>
         <p class="characteristics" v-if="snack.characteristics">

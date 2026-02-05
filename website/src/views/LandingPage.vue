@@ -1,7 +1,7 @@
 <template>
   <main>
     <header class="hero">
-      <h1>Casa Vazquez – Weinbar & Cocktails in Münster</h1>
+      <h1 style="font-display: swap;">Casa Vazquez – Weinbar, Tapas & Cocktails in Münster</h1>
     </header>
 
     <!-- <section class="promo-card" aria-label="MwSt-Senkung Aktion">
@@ -216,6 +216,10 @@ h3 {
   font-weight: 100;
   color: $accent-color;
   font-style: italic;
+}
+
+section {
+  padding: .5rem;
 }
 
 .hero {

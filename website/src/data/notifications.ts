@@ -22,7 +22,7 @@ export const notifications: Array<Notification> = [
     {
         title: "Folge uns unauffällig!",
         text: "Auf instagram informieren wir Euch immer über aktuelle Aktionen und Events. Folge uns, um nichts zu verpassen! ",
-        image: "insta_follow.gif",
+        image: "insta_follow.mp4",
         linkText: "@casa_vazquez_muenster",
         linkTo: "https://www.instagram.com/casa_vazquez_muenster/",
         createdAt: new Date('2025-04-01T10:24:00')

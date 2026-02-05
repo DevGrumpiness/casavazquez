@@ -2,7 +2,7 @@
   <div  v-if="wine.available"  class="wine-item card" @click="toggle">
     <!-- Zusammengeklappte Ansicht -->
     <div class="collapsed-view">
-      <img :src="wine.image ? wine.image : defaultImage" alt="Weinbild" class="wine-image"/>
+      <img :src="wine.image ? wine.image : defaultImage" :alt="wine.name" class="wine-image"/>
       <div class="wine-summary">
   <h2>{{ wine.name }}</h2>
   <p v-if="Object.keys(wine.prices).length === 1 && wine.prices.flasche" class="bottle-only-hint">Nur als Flasche</p>

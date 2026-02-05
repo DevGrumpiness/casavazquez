@@ -15,7 +15,7 @@
     <router-link to="/snacks" class="nav-link" active-class="active">
       <img src="../assets/images/icons8-snack-64.png" alt="Snacks" class="nav-icon"/>
     </router-link>
-    <router-link to="/legals" class="nav-link info-link" active-class="active" aria-label="Impressum und Datenschutz">
+    <router-link to="/legals" class="nav-link info-link" active-class="active" aria-label="Info">
       Info
     </router-link>
   </nav>

@@ -1,7 +1,8 @@
 <template>
   <div class="notification-card">
     <div class="flex-container">
-      <img :src="imageSrc" alt="title" class="notification-image" :class="{ rounded: roundedImage }" />
+      <video v-if="isVideo" :src="imageSrc" :alt="title" class="notification-image" :class="{ rounded: roundedImage }" loading="lazy" autoplay loop muted playsinline />
+      <img v-else :src="imageSrc" :alt="title" class="notification-image" :class="{ rounded: roundedImage }" loading="lazy" decoding="async" />
       <div class="notification-content">
         <div class="notification-header">
           <h3 class="notification-title">{{ title }}</h3>
@@ -32,6 +33,10 @@ const props = defineProps({
 
 const imageSrc = computed(() => {
   return props.image ? new URL(`/src/assets/images/${props.image}`, import.meta.url).href : defaultImage;
+});
+
+const isVideo = computed(() => {
+  return props.image && (props.image.endsWith('.mp4') || props.image.endsWith('.webm'));
 });
 
 const messages: UseTimeAgoMessages = {
@@ -73,7 +78,8 @@ const timeAgo = useTimeAgo(new Date(props.createdAt), {
     text-align: right;
     padding-right: 8px;
     font-size: .75rem;
-    color: #0095f6;
+    color: #0056b3;
+    font-weight: 500;
   }
 
   background-color: #fff8f0;
@@ -81,12 +87,12 @@ const timeAgo = useTimeAgo(new Date(props.createdAt), {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   padding: 1rem;
   margin-bottom: 1rem;
-  border-left: 4px solid #ceaa724d;
+  border-left: 4px solid rgba(139, 111, 71, 0.3);
 }
 .notification-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-.notification-image {
+.notification-image, video.notification-image {
   width: 48px;
   height: 48px;
   object-fit: cover;

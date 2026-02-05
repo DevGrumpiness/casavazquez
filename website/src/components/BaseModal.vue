@@ -2,9 +2,9 @@
   <Teleport to="body">
     <Transition name="modal-fade">
       <div v-if="modelValue" class="modal-overlay" @click.self="close">
-        <div class="modal-content">
+        <div class="modal-content" role="dialog" aria-modal="true">
           <slot />
-          <button class="modal-close" @click="close">×</button>
+          <button class="modal-close" @click="close" aria-label="Schließen" type="button">×</button>
         </div>
       </div>
     </Transition>

@@ -455,7 +455,7 @@ import onmLogo from "../assets/images/Logo-Olive-Meer_klein.png";
 import BaseModal from "../components/BaseModal.vue";
 import FeaturedSlider from "../components/FeaturedSlider.vue";
 import { featuredPromos } from "../data/featuredPromos";
-import cocaImage from "../assets/images/coca.png";
+import cocaImage from "../assets/images/coca.webp";
 import croquetasBoletus from "../assets/images/tapasclub/croquetas_boletus.png";
 import croquetasChorizo from "../assets/images/tapasclub/croquetas_chorizo.png";
 import datillesImage from "../assets/images/tapasclub/datilles.png";
@@ -470,9 +470,9 @@ import rotebete from "../assets/images/tapasclub/rotebete_baellchen.png";
 import pancehta from "../assets/images/tapasclub/pancheta.png";
 import veggieSticksImage from "../assets/images/tapasclub/sticks.png";
 import calamares from "../assets/images/tapasclub/calamares.png";
-import mixtoImage from "../assets/images/tapasclub/mixto.png";
+import mixtoImage from "../assets/images/tapasclub/mixto.webp";
 // import flammImage from "../assets/images/tapasclub/flamm.png";
-import pommesImage from "../assets/images/pommes.png";
+import pommesImage from "../assets/images/pommes.webp";
 
 interface SnackItem {
   name: string;
