@@ -99,7 +99,12 @@ body {
   padding: 0 1rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: bold;
   margin-bottom: 1rem;
 }
@@ -154,10 +159,12 @@ a {
   body {
     padding: 2rem;
   }
+
   .container {
     max-width: 720px;
     padding: 0 1.5rem;
   }
+
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -168,6 +175,7 @@ a {
     max-width: 960px;
     padding: 0 2rem;
   }
+
   .grid {
     grid-template-columns: repeat(3, 1fr);
   }
