@@ -1,6 +1,7 @@
 import giftCardImage from "../assets/images/gutschein.jpg";
 import roseImage from "../assets/images/riscal_rose.png";
 import scheibelImage from "../assets/images/scheibel_marille.png";
+import wineBottleImage from "../assets/images/default_vino_white.png";
 
 export interface FeaturedPromo {
   id: string;
@@ -10,6 +11,12 @@ export interface FeaturedPromo {
 }
 
 export const featuredPromos: FeaturedPromo[] = [
+  {
+    id: "bottle-discount",
+    title: "11% Valentins Rabatt",
+    description: "Sichert euch jetzt 11% Rabatt auf alle Flaschenweine – perfekt für euren gemütlichen Abend!",
+    image: wineBottleImage,
+  },
   {
     id: "scheibel",
     title: "Der perfekte Abschluss",

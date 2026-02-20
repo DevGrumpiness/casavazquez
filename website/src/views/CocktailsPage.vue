@@ -61,13 +61,12 @@ interface Drink {
 }
 
 const cocktails: Drink[] = [
-  { name: "Yuzu Sour", price: "12€", category: "Cocktail", alcoholic: true, allergens: [11] },
-  { name: "Espresso Martini", price: "12€", category: "Cocktail", alcoholic: true, allergens: [8, 13] },
+  { name: "Espresso Martini", price: "11€", category: "Cocktail", alcoholic: true, allergens: [8, 13] },
   { name: "Whisky Sour", price: "12€", category: "Cocktail", alcoholic: true, allergens: [11] },
   { name: "Cosmopolitan", price: "11€", category: "Cocktail", alcoholic: true, allergens: [4] },
   { name: "Skinny Bitch", price: "9€", category: "Cocktail", alcoholic: true, allergens: [4] },
   { name: "Negroni", price: "12€", category: "Cocktail", alcoholic: true, allergens: [4] },
-  { name: "Gin Fizz", price: "12€", category: "Cocktail", alcoholic: true, allergens: [4] },
+  { name: "Silver Fizz", price: "12€", category: "Cocktail", alcoholic: true, allergens: [4] },
 ];
 </script>
 

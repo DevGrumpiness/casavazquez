@@ -135,34 +135,6 @@
         </ul>
       </div>
 
-      <Transition name="section">
-        <div class="snack-section" v-if="!veggie">
-          <hr />
-          <br />
-          <h3 class="snacks-subtitle with-price">
-            <span class="section-title-text">
-              Albondigas
-              <span class="coca-clickable" @click="showAlbondigasInfo = true">
-                <img class="coca-image" :src="albondigasImage" alt="Albondigas" />
-                <span class="enlarge-hint">🔍</span>
-              </span>
-            </span>
-            <span class="section-price">10,50</span>
-          </h3>
-          <p class="snacks-note">
-            Albondigas (Fleischbällchen) mit Käse und Chili gefüllt in aromatischer Tomaten-Salsa – dazu reichen wir Brot. Perfekt für den kleinen
-            Hunger auf etwas Deftiges.
-          </p>
-          <BaseModal v-model="showAlbondigasInfo">
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-              <h2>Albondigas</h2>
-              <img :src="albondigasImage" alt="Albondigas" style="max-width: 300px; border-radius: 8px;" />
-            </div>
-            <p>Saftige Fleischbällchen mit Käse-Chili-Füllung, serviert in pikanter Tomaten-Salsa und mit Brot zum Dippen.</p>
-          </BaseModal>
-        </div>
-      </Transition>
-
       <div class="snack-section" v-if="!veggie">
         <hr />
         <br />
@@ -463,7 +435,7 @@ import olivenMixImage from "../assets/images/tapasclub/olivenmix.png";
 import polloPiripiri from "../assets/images/tapasclub/pollo_piripiri.png";
 import tortillaImage from "../assets/images/tapasclub/tortilla.png";
 import albondigasImage from "../assets/images/tapasclub/albondigas.png";
-import champignonsImage from "../assets/images/tapasclub/champignons.png";
+// import champignonsImage from "../assets/images/tapasclub/champignons.png";
 import nuggetsImage from "../assets/images/tapasclub/nuggets.png";
 // import zwiebelringeImage from "../assets/images/tapasclub/zwiebelringe.png";
 import rotebete from "../assets/images/tapasclub/rotebete_baellchen.png";
@@ -599,11 +571,11 @@ const sliderItems = featuredPromos;
 const snacks: SnackItem[] = [
   { name: 'Nachos mit Dip (Salsa/Aioli/Guacamole)', description: '', price: '6,5', veggie: true, keto: false, allergens: [11, 15] },
   { name: 'Brot Aioli/Guacamole Dip', description: '', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 15] },
-  { name: 'Süßkartoffel-Pommes', description: '', price: '6', veggie: true, keto: false, image: pommesImage, allergens: [11, 15] },
-  { name: 'Süßkartoffel-Pommes groß', description: '', price: '9', veggie: true, keto: false, image: pommesImage, allergens: [11, 15] },
+  { name: 'Süßkartoffel-Pommes', description: '', price: '6', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
+  { name: 'Süßkartoffel-Pommes groß', description: '', price: '9', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
   { name: 'Oliven Mix', description: '', price: '6', veggie: true, onm: true, keto: true, image: olivenMixImage },
   { name: 'Kroketten + Dip', description: 'gefüllt mit Käse & Jalapeños', price: '7,5', veggie: false, keto: false, image: croquetasBoletus, allergens: [9, 11, 13], available: true },
-  { name: 'Croquetas con Chorizo', description: 'kleine Kroketten mit Chorizo-Füllung', price: '7,5', veggie: false, keto: false, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
+  // { name: 'Croquetas con Jamón Iberico', description: 'kleine Kroketten mit Jamón-Füllung', price: '7,5', veggie: false, keto: false, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
   { name: 'Croquetas de Boletus', description: 'kleine Kroketten mit Steinpilz-Füllung', price: '7,5', veggie: false, keto: false, available: true, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
   
   {
@@ -619,25 +591,25 @@ const snacks: SnackItem[] = [
   },
   { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
   { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
-  { name: 'Champiñones', description: 'eingelegte Champignons mit und ohne Frischkäse-Füllung', price: '7,5', veggie: true, keto: false, image: champignonsImage, available: true, allergens: [9, 11, 13] },
+  { name: 'Albondigas in Salsa', description: 'Fleischbällchen (5Stk) mit Chili-Käse Füllung (nicht scharf) in Tomatensalsa', price: '7,5', veggie: true, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
   { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
 
   { name: 'Dátiles con Bacon', description: 'Datteln im Speckmantel', price: '7,5', veggie: false, keto: false, image: datillesImage, allergens: [26] },
   {
     name: 'Dados de Panceta',
-    description: 'Schweinbauch-Würfel, herzhaft mariniert. ca 100g',
+    description: 'Schweinbauch-Würfel, herzhaft mariniert. ca 150g',
     price: '9,5',
     veggie: false,
     keto: true,
-    available: false,
+    available: true,
     image: pancehta,
     allergens: [9, 16, 26]
   },
   { name: 'Calamares Ringe', description: 'Tintenfischringe im Backteig', price: '7,5', veggie: false, keto: false, image: calamares, allergens: [9, 11, 13, 20] },
 
  {
-    name: 'Rote Bete-Ingwer Bällchen',
-    description: 'Veganer Snack aus proteinreichen Kichererbsen, Rote Bete und Ingwer mit Karotten-Quinoa Panade',
+    name: 'Edamame Kräuter Bällchen',
+    description: 'Veganer Snack aus Edamame in Kräuter-Panade',
     price: '7,5',
     veggie: true,
     keto: false,
@@ -645,13 +617,14 @@ const snacks: SnackItem[] = [
     allergens: [9, 27, 28, 29, 30]
   },
  {
-    name: 'Harissa-GrilledPepper Bällchen',
-    description: 'Veganer Snack aus proteinreichen Kichererbsen, mit Harissa und gegrillter Paprika.',
+    name: 'Rote Beete Ingwer Bällchen',
+    description: 'Veganer Snack aus proteinreichen Kichererbsen, mit rote Beete und Ingwer.',
     price: '7,5',
     veggie: true,
     keto: false,
     image: rotebete,
-    allergens: [9, 27, 28, 29, 30]
+    allergens: [9, 27, 28, 29, 30],
+    available: true
   },
  {
     name: 'Vegane Erbsen Minz Sticks',
@@ -663,7 +636,7 @@ const snacks: SnackItem[] = [
     allergens: [9, 27, 28, 29, 30]
   },
  {
-    name: 'Grillgemüse',
+    name: 'Verduras a la Parrilla',
     description: 'Gemischtes Grillgemüse Antipasti-Art (lauwarm).',
     price: '7,5',
     veggie: true,
@@ -674,14 +647,14 @@ const snacks: SnackItem[] = [
  {
     name: 'Gambas Empanadas',
     description: 'Gambas mit einer köstlich subtil gewürzten knusprigen Kruste mit Knoblauch und Petersilie. ',
-    price: '7,5',
+    price: '8,5',
     veggie: false,
     keto: false,
     image: undefined,
     allergens: [9, 27, 28, 29, 30]
   },
  {
-    name: 'Empanadillas de Atun / Pollo 4Stk',
+    name: 'Empanadillas de Pollo 4Stk',
     description: 'Klassiker unter den spanischen Empanadas mit einer Füllung aus Thunfisch und Tomaten oder Hähnchen - Du entscheidest ',
     price: '7,5',
     veggie: false,
@@ -689,10 +662,19 @@ const snacks: SnackItem[] = [
     image: undefined,
     allergens: [9, 27, 28, 29, 30]
   },
+//  {
+//     name: 'Empanadillas de Atun / Pollo 4Stk',
+//     description: 'Klassiker unter den spanischen Empanadas mit einer Füllung aus Thunfisch und Tomaten oder Hähnchen - Du entscheidest ',
+//     price: '7,5',
+//     veggie: false,
+//     keto: false,
+//     image: undefined,
+//     allergens: [9, 27, 28, 29, 30]
+//   },
  {
     name: 'Costillas Picantes',
     description: 'Gegrillte, würzige Rippchen, losgeschnitten.',
-    price: '7,5',
+    price: '8,5',
     veggie: false,
     keto: true,
     image: undefined,

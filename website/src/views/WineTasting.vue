@@ -3,7 +3,7 @@
     <header class="tasting-header">
       <h1 class="tasting-title">Willkommen zur Herbst Degustation im Casa Vazquez!</h1>
       <p class="tasting-sub">Sechs Weine, sechs Geschichten – scroll dich durch unsere Auswahl.</p>
-      <p class="tasting-sub">Die Weine sind jeweils Flaschenweise für <b>44,50€</b> erhältlich.</p>
+      <p class="tasting-sub">Preise auf Anfrage.</p>
     </header>
 
     <div class="tasting-map" ref="mapEl" role="img" aria-label="Karte der Weinregionen"></div>
@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import markerIcon2xUrl from 'leaflet/dist/images/marker-icon-2x.png?url';
@@ -97,7 +97,7 @@ const wines: TastingWine[] = [
   },
 
   {
-    name: 'Nounat 2024 – Binigrau Mallorca',
+    name: 'Nounat 2024 – Binigrau Mallorca - 57,50€',
     story:
       'Mallorca-Highlight: eine elegante Cuvée, häufig aus Prensal Blanc und Chardonnay. Reife gelbe Frucht, zarte Kräuter der Insel und eine cremige Textur treffen auf salzige Frische. Sonnig, vielschichtig und dennoch erstaunlich balanciert – mediterraner Charakter mit Tiefgang.',
     image: imgNounat,
@@ -118,8 +118,10 @@ const mapEl = ref<HTMLDivElement | null>(null);
 let map: L.Map | null = null;
 let markers: L.Marker[] = [];
 
-onMounted(() => {
+onMounted(async () => {
+  await nextTick();
   if (!mapEl.value) return;
+  
   const DefaultIcon = L.icon({
     iconRetinaUrl: markerIcon2xUrl,
     iconUrl: markerIconUrl,
@@ -130,11 +132,14 @@ onMounted(() => {
     shadowSize: [41, 41],
   });
   (L.Marker.prototype as any).options.icon = DefaultIcon;
+  
   map = L.map(mapEl.value, { zoomControl: true });
+  
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap-Mitwirkende',
     maxZoom: 18,
   }).addTo(map);
+  
   markers = mapPoints.map((p, i) => {
     const icon = L.divIcon({
       html: `<div class="map-pin">${i + 1}</div>`,
@@ -144,8 +149,14 @@ onMounted(() => {
     });
     return L.marker([p.lat, p.lng], { icon }).bindPopup(`<b>${p.name}</b><br>${p.loc}`);
   });
+  
   const group = L.featureGroup(markers).addTo(map);
   map.fitBounds(group.getBounds().pad(0.3));
+  
+  // Fix tile rendering issues
+  setTimeout(() => {
+    if (map) map.invalidateSize();
+  }, 100);
 });
 
 onBeforeUnmount(() => {

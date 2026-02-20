@@ -1,4 +1,4 @@
-import type {Wine} from "../website/src/interfaces/vino";
+import type { Wine } from "../website/src/interfaces/vino";
 
 export const tintos: Wine[] = [
     {
@@ -35,23 +35,7 @@ export const tintos: Wine[] = [
         characteristics: 'Trocken, rote Frucht, Vanille, Eiche, würzig',
         available: true
     },
-    {
-        name: 'Arrogant Frog Cabernet Sauvignon Merlot',
-        id: 'r40',
-        prices: {
-            '0.1l': '5,00€',
-            '0.2l': '9,50€',
-            'flasche': '29,50€'
-        },
-        color: 'red',
-        grape: 'Cabernet Sauvignon, Merlot',
-        origin: 'Pays d’Oc, Frankreich',
-        shortDescription: 'Granatrot, dunkle Beeren, erdige Noten und samtige Tannine.',
-        longDescription: 'Arrogant Frog Ribet Red 2022 verbindet Cabernet Sauvignon und Merlot aus dem Pays d’Oc zu einer ausgewogenen Cuvée. In der Nase zeigen sich dunkle Beeren, etwas Konfitüre und Mokka, dazu erdige Nuancen. Am Gaumen ist der Wein trocken, balanciert und anhaltend, mit gut eingebundenen Tanninen und einem langen, würzigen Abgang.',
-        image: null,
-        characteristics: 'Trocken, dunkle Beeren, Mokka, erdig, lang',
-        available: true
-    },
+
     {
         name: 'Cal Y Canto Tinto',
         id: 'r38',
@@ -72,7 +56,7 @@ export const tintos: Wine[] = [
     {
         name: 'David Moreno',
         id: 'r2',
-        prices: {'0.1l': "4,50€", '0.2l': "8,50€", 'flasche': '€29,50'},
+        prices: { '0.1l': "4,50€", '0.2l': "8,50€", 'flasche': '€29,50' },
         color: 'red',
         grape: 'Tempranillo',
         origin: 'Rioja DOCa',
@@ -85,7 +69,7 @@ export const tintos: Wine[] = [
     },
     {
         name: 'Primitivo - DOPPIO PASSO ',
-        prices: {'0.1l': "4,50€", '0.2l': "8,00€", 'flasche': '€24,50'},
+        prices: { '0.1l': "4,50€", '0.2l': "8,00€", 'flasche': '€24,50' },
         id: 'r32',
         color: 'red',
         grape: '100% Primitivo',
@@ -94,6 +78,22 @@ export const tintos: Wine[] = [
         longDescription: 'Der Doppio Passo Primitivo ist ein Genussgarant aus der berühmten Weinregion Apuliens. Mit seinem warmwürzigen Schmelz und seiner intensiven Frucht verströmt dieser Süditaliener eine heitere Stimmung und mediterrane Lebensfreude. Im Glas funkelt der Wein in tiefem Rubinrot. Seine Aromen klingen an schwarze Beeren, Kakao und Vanille an. Charakteristisch ist eine großartige Fülle und die weichen Tannine, die sich wie Samt über die Zunge legen. Eine feine Spur Restsüße macht ihn sowohl für Trocken-Trinker als auch für Einsteiger höchst attraktiv. Ein Klassiker – egal wer mittrinkt, sie oder er wird diesen Tropfen garantiert ins Herz schließen. Mit 13% Alkoholgehalt und 4 Jahren Lagerfähigkeit.',
         image: null,
         characteristics: 'Halbtrocken, fruchtig, würzig, samtig',
+        available: true
+    },
+    {
+        name: 'Arrogant Frog Cabernet Sauvignon Merlot',
+        id: 'r40',
+        prices: {
+
+            'flasche': '29,50€'
+        },
+        color: 'red',
+        grape: 'Cabernet Sauvignon, Merlot',
+        origin: 'Pays d’Oc, Frankreich',
+        shortDescription: 'Granatrot, dunkle Beeren, erdige Noten und samtige Tannine.',
+        longDescription: 'Arrogant Frog Ribet Red 2022 verbindet Cabernet Sauvignon und Merlot aus dem Pays d’Oc zu einer ausgewogenen Cuvée. In der Nase zeigen sich dunkle Beeren, etwas Konfitüre und Mokka, dazu erdige Nuancen. Am Gaumen ist der Wein trocken, balanciert und anhaltend, mit gut eingebundenen Tanninen und einem langen, würzigen Abgang.',
+        image: null,
+        characteristics: 'Trocken, dunkle Beeren, Mokka, erdig, lang',
         available: true
     },
     {
@@ -116,7 +116,7 @@ export const tintos: Wine[] = [
     {
         name: 'Marques de Cáceres',
         id: 3,
-        prices: {'flasche': '€37,50'},
+        prices: { 'flasche': '€37,50' },
         color: 'red',
         grape: 'Tempranillo',
         origin: 'Rioja DOCa',
@@ -147,7 +147,7 @@ export const tintos: Wine[] = [
     {
         name: 'Barón de Ley Rioja Reserva ',
         id: 17,
-        prices: {'flasche': '€39,50'},
+        prices: { 'flasche': '€39,50' },
         color: 'red',
         grape: 'Tempranillo, Graciano, Maturana',
         origin: 'Spanien, Rioja DOCa',
@@ -162,7 +162,7 @@ export const tintos: Wine[] = [
     {
         name: 'EMBOCADERO',
         id: 1,
-        prices: {'flasche': '€39,50'},
+        prices: { 'flasche': '€39,50' },
         color: 'red',
         grape: '100% Tinto Fino',
         origin: 'Ribera del Duero',
@@ -175,7 +175,7 @@ export const tintos: Wine[] = [
     {
         name: 'Borgo Scopeto Chianti Classico Riserva 2017 DOCG',
         id: 16,
-        prices: {'flasche': '€45,00'},
+        prices: { 'flasche': '€45,00' },
         color: 'red',
         grape: 'Sangiovese',
         origin: 'Italien, Toskana',
@@ -190,7 +190,7 @@ export const tintos: Wine[] = [
     {
         name: 'Raineri Zovetto Dogliani 2018',
         id: 15,
-        prices: {'flasche': '€32,50'},
+        prices: { 'flasche': '€32,50' },
         color: 'red',
         grape: 'Barbera | Dolcetto',
         origin: 'Italien, Piemont',
@@ -205,7 +205,7 @@ export const tintos: Wine[] = [
     {
         name: 'CASTELLO DI BIBBIONE Chianti Classico Riserva 2017',
         id: 14,
-        prices: {'flasche': '€39,00'},
+        prices: { 'flasche': '€39,00' },
         color: 'red',
         grape: 'Sangiovese',
         origin: 'Italien, Toskana',
@@ -220,7 +220,7 @@ export const tintos: Wine[] = [
     {
         name: "1934 CVS Canicatti 2019",
         id: 13,
-        prices: {'flasche': '€39,50'},
+        prices: { 'flasche': '€39,50' },
         color: 'red',
         grape: "Nero d'Avola",
         origin: 'Italien, Sizilien (Canicatti)',
@@ -235,7 +235,7 @@ export const tintos: Wine[] = [
     {
         name: 'Barolo Terre dei Roveri 2020',
         id: 11,
-        prices: {'flasche': '€55,00'},
+        prices: { 'flasche': '€55,00' },
         color: 'red',
         grape: 'Nebbiolo',
         origin: 'Italien, Piemont',
@@ -354,5 +354,5 @@ export const tintos: Wine[] = [
         characteristics: 'Trocken, strukturiert, geschmeidig, komplex',
         available: true
     },
-    
+
 ];

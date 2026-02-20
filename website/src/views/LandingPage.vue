@@ -7,17 +7,16 @@
       </div>
     </header>
 
-    <!-- <section class="promo-card" aria-label="MwSt-Senkung Aktion">
+    <section class="promo-card" aria-label="Valentins Aktion">
       <div class="promo-card__glow"></div>
       <div class="promo-card__content">
-        <p class="promo-card__eyebrow">MwSt-Senkung Special</p>
-        <h2 class="promo-card__headline">Im Januar 50€ Gutschein kaufen und nur 40€ bezahlen!</h2>
+        <p class="promo-card__eyebrow">🍷 Valentins Angebot ❤️</p>
+        <h2 class="promo-card__headline">11% Rabatt auf alle Flaschenweine</h2>
         <p class="promo-card__detail">
-          Perfekt für eure Afterwork-Abende: sichert euch jetzt den vergünstigten Gutschein - nur im Januar!
+          Entdeckt unsere Weinauswahl und sichert euch 11% auf alle Flaschenweine – perfekt für einen gemütlichen Abend!
         </p>
-        <p style="font-size: smaller; text-align: center;">(1x pro Person und pro Abend einlösbar. Gültig ab 1. Tag nach dem Kauf.) </p>
       </div>
-    </section> -->
+    </section>
 
     <!-- Announcement Modal -->
     <!-- <BaseModal v-model="showAnnouncement">
@@ -359,10 +358,10 @@ section {
 .promo-card__glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 30% 20%, rgba(255, 215, 160, 0.55), transparent 45%),
-    radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.25), transparent 35%);
-  filter: blur(5px);
-  opacity: 0.85;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 215, 160, 0.15), transparent 45%),
+    radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.08), transparent 35%);
+  filter: blur(8px);
+  opacity: 0.4;
   pointer-events: none;
 }
 
@@ -380,22 +379,25 @@ section {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-family: "King Red", serif;
-  color: rgba(249, 241, 228, 0.8);
+  color: rgba(249, 241, 228, 0.95);
   text-align: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 .promo-card__headline {
   margin: 0;
   font-size: clamp(1.4rem, 4vw, 2rem);
   line-height: 1.2;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 }
 
 .promo-card__detail {
   margin: 0;
   font-size: 1rem;
   line-height: 1.5;
-  color: rgba(249, 241, 228, 0.9);
+  color: rgba(249, 241, 228, 0.95);
   text-align: center;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
 
 }
 

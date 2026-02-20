@@ -534,7 +534,7 @@ const schnapps: Drink[] = [
 const zeroAlc: Drink[] = [
   { name: "Gin Fizz", price: "9€", category: "Cocktail", alcoholic: false, allergens: [11] },
   { name: "Gin Tonic", price: "7,5€", category: "Cocktail", alcoholic: false, allergens: [24] },
-  { name: "Aperol Spritz", price: "7,5€", category: "Cocktail", alcoholic: false, allergens: [1, 4] },
+  { name: "Martini Vibrante Spritz", price: "7,5€", category: "Cocktail", alcoholic: false, allergens: [1, 4] },
   { name: "Limoncello Spritz", price: "7,5€", category: "Cocktail", alcoholic: false, allergens: [1, 4] },
 ];
 </script>

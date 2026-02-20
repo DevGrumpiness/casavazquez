@@ -1,4 +1,4 @@
-import type {Wine} from "../website/src/interfaces/vino";
+import type { Wine } from "../website/src/interfaces/vino";
 
 export const rosados: Wine[] = [
     {
@@ -16,6 +16,23 @@ export const rosados: Wine[] = [
         longDescription: 'Der Calalenta Rosé (auch "Kühle Nacht" genannt) stammt aus den Abruzzen und wird aus 100% Merlot gekeltert. Dank kühler Nachtlese bewahrt er seine frischen Aromen von Erdbeeren, Kirschen und einem Hauch floraler Noten. Ein leichtes, trockenes Geschmacksprofil mit dezenter Säure und einem angenehm fruchtigen Abgang – ideal als Aperitif oder zu leichten Gerichten.',
         image: null,
         characteristics: 'trocken, leicht, hellrosa, rosé, fruchtig, erfrischend',
+        available: false
+    },
+    {
+        name: 'Karl Pfaffmann Rosé',
+        id: 211,
+        prices: {
+            '0.1l': '4,50€',
+            '0.2l': '8,50€',
+            'flasche': '26,00€'
+        },
+        color: 'rosé',
+        grape: 'Spätburgunder',
+        origin: 'Pfalz, Deutschland',
+        shortDescription: 'Halbtrocken, fruchtiger Spätburgunder Rosé mit intensivem Rosa und samtiger Textur.',
+        longDescription: 'Dieser fruchtige Spätburgunder Rosé vom traditionsreichen Weingut Karl Pfaffmann aus Walsheim (Pfalz) zeigt sich in leuchtend rosé-intensiver Farbe. Aus sonnenverwöhnten Spätburgunder-Trauben gekeltert, überzeugt er mit frischen Erdbeeraromen und einer dezenten Restsüße im halbtrockenen Ausbau. Dank schonender Pressung und kontrollierter Vergärung präsentiert sich der Pfaffmann Rosé angenehm samtig am Gaumen. Ein süffiger Sommerwein, ideal gekühlt (9-11°C) zu Salaten, Frischkäse und hellem Fleisch – Qualität aus Familienhand seit 1955.',
+        image: null,
+        characteristics: 'halbtrocken, leicht, hellrosa, rosé, fruchtig, beerig',
         available: true
     },
     {
@@ -39,8 +56,6 @@ export const rosados: Wine[] = [
         name: 'Rosa Dei Frati',
         id: 22,
         prices: {
-            '0.1l': '6,00€',
-            '0.2l': '11,50€',
             'flasche': '37,50€'
         },
         color: 'rosé',
@@ -53,7 +68,7 @@ export const rosados: Wine[] = [
         available: true
     },
     {
-        name: 'Arrogant Frog',
+        name: 'Arrogant Frog Rosé',
         id: 23,
         prices: {
             '0.1l': '5,00€',
@@ -106,7 +121,7 @@ export const rosados: Wine[] = [
     {
         name: 'Minuty Rosé',
         id: 24,
-        prices: {'flasche': '€38,50'},
+        prices: { 'flasche': '€38,50' },
         color: 'rosé',
         grape: 'Grenache, Cinsault, Syrah',
         origin: 'Frankreich, Côtes de Provence',
@@ -114,14 +129,14 @@ export const rosados: Wine[] = [
         longDescription: 'Der M de Minuty Rosé ist ein eleganter Roséwein aus der Provence mit einer zarten, lachsfarbenen Erscheinung. Er verführt mit feinen Aromen von weißen Blüten, Erdbeeren, Johannisbeeren und einem Hauch Zitrus. Leicht, trocken und lebendig am Gaumen – mit einem frischen Abgang und ausgewogener Säure. Ideal zu mediterraner Küche oder als stilvoller Aperitif.',
         image: null,
         characteristics: 'Trocken, frisch, leicht, zitrus, floral',
-        available: true
+        available: false
     },
     {
         name: 'PINK St. Laurent Rosé',
         id: 28,
         prices: {
             '0.1l': '5,0€',
-            '0.2l': '9,50€',
+            '0.2l': '8,50€',
             'flasche': '29,50€'
         },
         color: 'rosé',
@@ -166,7 +181,7 @@ export const rosados: Wine[] = [
     {
         name: 'Miraval',
         id: 117,
-        prices: {'flasche': '€49,00'},
+        prices: { 'flasche': '€49,00' },
         color: 'rosé',
         grape: 'Cinsault, Grenache, Syrah, Rolle',
         origin: 'Frankreich, Provence',

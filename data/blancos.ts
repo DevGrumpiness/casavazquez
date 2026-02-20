@@ -1,4 +1,4 @@
-import type {Wine} from "../website/src/interfaces/vino";
+import type { Wine } from "../website/src/interfaces/vino";
 
 export const blancos: Wine[] = [
 
@@ -85,7 +85,7 @@ export const blancos: Wine[] = [
             'Der Nebla Verdejo präsentiert sich in einem klaren, goldgrün schimmernden Ton, der für die Verdejo-Traube charakteristisch ist. In der Nase entfalten sich lebendige Aromen von Zitrusfrüchten und frisch geernteten grünen Äpfeln, fein untermalt von dezenten Kräuteranklängen, die dem Duft eine elegante Frische verleihen. Am Gaumen überzeugt er durch sein harmonisches Gleichgewicht: Noten von saftiger Ananas und reifer Melone verschmelzen mit einer feinen, belebenden Säure zu einem dynamischen, zugleich ausgewogenen Trinkvergnügen. Ein Wein, der mit seiner spritzigen Lebhaftigkeit und feinen Raffinesse Kenner und Genießer gleichermaßen begeistert.',
         image: null,
         characteristics: 'Trocken, leicht, Mango, grünes Gras',
-        available: true
+        available: false
     },
     {
         name: 'El Coto Blanco',

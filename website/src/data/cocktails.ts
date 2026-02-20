@@ -41,7 +41,7 @@ export const cocktails: Cocktail[] = [
         personality: 'mysterious',
         description: 'Der Klassiker: Vodka, Kahlua und frischer Espresso mit Kaffeebohnen als Krönung.',
         ingredients: ['Vodka', 'Kahlua', 'Espresso', 'Kaffeebohne'],
-        price: '12€',
+        price: '11€',
         characteristics: ['kräftig', 'Wachmacher', 'klassisch', 'elegant'],
         alcoholic: true,
     },
