@@ -575,7 +575,7 @@ const snacks: SnackItem[] = [
   { name: 'Süßkartoffel-Pommes groß', description: '', price: '9', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
   { name: 'Oliven Mix', description: '', price: '6', veggie: true, onm: true, keto: true, image: olivenMixImage },
   { name: 'Kroketten + Dip', description: 'gefüllt mit Käse & Jalapeños', price: '7,5', veggie: false, keto: false, image: croquetasBoletus, allergens: [9, 11, 13], available: true },
-  // { name: 'Croquetas con Jamón Iberico', description: 'kleine Kroketten mit Jamón-Füllung', price: '7,5', veggie: false, keto: false, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
+  { name: 'Croquetas con Jamón Iberico', description: 'kleine Kroketten mit Jamón-Füllung', price: '7,5', veggie: false, keto: false, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
   { name: 'Croquetas de Boletus', description: 'kleine Kroketten mit Steinpilz-Füllung', price: '7,5', veggie: false, keto: false, available: true, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
   
   {
@@ -624,7 +624,7 @@ const snacks: SnackItem[] = [
     keto: false,
     image: rotebete,
     allergens: [9, 27, 28, 29, 30],
-    available: true
+    available: false
   },
  {
     name: 'Vegane Erbsen Minz Sticks',
