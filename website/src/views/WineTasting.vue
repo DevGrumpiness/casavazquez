@@ -2,11 +2,17 @@
   <section class="tasting-page">
     <header class="tasting-header">
       <h1 class="tasting-title">Willkommen zur Herbst Degustation im Casa Vazquez!</h1>
-      <p class="tasting-sub">Sechs Weine, sechs Geschichten – scroll dich durch unsere Auswahl.</p>
+      <p class="tasting-sub">"Sechs Weine, sechs Geschichten – scroll dich durch unsere Auswahl." Das war das Motto unseres letzten Wein-Tastings. Folge uns auf <a href="https://www.instagram.com/casa_vazquez_muenster/" target="_blank" rel="noopener noreferrer"><u>Instagram</u></a>, um das nächste Tasting-Event nicht zu verpassen. </p>
       <p class="tasting-sub">Preise auf Anfrage.</p>
     </header>
 
-    <div class="tasting-map" ref="mapEl" role="img" aria-label="Karte der Weinregionen"></div>
+    <div
+      class="tasting-map"
+      ref="mapEl"
+      role="img"
+      aria-label="Karte der Weinregionen"
+      style="height: clamp(260px, 38vh, 420px); min-height: 260px;"
+    ></div>
     <div class="tasting-map-legend">
       <div class="legend-title">Kartenlegende</div>
       <ul>
@@ -121,6 +127,13 @@ let markers: L.Marker[] = [];
 onMounted(async () => {
   await nextTick();
   if (!mapEl.value) return;
+
+  if (mapEl.value.clientHeight === 0) {
+    mapEl.value.style.height = '320px';
+  }
+  if (mapEl.value.clientWidth === 0) {
+    mapEl.value.style.width = '100%';
+  }
   
   const DefaultIcon = L.icon({
     iconRetinaUrl: markerIcon2xUrl,
@@ -152,19 +165,28 @@ onMounted(async () => {
   
   const group = L.featureGroup(markers).addTo(map);
   map.fitBounds(group.getBounds().pad(0.3));
-  
+
   // Fix tile rendering issues
   setTimeout(() => {
     if (map) map.invalidateSize();
   }, 100);
+
+  window.addEventListener('resize', onResize);
 });
 
 onBeforeUnmount(() => {
+  window.removeEventListener('resize', onResize);
   if (map) {
     map.remove();
     map = null;
   }
 });
+
+function onResize() {
+  if (map) {
+    map.invalidateSize();
+  }
+}
 
 function flyToIndex(i: number) {
   if (!map || !markers[i]) return;
@@ -180,7 +202,8 @@ function flyToIndex(i: number) {
   background-color: $background-color;
   color: $text-color;
   font-family: $font-family;
-  max-width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
 .tasting-header {
@@ -190,10 +213,16 @@ function flyToIndex(i: number) {
 
 .tasting-map {
   height: 33vh;
+  min-height: 260px;
   margin: 0 1rem 2rem;
   border: 2px solid $accent-color;
   border-radius: 10px;
   overflow: hidden;
+}
+
+:deep(.leaflet-container) {
+  width: 100%;
+  height: 100%;
 }
 
 .tasting-map-legend {
@@ -307,7 +336,7 @@ function flyToIndex(i: number) {
 .tasting-section {
   border: 2px solid $accent-color;
   border-radius: 10px;
-  min-height: calc(100vh - 9rem);
+  min-height: 80vh;
   display: grid;
   grid-template-columns: 1fr;
   overflow: hidden;
@@ -316,7 +345,8 @@ function flyToIndex(i: number) {
 @media (min-width: 720px) {
   .tasting-section {
     grid-template-columns: 1fr 1fr;
-    min-height: 80vh;
+    min-height: 0;
+    max-height: 50vh;
   }
 }
 
@@ -359,5 +389,12 @@ function flyToIndex(i: number) {
   max-height: 70vh;
   max-width: 90%;
   object-fit: contain;
+}
+
+@media (min-width: 720px) {
+  .tasting-image img {
+    max-height: 44vh;
+    max-width: 82%;
+  }
 }
 </style>

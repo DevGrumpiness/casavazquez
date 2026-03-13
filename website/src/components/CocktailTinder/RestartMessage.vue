@@ -39,7 +39,7 @@ interface Props {
   }>;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 defineEmits<{
   restart: [];
@@ -47,7 +47,7 @@ defineEmits<{
 }>();
 
 const getPersonalityEmoji = (personality: CocktailPersonality): string => {
-  const p = defineProps<Props>().personalities.find(p => p.type === personality);
+  const p = props.personalities.find(p => p.type === personality);
   return p?.emoji || '🍸';
 };
 </script>

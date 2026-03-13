@@ -21,7 +21,7 @@ module.exports = {
                     /^pi-/,
                 ],
                 deep: [/modal/, /slider/, /notification/, /wine/, /snack/, /nav/],
-                greedy: [],
+                greedy: [/^leaflet-/, /leaflet/],
             },
         } : false,
         autoprefixer: {},

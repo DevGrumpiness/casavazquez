@@ -13,10 +13,20 @@
               <span class="drinks-name">{{ drink.name }}
                 <sup v-if="drink.allergens" class="allergen-indices">{{ drink.allergens.join(',') }}</sup>
               </span>
+              <span v-if="drink.ingredients" class="drinks-ingredients">{{ drink.ingredients }}</span>
             </div>
             <span class="drinks-price">{{ drink.price }}</span>
           </li>
         </transition-group>
+
+        <h3 class="drinks-group-title">Mocktails</h3>
+        <ul class="drinks-list">
+          <li v-for="mocktail in mocktails" :key="mocktail" class="drinks-item">
+            <div class="drink-text">
+              <span class="drinks-name">{{ mocktail }}</span>
+            </div>
+          </li>
+        </ul>
       </div>
 
       <p class="note">
@@ -58,15 +68,23 @@ interface Drink {
   category: string;
   alcoholic: boolean;
   allergens?: number[];
+  ingredients?: string;
 }
 
 const cocktails: Drink[] = [
-  { name: "Espresso Martini", price: "11€", category: "Cocktail", alcoholic: true, allergens: [8, 13] },
-  { name: "Whisky Sour", price: "12€", category: "Cocktail", alcoholic: true, allergens: [11] },
-  { name: "Cosmopolitan", price: "11€", category: "Cocktail", alcoholic: true, allergens: [4] },
-  { name: "Skinny Bitch", price: "9€", category: "Cocktail", alcoholic: true, allergens: [4] },
-  { name: "Negroni", price: "12€", category: "Cocktail", alcoholic: true, allergens: [4] },
-  { name: "Silver Fizz", price: "12€", category: "Cocktail", alcoholic: true, allergens: [4] },
+  { name: "Espresso Martini", price: "11€", category: "Cocktail", alcoholic: true, allergens: [8, 13], ingredients: "Vodka, Kaffeelikor, Espresso, Zuckersirup" },
+  { name: "Whisky Sour", price: "12€", category: "Cocktail", alcoholic: true, allergens: [11], ingredients: "Whisky, Zitronensaft, Zuckersirup, Eiweiss" },
+  { name: "Cosmopolitan", price: "11€", category: "Cocktail", alcoholic: true, allergens: [4], ingredients: "Vodka, Cointreau, Cranberrysaft, Limettensaft" },
+  { name: "Skinny Bitch", price: "9€", category: "Cocktail", alcoholic: true, allergens: [4], ingredients: "Vodka, Sodawasser, Limette" },
+  { name: "Negroni", price: "12€", category: "Cocktail", alcoholic: true, allergens: [4], ingredients: "Gin, Campari, roter Wermut" },
+  { name: "Silver Fizz", price: "12€", category: "Cocktail", alcoholic: true, allergens: [4], ingredients: "Gin, Zitronensaft, Zuckersirup, Sodawasser" },
+];
+
+const mocktails: string[] = [
+  "Mojito 0%",
+  "Caipirinha 0% (Ipanema)",
+  "Silver Fizz 0%",
+  "Gin & Tonic 0%",
 ];
 </script>
 
@@ -88,6 +106,18 @@ const cocktails: Drink[] = [
   border: 2px solid $accent-color;
   border-radius: 8px;
   position: relative;
+}
+
+@media (min-width: 1024px) {
+  .drinks-menu-section {
+    max-width: 960px;
+    margin: 3.5rem auto;
+    margin-bottom: 3.5rem;
+  }
+
+  .tinder-announcement {
+    max-width: 960px;
+  }
 }
 
 .drinks-header {
@@ -131,6 +161,14 @@ const cocktails: Drink[] = [
   margin-bottom: 1.5rem;
 }
 
+.drinks-group-title {
+  margin: 0 0 0.8rem;
+  color: $accent-color;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  font-size: 0.9rem;
+}
+
 .drinks-item {
   display: flex;
   justify-content: space-between;
@@ -149,6 +187,13 @@ const cocktails: Drink[] = [
       .allergen-indices {
         font-size: 10px;
       }
+    }
+
+    .drinks-ingredients {
+      margin-top: 0.2rem;
+      font-size: 0.78rem;
+      color: #b8b8b8;
+      line-height: 1.35;
     }
   }
 
@@ -242,9 +287,15 @@ const cocktails: Drink[] = [
   }
 }
 
+@media (min-width: 1024px) {
+  .tinder-announcement {
+    max-width: 960px;
+  }
+}
+
 .allergen-section {
-  max-width: 90%;
-  margin: 3rem auto;
+  max-width: 600px;
+  margin: 2rem auto;
   padding: 2rem;
   background: rgba(255, 255, 255, 0.03);
   border-radius: 8px;

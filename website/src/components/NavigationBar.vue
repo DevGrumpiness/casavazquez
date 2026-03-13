@@ -1,18 +1,18 @@
 <template>
   <nav class="navigation-bar">
-    <router-link to="/home" class="nav-link" active-class="active">
+    <router-link to="/home" class="nav-link nav-home" active-class="active">
       <img src="../assets/images/icons8-zuhause-64.png" alt="Home" class="nav-icon"/>
     </router-link>
-    <router-link to="/vino" class="nav-link" active-class="active">
+    <router-link to="/vino" class="nav-link nav-vino" active-class="active">
       <img src="../assets/images/icons8-bar-50.png" alt="Vino" class="nav-icon"/>
     </router-link>
-    <router-link to="/drinks" class="nav-link" active-class="active">
+    <router-link to="/drinks" class="nav-link nav-drinks" active-class="active">
       <img src="../assets/images/icons8-drinks-64.png" alt="Getränke" class="nav-icon"/>
     </router-link>
-    <!-- <router-link to="/cocktails" class="nav-link cocktail-tinder-nav" active-class="active" aria-label="Cocktails">
-      🍸
-    </router-link> -->
-    <router-link to="/snacks" class="nav-link" active-class="active">
+    <router-link to="/cocktails" class="nav-link nav-cocktails" active-class="active">
+      <img src="../assets/images/icons8-strandcocktail-96.png" alt="Cocktails" class="nav-icon"/>
+    </router-link>
+    <router-link to="/snacks" class="nav-link nav-snacks" active-class="active">
       <img src="../assets/images/icons8-snack-64.png" alt="Snacks" class="nav-icon"/>
     </router-link>
     <router-link to="/legals" class="nav-link info-link" active-class="active" aria-label="Info">
@@ -46,7 +46,10 @@
     text-decoration: none;
     color: $dark-color;
     font-size: 1rem;
-    padding: 0 0.5rem;
+    padding: 0 0.45rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
     &.active {
       font-weight: bold;
@@ -56,7 +59,30 @@
     .nav-icon {
       width: 24px;
       height: 24px;
+      object-fit: contain;
+      opacity: 1;
+      filter: none;
     }
+  }
+
+  .nav-home .nav-icon {
+    filter: brightness(0) saturate(100%) invert(39%) sepia(95%) saturate(579%) hue-rotate(196deg) brightness(97%) contrast(96%);
+  }
+
+  .nav-vino .nav-icon {
+    filter: brightness(0) saturate(100%) invert(22%) sepia(47%) saturate(1670%) hue-rotate(323deg) brightness(88%) contrast(95%);
+  }
+
+  .nav-drinks .nav-icon {
+    filter: brightness(0) saturate(100%) invert(49%) sepia(93%) saturate(354%) hue-rotate(152deg) brightness(91%) contrast(92%);
+  }
+
+  .nav-cocktails .nav-icon {
+    filter: brightness(0) saturate(100%) invert(65%) sepia(93%) saturate(548%) hue-rotate(356deg) brightness(99%) contrast(96%);
+  }
+
+  .nav-snacks .nav-icon {
+    filter: brightness(0) saturate(100%) invert(55%) sepia(40%) saturate(483%) hue-rotate(67deg) brightness(92%) contrast(89%);
   }
 
   .info-link {

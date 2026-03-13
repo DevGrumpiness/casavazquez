@@ -67,22 +67,90 @@
       Wir stellen euch auch gerne einen Mix zusammen. Nennt uns einfach euer Budget und wir stellen euch Leckereien auf den Tisch. (Empfehlung: 15€ pP)
     </p>
 
+    <section v-if="showQuickWaitSection" class="quick-wait-section" aria-label="Snacks mit geringsten Wartezeiten">
+      <h3 class="quick-wait-title">Snacks mit geringsten Wartezeiten</h3>
+      <p class="quick-wait-hint">Tippe auf ein Gericht, um direkt dorthin zu springen</p>
+      <ul class="quick-wait-list">
+        <li class="quick-wait-item">
+          <a href="#plato-quesos" class="quick-wait-link" @click.prevent="scrollToSnackSection('plato-quesos')">Plato de Quesos</a>
+        </li>
+        <li class="quick-wait-item">
+          <a href="#plato-jamon" class="quick-wait-link" @click.prevent="scrollToSnackSection('plato-jamon')">Plato de Jamón</a>
+        </li>
+        <li class="quick-wait-item">
+          <a href="#plato-mixto" class="quick-wait-link" @click.prevent="scrollToSnackSection('plato-mixto')">Plato Mixto</a>
+        </li>
+      </ul>
+    </section>
+
+    <section v-if="isMobileDevice" class="snack-bookmarks" aria-label="Snack Merkliste">
+      <div class="snack-bookmarks-header">
+        <h3>Merkliste <span class="count">{{ bookmarkedSnacks.length }}</span></h3>
+        <button
+          v-if="bookmarkedSnacks.length"
+          type="button"
+          class="clear-bookmarks"
+          @click="clearSnackBookmarks"
+        >
+          Leeren
+        </button>
+      </div>
+
+      <p v-if="!bookmarkedSnacks.length" class="snack-bookmarks-empty">
+        Tippe bei einem Snack auf ☆, um ihn hier zu merken.
+      </p>
+
+      <ul v-else class="snack-bookmark-list">
+        <li v-for="snack in bookmarkedSnacks" :key="getSnackBookmarkId(snack)" class="snack-bookmark-item">
+          <button type="button" class="snack-bookmark-link" @click="scrollToBookmarkedSnack(snack)">
+            {{ snack.name }} · {{ snack.price }}
+          </button>
+          <button
+            type="button"
+            class="snack-bookmark-remove"
+            :aria-label="`${snack.name} aus Merkliste entfernen`"
+            @click="removeSnackBookmark(getSnackBookmarkId(snack))"
+          >
+            ×
+          </button>
+        </li>
+      </ul>
+    </section>
+
     <div class="scrollContainer">
       <div class="snack-section">
         <TransitionGroup name="snack" tag="ul" class="basic-snacks-list">
-          <li v-for="snack in filteredSnacks" :key="snack.name" :class="['basic-snacks-item', { 'is-out': snack.available === false }]">
+          <li
+            v-for="snack in filteredSnacks"
+            :id="`snack-${toSnackId(getSnackBookmarkId(snack))}`"
+            :key="getSnackBookmarkId(snack)"
+            :class="['basic-snacks-item', { 'is-out': snack.available === false }]"
+          >
             <div class="snack-primary">
               <div class="snack-text">
-                <span class="snacks-name">
-                  {{ snack.name }}
-                  <sup
-                    v-if="snack.allergens && snack.allergens.length"
-                    class="allergen-indices"
-                    :title="formatAllergenDescription(snack.allergens)"
+                <span class="snacks-name-row">
+                  <button
+                    v-if="isMobileDevice && snack.available !== false"
+                    type="button"
+                    class="bookmark-toggle"
+                    :class="{ active: isSnackBookmarked(snack) }"
+                    :aria-pressed="isSnackBookmarked(snack)"
+                    :aria-label="isSnackBookmarked(snack) ? `${snack.name} aus Merkliste entfernen` : `${snack.name} merken`"
+                    @click.stop="toggleSnackBookmark(snack)"
                   >
-                    {{ snack.allergens.join(',') }}
-                  </sup>
-                  <span v-if="snack.veggie" class="veggie-icon" title="Vegetarisch">&#127811;</span>
+                    {{ isSnackBookmarked(snack) ? '★' : '☆' }}
+                  </button>
+                  <span class="snacks-name">
+                    {{ snack.name }}
+                    <sup
+                      v-if="snack.allergens && snack.allergens.length"
+                      class="allergen-indices"
+                      :title="formatAllergenDescription(snack.allergens)"
+                    >
+                      {{ snack.allergens.join(',') }}
+                    </sup>
+                    <span v-if="snack.veggie" class="veggie-icon" title="Vegetarisch">&#127811;</span>
+                  </span>
                 </span>
                 <!-- <img v-if="snack.onm" class="onmLogo" :src="onmLogo" alt="Olive und Meer" @click="showOnmInfo = true" /> -->
                 <BaseModal v-model="showOnmInfo">
@@ -135,7 +203,7 @@
         </ul>
       </div>
 
-      <div class="snack-section" v-if="!veggie">
+      <div id="plato-jamon" class="snack-section anchor-target" v-if="!veggie">
         <hr />
         <br />
         <h3 class="snacks-subtitle with-price">
@@ -148,7 +216,7 @@
       </div>
 
       <Transition name="section">
-        <div class="snack-section" >
+        <div id="plato-quesos" class="snack-section anchor-target" >
           <hr />
           <br />
           <h3 class="snacks-subtitle with-price">
@@ -156,12 +224,12 @@
             <span class="section-price">10,50</span>
           </h3>
           <p class="snacks-note">
-            Manchego Käse – der klassische spanische Schafskäse. Dazu servieren wir Brot.
+            Manchego Käse – der klassische spanische Schafskäse. Dazu servieren wir Brot und auf Wunsch Feigen-Sauce.
           </p>
         </div>
       </Transition>
 
-      <div class="snack-section">
+      <div id="plato-mixto" class="snack-section anchor-target">
         <hr />
         <br />
         <h3 class="snacks-subtitle with-price">
@@ -175,7 +243,7 @@
           <span class="section-price">16,50</span>
         </h3>
         <p class="snacks-note">
-          Gemischte Platte mit Jamón Serrano und Manchego Käse. Dazu servieren wir Brot.
+          Gemischte Platte mit Jamón Serrano und Manchego Käse. Dazu servieren wir Brot und auf Wunsch Feigen-Sauce für den Käse.
         </p>
         <BaseModal v-model="showMixtoInfo">
           <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-bottom: 1rem;">
@@ -231,10 +299,7 @@
               <span class="snacks-name">+ Albondigas</span>
               <span class="snacks-price">+ 3,90</span>
             </li>
-            <li class="snacks-item extra" v-if="!veggie">
-              <span class="snacks-name">+ Hähnchen Bällchen</span>
-              <span class="snacks-price">+ 3,90</span>
-            </li>
+
             <li class="snacks-item extra veggie">
               <span class="snacks-name">+ Doppelt Mozarella</span>
               <span class="snacks-price">+ 2,50</span>
@@ -428,12 +493,12 @@ import BaseModal from "../components/BaseModal.vue";
 import FeaturedSlider from "../components/FeaturedSlider.vue";
 import { featuredPromos } from "../data/featuredPromos";
 import cocaImage from "../assets/images/coca.webp";
-import croquetasBoletus from "../assets/images/tapasclub/croquetas_boletus.png";
+// import croquetasBoletus from "../assets/images/tapasclub/croquetas_boletus.png";
 import croquetasChorizo from "../assets/images/tapasclub/croquetas_chorizo.png";
 import datillesImage from "../assets/images/tapasclub/datilles.png";
 import olivenMixImage from "../assets/images/tapasclub/olivenmix.png";
 import polloPiripiri from "../assets/images/tapasclub/pollo_piripiri.png";
-import tortillaImage from "../assets/images/tapasclub/tortilla.png";
+// import tortillaImage from "../assets/images/tapasclub/tortilla.png";
 import albondigasImage from "../assets/images/tapasclub/albondigas.png";
 // import champignonsImage from "../assets/images/tapasclub/champignons.png";
 import nuggetsImage from "../assets/images/tapasclub/nuggets.png";
@@ -567,14 +632,139 @@ function formatAllergenDescription(codes?: number[]) {
 }
 
 const sliderItems = featuredPromos;
+const snackBookmarksStorageKey = "snackBookmarks"
+
+const QUICK_WAIT_SECTION_DATE = "2026-02-28"
+
+function getLocalDateIso(date: Date) {
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, "0")
+  const day = String(date.getDate()).padStart(2, "0")
+  return `${year}-${month}-${day}`
+}
+
+const showQuickWaitSection = computed(() => getLocalDateIso(new Date()) === QUICK_WAIT_SECTION_DATE)
+
+const isMobileDevice = ref(false)
+const bookmarkedSnackIds = ref<string[]>([])
+
+const bookmarkedSnacks = computed(() =>
+  bookmarkedSnackIds.value
+    .map(id => getSnackByBookmarkId(id))
+    .filter((snack): snack is SnackItem => !!snack && snack.available !== false)
+)
+
+function updateIsMobileDevice() {
+  if (typeof window === "undefined") return
+  isMobileDevice.value = window.matchMedia("(max-width: 768px)").matches
+}
+
+function toSnackId(name: string) {
+  return name
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+}
+
+function getSnackBookmarkId(snack: SnackItem) {
+  return `${snack.name}::${snack.price}::${snack.description}`
+}
+
+function getSnackByBookmarkId(bookmarkId: string) {
+  return snacks.find(item => getSnackBookmarkId(item) === bookmarkId)
+}
+
+function isSnackBookmarked(snack: SnackItem) {
+  return bookmarkedSnackIds.value.includes(getSnackBookmarkId(snack))
+}
+
+function persistSnackBookmarks() {
+  if (typeof window === "undefined") return
+  localStorage.setItem(snackBookmarksStorageKey, JSON.stringify(bookmarkedSnackIds.value))
+}
+
+function loadSnackBookmarks() {
+  if (typeof window === "undefined") return
+
+  const raw = localStorage.getItem(snackBookmarksStorageKey)
+  if (!raw) return
+
+  try {
+    const parsed = JSON.parse(raw)
+    if (Array.isArray(parsed)) {
+      const validIds = parsed
+        .filter((value): value is string => typeof value === "string")
+        .map(value => {
+          if (value.includes("::")) {
+            return value
+          }
+          const fallbackSnack = snacks.find(item => item.name === value && item.available !== false)
+          return fallbackSnack ? getSnackBookmarkId(fallbackSnack) : null
+        })
+        .filter((value): value is string => !!value)
+
+      bookmarkedSnackIds.value = Array.from(new Set(validIds))
+      persistSnackBookmarks()
+    }
+  } catch {
+    bookmarkedSnackIds.value = []
+  }
+}
+
+function toggleSnackBookmark(snack: SnackItem) {
+  if (snack.available === false) {
+    return
+  }
+
+  const bookmarkId = getSnackBookmarkId(snack)
+
+  if (bookmarkedSnackIds.value.includes(bookmarkId)) {
+    bookmarkedSnackIds.value = bookmarkedSnackIds.value.filter(item => item !== bookmarkId)
+  } else {
+    bookmarkedSnackIds.value = [...bookmarkedSnackIds.value, bookmarkId]
+  }
+
+  persistSnackBookmarks()
+}
+
+function removeSnackBookmark(bookmarkId: string) {
+  bookmarkedSnackIds.value = bookmarkedSnackIds.value.filter(item => item !== bookmarkId)
+  persistSnackBookmarks()
+}
+
+function clearSnackBookmarks() {
+  bookmarkedSnackIds.value = []
+  persistSnackBookmarks()
+}
+
+function scrollToBookmarkedSnack(snack: SnackItem) {
+  veggie.value = false
+  keto.value = false
+  requestAnimationFrame(() => {
+    document.getElementById(`snack-${toSnackId(getSnackBookmarkId(snack))}`)?.scrollIntoView({ behavior: "smooth", block: "start" })
+  })
+}
+
+function scrollToSnackSection(sectionId: string) {
+  if (sectionId === "plato-jamon" && veggie.value) {
+    veggie.value = false
+  }
+
+  requestAnimationFrame(() => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" })
+  })
+}
 
 const snacks: SnackItem[] = [
   { name: 'Nachos mit Dip (Salsa/Aioli/Guacamole)', description: '', price: '6,5', veggie: true, keto: false, allergens: [11, 15] },
+  { name: 'Pimientos de Padrón - der Klassiker', description: '', price: '6,5', veggie: true, keto: true},
   { name: 'Brot Aioli/Guacamole Dip', description: '', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 15] },
-  { name: 'Süßkartoffel-Pommes', description: '', price: '6', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
-  { name: 'Süßkartoffel-Pommes groß', description: '', price: '9', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
+  { name: 'Süßkartoffel-Pommes', description: '', price: '5', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
+  { name: 'Süßkartoffel-Pommes groß', description: '', price: '7', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
   { name: 'Oliven Mix', description: '', price: '6', veggie: true, onm: true, keto: true, image: olivenMixImage },
-  { name: 'Kroketten + Dip', description: 'gefüllt mit Käse & Jalapeños', price: '7,5', veggie: false, keto: false, image: croquetasBoletus, allergens: [9, 11, 13], available: true },
+  // { name: 'Kroketten + Dip', description: 'gefüllt mit Käse & Jalapeños', price: '7,5', veggie: false, keto: false, image: croquetasBoletus, allergens: [9, 11, 13], available: true },
   { name: 'Croquetas con Jamón Iberico', description: 'kleine Kroketten mit Jamón-Füllung', price: '7,5', veggie: false, keto: false, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
   { name: 'Croquetas de Boletus', description: 'kleine Kroketten mit Steinpilz-Füllung', price: '7,5', veggie: false, keto: false, available: true, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
   
@@ -589,9 +779,10 @@ const snacks: SnackItem[] = [
     traceAllergens: [4, 9, 12, 13, 15, 17, 22],
     available: true
   },
-  { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
-  { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
-  { name: 'Albondigas in Salsa', description: 'Fleischbällchen (5Stk) mit Chili-Käse Füllung (nicht scharf) in Tomatensalsa', price: '7,5', veggie: true, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
+  // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
+  // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
+  { name: 'Albondigas in Salsa', description: 'Fleischbällchen (5Stk) mit Chili-Käse Füllung (nicht scharf) in Tomatensalsa', price: '7,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
+  { name: 'Chorizo in Salsa', description: 'Pikante Chorizo (spanische Wurst) in Tomatensalsa', price: '6,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
   { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
 
   { name: 'Dátiles con Bacon', description: 'Datteln im Speckmantel', price: '7,5', veggie: false, keto: false, image: datillesImage, allergens: [26] },
@@ -633,7 +824,8 @@ const snacks: SnackItem[] = [
     veggie: true,
     keto: false,
     image: veggieSticksImage,
-    allergens: [9, 27, 28, 29, 30]
+    allergens: [9, 27, 28, 29, 30],
+    available: false
   },
  {
     name: 'Verduras a la Parrilla',
@@ -654,7 +846,16 @@ const snacks: SnackItem[] = [
     allergens: [9, 27, 28, 29, 30]
   },
  {
-    name: 'Empanadillas de Pollo 4Stk',
+    name: 'DESSERT - Tartufo mit Schoko-Kern und Haselnussmantel',
+    description: 'Tartufo mit Schoko-Kern und Haselnussmantel',
+    price: '6,5',
+    veggie: true,
+    keto: false,
+    image: undefined,
+   allergens: [12, 13]
+  },
+ {
+    name: 'Empanadillas de Atun / Pollo 4Stk',
     description: 'Klassiker unter den spanischen Empanadas mit einer Füllung aus Thunfisch und Tomaten oder Hähnchen - Du entscheidest ',
     price: '7,5',
     veggie: false,
@@ -663,23 +864,14 @@ const snacks: SnackItem[] = [
     allergens: [9, 27, 28, 29, 30]
   },
 //  {
-//     name: 'Empanadillas de Atun / Pollo 4Stk',
-//     description: 'Klassiker unter den spanischen Empanadas mit einer Füllung aus Thunfisch und Tomaten oder Hähnchen - Du entscheidest ',
-//     price: '7,5',
+//     name: 'Costillas Picantes',
+//     description: 'Gegrillte, würzige Rippchen, losgeschnitten.',
+//     price: '8,5',
 //     veggie: false,
-//     keto: false,
+//     keto: true,
 //     image: undefined,
 //     allergens: [9, 27, 28, 29, 30]
 //   },
- {
-    name: 'Costillas Picantes',
-    description: 'Gegrillte, würzige Rippchen, losgeschnitten.',
-    price: '8,5',
-    veggie: false,
-    keto: true,
-    image: undefined,
-    allergens: [9, 27, 28, 29, 30]
-  },
 ];
 // { name: 'Palta Rebozada', description: 'Avocadospalten paniert', price: '8,5', veggie: true, keto: false },
 // { name: 'Tapas Mix (2p)', description: 'Mix aus verschiedenen Tapas', price: '24,5', veggie: false, keto: false },
@@ -741,9 +933,12 @@ function decrementCounter() {
 
 onMounted(() => {
   loadCounter()
+  loadSnackBookmarks()
+  updateIsMobileDevice()
   setupModalWatchers()
   if (typeof window !== "undefined") {
     window.addEventListener("popstate", handlePopstate)
+    window.addEventListener("resize", updateIsMobileDevice)
   }
 })
 
@@ -751,6 +946,7 @@ onUnmounted(() => {
   teardownModalWatchers()
   if (typeof window !== "undefined") {
     window.removeEventListener("popstate", handlePopstate)
+    window.removeEventListener("resize", updateIsMobileDevice)
   }
 })
 </script>
@@ -820,19 +1016,6 @@ ul {
       color: $background-color;
     }
   }
-}
-
-.supply-hint {
-  margin: 1rem auto 0;
-  max-width: 90%;
-  padding: 0.75rem 1rem;
-  border: 1px solid rgba(206, 170, 114, 0.7);
-  border-radius: 8px;
-  background: rgba(206, 170, 114, 0.15);
-  color: $text-color;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  text-align: center;
 }
 
 .flamm-feature {
@@ -943,6 +1126,13 @@ hr {
         }
       }
     }
+  }
+}
+
+@media (min-width: 1024px) {
+  .snacks-menu {
+    max-width: 960px;
+    margin: 3.5rem auto 7rem;
   }
 }
 
@@ -1218,6 +1408,206 @@ hr {
   text-align: center;
   color: $accent-color;
   max-width: 90%;
+}
+
+.snack-bookmarks {
+  margin: 0.7rem auto 1rem;
+  max-width: 90%;
+  border: 1px solid $accent-color;
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+}
+
+.snack-bookmarks-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+
+  h3 {
+    margin: 0;
+    font-size: 0.85rem;
+    color: $accent-color;
+    text-transform: uppercase;
+    letter-spacing: 0.04rem;
+  }
+
+  .count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.35rem;
+    height: 1.35rem;
+    border-radius: 999px;
+    border: 1px solid $accent-color;
+    font-size: 0.72rem;
+    margin-left: 0.35rem;
+  }
+}
+
+.clear-bookmarks {
+  border: 1px solid $accent-color;
+  background: transparent;
+  color: $accent-color;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+}
+
+.snack-bookmarks-empty {
+  margin: 0.3rem 0 0;
+  font-size: 0.72rem;
+  color: $text-color;
+  opacity: 0.9;
+}
+
+.snack-bookmark-list {
+  list-style: none;
+  margin: 0.45rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.snack-bookmark-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.45rem;
+}
+
+.snack-bookmark-link {
+  border: 1px solid $accent-color;
+  background: transparent;
+  color: $text-color;
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.72rem;
+  text-align: left;
+  flex: 1;
+  cursor: pointer;
+}
+
+.snack-bookmark-remove {
+  border: 1px solid $accent-color;
+  background: transparent;
+  color: $accent-color;
+  border-radius: 999px;
+  width: 1.45rem;
+  height: 1.45rem;
+  line-height: 1;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.snacks-name-row {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+
+.bookmark-toggle {
+  border: 1px solid $accent-color;
+  background: transparent;
+  color: $accent-color;
+  border-radius: 999px;
+  width: 1.45rem;
+  height: 1.45rem;
+  line-height: 1;
+  font-size: 0.9rem;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &.active {
+    background: $accent-color;
+    color: $background-color;
+  }
+}
+
+.quick-wait-section {
+  margin: 1.25rem auto 1.4rem;
+  max-width: 90%;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid $accent-color;
+  border-radius: 10px;
+}
+
+.quick-wait-title {
+  margin: 0;
+  color: $accent-color;
+  text-align: center;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04rem;
+}
+
+.quick-wait-hint {
+  margin: 0.35rem 0 0.65rem;
+  color: $accent-color;
+  text-align: center;
+  font-size: 0.72rem;
+  font-style: italic;
+}
+
+.quick-wait-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.quick-wait-item {
+  position: relative;
+  padding-left: 1.35rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0.15rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0.62rem;
+    height: 0.62rem;
+    border: 1.5px solid $accent-color;
+    border-radius: 999px;
+    box-sizing: border-box;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0.35rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0.22rem;
+    height: 0.22rem;
+    background: $accent-color;
+    border-radius: 999px;
+  }
+}
+
+.quick-wait-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: $text-color;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color 0.2s ease, opacity 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: $accent-color;
+    opacity: 1;
+  }
+}
+
+.anchor-target {
+  scroll-margin-top: 90px;
 }
 
 .today-hint {

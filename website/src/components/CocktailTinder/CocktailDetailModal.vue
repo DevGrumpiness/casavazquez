@@ -30,9 +30,9 @@
           <button @click="$emit('remove', cocktail)" class="ct-btn ct-btn-remove">
             Aus Matches entfernen
           </button>
-          <button @click="$emit('order', cocktail)" class="ct-btn ct-btn-primary">
+          <!-- <button @click="$emit('order', cocktail)" class="ct-btn ct-btn-primary">
             Jetzt bestellen
-          </button>
+          </button> -->
         </div>
       </div>
     </div>

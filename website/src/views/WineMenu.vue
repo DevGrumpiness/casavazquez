@@ -9,7 +9,10 @@
       <button class="toast-close" @click="showTopToast = false" aria-label="Schließen">×</button>
     </div>
     <p class="tasting-notice">
-      Besondere Weißweine findet ihr auf unserer <router-link to="/wine-tasting" class="tasting-link">Tasting Seite</router-link>
+      Besondere Weißweine findet ihr auf unserer Tasting Seite.
+    </p>
+    <p class="tasting-cta-wrap">
+      <router-link to="/wine-tasting" class="tasting-cta">Zur Tasting Seite →</router-link>
     </p>
     <p class="note">Unsere Hausweine gibt es für<br> 7€ (0.2l) bzw. 19€ (0.75l).</p>
     <div v-if="selectedColor === 'rosé' && false" class="happy-hour-hint">🎉 Happy Hour 🎉! Mo-Fr bis 19 Uhr zu
@@ -93,16 +96,26 @@ const filteredWines = computed(() => {
   font-size: 0.85rem;
   text-align: center;
   color: $text-color;
-  margin: 0.75rem auto;
-  
-  .tasting-link {
-    color: $accent-color;
-    text-decoration: underline;
-    font-weight: 600;
-    
-    &:hover {
-      opacity: 0.8;
-    }
+  margin: 0.75rem auto 0.35rem;
+}
+
+.tasting-cta-wrap {
+  text-align: center;
+  margin: 0 0 0.75rem;
+}
+
+.tasting-cta {
+  display: inline-block;
+  padding: 0.45rem 0.85rem;
+  border-radius: 6px;
+  background: $accent-color;
+  color: $background-color;
+  border: 1px solid $accent-color;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.92;
   }
 }
 
@@ -120,6 +133,13 @@ const filteredWines = computed(() => {
   border: 2px solid $accent-color;
   border-radius: 8px;
   position: relative;
+}
+
+@media (min-width: 1024px) {
+  .wine-menu-section {
+    max-width: 960px;
+    margin: 3.5rem auto 7rem;
+  }
 }
 
 .top-toast {

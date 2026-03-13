@@ -15,7 +15,7 @@ export const blancos: Wine[] = [
         longDescription: 'Der Marqués de Riscal Verdejo aus der spanischen Region Rueda ist ein erfrischender, trockener Weißwein mit intensiven Aromen von tropischen Früchten und Zitrus. Noten von Fenchel und frischen Kräutern verleihen ihm eine elegante Komplexität, während seine lebhafte Säure für eine angenehme Frische sorgt. Perfekt als Aperitif oder zu leichten Speisen und Meeresfrüchten.',
         image: null,
         characteristics: 'Trocken, fruchtbetont, elegant, weiß, erfrischend',
-        available: true
+        available: false
     },
     {
         name: 'Epicuro Chardonnay‑Fiano Puglia IGT',

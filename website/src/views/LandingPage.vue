@@ -1,5 +1,6 @@
+
 <template>
-  <main>
+  <main class="landing-page-main">
     <header class="hero">
       <div class="hero-content">
         <h1>Casa Vazquez Münster – Weinbar, Tapas & Cocktails</h1>
@@ -7,16 +8,36 @@
       </div>
     </header>
 
-    <section class="promo-card" aria-label="Valentins Aktion">
-      <div class="promo-card__glow"></div>
-      <div class="promo-card__content">
-        <p class="promo-card__eyebrow">🍷 Valentins Angebot ❤️</p>
-        <h2 class="promo-card__headline">11% Rabatt auf alle Flaschenweine</h2>
-        <p class="promo-card__detail">
-          Entdeckt unsere Weinauswahl und sichert euch 11% auf alle Flaschenweine – perfekt für einen gemütlichen Abend!
-        </p>
+    <section class="quick-menu-section mobile-only" aria-label="Schnellzugriff zur Speisekarte">
+      <h2 >Direkt zur Karte</h2>
+      <div class="tile-navigation quick-menu-tiles">
+          <router-link class="nav-link" to="/drinks">
+            <div class="navigation-tile">
+              <img :src="iconDrinks" alt="Drinks" class="quick-menu-icon" />
+              <span>Drinks</span>
+            </div>
+          </router-link>
+          <router-link class="nav-link" to="/vino">
+            <div class="navigation-tile">
+              <img :src="iconVino" alt="Vino" class="quick-menu-icon" />
+              <span>Vino</span>
+            </div>
+          </router-link>
+          <router-link class="nav-link" to="/cocktails">
+            <div class="navigation-tile">
+              <img :src="iconCocktails" alt="Cocktails" class="quick-menu-icon" />
+              <span>Cocktails</span>
+            </div>
+          </router-link>
+          <router-link class="nav-link" to="/snacks">
+            <div class="navigation-tile">
+              <img :src="iconSnacks" alt="Snacks" class="quick-menu-icon" />
+              <span>Snacks</span>
+            </div>
+          </router-link>
       </div>
     </section>
+
 
     <!-- Announcement Modal -->
     <!-- <BaseModal v-model="showAnnouncement">
@@ -28,52 +49,139 @@
       </div>
     </BaseModal> -->
 
-    <section class="tile-navigation" aria-label="Navigation zu Speisekarten">
-      <router-link class="nav-link" to="/vino">
-        <div class="navigation-tile">Weine</div>
-      </router-link>
-      <router-link class="nav-link" to="/drinks">
-        <div class="navigation-tile">Getränke</div>
-      </router-link>
-      <router-link class="nav-link" to="/snacks">
-        <div class="navigation-tile">Snacks</div>
-      </router-link>
-      <router-link class="nav-link" to="/showroom">
-        <div class="navigation-tile">Galerie</div>
-      </router-link>
-      <router-link class="nav-link" to="/wine-tasting">
-        <div class="navigation-tile">Tasting</div>
-      </router-link>
-      <!-- <router-link class="nav-link" to="/cocktails">
-        <div class="navigation-tile cocktail-tinder-tile">Cocktail Tinder 🍸</div>
-      </router-link> -->
-    </section>
-    
-    <section class="news-section" aria-label="Aktuelle Neuigkeiten">
-      <h2>Aktuelles</h2>
-      <div class="landing-page container">
-        <NotificationCard v-for="note in combinedNotifications" :key="note.title" :title="note.title"
-          :created-at="note.createdAt" :image="note.image" :text="note.text" :roundedImage="note.roundedImage"
-          :linkText="note.linkText" :linkTo="note.linkTo" />
-      </div>
-    </section>
+    <div>
+      <!-- About Casa Vazquez -->
+      <section class="intro-section bar-intro" aria-label="Über Casa Vazquez">
+        <div class="intro-content">
+          <div class="intro-text">
+            <h2>Willkommen in der Bar Casa Vazquez</h2>
+            <p>
+              Mitten im Herzen von Münster, an der Warendorfer Straße, findest du unsere gemütliche Wein-, Cocktail-, Tapas-bar. 
+              Wir sind dein Ort für entspannte Feierabendstunden, gesellige Abende mit Freunden oder einen 
+              genussvollen Start ins Wochenende.
+            </p>
+            <p>
+              In entspannter Atmosphäre servieren wir dir erlesene Weine, kreative Cocktails und köstliche 
+              Tapas – ganz so, wie du es aus spanischen Bars kennst. Bei uns steht der Genuss im Vordergrund, 
+              ohne Schnickschnack, dafür mit viel Herzlichkeit.
+            </p>
+            <p class="intro-tagline">
+              Ganz ungezwungen – wie bei Freunden.
+            </p>
+          </div>
+          <div class="intro-image">
+            <img src="../assets/images/cv.jpg" alt="Casa Vazquez Logo" />
+          </div>
+        </div>
+      </section>
 
-    <section class="about-section" aria-label="Über Casa Vazquez">
-      <div class="about-content">
-        <h2>Willkommen!</h2>
-        <p>
-          Du warst noch nie bei uns und fragst dich, was wir bieten?
-        </p>
-        <p>
-          Wir laden zum gemütlichen Verweilen an der Warendorfer Straße ein.
-          Leckere Drinks und Snacks und eine Auswahl an besonderen Weinen
-          versüßen dir den Feierabend.
-        </p>
-        <p class="about-tagline">
-          Ganz ungezwungen – wie bei Freunden.
-        </p>
-      </div>
-    </section>
+      <!-- Snacks Section -->
+      <section class="intro-section snacks-intro" aria-label="Unsere Snacks">
+        <div class="intro-content reverse">
+          <div class="intro-image">
+            <div class="image-grid">
+              <img src="../assets/images/tapasclub/tortilla.png" alt="Tortilla" />
+              <img src="../assets/images/tapasclub/croquetas_chorizo.png" alt="Croquetas" />
+              <img src="../assets/images/tapasclub/albondigas.png" alt="Albondigas" />
+              <img src="../assets/images/tapasclub/datilles.png" alt="Datteln" />
+            </div>
+          </div>
+          <div class="intro-text">
+            <h2>Tapas & Snacks</h2>
+            <p>
+              Hunger? Bei uns findest du eine feine Auswahl an spanischen Tapas und mediterranen Snacks. 
+              Von klassischen Croquetas über saftige Albondigas bis hin zu knusprigen Calamares – 
+              jede Kleinigkeit ist perfekt abgestimmt auf dein Glas Wein oder deinen Cocktail.
+            </p>
+            <p>
+              Unsere Tapas werden mit Liebe zum Detail serviert. Ob als kleiner 
+              Happen zwischendurch oder als gemeinsames Menü zum Teilen – bei uns wird jeder Abend zum 
+              kulinarischen Erlebnis.
+            </p>
+            <router-link to="/snacks" class="cta-link">Zur Snack-Karte →</router-link>
+          </div>
+        </div>
+      </section>
+
+      <!-- Wine Section -->
+      <section class="intro-section wine-intro" aria-label="Unsere Weine">
+        <div class="intro-content">
+          <div class="intro-text">
+            <h2>Weine mit Charakter</h2>
+            <p>
+              Unser Herzstück: Eine sorgfältig kuratierte Auswahl an Weinen aus Spanien, Italien und 
+              Deutschland. Ob kräftiger Rioja, eleganter Pinot Noir oder spritziger Albariño – 
+              bei uns findest du Weine für jeden Geschmack und jeden Anlass.
+            </p>
+            <p>
+              Achte auch auf unsere regelmäßigen Wein-Proben. Folge uns am Besten auf <a href="https://www.instagram.com/casa_vazquez_muenster/" target="_blank" rel="noopener noreferrer"><u> instagram</u></a>, um 
+              nichts zu verpassen!
+              
+            </p>
+            <router-link to="/vino" class="cta-link">Zur Weinkarte →</router-link>
+          </div>
+          <div class="intro-image">
+            <div class="image-grid wine-bottles">
+              <img :src="imgElenaWalch" alt="Elena Walch Pinot Bianco" />
+              <img :src="imgTerlan" alt="Terlan Chardonnay" />
+              <img :src="imgPompaelo" alt="Pompaelo Blanc de Noir" />
+              <img :src="imgNounat" alt="Nounat" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cocktails Section -->
+      <section class="intro-section cocktails-intro" aria-label="Unsere Cocktails">
+        <div class="intro-content reverse">
+          <div class="intro-image">
+            <img src="../assets/images/tinified (6)/blue_whisper.jpg" alt="Cocktails" class="single-image" />
+          </div>
+          <div class="intro-text">
+            <h2>Raffinierte Cocktails</h2>
+            <p>
+              Von zeitlosen Klassikern bis zu kreativen Eigenkreationen – unsere Cocktailkarte lässt keine 
+              Wünsche offen. Ob klassiche Sours, eleganter Espresso-Martini oder experimentelle Signature Drinks 
+              mit mediterranen Aromen: Bei uns wird jeder Cocktail mit Leidenschaft und frischen Zutaten 
+              zubereitet.
+            </p>
+            <router-link to="/drinks" class="cta-link">Zur Getränkekarte →</router-link>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="quick-menu-desktop-anchor desktop-only">
+      <section class="quick-menu-section quick-menu-section-desktop" aria-label="Schnellzugriff zur Speisekarte">
+        <h2>Direkt zur Karte</h2>
+        <div class="tile-navigation quick-menu-tiles">
+          <router-link class="nav-link" to="/drinks">
+            <div class="navigation-tile">
+              <img :src="iconDrinks" alt="Drinks" class="quick-menu-icon" />
+              <span>Drinks</span>
+            </div>
+          </router-link>
+          <router-link class="nav-link" to="/vino">
+            <div class="navigation-tile">
+              <img :src="iconVino" alt="Vino" class="quick-menu-icon" />
+              <span>Vino</span>
+            </div>
+          </router-link>
+          <router-link class="nav-link" to="/cocktails">
+            <div class="navigation-tile">
+              <img :src="iconCocktails" alt="Cocktails" class="quick-menu-icon" />
+              <span>Cocktails</span>
+            </div>
+          </router-link>
+          <router-link class="nav-link" to="/snacks">
+            <div class="navigation-tile">
+              <img :src="iconSnacks" alt="Snacks" class="quick-menu-icon" />
+              <span>Snacks</span>
+            </div>
+          </router-link>
+        </div>
+      </section>
+    </div>
 
     <div class="impressum">
       <h1 @click="handleImpressumSecret">Impressum</h1>
@@ -123,7 +231,7 @@
       </p>
 
     </div>
-    <div v-if="false" class="easter-egg" @click="handleClick" :style="{ transform: 'scale(' + scale + ')' }"
+    <div v-if="!voucherRedeemed" class="easter-egg" @click="handleClick" :style="{ transform: 'scale(' + scale + ')' }"
       :class="{ 'shake': isShaking }">
       <template v-if="clickCount < 5">
         <img :src="osterei" alt="Osertei" class="egg-icon" />
@@ -141,6 +249,8 @@
     <footer>
       <div class="sources-link">
         Icons by <a href="https://icons8.com/" target="_blank" rel="noopener">icons8.com</a>
+        ·
+        <a href="https://www.instagram.com/casa_vazquez_muenster/" target="_blank" rel="noopener noreferrer">Instagram</a>
       </div>
     </footer>
   </main>
@@ -149,15 +259,21 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { useRouter } from 'vue-router';
-import { notifications } from "../../../data/notifications.ts";
-import NotificationCard from "../components/NotificationCard.vue";
 import osterei from "../assets/images/icons8-easter-64.png";
+import iconVino from "../assets/images/icons8-bar-50.png";
+import iconDrinks from "../assets/images/icons8-drinks-64.png";
+import iconSnacks from "../assets/images/icons8-snack-64.png";
+import iconCocktails from "../assets/images/icons8-strandcocktail-96.png";
 
-const combinedNotifications = [...notifications] as typeof notifications;
+const imgElenaWalch = new URL('../assets/images/tinified (6)/elenawalch.PNG', import.meta.url).href;
+const imgTerlan = new URL('../assets/images/tinified (6)/terlan.PNG', import.meta.url).href;
+const imgPompaelo = new URL('../assets/images/tinified (6)/pompaelo.PNG', import.meta.url).href;
+const imgNounat = new URL('../assets/images/tinified (6)/nounat.PNG', import.meta.url).href;
 
 const clickCount = ref(0);
 const scale = ref(1);
 const isShaking = ref(false);
+const voucherRedeemed = true;
 const impressumClicks = ref(0);
 const impressumTimer = ref<number | null>(null);
 const router = useRouter();
@@ -202,7 +318,28 @@ function handleImpressumSecret() {
 }
 
 onMounted(() => {
-  // Announcement currently disabled
+  // Smooth scroll reveal for images - repeats every time
+  if (window.innerWidth >= 768) {
+    const images = document.querySelectorAll('.intro-image');
+    const firstImage = images.item(0);
+    if (firstImage) {
+      firstImage.classList.add('visible');
+    }
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.5,
+      rootMargin: '-100px'
+    });
+    
+    images.forEach(img => observer.observe(img));
+  }
 });
 
 onBeforeUnmount(() => {
@@ -215,6 +352,21 @@ onBeforeUnmount(() => {
 <style lang="scss" scoped>
 @use "../assets/styles/main" as *;
 
+/* ===========================================
+   LANDING PAGE FULL WIDTH OVERRIDE
+   =========================================== */
+
+.landing-page-main {
+  width: 100%;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 0 5rem 0 !important;
+}
+
+/* ===========================================
+   GLOBAL TYPOGRAPHY
+   =========================================== */
+
 h1,
 h2,
 h3 {
@@ -222,12 +374,15 @@ h3 {
   text-align: center;
   font-weight: 100;
   color: $accent-color;
-  font-style: italic;
 }
 
 section {
   padding: 1rem;
 }
+
+/* ===========================================
+   HERO SECTION
+   =========================================== */
 
 .hero {
   padding: 3rem 1rem;
@@ -265,6 +420,80 @@ section {
   font-style: italic;
 }
 
+.quick-menu-section {
+  background: rgba(139, 111, 71, 0.03);
+  padding: 0 1.25rem 2rem;
+  text-align: center;
+  border: 1px solid rgba(206, 170, 114, 0.2);
+}
+
+.quick-menu-section h2 {
+  margin: 0.75rem auto 0.75rem;
+  padding: 0;
+}
+
+.quick-menu-tiles {
+  max-width: 1080px;
+  margin: 0 auto;
+
+  .nav-link {
+    width: 100%;
+  }
+
+  .navigation-tile {
+    height: 72px;
+    font-size: 1.05rem;
+    padding: 0.4rem 0.65rem;
+    display: flex;
+    gap: 0.32rem;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: unset;
+    min-height: unset;
+  }
+
+  .quick-menu-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    flex-shrink: 0;
+    opacity: 0.95;
+    filter: brightness(0) saturate(100%) invert(63%) sepia(27%) saturate(518%) hue-rotate(358deg) brightness(92%) contrast(88%);
+  }
+}
+
+.tile-navigation.quick-menu-tiles {
+  gap: 0.85rem;
+  padding: 1rem;
+}
+
+.tile-navigation.quick-menu-tiles .navigation-tile {
+  height: 72px;
+  font-size: 1.05rem;
+}
+
+.quick-menu-desktop-anchor {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1.25rem 0;
+}
+
+.quick-menu-section-desktop {
+  width: min(560px, 100%);
+  margin: 0;
+
+  .tile-navigation.quick-menu-tiles {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .tile-navigation.quick-menu-tiles .nav-link {
+    min-width: 0;
+  }
+}
+
 .landing-page {
   padding: 1rem 0;
 
@@ -276,20 +505,22 @@ section {
 }
 
 .tile-navigation {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
   gap: 1.2rem;
-  justify-content: center;
-  padding: 2rem 1rem;
-  max-width: 600px;
-  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  margin: 0;
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  justify-items: stretch;
+  justify-content: stretch;
 
   .nav-link {
     text-decoration: none;
+    width: 100%;
   }
 
   .navigation-tile {
-    aspect-ratio: 1 / 1;
     background: linear-gradient(145deg, #1a1a28 0%, #1e1e2f 100%);
     border: 1.5px solid rgba(206, 170, 114, 0.4);
     border-radius: 1.2rem;
@@ -298,11 +529,13 @@ section {
     align-items: center;
     color: #ceaa72;
     font-family: "King Red", serif;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
+    height: 100px;
+    width: 100%;
 
     &::before {
       content: '';
@@ -439,18 +672,310 @@ section {
   margin-top: 2rem;
 }
 
+/* Mobile/Desktop visibility toggles */
+.desktop-only {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobile-only {
+    display: none;
+  }
+
+  .desktop-only {
+    display: block;
+  }
+
+  .quick-menu-desktop-anchor.desktop-only {
+    display: flex;
+  }
+}
+
+/* ===========================================
+   MOBILE NEWS & ABOUT SECTIONS
+   =========================================== */
+
 .news-section {
   padding: 2rem 1rem;
   background: rgba(139, 111, 71, 0.03);
-}
 
-.news-section h2 {
-  margin-bottom: 1.5rem;
+  h2 {
+    margin-bottom: 1.5rem;
+  }
 }
 
 .about-section {
   padding: 3rem 1rem;
   margin: 2rem 0;
+}
+
+/* ===========================================
+   DESKTOP INTRODUCTION SECTIONS
+   =========================================== */
+
+.intro-section {
+  padding: 5rem 3rem;
+  overflow: hidden;
+  
+  &:nth-child(even) {
+    background: rgba(139, 111, 71, 0.03);
+  }
+}
+
+.intro-content {
+  max-width: 2200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10rem;
+  align-items: center;
+  padding: 0 4rem;
+  
+  &.reverse {
+    .intro-text {
+      order: 2;
+    }
+    .intro-image {
+      order: 1;
+    }
+  }
+}
+
+/* ===========================================
+   TEXT CONTENT
+   =========================================== */
+
+.intro-text {
+  h2 {
+    text-align: left;
+    font-size: 3.2rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  p {
+    font-size: 1.25rem;
+    line-height: 2;
+    color: rgba(200, 192, 179, 0.95);
+    margin-bottom: 1.5rem;
+  }
+  
+  .intro-tagline {
+    font-family: "King Red", serif;
+    font-size: 1.5rem;
+    color: $accent-color;
+    font-style: italic;
+    margin-top: 2rem;
+  }
+}
+
+.cta-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: $accent-color;
+  border: 1px solid $accent-color;
+  border-radius: 0.5rem;
+  color: $background-color;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba($accent-color, 0.9);
+    border-color: rgba($accent-color, 0.9);
+    transform: translateX(5px);
+  }
+}
+
+/* ===========================================
+   IMAGES
+   =========================================== */
+
+.intro-image {
+  position: relative;
+  
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    // box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .single-image {
+    max-width: 500px;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+/* Scroll reveal effects - ONLY on desktop */
+@media (min-width: 768px) {
+  .intro-image {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    
+    &.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    img:hover {
+      transform: scale(1.03);
+      transition: transform 0.4s ease;
+    }
+  }
+  
+  .snacks-intro .intro-image,
+  .cocktails-intro .intro-image {
+    transform: translateX(-40px);
+    
+    &.visible {
+      transform: translateX(0);
+    }
+  }
+  
+  .wine-intro .intro-image {
+    transform: translateX(40px);
+    
+    &.visible {
+      transform: translateX(0);
+    }
+  }
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 0.75rem;
+  }
+  
+  &.wine-bottles {
+    img {
+      height: 300px;
+      object-fit: contain;
+      box-shadow: none;
+    }
+  }
+}
+
+/* ===========================================
+   RESPONSIVE: TABLET
+   =========================================== */
+
+@media (max-width: 1024px) {
+  .intro-section {
+    padding: 4rem 2rem;
+  }
+
+  .intro-content {
+    max-width: 100%;
+    gap: 4rem;
+    padding: 0 1rem;
+  }
+  
+  .intro-text {
+    h2 {
+      font-size: 2.2rem;
+    }
+    
+    p {
+      font-size: 1.05rem;
+    }
+  }
+}
+
+/* ===========================================
+   RESPONSIVE: MOBILE
+   =========================================== */
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+  }
+
+  .tile-navigation.quick-menu-tiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .tile-navigation.quick-menu-tiles .nav-link {
+    flex: 1 1 calc(50% - 0.75rem);
+    min-width: 140px;
+  }
+
+  .tile-navigation.quick-menu-tiles .navigation-tile {
+    height: 72px;
+    font-size: 1.1rem;
+    border-radius: 0.9rem;
+  }
+
+  .news-section {
+    padding: 1.5rem 1rem 0.75rem;
+  }
+
+  .intro-section {
+    padding: 2rem 1rem;
+  }
+  
+  .intro-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 100%;
+    padding: 0;
+
+    .intro-text {
+      order: 1;
+    }
+
+    .intro-image {
+      order: 2;
+    }
+    
+    &.reverse {
+      .intro-text,
+      .intro-image {
+        order: initial;
+      }
+
+      .intro-text {
+        order: 1;
+      }
+
+      .intro-image {
+        order: 2;
+      }
+    }
+  }
+  
+  .intro-text {
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+    }
+    
+    p {
+      font-size: 1rem;
+    }
+  }
+  
+  .image-grid img {
+    height: 150px;
+  }
 }
 
 .about-content {
@@ -485,7 +1010,7 @@ section {
 }
 
 .impressum {
-  margin-top: 5rem;
+  margin-top: 7rem;
   padding: 1rem;
   font-size: 0.9rem;
 

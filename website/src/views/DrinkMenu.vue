@@ -371,31 +371,32 @@ const beers: Drink[] = [
     allergens: [4, 10],
     available: true,
   },
-  {
-    name: "Estrella vom Fass 0,2",
+ {
+   name: "Estrella vom Fass 0,2",
     volume: "0,2l",
     price: "2,9€",
-    category: "Bier",
-    alcoholic: true,
-    allergens: [4, 10],
-    available: true
-  },
-  {
-    name: "Estrella vom Fass 0,4",
-    volume: "0,4l",
-    price: "5,5€",
-    category: "Bier",
-    alcoholic: true,
-    allergens: [4, 10],
-    available: true
-  },
+   category: "Bier",
+   alcoholic: true,
+   allergens: [4, 10],
+   available: true
+ },
+ {
+   name: "Estrella vom Fass 0,4",
+   volume: "0,4l",
+   price: "5,5€",
+   category: "Bier",
+   alcoholic: true,
+   allergens: [4, 10],
+   available: true
+ },
   {
     name: "Krombacher Weizen",
     volume: "0,50l",
     price: "5,9€",
     category: "Bier",
     alcoholic: true,
-    allergens: [4, 9, 10], available: true
+    allergens: [4, 9, 10],
+     available: false
   },
   {
     name: "Krombacher Weizen 0,0%",
@@ -403,7 +404,8 @@ const beers: Drink[] = [
     price: "5,5€",
     category: "Bier",
     alcoholic: false,
-    allergens: [4, 9, 10]
+    allergens: [4, 9, 10],
+     available: false
   },
   {
     name: "Paulaner Weißbier-Zitrone 0,0%",
@@ -411,7 +413,8 @@ const beers: Drink[] = [
     price: "5,5€",
     category: "Bier",
     alcoholic: false,
-    allergens: [4, 9, 10]
+    allergens: [4, 9, 10],
+     available: false
   },
   {
     name: "Krombacher Pils (0,0%)",
@@ -422,9 +425,9 @@ const beers: Drink[] = [
     allergens: [4, 10],
   },
   {
-    name: "Oberdorfer Helles",
-    volume: "0,33l",
-    price: "3,9€",
+    name: "Oberdorfer Helles 0,5l Fl",
+    volume: "0,5l",
+    price: "4,9€",
     category: "Bier",
     alcoholic: true,
     allergens: [4, 10],
@@ -465,14 +468,6 @@ const softdrinks: Drink[] = [
     category: "Softdrink",
     alcoholic: false,
     allergens: [1, 7, 8]
-  },
-  {
-    name: "Tafelwasser Classic 1l Karaffe",
-    volume: "1l",
-    price: "6,9€",
-    category: "Softdrink",
-    alcoholic: false,
-    allergens: []
   },
   {
     name: "Wasser Classic Fl. 0,75l",
@@ -554,6 +549,14 @@ const zeroAlc: Drink[] = [
   border-radius: 8px;
   position: relative;
   margin-bottom: 20%;
+}
+
+@media (min-width: 1024px) {
+  .drinks-menu-section {
+    max-width: 960px;
+    margin: 3.5rem auto;
+    margin-bottom: 3.5rem;
+  }
 }
 
 .drinks-header {

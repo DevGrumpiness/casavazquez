@@ -1,7 +1,7 @@
-import giftCardImage from "../assets/images/gutschein.jpg";
 import roseImage from "../assets/images/riscal_rose.png";
 import scheibelImage from "../assets/images/scheibel_marille.png";
-import wineBottleImage from "../assets/images/default_vino_white.png";
+import duom from "../assets/images/duom.jpg";
+import nounat from "../assets/images/nounat.jpg";
 
 export interface FeaturedPromo {
   id: string;
@@ -11,12 +11,6 @@ export interface FeaturedPromo {
 }
 
 export const featuredPromos: FeaturedPromo[] = [
-  {
-    id: "bottle-discount",
-    title: "11% Valentins Rabatt",
-    description: "Sichert euch jetzt 11% Rabatt auf alle Flaschenweine – perfekt für euren gemütlichen Abend!",
-    image: wineBottleImage,
-  },
   {
     id: "scheibel",
     title: "Der perfekte Abschluss",
@@ -31,9 +25,15 @@ export const featuredPromos: FeaturedPromo[] = [
     image: roseImage
   },
   {
-    id: "valentine",
-    title: "Valentinstag",
-    description: "Denk dran rechtzeitig zu reservieren!",
-    image: giftCardImage
+    id: "musicFeb27",
+    title: "Live Music - DuoM",
+    description: "Am 27.02. | 28.03. - DuoM rundet Euren Abend mit Musik und Witz ab.",
+    image: duom
+  },
+  {
+    id: "weintasting",
+    title: "Wein Tasting",
+    description: "05.03. Entdecke die Welt der Weine mit unserem exklusiven Wein Tasting Event mit K&D Wein Stories",
+    image: nounat
   }
 ];

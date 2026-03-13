@@ -16,7 +16,7 @@
 
     <!-- Swipe Counter -->
     <div class="ct-counter">
-      <span>{{ currentCardIndex + 1 }} / {{ allCocktails.length }}</span>
+      <span>{{ displayCardIndex }} / {{ allCocktails.length }}</span>
       <span v-if="likedCocktails.length > 0" class="ct-match-badge">💚 {{ likedCocktails.length }} Match{{ likedCocktails.length !== 1 ? 'es' : '' }}</span>
     </div>
 
@@ -30,7 +30,7 @@
 
     <!-- Restart Message -->
     <RestartMessage
-      :show="showRestartMessage"
+      :show="isFinished"
       :match-count="likedCocktails.length"
       :matches="likedCocktails"
       :personalities="personalities"
@@ -39,7 +39,7 @@
     />
 
     <!-- Swipeable Cards Stack -->
-    <div v-if="!showRestartMessage" class="ct-card-stack">
+    <div v-if="!isFinished" class="ct-card-stack">
       <CocktailCard
         v-for="(cocktail, index) in visibleCards"
         :key="`${currentCardIndex}-${cocktail.id}-${index}`"
@@ -60,7 +60,7 @@
     </div>
 
     <!-- Action Buttons -->
-    <div v-if="!showRestartMessage" class="ct-swipe-actions">
+    <div v-if="!isFinished" class="ct-swipe-actions">
       <button @click="swipeLeft" class="ct-action-btn ct-action-nope" aria-label="Pass">
         <span class="ct-action-icon">✕</span>
       </button>
@@ -70,19 +70,19 @@
     </div>
 
     <!-- Instruction -->
-    <div v-if="!showRestartMessage" class="ct-instruction">
+    <div v-if="!isFinished" class="ct-instruction">
       <p>← Swipe oder nutze die Buttons →</p>
     </div>
 
     <!-- Matches Section - Always visible, prominent -->
-    <div v-if="!showRestartMessage && likedCocktails.length > 0" class="ct-matches-banner">
+    <div v-if="!isFinished && likedCocktails.length > 0" class="ct-matches-banner">
       <h3 class="ct-banner-title">🎉 Deine Matches ({{ likedCocktails.length }})</h3>
       <p class="ct-banner-subtitle">Klick auf einen Cocktail für Details</p>
     </div>
 
     <!-- Matches Section -->
     <MatchesGrid
-      v-if="!showRestartMessage"
+      v-if="!isFinished"
       :matches="likedCocktails"
       :personalities="personalities"
       @view="viewCocktailDetails"
@@ -137,7 +137,6 @@ const allCocktails = computed(() => {
 });
 const currentCardIndex = ref(0);
 const likedCocktails = ref<Cocktail[]>([]);
-const showRestartMessage = ref(false);
 const swipeDirection = ref<'left' | 'right' | null>(null);
 const cardTransform = ref('');
 const isDragging = ref(false);
@@ -146,6 +145,13 @@ const detailCocktail = ref<Cocktail | null>(null);
 const isAnimating = ref(false);
 const showMatchToast = ref(false);
 const lastMatchedCocktail = ref<Cocktail | null>(null);
+const isFinished = computed(() => currentCardIndex.value >= allCocktails.value.length);
+const displayCardIndex = computed(() => {
+  if (allCocktails.value.length === 0) {
+    return 0;
+  }
+  return Math.min(currentCardIndex.value + 1, allCocktails.value.length);
+});
 
 const visibleCards = computed(() => {
   const cards = [];
@@ -249,8 +255,7 @@ const checkIfFinished = () => {
     totalCocktails: allCocktails.value.length,
     isFinished: currentCardIndex.value >= allCocktails.value.length
   });
-  if (currentCardIndex.value >= allCocktails.value.length) {
-    showRestartMessage.value = true;
+  if (isFinished.value) {
     console.log('🎉 All cocktails swiped! Matches:', likedCocktails.value.map(c => `${c.femaleName}/${c.maleName}`));
   }
 };
@@ -259,7 +264,6 @@ const restartSwiping = () => {
   console.log('🔄 Restarting...');
   currentCardIndex.value = 0;
   likedCocktails.value = [];
-  showRestartMessage.value = false;
   isAnimating.value = false;
 };
 
