@@ -14,11 +14,12 @@
     </button>
   </div>
 
-  <!-- Top announcement toast -->
-  <div v-if="showTopToast" class="top-toast" role="status" aria-live="polite">
-    <span>Saludos desde Madrid – Diesen Samstag bekommt ihr zu jedem Getränk eine kleine Tapita, ganz wie ihr es aus der
-      Hauptstadt Spaniens kennt.</span>
-    <button class="toast-close" @click="showTopToast = false" aria-label="Schließen">×</button>
+  <div v-if="featuredSoftdrink" class="drink-featured-card">
+    <span class="drink-featured-badge">JETZT NEU</span>
+    <div class="drink-featured-copy">
+      <h2>{{ featuredSoftdrink.name }}</h2>
+    </div>
+    <span class="drink-featured-price">{{ featuredSoftdrink.price }}</span>
   </div>
 
   <!--    Bubbles-->
@@ -50,7 +51,7 @@
         <li v-for="drink in nonAlcoholic ? softdrinks.filter(d => !d.alcoholic) : softdrinks" :key="drink.name"
           class="drinks-item">
           <div class="drink-text">
-            <span class="drinks-name">{{ drink.name }} &nbsp;{{ drink.volume }}
+            <span class="drinks-name">{{ drink.name }}<template v-if="drink.volume">&nbsp;{{ drink.volume }}</template>
               <sup v-if="drink.allergens" class="allergen-indices">{{ drink.allergens.join(',') }}</sup>
             </span>
             <div class="new-label" v-if="drink.neu">
@@ -181,6 +182,7 @@
       <p class="drinks-subtitle">Alkoholfreie Optionen</p>
     </header>
     <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
+      <p class="zero-alc-disclaimer">Produkte in dieser Kategorie enthalten lt. Hersteller max. 0,5% Alkohol oder sind vollständig alkoholfrei. Bei Unsicherheiten sprecht uns gerne an.</p>
       <transition-group name="drink" tag="ul" class="drinks-list">
         <li v-for="drink in nonAlcoholic ? zeroAlc.filter(d => !d.alcoholic) : zeroAlc" :key="drink.name"
           class="drinks-item">
@@ -347,7 +349,6 @@ interface Drink {
 }
 
 const nonAlcoholic = ref(false);
-const showTopToast = ref(false);
 const sliderItems = featuredPromos;
 
 function toggleNonAlcoholic() {
@@ -424,18 +425,17 @@ const beers: Drink[] = [
     alcoholic: false,
     allergens: [4, 10],
   },
-  {
-    name: "Oberdorfer Helles 0,5l Fl",
-    volume: "0,5l",
-    price: "4,9€",
-    category: "Bier",
-    alcoholic: true,
-    allergens: [4, 10],
-    available: true
-  },
+
 ];
 
 const softdrinks: Drink[] = [
+  {
+    name: "Erfrischende Limo mit Gurke, Minze und Thomas Henry Cherry Blossom",
+    price: "3,90€",
+    category: "Softdrink",
+    alcoholic: false,
+    neu: true
+  },
   {
     name: "Eistee von Rauch (Granateapfel, Crenberry)",
     volume: "0,33l",
@@ -495,6 +495,8 @@ const softdrinks: Drink[] = [
   },
 ];
 
+const featuredSoftdrink = softdrinks[0];
+
 const spritz: Drink[] = [
   { name: "*Limoncello", price: "8,5€", category: "Cocktail", alcoholic: true, allergens: [1, 4] },
   { name: "*Aperol", price: "8,5€", category: "Cocktail", alcoholic: true, allergens: [1, 4] },
@@ -531,6 +533,8 @@ const zeroAlc: Drink[] = [
   { name: "Gin Tonic", price: "7,5€", category: "Cocktail", alcoholic: false, allergens: [24] },
   { name: "Martini Vibrante Spritz", price: "7,5€", category: "Cocktail", alcoholic: false, allergens: [1, 4] },
   { name: "Limoncello Spritz", price: "7,5€", category: "Cocktail", alcoholic: false, allergens: [1, 4] },
+  { name: "Glitter Spritz", price: "7,5€", category: "Cocktail", alcoholic: false, allergens: [1, 4] },
+  { name: "Crodino Spritz", price: "7,5€", category: "Cocktail", alcoholic: false, allergens: [1, 4] },
 ];
 </script>
 
@@ -587,10 +591,65 @@ const zeroAlc: Drink[] = [
   text-align: center;
 }
 
+.zero-alc-disclaimer {
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.55);
+  border-left: 2px solid rgba(206, 170, 114, 0.4);
+  padding: 0.4rem 0.65rem;
+  margin: 0 0 0.75rem;
+}
+
 .drinks-content {
   overflow-y: auto;
   padding: 1rem;
   border-radius: 5px;
+}
+
+.drink-featured-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 1rem 1.25rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(206, 170, 114, 0.55);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(206, 170, 114, 0.14), rgba(255, 255, 255, 0.05));
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16);
+}
+
+.drink-featured-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #76b99290, #6b9f81b5);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.drink-featured-copy {
+  flex: 1 1 auto;
+}
+
+.drink-featured-copy h2 {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.45;
+  color: #fff;
+}
+
+.drink-featured-price {
+  color: $accent-color;
+  font-size: 1.15rem;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .scheibel-highlight {
@@ -779,6 +838,15 @@ const zeroAlc: Drink[] = [
     font-size: 0.85rem;
   }
 
+  .drink-featured-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .drink-featured-price {
+    align-self: flex-end;
+  }
+
   .scheibel-highlight {
     flex-direction: column;
     text-align: center;
@@ -787,31 +855,6 @@ const zeroAlc: Drink[] = [
   .scheibel-copy {
     text-align: center;
   }
-}
-
-.top-toast {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-  justify-content: space-between;
-  background: #221d32;
-  color: #ceaa72;
-  border: 1px solid #ceaa72;
-  border-radius: 6px;
-  padding: .5rem .75rem;
-  margin: .5rem 1rem 0;
-}
-
-.toast-close {
-  background: transparent;
-  border: none;
-  color: #ceaa72;
-  font-size: 1.2rem;
-  line-height: 1;
-  cursor: pointer;
 }
 
 .cocktails-link-section {

@@ -2,6 +2,19 @@ import type { Wine } from "../website/src/interfaces/vino";
 
 export const tintos: Wine[] = [
     {
+        name: 'Porta 6',
+        id: 'r41',
+        prices: {
+            '0.1l': '5,00€',
+            '0.2l': '8,50€',
+            'flasche': '24,50€'
+        },
+        color: 'red',
+        grape: 'Jahrgang 2023',
+        image: '/porto6.png',
+        available: true
+    },
+    {
         name: 'the guv`nor',
         id: 'r29',
         prices: {
@@ -19,6 +32,22 @@ export const tintos: Wine[] = [
         available: false
     },
     {
+        name: 'EMBOCADERO',
+        id: 1,
+        prices: {
+            '0.2l': '10,50€',
+            'flasche': '34,00€'
+        },
+        color: 'red',
+        grape: '100% Tinto Fino',
+        origin: 'Ribera del Duero',
+        shortDescription: 'Eleganter, trockener Rotwein mit lebendigen Beeren- und Zedernholznoten.',
+        longDescription: 'Embocadero Ribera del Duero 2021 – Dieser trockene Rotwein aus der renommierten Region Ribera del Duero besticht durch eine elegante, feinkörnige Tanninstruktur und animierende Säure. Sein lang anhaltender Abgang ist von Nuancen geprägt, die an Zedernholz erinnern. Im Bouquet entfalten sich lebendige Fruchtnoten von Schlehen, dunklen Beeren und Pflaumen, ergänzt durch subtile Anklänge von Lorbeer, Süßholz und einem Hauch Vanille. Am Gaumen setzt sich der Wein mit einer weichen Holznote in saftige Aromen von Kirsch, Schlehen und Beeren fort – ein harmonischer Wein, der Tiefe und Finesse vereint.',
+        image: null,
+        characteristics: 'Trocken, vollmundig, tiefrot, ehrlich',
+        available: false
+    },
+    {
         name: 'Banda Azul Crianza',
         id: 'r39',
         prices: {
@@ -33,7 +62,7 @@ export const tintos: Wine[] = [
         longDescription: 'Die Banda Azul Crianza 2022 von Federico Paternina vereint Tempranillo und Garnacha aus Rioja und reift zur klassischen Crianza mit würziger Eiche. In der Nase zeigen sich florale und balsamische Noten, dazu Kirsche, Brombeere und Vanille. Am Gaumen wirkt der Wein frisch und elegant mit mittlerem Körper, feinen Röstaromen sowie einem Hauch Leder, Lakritz und Pfeffer im langen Finish.',
         image: null,
         characteristics: 'Trocken, rote Frucht, Vanille, Eiche, würzig',
-        available: true
+        available: false
     },
 
     {
@@ -159,19 +188,7 @@ export const tintos: Wine[] = [
         characteristics: 'Trocken, klassisch, elegant, ausgewogen',
         available: true
     },
-    {
-        name: 'EMBOCADERO',
-        id: 1,
-        prices: { 'flasche': '€39,50' },
-        color: 'red',
-        grape: '100% Tinto Fino',
-        origin: 'Ribera del Duero',
-        shortDescription: 'Eleganter, trockener Rotwein mit lebendigen Beeren- und Zedernholznoten.',
-        longDescription: 'Embocadero Ribera del Duero 2021 – Dieser trockene Rotwein aus der renommierten Region Ribera del Duero besticht durch eine elegante, feinkörnige Tanninstruktur und animierende Säure. Sein lang anhaltender Abgang ist von Nuancen geprägt, die an Zedernholz erinnern. Im Bouquet entfalten sich lebendige Fruchtnoten von Schlehen, dunklen Beeren und Pflaumen, ergänzt durch subtile Anklänge von Lorbeer, Süßholz und einem Hauch Vanille. Am Gaumen setzt sich der Wein mit einer weichen Holznote in saftige Aromen von Kirsch, Schlehen und Beeren fort – ein harmonischer Wein, der Tiefe und Finesse vereint.',
-        image: null,
-        characteristics: 'Trocken, vollmundig, tiefrot, ehrlich',
-        available: true
-    },
+
     {
         name: 'Borgo Scopeto Chianti Classico Riserva 2017 DOCG',
         id: 16,

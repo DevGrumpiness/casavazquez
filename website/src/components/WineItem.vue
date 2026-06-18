@@ -93,14 +93,18 @@ strong {
 
   .collapsed-view {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     padding: 1rem;
+    gap: 1rem;
 
     .wine-image {
+      width: 56px;
       height: 80px;
-      object-fit: cover;
+      flex-shrink: 0;
+      object-fit: contain;
+      object-position: center top;
       border-radius: 8px;
-      margin-right: 1rem;
+      display: block;
     }
 
     .wine-summary {

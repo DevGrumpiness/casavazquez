@@ -33,7 +33,7 @@ export const featuredPromos: FeaturedPromo[] = [
   {
     id: "weintasting",
     title: "Wein Tasting",
-    description: "05.03. Entdecke die Welt der Weine mit unserem exklusiven Wein Tasting Event mit K&D Wein Stories",
+    description: "07.05. Entdecke die Welt der Weine mit unserem exklusiven Wein Tasting Event mit K&D Wein Stories",
     image: nounat
   }
 ];

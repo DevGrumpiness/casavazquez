@@ -1,13 +1,10 @@
 <template>
   <FeaturedSlider :items="sliderItems" />
+  <TodayPromoBanner />
   <section class="wine-menu-section">
     <header class="wine-header">
       <h1 class="wine-title">Vino</h1>
     </header>
-    <div v-if="showTopToast" class="top-toast" role="status" aria-live="polite">
-      <span>Saludos desde Madrid – Diesen Samstag bekommt ihr zu jedem Getränk eine kleine Tapita, ganz wie ihr es aus der Hauptstadt Spaniens kennt.</span>
-      <button class="toast-close" @click="showTopToast = false" aria-label="Schließen">×</button>
-    </div>
     <p class="tasting-notice">
       Besondere Weißweine findet ihr auf unserer Tasting Seite.
     </p>
@@ -48,6 +45,7 @@ import {ref, onMounted, computed} from 'vue';
 import {type Wine} from "../interfaces/vino.ts";
 import WineItem from '../components/WineItem.vue';
 import FeaturedSlider from "../components/FeaturedSlider.vue";
+import TodayPromoBanner from "../components/TodayPromoBanner.vue";
 import { featuredPromos } from "../data/featuredPromos";
 import {useNow} from '@vueuse/core';
 import {useWineMenu} from "./useWineMenu.ts";
@@ -65,7 +63,6 @@ const isHappyHour = computed(() => {
 });
 
 const wines = ref<Wine[]>([]);
-const showTopToast = ref(false);
 const selectedColor = ref<string>('');
 const sliderItems = featuredPromos;
 
@@ -140,31 +137,6 @@ const filteredWines = computed(() => {
     max-width: 960px;
     margin: 3.5rem auto 7rem;
   }
-}
-
-.top-toast {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-  justify-content: space-between;
-  background: $background-color;
-  color: $accent-color;
-  border: 1px solid $accent-color;
-  border-radius: 6px;
-  padding: .5rem .75rem;
-  margin: .5rem 0 0;
-}
-
-.toast-close {
-  background: transparent;
-  border: none;
-  color: $accent-color;
-  font-size: 1.2rem;
-  line-height: 1;
-  cursor: pointer;
 }
 
 .wine-header {

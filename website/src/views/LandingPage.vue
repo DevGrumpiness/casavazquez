@@ -8,6 +8,8 @@
       </div>
     </header>
 
+    <TodayPromoBanner />
+
     <section class="quick-menu-section mobile-only" aria-label="Schnellzugriff zur Speisekarte">
       <h2 >Direkt zur Karte</h2>
       <div class="tile-navigation quick-menu-tiles">
@@ -37,18 +39,6 @@
           </router-link>
       </div>
     </section>
-
-
-    <!-- Announcement Modal -->
-    <!-- <BaseModal v-model="showAnnouncement">
-      <div style="display:flex;flex-direction:column;gap:0.75rem">
-        <h2 style="margin:0">Saludos desde Madrid</h2>
-        <p style="margin:0">
-          Diesen Samstag bekommt ihr zu jedem Getränk eine kleine Tapita – ganz wie ihr es aus der Hauptstadt Spaniens kennt.
-        </p>
-      </div>
-    </BaseModal> -->
-
     <div>
       <!-- About Casa Vazquez -->
       <section class="intro-section bar-intro" aria-label="Über Casa Vazquez">
@@ -259,16 +249,17 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { useRouter } from 'vue-router';
+import TodayPromoBanner from "../components/TodayPromoBanner.vue";
 import osterei from "../assets/images/icons8-easter-64.png";
 import iconVino from "../assets/images/icons8-bar-50.png";
 import iconDrinks from "../assets/images/icons8-drinks-64.png";
 import iconSnacks from "../assets/images/icons8-snack-64.png";
 import iconCocktails from "../assets/images/icons8-strandcocktail-96.png";
 
-const imgElenaWalch = new URL('../assets/images/tinified (6)/elenawalch.PNG', import.meta.url).href;
-const imgTerlan = new URL('../assets/images/tinified (6)/terlan.PNG', import.meta.url).href;
-const imgPompaelo = new URL('../assets/images/tinified (6)/pompaelo.PNG', import.meta.url).href;
-const imgNounat = new URL('../assets/images/tinified (6)/nounat.PNG', import.meta.url).href;
+const imgElenaWalch = new URL('../assets/images/tinified (6)/elenawalch.jpg', import.meta.url).href;
+const imgTerlan = new URL('../assets/images/tinified (6)/terlan.jpg', import.meta.url).href;
+const imgPompaelo = new URL('../assets/images/tinified (6)/pompaelo.jpg', import.meta.url).href;
+const imgNounat = new URL('../assets/images/tinified (6)/nounat.jpg', import.meta.url).href;
 
 const clickCount = ref(0);
 const scale = ref(1);
@@ -574,97 +565,6 @@ section {
     }
   }
 }
-
-.promo-card {
-  position: relative;
-  overflow: hidden;
-  margin: 2rem auto 0;
-  padding: 1.5rem;
-  max-width: 720px;
-  border-radius: 1.5rem;
-  border: 1px solid rgba(206, 170, 114, 0.4);
-  background: radial-gradient(circle at top right, rgba(250, 223, 173, 0.18), transparent 60%),
-    linear-gradient(145deg, rgba(12, 12, 18, 0.96), rgba(34, 24, 18, 0.9));
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
-}
-
-.promo-card__glow {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 30% 20%, rgba(255, 215, 160, 0.15), transparent 45%),
-    radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.08), transparent 35%);
-  filter: blur(8px);
-  opacity: 0.4;
-  pointer-events: none;
-}
-
-.promo-card__content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  color: #f9f1e4;
-}
-
-.promo-card__eyebrow {
-  margin: 0;
-  font-size: 0.9rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-family: "King Red", serif;
-  color: rgba(249, 241, 228, 0.95);
-  text-align: center;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-}
-
-.promo-card__headline {
-  margin: 0;
-  font-size: clamp(1.4rem, 4vw, 2rem);
-  line-height: 1.2;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
-}
-
-.promo-card__detail {
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: rgba(249, 241, 228, 0.95);
-  text-align: center;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
-
-}
-
-.promo-card__cta {
-  align-self: flex-start;
-  padding: 0.65rem 1.5rem;
-  border-radius: 999px;
-  border: 1px solid rgba(249, 241, 228, 0.3);
-  background: rgba(206, 170, 114, 0.15);
-  color: #f9f1e4;
-  text-decoration: none;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  transition: transform 0.2s ease, background 0.3s ease, border 0.3s ease;
-}
-
-.promo-card__cta:hover {
-  transform: translateY(-2px);
-  background: rgba(206, 170, 114, 0.3);
-  border-color: rgba(249, 241, 228, 0.6);
-}
-
-@media (max-width: 640px) {
-  .promo-card {
-    margin: 1.5rem 1rem 0;
-    padding: 1.25rem;
-  }
-
-  .promo-card__cta {
-    width: 100%;
-    text-align: center;
-  }
-}
-
 
 .sources-link {
   padding: 1rem;

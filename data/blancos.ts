@@ -52,6 +52,21 @@ export const blancos: Wine[] = [
         available: true
     },
     {
+        name: 'Marina Alta Blanco Gran Selección 2023',
+        id: 'w_marina_alta_gran_seleccion_2023',
+        prices: {
+            'flasche': '19,00€'
+        },
+        color: 'white',
+        grape: '100% Moscatel de Alejandría',
+        origin: 'Spanien, Alicante D.O.',
+        shortDescription: 'Trocken, aromatisch-floraler Weißwein aus Alicante mit intensivem Moscatel-Charakter und tropischer Frische.',
+        longDescription: 'Der Marina Alta Blanco Gran Selección von Bodegas Bocopa ist ein sortenreiner Moscatel de Alejandría aus der D.O. Alicante. Vergoren im Edelstahltank, präsentiert er sich blassgolden und kristallklar. In der Nase intensiv, fein und elegant – Moschus, tropische Zitrusfrüchte und Kräuterhintergründe ergeben ein unverwechselbar aromatisches Bouquet. Am Gaumen trocken, sehr geschmeidig und vollmundig, mit einer saftigen Fruchtfülle und einem langen, sortentypischen Abgang. Serviertemperatur: 6 °C.',
+        image: null,
+        characteristics: 'Trocken, aromatisch, floral, Moscatel, Alicante, frisch',
+        available: true
+    },
+    {
         name: 'Colli Vaibò Lugana',
         id: 'w20',
         prices: {
@@ -136,7 +151,7 @@ export const blancos: Wine[] = [
         longDescription: 'Pompaelo Wines widmet den Blanco der Vielfalt Navarras: Die Cuvée aus rund 90% Chardonnay, 8% Viura (Macabeo) und 2% Muscadelle leuchtet strohgelb und duftet nach Apfel, Birne, Ananas und Orangenschale, abgerundet von feinen Mandel- und Rosenanklängen. Am Gaumen treffen lebendige Frucht, milde Säure und eine verführerisch cremige Textur auf einen langen, charmanten Nachhall – perfekt als Aperitif oder zu Salaten, Meeresfrüchten und asiatisch inspirierten Gerichten. Enthält Sulfite.',
         image: null,
         characteristics: 'Trocken, cremig, tropisch, Navarra, Chardonnay',
-        available: true
+        available: false
     },
     {
         name: 'Julian',
@@ -174,4 +189,5 @@ export const blancos: Wine[] = [
         "characteristics": "Trocken, fruchtig, frisch, weiß, Garnacha, elegant",
         "available": false
     },
+
 ]

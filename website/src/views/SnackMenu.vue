@@ -1,22 +1,23 @@
 <template>
   <FeaturedSlider :items="sliderItems" />
 
-  <!-- <section class="flamm-feature" aria-label="Flammkuchen Highlight">
+  <section
+    v-if="showTodayServiceNotice"
+    class="flamm-feature"
+    aria-label="Hinweis zu Wartezeiten waehrend des Bandauftritts"
+  >
     <div class="flamm-content">
-      <span class="flamm-kicker">GANZ NEU AUF DER KARTE</span>
-      <h2>Elsässer Flammkuchen</h2>
-      <p>
-        Dünner, ofenfrischer Teig mit Crème fraîche, roten Zwiebeln und herzhaftem Speck. Perfekt zum Teilen mit einem Glas Wein.
-      </p>
-      <div class="flamm-meta">
-        <span class="flamm-price">10,00€</span>
-        <span class="flamm-tag">Auf Wunsch auf vegetarisch</span>
-      </div>
+      <span class="flamm-kicker">Nur heute</span>
+      <h2>Längere Wartezeiten während Bandauftritt - Tapas mit kurzen Wartezeiten:</h2>
+      <ul class="flamm-variants">
+        <li v-for="item in quickWaitItems" :key="item.name">
+          <span class="flamm-variant-name">{{ item.name }}</span>
+          <span class="flamm-variant-desc">{{ item.description }}</span>
+          <span class="flamm-variant-price">{{ item.price }}</span>
+        </li>
+      </ul>
     </div>
-    <figure class="flamm-figure">
-      <img class="flamm-photo" :src="flammImage" alt="Knuspriger Flammkuchen" loading="lazy" />
-    </figure>
-  </section> -->
+  </section>
 
   <!-- <div class="supply-hint" role="status" aria-live="polite">
     Aufgrund einer Lieferverzögerung unseres Zulieferers sind einige Tapas erst ab nächster Woche wieder erhältlich. Danke für euer Verständnis!
@@ -57,15 +58,6 @@
     <header class="snacks-header">
       <h1 class="snacks-title">SNACKS</h1>
     </header>
-    <div v-if="showTopToast" class="top-toast" role="status" aria-live="polite">
-      <span>Saludos desde Madrid – Diesen Samstag bekommt ihr zu jedem Getränk eine kleine Tapita, ganz wie ihr es aus
-        der Hauptstadt Spaniens kennt.</span>
-      <button class="toast-close" @click="showTopToast = false" aria-label="Schließen">×</button>
-    </div>
-
-    <p class="snacks-note" style="margin-top: 1rem; font-style: italic;">
-      Wir stellen euch auch gerne einen Mix zusammen. Nennt uns einfach euer Budget und wir stellen euch Leckereien auf den Tisch. (Empfehlung: 15€ pP)
-    </p>
 
     <section v-if="showQuickWaitSection" class="quick-wait-section" aria-label="Snacks mit geringsten Wartezeiten">
       <h3 class="quick-wait-title">Snacks mit geringsten Wartezeiten</h3>
@@ -186,6 +178,7 @@
             </span>
           </li>
         </TransitionGroup>
+
         <br />
         <ul class="snacks-extras">
           <li class="snacks-item extra veggie">
@@ -295,10 +288,10 @@
               <span class="snacks-name">+ Serrano</span>
               <span class="snacks-price">+ 3,90</span>
             </li>
-            <li class="snacks-item extra" v-if="!veggie">
+            <!-- <li class="snacks-item extra" v-if="!veggie">
               <span class="snacks-name">+ Albondigas</span>
               <span class="snacks-price">+ 3,90</span>
-            </li>
+            </li> -->
 
             <li class="snacks-item extra veggie">
               <span class="snacks-name">+ Doppelt Mozarella</span>
@@ -344,7 +337,9 @@
       </div>
     </div>
 
-    <div class="allergen-section">
+  </section>
+
+  <div class="allergen-section">
       <h3>Allergene und Zusatzstoffe</h3>
       <p class="legal-disclaimer">
         Die Inhalte dieser Karte werden mit größter Sorgfalt erstellt. Trotzdem können Rezeptur- oder Lieferantenwechsel
@@ -483,7 +478,6 @@
       </table>
     </div>
 
-  </section>
 </template>
 
 <script setup lang="ts">
@@ -501,14 +495,12 @@ import polloPiripiri from "../assets/images/tapasclub/pollo_piripiri.png";
 // import tortillaImage from "../assets/images/tapasclub/tortilla.png";
 import albondigasImage from "../assets/images/tapasclub/albondigas.png";
 // import champignonsImage from "../assets/images/tapasclub/champignons.png";
-import nuggetsImage from "../assets/images/tapasclub/nuggets.png";
 // import zwiebelringeImage from "../assets/images/tapasclub/zwiebelringe.png";
 import rotebete from "../assets/images/tapasclub/rotebete_baellchen.png";
-import pancehta from "../assets/images/tapasclub/pancheta.png";
-import veggieSticksImage from "../assets/images/tapasclub/sticks.png";
+// import pancehta from "../assets/images/tapasclub/pancheta.png";
 import calamares from "../assets/images/tapasclub/calamares.png";
 import mixtoImage from "../assets/images/tapasclub/mixto.webp";
-// import flammImage from "../assets/images/tapasclub/flamm.png";
+import flammImage from "../assets/images/tapasclub/flamm.png";
 import pommesImage from "../assets/images/pommes.webp";
 
 interface SnackItem {
@@ -560,7 +552,6 @@ const veggie = ref(false)
 const keto = ref(false)
 const showOnmInfo = ref(false)
 const showCocaInfo = ref(false)
-const showTopToast = ref(false)
 const showAlbondigasInfo = ref(false)
 const showMixtoInfo = ref(false)
 
@@ -635,6 +626,56 @@ const sliderItems = featuredPromos;
 const snackBookmarksStorageKey = "snackBookmarks"
 
 const QUICK_WAIT_SECTION_DATE = "2026-02-28"
+const TODAY_SERVICE_NOTICE_DATE = "2026-05-08"
+
+const quickWaitItems = [
+  {
+    name: "Käseplatte",
+    description: "Manchego Käse, dazu servieren wir Brot und auf Wunsch Feigen-Sauce.",
+    price: "10,50"
+  },
+  {
+    name: "Albondigas",
+    description: "Fleischbällchen (5Stk) mit Chili-Käse Füllung (pikant) in Tomatensalsa",
+    price: "7,5"
+  },
+  {
+    name: "Oliven",
+    description: "Spanischer Olivenmix.",
+    price: "6"
+  },
+  {
+    name: "Verduras",
+    description: "Gemischtes Grillgemüse Antipasti-Art (lauwarm).",
+    price: "7,5"
+  },
+  {
+    name: "Calamares",
+    description: "Tintenfischringe im Backteig",
+    price: "7,5"
+  }
+]
+
+const flammkuchenVariants = [
+  {
+    name: "Flammkuchen Klassisch",
+    description: "Speck & Zwiebeln",
+    price: "9,50",
+    veggie: false
+  },
+  {
+    name: "Flammkuchen Vegetarisch",
+    description: "mit roten Zwiebeln, Frühlingszwiebeln & Champignons",
+    price: "9,50",
+    veggie: true
+  },
+  {
+    name: "Flammkuchen Española",
+    description: "Chorizo & Oliven",
+    price: "9,50",
+    veggie: false
+  }
+]
 
 function getLocalDateIso(date: Date) {
   const year = date.getFullYear()
@@ -644,6 +685,18 @@ function getLocalDateIso(date: Date) {
 }
 
 const showQuickWaitSection = computed(() => getLocalDateIso(new Date()) === QUICK_WAIT_SECTION_DATE)
+const showTodayServiceNotice = computed(() => getLocalDateIso(new Date()) === TODAY_SERVICE_NOTICE_DATE)
+
+const filteredSnacks = computed(() => {
+  let filtered = [...snacks]
+  if (veggie.value) {
+    filtered = filtered.filter(s => s.veggie)
+  }
+  if (keto.value) {
+    filtered = filtered.filter(s => s.keto)
+  }
+  return filtered
+})
 
 const isMobileDevice = ref(false)
 const bookmarkedSnackIds = ref<string[]>([])
@@ -758,16 +811,21 @@ function scrollToSnackSection(sectionId: string) {
 }
 
 const snacks: SnackItem[] = [
-  { name: 'Nachos mit Dip (Salsa/Aioli/Guacamole)', description: '', price: '6,5', veggie: true, keto: false, allergens: [11, 15] },
-  { name: 'Pimientos de Padrón - der Klassiker', description: '', price: '6,5', veggie: true, keto: true},
-  { name: 'Brot Aioli/Guacamole Dip', description: '', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 15] },
+  { name: 'Nachos mit Dip (Salsa/Aioli)', description: '', price: '6,5', veggie: true, keto: false, allergens: [11, 15] },
+  { name: 'Pimientos de Padrón - der Klassiker', description: '', price: '6,5', veggie: true, keto: true },
+  // { name: 'Brot mit Aioli Dip', description: '', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 15] },
   { name: 'Süßkartoffel-Pommes', description: '', price: '5', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
   { name: 'Süßkartoffel-Pommes groß', description: '', price: '7', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
   { name: 'Oliven Mix', description: '', price: '6', veggie: true, onm: true, keto: true, image: olivenMixImage },
-  // { name: 'Kroketten + Dip', description: 'gefüllt mit Käse & Jalapeños', price: '7,5', veggie: false, keto: false, image: croquetasBoletus, allergens: [9, 11, 13], available: true },
   { name: 'Croquetas con Jamón Iberico', description: 'kleine Kroketten mit Jamón-Füllung', price: '7,5', veggie: false, keto: false, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
-  { name: 'Croquetas de Boletus', description: 'kleine Kroketten mit Steinpilz-Füllung', price: '7,5', veggie: false, keto: false, available: true, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
-  
+  ...flammkuchenVariants.map(variant => ({
+    name: variant.name,
+    description: variant.description,
+    price: variant.price,
+    veggie: variant.veggie,
+    keto: false,
+    image: flammImage
+  })),
   {
     name: 'Pollo Al Ajillo',
     description: 'Gegarte, marinierte Hähnchen Flügel mit Knoblauch',
@@ -781,53 +839,50 @@ const snacks: SnackItem[] = [
   },
   // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
   // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
-  { name: 'Albondigas in Salsa', description: 'Fleischbällchen (5Stk) mit Chili-Käse Füllung (nicht scharf) in Tomatensalsa', price: '7,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
-  { name: 'Chorizo in Salsa', description: 'Pikante Chorizo (spanische Wurst) in Tomatensalsa', price: '6,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
-  { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
-
+  { name: 'Albondigas in Salsa', description: 'Fleischbällchen (5Stk) mit Chili-Käse Füllung (pikant) in Tomatensalsa', price: '7,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
+  // { name: 'Chorizo in Salsa', description: 'Pikante Chorizo (spanische Wurst) in Tomatensalsa', price: '6,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
+  // { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
   { name: 'Dátiles con Bacon', description: 'Datteln im Speckmantel', price: '7,5', veggie: false, keto: false, image: datillesImage, allergens: [26] },
-  {
-    name: 'Dados de Panceta',
-    description: 'Schweinbauch-Würfel, herzhaft mariniert. ca 150g',
-    price: '9,5',
-    veggie: false,
-    keto: true,
-    available: true,
-    image: pancehta,
-    allergens: [9, 16, 26]
-  },
+  // {
+  //   name: 'Dados de Panceta',
+  //   description: 'Schweinbauch-Würfel, herzhaft mariniert. ca 150g',
+  //   price: '9,5',
+  //   veggie: false,
+  //   keto: true,
+  //   available: true,
+  //   image: pancehta,
+  //   allergens: [9, 16, 26]
+  // },
   { name: 'Calamares Ringe', description: 'Tintenfischringe im Backteig', price: '7,5', veggie: false, keto: false, image: calamares, allergens: [9, 11, 13, 20] },
-
- {
-    name: 'Edamame Kräuter Bällchen',
-    description: 'Veganer Snack aus Edamame in Kräuter-Panade',
+  {
+    name: 'Harissa Bällchen',
+    description: 'Veganer Snack aus Harissa in Kräuter-Panade',
     price: '7,5',
     veggie: true,
     keto: false,
     image: rotebete,
     allergens: [9, 27, 28, 29, 30]
   },
- {
-    name: 'Rote Beete Ingwer Bällchen',
-    description: 'Veganer Snack aus proteinreichen Kichererbsen, mit rote Beete und Ingwer.',
-    price: '7,5',
-    veggie: true,
-    keto: false,
-    image: rotebete,
-    allergens: [9, 27, 28, 29, 30],
-    available: false
-  },
- {
-    name: 'Vegane Erbsen Minz Sticks',
-    description: 'Veganund lecker.',
-    price: '7,5',
-    veggie: true,
-    keto: false,
-    image: veggieSticksImage,
-    allergens: [9, 27, 28, 29, 30],
-    available: false
-  },
- {
+  // {
+  //   name: 'Rote Beete Ingwer Bällchen',
+  //   description: 'Veganer Snack aus proteinreichen Kichererbsen, mit rote Beete und Ingwer.',
+  //   price: '7,5',
+  //   veggie: true,
+  //   keto: false,
+  //   image: rotebete,
+  //   allergens: [9, 27, 28, 29, 30],
+  // },
+  // {
+  //   name: 'Vegane Erbsen Minz Sticks',
+  //   description: 'Veganund lecker.',
+  //   price: '7,5',
+  //   veggie: true,
+  //   keto: false,
+  //   image: veggieSticksImage,
+  //   allergens: [9, 27, 28, 29, 30],
+  //   available: false
+  // },
+  {
     name: 'Verduras a la Parrilla',
     description: 'Gemischtes Grillgemüse Antipasti-Art (lauwarm).',
     price: '7,5',
@@ -836,7 +891,7 @@ const snacks: SnackItem[] = [
     image: undefined,
     allergens: [9, 27, 28, 29, 30]
   },
- {
+  {
     name: 'Gambas Empanadas',
     description: 'Gambas mit einer köstlich subtil gewürzten knusprigen Kruste mit Knoblauch und Petersilie. ',
     price: '8,5',
@@ -845,18 +900,27 @@ const snacks: SnackItem[] = [
     image: undefined,
     allergens: [9, 27, 28, 29, 30]
   },
- {
-    name: 'DESSERT - Tartufo mit Schoko-Kern und Haselnussmantel',
-    description: 'Tartufo mit Schoko-Kern und Haselnussmantel',
+  {
+    name: 'Blumenkohl Bites, würzig',
+    description: 'Blumenkohl Bites, würzig mit einer knusprigen Panade und einer leichten Schärfe',
+    price: '5,5',
+    veggie: true,
+    keto: false,
+    image: undefined,
+    allergens: [9, 27, 28, 29, 30]
+  },
+  {
+    name: 'DESSERT - Crema Catalana',
+    description: 'Traditionelles spanisches Dessert mit einer cremigen Vanillebasis und karamellisierter Zuckerkruste',
     price: '6,5',
     veggie: true,
     keto: false,
     image: undefined,
-   allergens: [12, 13]
+    allergens: [12, 13]
   },
- {
-    name: 'Empanadillas de Atun / Pollo 4Stk',
-    description: 'Klassiker unter den spanischen Empanadas mit einer Füllung aus Thunfisch und Tomaten oder Hähnchen - Du entscheidest ',
+  {
+    name: 'Empanadillas de Pollo 4Stk',
+    description: 'Klassiker unter den spanischen Empanadas mit Hähnchen-Füllung ',
     price: '7,5',
     veggie: false,
     keto: false,
@@ -877,17 +941,6 @@ const snacks: SnackItem[] = [
 // { name: 'Tapas Mix (2p)', description: 'Mix aus verschiedenen Tapas', price: '24,5', veggie: false, keto: false },
 // { name: 'Veggi Mix (2p)', description: 'Mix aus verschiedenen Veggie Tapas.', price: '24,5', veggie: true, keto: false },
 // { name: 'Aros de Cebolla', description: 'Zwiebelringe', price: '6', veggie: true, keto: false, image: zwiebelringeImage, allergens: [9, 11, 13] },
-
-const filteredSnacks = computed(() => {
-  let filtered = [...snacks];
-  if (veggie.value) {
-    filtered = filtered.filter(s => s.veggie);
-  }
-  if (keto.value) {
-    filtered = filtered.filter(s => s.keto);
-  }
-  return filtered;
-});
 
 function toggleVeggie() {
   veggie.value = !veggie.value;
@@ -1019,15 +1072,61 @@ ul {
 }
 
 .flamm-feature {
-  margin: 1.5rem auto 0;
+  margin: 1.5rem 1rem 0;
   max-width: 920px;
-  padding: 1.8rem 1.5rem 1rem;
+  padding: 1.5rem 1.5rem 1.2rem;
   border: 1px solid rgba(206, 170, 114, 0.6);
   border-radius: 22px;
   background: rgba(22, 14, 46, 0.9);
   box-shadow: 0 18px 34px rgba(0, 0, 0, 0.28);
   overflow: hidden;
-  margin: 0 1rem;
+
+  @media (min-width: 600px) {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 1.5rem auto 0;
+  }
+}
+
+.flamm-variants {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+}
+
+.flamm-variant-name {
+  font-weight: 600;
+  color: $accent-color;
+  font-size: 0.95rem;
+  min-width: 8rem;
+}
+
+.flamm-variant-desc {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  flex: 1;
+}
+
+.flamm-variant-price {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $accent-color;
+  white-space: nowrap;
+
+  &::after {
+    content: ' €';
+  }
 }
 
 .flamm-content {
@@ -1083,6 +1182,62 @@ ul {
   object-fit: contain;
   filter: drop-shadow(0 18px 25px rgba(0, 0, 0, 0.4));
 }
+
+.quick-wait-section {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px solid rgba(206, 170, 114, 0.35);
+  border-radius: 14px;
+  background: rgba(206, 170, 114, 0.08);
+}
+
+.quick-wait-title {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  font-size: 0.8rem;
+  color: $accent-color;
+}
+
+.quick-wait-hint {
+  margin: 0.4rem 0 0;
+  font-size: 0.72rem;
+  color: rgba(0, 0, 0, 0.72);
+}
+
+.quick-wait-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0.9rem 0 0;
+  padding: 0;
+}
+
+.quick-wait-item {
+  margin: 0;
+}
+
+.quick-wait-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(206, 170, 114, 0.4);
+  color: $text-color;
+  text-decoration: none;
+  font-size: 0.72rem;
+  letter-spacing: 0.04rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(206, 170, 114, 0.14);
+    border-color: rgba(206, 170, 114, 0.7);
+    color: $accent-color;
+  }
+}
+
 
 .hint {
   text-shadow: 1px 1px 2px #ceaa72;
@@ -1178,8 +1333,8 @@ hr {
   background: $background-color;
   width: min-content;
   margin: 0 auto;
-  padding: 0 1rem;
   color: $accent-color;
+  padding: 0 1rem;
   font-size: 2rem;
   font-family: 'King Red';
   font-weight: normal;
@@ -1616,7 +1771,10 @@ hr {
 }
 
 .allergen-section {
-  padding: 1rem;
+  margin-top: 10vh;
+  padding: 1.5rem 1rem 3rem;
+  border-top: 2px solid rgba(206, 170, 114, 0.3);
+  background: rgba(0, 0, 0, 0.25);
 }
 
 .legal-disclaimer {

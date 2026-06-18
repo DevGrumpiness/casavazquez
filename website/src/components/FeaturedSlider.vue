@@ -1,13 +1,14 @@
 <template>
   <section
-    v-if="items && items.length"
+    v-if="false"
     class="featured-slider"
-    aria-label="Highlights"
+    aria-label="Empfehlungen"
     @mouseenter="stopAutoScroll"
     @mouseleave="startAutoScroll"
     @touchstart.passive="stopAutoScroll"
     @touchend.passive="startAutoScroll"
   >
+    <h3 class="slider-heading">Empfehlungen</h3>
     <button
       class="slider-nav prev"
       type="button"
@@ -168,6 +169,16 @@ watch(
   margin: 0 auto 1.25rem;
   max-width: 960px;
   position: relative;
+}
+
+.slider-heading {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin: 0 0 0.6rem;
 }
 
 .slider-viewport {
