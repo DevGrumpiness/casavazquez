@@ -488,7 +488,7 @@ import FeaturedSlider from "../components/FeaturedSlider.vue";
 import { featuredPromos } from "../data/featuredPromos";
 import cocaImage from "../assets/images/coca.webp";
 // import croquetasBoletus from "../assets/images/tapasclub/croquetas_boletus.png";
-import croquetasChorizo from "../assets/images/tapasclub/croquetas_chorizo.png";
+// import croquetasChorizo from "../assets/images/tapasclub/croquetas_chorizo.png";
 import datillesImage from "../assets/images/tapasclub/datilles.png";
 import olivenMixImage from "../assets/images/tapasclub/olivenmix.png";
 import polloPiripiri from "../assets/images/tapasclub/pollo_piripiri.png";
@@ -665,7 +665,7 @@ const flammkuchenVariants = [
   },
   {
     name: "Flammkuchen Vegetarisch",
-    description: "mit roten Zwiebeln, Frühlingszwiebeln & Champignons",
+    description: "mit Dingen aus dem Garten",
     price: "9,50",
     veggie: true
   },
@@ -813,11 +813,14 @@ function scrollToSnackSection(sectionId: string) {
 const snacks: SnackItem[] = [
   { name: 'Nachos mit Dip (Salsa/Aioli)', description: '', price: '6,5', veggie: true, keto: false, allergens: [11, 15] },
   { name: 'Pimientos de Padrón - der Klassiker', description: '', price: '6,5', veggie: true, keto: true },
-  // { name: 'Brot mit Aioli Dip', description: '', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 15] },
-  { name: 'Süßkartoffel-Pommes', description: '', price: '5', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
-  { name: 'Süßkartoffel-Pommes groß', description: '', price: '7', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
+  { name: 'Brot mit Aioli Dip', description: '', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 15] },
+  { name: 'Patatas Bravas', description: '', price: '5', veggie: true, keto: false, allergens: [9, 11, 15] },
+  { name: 'Chicken Fingers', description: 'Saftige panierte Hänchen-Stückchen', price: '6,5', veggie: false, keto: false, allergens: [9, 11, 15] },
+  
+  { name: 'Pommes', description: '', price: '5', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
+  { name: 'Pommes groß', description: '', price: '7', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
   { name: 'Oliven Mix', description: '', price: '6', veggie: true, onm: true, keto: true, image: olivenMixImage },
-  { name: 'Croquetas con Jamón Iberico', description: 'kleine Kroketten mit Jamón-Füllung', price: '7,5', veggie: false, keto: false, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
+  // { name: 'Croquetas con Jamón Iberico', description: 'kleine Kroketten mit Jamón-Füllung', price: '7,5', veggie: false, keto: false, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
   ...flammkuchenVariants.map(variant => ({
     name: variant.name,
     description: variant.description,
@@ -835,7 +838,7 @@ const snacks: SnackItem[] = [
     image: polloPiripiri,
     allergens: [14, 16],
     traceAllergens: [4, 9, 12, 13, 15, 17, 22],
-    available: true
+    available: false
   },
   // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
   // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
@@ -893,7 +896,7 @@ const snacks: SnackItem[] = [
   },
   {
     name: 'Gambas Empanadas',
-    description: 'Gambas mit einer köstlich subtil gewürzten knusprigen Kruste mit Knoblauch und Petersilie. ',
+    description: 'Gambas mit einer köstlich subtil gewürzten knusprigen Kokos-Kruste mit Knoblauch und Petersilie. ',
     price: '8,5',
     veggie: false,
     keto: false,
@@ -909,15 +912,7 @@ const snacks: SnackItem[] = [
     image: undefined,
     allergens: [9, 27, 28, 29, 30]
   },
-  {
-    name: 'DESSERT - Crema Catalana',
-    description: 'Traditionelles spanisches Dessert mit einer cremigen Vanillebasis und karamellisierter Zuckerkruste',
-    price: '6,5',
-    veggie: true,
-    keto: false,
-    image: undefined,
-    allergens: [12, 13]
-  },
+
   {
     name: 'Empanadillas de Pollo 4Stk',
     description: 'Klassiker unter den spanischen Empanadas mit Hähnchen-Füllung ',

@@ -14,13 +14,7 @@
     </button>
   </div>
 
-  <div v-if="featuredSoftdrink" class="drink-featured-card">
-    <span class="drink-featured-badge">JETZT NEU</span>
-    <div class="drink-featured-copy">
-      <h2>{{ featuredSoftdrink.name }}</h2>
-    </div>
-    <span class="drink-featured-price">{{ featuredSoftdrink.price }}</span>
-  </div>
+
 
   <!--    Bubbles-->
   <section class="drinks-menu-section" v-if="!nonAlcoholic">
@@ -364,9 +358,9 @@ const showCocktailTinder = computed(() => {
 
 const beers: Drink[] = [
   {
-    name: "Krombacher Radler",
-    volume: "0,33l",
-    price: "3,5€",
+    name: "Radler",
+    volume: "0,4l",
+    price: "3,9€",
     category: "Bier",
     alcoholic: true,
     allergens: [4, 10],
@@ -429,13 +423,7 @@ const beers: Drink[] = [
 ];
 
 const softdrinks: Drink[] = [
-  {
-    name: "Erfrischende Limo mit Gurke, Minze und Thomas Henry Cherry Blossom",
-    price: "3,90€",
-    category: "Softdrink",
-    alcoholic: false,
-    neu: true
-  },
+
   {
     name: "Eistee von Rauch (Granateapfel, Crenberry)",
     volume: "0,33l",
@@ -461,14 +449,7 @@ const softdrinks: Drink[] = [
     alcoholic: false,
     allergens: [1, 7, 8]
   },
-  {
-    name: "Paulaner Spezi",
-    volume: "0,33l",
-    price: "3,9€",
-    category: "Softdrink",
-    alcoholic: false,
-    allergens: [1, 7, 8]
-  },
+
   {
     name: "Wasser Classic Fl. 0,75l",
     volume: "0,75l",
@@ -495,7 +476,6 @@ const softdrinks: Drink[] = [
   },
 ];
 
-const featuredSoftdrink = softdrinks[0];
 
 const spritz: Drink[] = [
   { name: "*Limoncello", price: "8,5€", category: "Cocktail", alcoholic: true, allergens: [1, 4] },

@@ -52,6 +52,23 @@ export const blancos: Wine[] = [
         available: true
     },
     {
+        name: 'Maybach Grauer Burgunder QBA trocken',
+        id: 'w_maybach_grauer_burgunder_qba_trocken',
+        prices: {
+            '0.2l': '7,00€',
+            'flasche': '19,00€'
+        },
+        color: 'white',
+        grape: '100% Grauburgunder',
+        origin: 'Deutschland, Rheinhessen',
+        shortDescription: 'Trockener Grauburgunder aus Rheinhessen mit runder Frucht, milder Struktur und unkompliziertem Trinkfluss.',
+        longDescription: 'Der Maybach Grauer Burgunder QBA trocken von Peter Mertes stammt aus Rheinhessen und zeigt sich als zugänglicher, trockener Weißwein mit 12,0 % Vol. In der Nase und am Gaumen stehen helle Früchte wie Apfel, Pfirsich und dezente Steinfrucht im Vordergrund. Seine runde, angenehm milde Art macht ihn besonders passend zu Fisch- und Reisgerichten. Serviertemperatur: 8-10 °C. Enthält Sulfite.',
+        image: null,
+        characteristics: 'Trocken, Grauburgunder, Rheinhessen, Apfel, Pfirsich, mild',
+        available: true
+    },
+
+    {
         name: 'Marina Alta Blanco Gran Selección 2023',
         id: 'w_marina_alta_gran_seleccion_2023',
         prices: {
@@ -100,7 +117,7 @@ export const blancos: Wine[] = [
             'Der Nebla Verdejo präsentiert sich in einem klaren, goldgrün schimmernden Ton, der für die Verdejo-Traube charakteristisch ist. In der Nase entfalten sich lebendige Aromen von Zitrusfrüchten und frisch geernteten grünen Äpfeln, fein untermalt von dezenten Kräuteranklängen, die dem Duft eine elegante Frische verleihen. Am Gaumen überzeugt er durch sein harmonisches Gleichgewicht: Noten von saftiger Ananas und reifer Melone verschmelzen mit einer feinen, belebenden Säure zu einem dynamischen, zugleich ausgewogenen Trinkvergnügen. Ein Wein, der mit seiner spritzigen Lebhaftigkeit und feinen Raffinesse Kenner und Genießer gleichermaßen begeistert.',
         image: null,
         characteristics: 'Trocken, leicht, Mango, grünes Gras',
-        available: false
+        available: true
     },
     {
         name: 'El Coto Blanco',
@@ -134,7 +151,7 @@ export const blancos: Wine[] = [
         longDescription: 'Die Cuvée aus Viura, Sauvignon Blanc, Chardonnay, Tempranillo Blanco und Garnacha Blanca reift teils im Holz, teils im Edelstahl. Noten von Birne, Limettenzeste und weißen Blüten verbinden sich mit cremigem Mundgefühl, feiner Würze und einer kühlen, kalkigen Mineralität. Der Jahrgang 2023 wirkt vielschichtig und bleibt trotzdem trinkanimierend – perfekt zu Pintxos, Meeresfrüchten oder cremigen Reisgerichten.',
         image: null,
         characteristics: 'Trocken, mineralisch, Rioja, Birne, Kräuter',
-        available: true
+        available: false
     },
     {
         name: 'Pompaelo Blanco 2023',
