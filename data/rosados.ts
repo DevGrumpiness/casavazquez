@@ -82,7 +82,7 @@ export const rosados: Wine[] = [
         longDescription: 'Der Arrogant Frog Syrah Rosé aus dem Languedoc besticht durch seine lebendige Frische und elegante Struktur. Er entfaltet Aromen von roten Beeren, Zitrusfrüchten und floralen Nuancen, was ihm einen einzigartigen Charakter verleiht. Feine Tannine und eine ausgewogene Säure machen ihn zum idealen Begleiter zu leichten Gerichten und sommerlichen Anlässen.',
         image: null,
         characteristics: 'Trocken, knackig, fruchtig, rosé, erfrischend, elegant',
-        available: true
+        available: false
     },
     {
         "name": "Guv’nor Rosé",

@@ -2,9 +2,10 @@
 
   <FeaturedSlider :items="sliderItems" />
 
-  <!--  <div class="hint">-->
-  <!--    Bundle des Tages 12,-  <br> 1 Glas Hauswein weiß <br>+ 1 x Käseplatte-->
-  <!--  </div>-->
+  <div class="bundle-offer">
+    <strong>Promotion</strong><br />
+    1 Flasche Maybach Grauer Burgunder + kleine Queso Manchego Platte für 20€
+  </div>
 
   <!-- Filter-Button -->
   <div class="filter-buttons">

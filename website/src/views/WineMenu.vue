@@ -1,4 +1,5 @@
 <template>
+  <div class="promo-banner">1 Flasche Maybach Grauer Burgunder + kleine Queso Manchego Platte für 20€</div>
   <FeaturedSlider :items="sliderItems" />
   <TodayPromoBanner />
   <section class="wine-menu-section">
@@ -88,6 +89,19 @@ const filteredWines = computed(() => {
 
 <style lang="scss" scoped>
 @use "../assets/styles/main" as *;
+
+.promo-banner {
+  text-align: center;
+  background: rgba($accent-color, 0.12);
+  border: 1px solid $accent-color;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin: 1rem auto 0;
+  max-width: 90%;
+  font-weight: 600;
+  color: $accent-color;
+  font-size: 0.95rem;
+}
 
 .tasting-notice {
   font-size: 0.85rem;

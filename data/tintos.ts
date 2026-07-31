@@ -5,9 +5,9 @@ export const tintos: Wine[] = [
         name: 'Porta 6',
         id: 'r41',
         prices: {
-            '0.1l': '5,00€',
-            '0.2l': '8,50€',
-            'flasche': '24,50€'
+            '0.1l': '4,00€',
+            '0.2l': '7,50€',
+            'flasche': '22,50€'
         },
         color: 'red',
         grape: 'Jahrgang 2023',

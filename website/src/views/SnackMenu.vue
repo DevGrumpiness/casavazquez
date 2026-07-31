@@ -1,4 +1,5 @@
 <template>
+  <div class="promo-banner">1 Flasche Maybach Grauer Burgunder + kleine Queso Manchego Platte für 20€</div>
   <FeaturedSlider :items="sliderItems" />
 
   <section
@@ -246,7 +247,7 @@
           <p>Jamón Serrano und Manchego auf einer Platte – servierbereit mit Brot.</p>
         </BaseModal>
       </div>
-
+<!-- 
       <Transition name="section">
         <div class="snack-section" v-if="!keto">
           <hr />
@@ -288,10 +289,10 @@
               <span class="snacks-name">+ Serrano</span>
               <span class="snacks-price">+ 3,90</span>
             </li>
-            <!-- <li class="snacks-item extra" v-if="!veggie">
+            <li class="snacks-item extra" v-if="!veggie">
               <span class="snacks-name">+ Albondigas</span>
               <span class="snacks-price">+ 3,90</span>
-            </li> -->
+            </li> 
 
             <li class="snacks-item extra veggie">
               <span class="snacks-name">+ Doppelt Mozarella</span>
@@ -307,19 +308,8 @@
             </li>
           </ul>
         </div>
-      </Transition>
+      </Transition> -->
 
-      <div class="snack-section bundle">
-        <hr />
-        <br />
-        <h3 class="snacks-subtitle">Bundle</h3>
-        <ul class="snacks-extras">
-          <li class="snacks-item extra veggie">
-            <span class="snacks-name"><b>1 Flasche Hauswein + Plato Queso ODER Serrano</b><br /></span>
-            <span class="snacks-price">26,50</span>
-          </li>
-        </ul>
-      </div>
       <div v-show=false class="snack-section bundle">
         <hr />
         <br />
@@ -838,7 +828,7 @@ const snacks: SnackItem[] = [
     image: polloPiripiri,
     allergens: [14, 16],
     traceAllergens: [4, 9, 12, 13, 15, 17, 22],
-    available: false
+    available: true
   },
   // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
   // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
@@ -1389,10 +1379,23 @@ hr {
   opacity: .75;
 }
 
-.bundle {
+.promotion {
   li {
     margin-bottom: 1rem !important;
   }
+}
+
+.promo-banner {
+  text-align: center;
+  background: rgba($accent-color, 0.12);
+  border: 1px solid $accent-color;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin: 1rem auto 0;
+  max-width: 90%;
+  font-weight: 600;
+  color: $accent-color;
+  font-size: 0.95rem;
 }
 
 .snack-enter-active,
