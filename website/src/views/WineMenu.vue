@@ -51,9 +51,11 @@ import { featuredPromos } from "../data/featuredPromos";
 import {useNow} from '@vueuse/core';
 import {useWineMenu} from "./useWineMenu.ts";
 import {vinos as staticVinos}  from '../data/vinos.ts'
+import { useAvailability, availabilityId } from "../composables/useAvailability";
 
 const  {loadVinos, loading, vinos} = useWineMenu();
 const shouldUseApi = false;
+const { isAvailable } = useAvailability();
 
 const now = useNow();
 const isHappyHour = computed(() => {
@@ -82,8 +84,9 @@ const roseLabel = computed(() => {
 });
 
 const filteredWines = computed(() => {
-  if (!selectedColor.value) return wines.value;
-  return wines.value.filter(wine => wine.color === selectedColor.value);
+  const byLiveAvailability = wines.value.filter(wine => isAvailable(availabilityId('Wein', String(wine.id)), wine.available !== false));
+  if (!selectedColor.value) return byLiveAvailability;
+  return byLiveAvailability.filter(wine => wine.color === selectedColor.value);
 });
 </script>
 

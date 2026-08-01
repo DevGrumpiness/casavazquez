@@ -8,7 +8,7 @@
       </header>
       <div class="drinks-content">
         <transition-group name="drink" tag="ul" class="drinks-list">
-          <li v-for="drink in cocktails" :key="drink.name" class="drinks-item">
+          <li v-for="drink in visibleCocktails" :key="drink.name" class="drinks-item">
             <div class="drink-text">
               <span class="drinks-name">{{ drink.name }}
                 <sup v-if="drink.allergens" class="allergen-indices">{{ drink.allergens.join(',') }}</sup>
@@ -59,19 +59,18 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { CocktailTinder } from "../components/CocktailTinder";
-
-interface Drink {
+<script lang="ts">
+export interface CocktailDrink {
   name: string;
   price: string;
   category: string;
   alcoholic: boolean;
   allergens?: number[];
   ingredients?: string;
+  available?: boolean;
 }
 
-const cocktails: Drink[] = [
+export const cocktails: CocktailDrink[] = [
   { name: "Espresso Martini", price: "11€", category: "Cocktail", alcoholic: true, allergens: [8, 13], ingredients: "Vodka, Kaffeelikor, Espresso, Zuckersirup" },
   { name: "Whisky Sour", price: "12€", category: "Cocktail", alcoholic: true, allergens: [11], ingredients: "Whisky, Zitronensaft, Zuckersirup, Eiweiss" },
   { name: "Cosmopolitan", price: "11€", category: "Cocktail", alcoholic: true, allergens: [4], ingredients: "Vodka, Cointreau, Cranberrysaft, Limettensaft" },
@@ -80,12 +79,29 @@ const cocktails: Drink[] = [
   { name: "Silver Fizz", price: "12€", category: "Cocktail", alcoholic: true, allergens: [4], ingredients: "Gin, Zitronensaft, Zuckersirup, Sodawasser" },
 ];
 
-const mocktails: string[] = [
+export const mocktails: string[] = [
   "Mojito 0%",
   "Caipirinha 0% (Ipanema)",
   "Silver Fizz 0%",
   "Gin & Tonic 0%",
 ];
+
+// Group shared with the admin availability toggle page (src/views/AdminAvailability.vue)
+export const cocktailGroups: { group: string; items: CocktailDrink[] }[] = [
+  { group: 'Cocktails', items: cocktails },
+];
+</script>
+
+<script setup lang="ts">
+import { computed } from "vue";
+import { CocktailTinder } from "../components/CocktailTinder";
+import { useAvailability, availabilityId } from "../composables/useAvailability";
+
+const { isAvailable } = useAvailability();
+
+const visibleCocktails = computed(() =>
+  cocktails.filter(d => isAvailable(availabilityId('Cocktails', d.name), d.available !== false))
+);
 </script>
 
 <style lang="scss" scoped>

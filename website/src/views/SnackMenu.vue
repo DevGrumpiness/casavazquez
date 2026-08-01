@@ -476,6 +476,7 @@ import onmLogo from "../assets/images/Logo-Olive-Meer_klein.png";
 import BaseModal from "../components/BaseModal.vue";
 import FeaturedSlider from "../components/FeaturedSlider.vue";
 import { featuredPromos } from "../data/featuredPromos";
+import { useAvailability, availabilityId } from "../composables/useAvailability";
 // import cocaImage from "../assets/images/coca.webp";
 // import croquetasBoletus from "../assets/images/tapasclub/croquetas_boletus.png";
 // import croquetasChorizo from "../assets/images/tapasclub/croquetas_chorizo.png";
@@ -677,8 +678,19 @@ function getLocalDateIso(date: Date) {
 const showQuickWaitSection = computed(() => getLocalDateIso(new Date()) === QUICK_WAIT_SECTION_DATE)
 const showTodayServiceNotice = computed(() => getLocalDateIso(new Date()) === TODAY_SERVICE_NOTICE_DATE)
 
+const { isAvailable } = useAvailability();
+
+// Merges the ad-hoc live "sold out today" toggle (Firestore) into the static
+// menu data, without touching the hardcoded `snacks` array above.
+const liveSnacks = computed<SnackItem[]>(() =>
+  snacks.map(snack => ({
+    ...snack,
+    available: isAvailable(availabilityId('Snacks', snack.name), snack.available !== false),
+  }))
+);
+
 const filteredSnacks = computed(() => {
-  let filtered = [...snacks]
+  let filtered = [...liveSnacks.value]
   if (veggie.value) {
     filtered = filtered.filter(s => s.veggie)
   }
@@ -716,7 +728,7 @@ function getSnackBookmarkId(snack: SnackItem) {
 }
 
 function getSnackByBookmarkId(bookmarkId: string) {
-  return snacks.find(item => getSnackBookmarkId(item) === bookmarkId)
+  return liveSnacks.value.find(item => getSnackBookmarkId(item) === bookmarkId)
 }
 
 function isSnackBookmarked(snack: SnackItem) {
