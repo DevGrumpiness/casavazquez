@@ -179,6 +179,23 @@ export const rosados: Wine[] = [
         available: true
     },
     {
+        name: 'Novantaceppi Primitivo Rosato Puglia IGT 2025',
+        id: 120,
+        prices: {
+            '0.1l': '4,50€',
+            '0.2l': '8,00€',
+            'flasche': '26,00€'
+        },
+        color: 'rosé',
+        grape: '85% Primitivo, 15% andere',
+        origin: 'Apulien, Italien',
+        shortDescription: 'Halbtrocken, frischer Rosé aus 85% Primitivo mit Aromen von Erdbeere, Himbeere und Wassermelone.',
+        longDescription: 'Der Primitivo Rosato Puglia IGT von Novantaceppi verführt mit seiner frischen Fruchtigkeit und der lebendigen Kombination aus 85% Primitivo und 15% weiteren Rebsorten. Das Bukett zeigt frische Erdbeeren, saftige Himbeeren, Wassermelone und florale Noten von Rosenblättern. Am Gaumen harmonisch mit lebendiger Säure, die die fruchtige Süße balanciert, und einem erfrischenden Abgang. Halbtrocken ausgebaut, mit 12 % Vol. und einer Serviertemperatur von 12–14 °C – ideal zu mediterranen Vorspeisen, leichten Salaten und sommerlichen Gerichten.',
+        image: null,
+        characteristics: 'halbtrocken, fruchtig, frisch, beerig, Apulien, sommerwein',
+        available: true
+    },
+    {
         name: 'Miraval',
         id: 117,
         prices: { 'flasche': '€49,00' },
