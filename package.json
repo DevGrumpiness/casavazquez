@@ -12,16 +12,16 @@
   },
   "type": "module",
   "keywords": [],
-  "author": "ibericoder <ibericoder@gmail.com>",
+  "author": "DevGrumpiness",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ibericoder/bar-casavazquez.git"
+    "url": "git+https://github.com/DevGrumpiness/casavazquez.git"
   },
   "bugs": {
-    "url": "https://github.com/ibericoder/bar-casavazquez/issues"
+    "url": "https://github.com/DevGrumpiness/casavazquez/issues"
   },
-  "homepage": "https://github.com/ibericoder/bar-casavazquez#readme",
+  "homepage": "https://github.com/DevGrumpiness/casavazquez#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
