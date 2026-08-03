@@ -70,7 +70,10 @@ const getPersonalityEmoji = (personality: CocktailPersonality): string => {
 // "Zufällig entscheiden": cycles through the current matches and lands on one.
 const isRolling = ref(false);
 const rollingId = ref<string | number | null>(null);
-let rollInterval: ReturnType<typeof setInterval> | null = null;
+let rollTimeout: ReturnType<typeof setTimeout> | null = null;
+
+const ROLL_DURATION_MS = 5000;
+const RESULT_DELAY_MS = 1000;
 
 const spinRandom = () => {
   if (isRolling.value || props.matches.length === 0) {
@@ -78,32 +81,37 @@ const spinRandom = () => {
   }
 
   isRolling.value = true;
-  let ticks = 0;
-  const maxTicks = 14;
-  rollInterval = setInterval(() => {
+  const startTime = Date.now();
+  const minDelay = 70;
+  const maxDelay = 300;
+
+  const tick = () => {
+    const elapsed = Date.now() - startTime;
     const pick = props.matches[Math.floor(Math.random() * props.matches.length)];
     rollingId.value = pick.id;
-    ticks++;
-    if (ticks >= maxTicks) {
-      if (rollInterval) {
-        clearInterval(rollInterval);
-        rollInterval = null;
-      }
+
+    if (elapsed >= ROLL_DURATION_MS) {
+      rollTimeout = null;
       isRolling.value = false;
-      const finalPick = props.matches.find(c => c.id === rollingId.value) || null;
-      if (finalPick) {
-        setTimeout(() => {
-          emit('view', finalPick);
-          rollingId.value = null;
-        }, 500);
-      }
+      setTimeout(() => {
+        emit('view', pick);
+        rollingId.value = null;
+      }, RESULT_DELAY_MS);
+      return;
     }
-  }, 90);
+
+    // Ease out: ticks start fast and gradually slow down, like a real slot machine.
+    const progress = elapsed / ROLL_DURATION_MS;
+    const delay = minDelay + (maxDelay - minDelay) * progress ** 2;
+    rollTimeout = setTimeout(tick, delay);
+  };
+
+  rollTimeout = setTimeout(tick, minDelay);
 };
 
 onUnmounted(() => {
-  if (rollInterval) {
-    clearInterval(rollInterval);
+  if (rollTimeout) {
+    clearTimeout(rollTimeout);
   }
 });
 
