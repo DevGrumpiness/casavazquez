@@ -51,38 +51,6 @@
       @view="viewCocktailDetails"
     />
 
-    <!-- Picker: "Wer soll es sein?" - shown once you've swiped through everything -->
-    <div v-if="isFinished" class="ct-picker">
-      <h2 class="ct-picker-heading">Wer soll es sein? 💫</h2>
-      <p class="ct-picker-subheading">Wähl deinen Geschmack – oder lass den Zufall ran</p>
-
-      <div class="ct-picker-grid">
-        <button
-          v-for="p in flavorPersonalities"
-          :key="p.type"
-          class="ct-picker-card"
-          @click="pickFlavor(p.type)"
-        >
-          <span class="ct-picker-emoji">{{ p.emoji }}</span>
-          <span class="ct-picker-name">{{ p.name }}</span>
-        </button>
-      </div>
-
-      <div class="ct-random-picker">
-        <div class="ct-random-divider"><span>oder</span></div>
-        <button class="ct-random-btn" :disabled="isRolling" @click="spinRandom">
-          <span v-if="!isRolling">🎰 Zufällig wählen</span>
-          <span v-else>🎲 …</span>
-        </button>
-        <transition name="detail-fade">
-          <div v-if="rollingResult" class="ct-random-reel" :class="{ 'is-rolling': isRolling }">
-            <span class="ct-random-reel-emoji">{{ getPersonalityEmoji(rollingResult.personality) }}</span>
-            <span class="ct-random-reel-name">{{ rollingResult.femaleName }}</span>
-          </div>
-        </transition>
-      </div>
-    </div>
-
     <!-- Swipeable Cards Stack -->
     <div v-if="!isFinished" class="ct-card-stack">
       <CocktailCard
@@ -148,7 +116,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onUnmounted } from 'vue';
+import { ref, computed } from 'vue';
 import type { Cocktail, CocktailPersonality } from '../../interfaces/cocktail';
 import { cocktails as cocktailsData } from '../../data/cocktails';
 import CocktailCard from './CocktailCard.vue';
@@ -175,8 +143,6 @@ const personalities: Personality[] = [
 
 const allCocktails = computed(() => cocktailsData);
 
-const flavorPersonalities = computed(() => personalities.filter(p => p.type !== 'virgin'));
-
 type AlcoholFilter = 'all' | 'alcoholic' | 'virgin';
 const activeFilter = ref<AlcoholFilter>('all');
 const filterOptions: { value: AlcoholFilter; label: string }[] = [
@@ -195,22 +161,10 @@ const alcoholFilteredCocktails = computed(() => {
   return allCocktails.value;
 });
 
-const personalityFilter = ref<CocktailPersonality | null>(null);
-
-const filteredCocktails = computed(() => {
-  if (personalityFilter.value) {
-    return alcoholFilteredCocktails.value.filter(c => c.personality === personalityFilter.value);
-  }
-  return alcoholFilteredCocktails.value;
-});
+const filteredCocktails = computed(() => alcoholFilteredCocktails.value);
 
 const setFilter = (filter: AlcoholFilter) => {
   activeFilter.value = filter;
-  currentCardIndex.value = 0;
-};
-
-const pickFlavor = (type: CocktailPersonality | null) => {
-  personalityFilter.value = type;
   currentCardIndex.value = 0;
 };
 
@@ -266,58 +220,6 @@ const getPersonalityName = (personality: CocktailPersonality): string => {
   return p?.name || '';
 };
 
-// Random "slot machine" picker: cycles rapidly through the pool and lands on one cocktail.
-const isRolling = ref(false);
-const rollingResult = ref<Cocktail | null>(null);
-let rollInterval: ReturnType<typeof setInterval> | null = null;
-
-const spinRandom = () => {
-  if (isRolling.value) {
-    return;
-  }
-  const pool = alcoholFilteredCocktails.value;
-  if (pool.length === 0) {
-    return;
-  }
-
-  isRolling.value = true;
-  let ticks = 0;
-  const maxTicks = 16;
-  rollInterval = setInterval(() => {
-    rollingResult.value = pool[Math.floor(Math.random() * pool.length)];
-    ticks++;
-    if (ticks >= maxTicks) {
-      if (rollInterval) {
-        clearInterval(rollInterval);
-        rollInterval = null;
-      }
-      isRolling.value = false;
-      const finalPick = rollingResult.value;
-      if (finalPick) {
-        setTimeout(() => revealRandomPick(finalPick), 400);
-      }
-    }
-  }, 90);
-};
-
-const revealRandomPick = (cocktail: Cocktail) => {
-  if (!likedCocktails.value.some(c => c.id === cocktail.id)) {
-    likedCocktails.value.push(cocktail);
-    lastMatchedCocktail.value = cocktail;
-    showMatchToast.value = true;
-    setTimeout(() => {
-      showMatchToast.value = false;
-    }, 2000);
-  }
-  viewCocktailDetails(cocktail);
-};
-
-onUnmounted(() => {
-  if (rollInterval) {
-    clearInterval(rollInterval);
-  }
-});
-
 const swipeLeft = () => {
   if (currentCardIndex.value >= filteredCocktails.value.length || isAnimating.value) {
     return;
@@ -363,8 +265,6 @@ const restartSwiping = () => {
   currentCardIndex.value = 0;
   likedCocktails.value = [];
   isAnimating.value = false;
-  personalityFilter.value = null;
-  rollingResult.value = null;
 };
 
 const viewCocktailDetails = (cocktail: Cocktail) => {
@@ -485,145 +385,6 @@ const removeMatch = (cocktail: Cocktail) => {
     border-color: transparent;
     color: #fff;
   }
-}
-
-.ct-picker {
-  text-align: center;
-  margin-bottom: 2rem;
-  padding: 2rem 1.5rem;
-  background: linear-gradient(145deg, rgba(30, 30, 47, 0.6), rgba(20, 20, 30, 0.6));
-  border: 2px solid rgba(206, 170, 114, 0.25);
-  border-radius: 20px;
-}
-
-.ct-picker-heading {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 0.35rem;
-}
-
-.ct-picker-subheading {
-  font-size: 0.95rem;
-  color: #aaa;
-  margin-bottom: 1.5rem;
-}
-
-.ct-picker-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 0.75rem;
-  max-width: 480px;
-  margin: 0 auto 1.25rem;
-}
-
-.ct-picker-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 1rem 0.5rem;
-  border-radius: 14px;
-  border: 2px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.04);
-  color: #eee;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  .ct-picker-emoji {
-    font-size: 1.75rem;
-  }
-
-  .ct-picker-name {
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
-
-  &:hover {
-    transform: translateY(-3px);
-    border-color: rgba(206, 170, 114, 0.6);
-    background: rgba(206, 170, 114, 0.1);
-  }
-}
-
-.ct-random-picker {
-  margin-top: 1.75rem;
-}
-
-.ct-random-divider {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: #777;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 1rem;
-  max-width: 300px;
-  margin-left: auto;
-  margin-right: auto;
-
-  &::before,
-  &::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.15);
-  }
-}
-
-.ct-random-btn {
-  padding: 0.9rem 2rem;
-  border-radius: 50px;
-  border: none;
-  background: linear-gradient(135deg, #f5a623, #e8580c);
-  color: #fff;
-  font-size: 1.05rem;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 4px 16px rgba(232, 88, 12, 0.4);
-  transition: all 0.2s ease;
-
-  &:hover:not(:disabled) {
-    transform: translateY(-2px) scale(1.03);
-  }
-
-  &:disabled {
-    opacity: 0.8;
-    cursor: default;
-  }
-}
-
-.ct-random-reel {
-  margin-top: 1.25rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 2px solid rgba(245, 166, 35, 0.4);
-
-  .ct-random-reel-emoji {
-    font-size: 1.75rem;
-  }
-
-  .ct-random-reel-name {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #fff;
-  }
-
-  &.is-rolling {
-    filter: blur(1.5px);
-    animation: reelShake 0.09s linear infinite;
-  }
-}
-
-@keyframes reelShake {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-  100% { transform: translateY(0); }
 }
 
 .ct-counter {

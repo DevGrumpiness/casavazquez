@@ -8,9 +8,15 @@
         Nochmal von vorne
       </button>
       <div v-if="matchCount > 0" class="ct-liked-list">
-        <h4>Deine Favoriten:</h4>
+        <h4>Wer soll es sein? 💫</h4>
+        <p class="ct-liked-subtitle">Wähl selbst – oder lass den Zufall entscheiden</p>
         <div class="ct-liked-items">
-          <div v-for="cocktail in matches" :key="cocktail.id" class="ct-liked-item">
+          <div
+            v-for="cocktail in matches"
+            :key="cocktail.id"
+            class="ct-liked-item"
+            :class="{ 'is-rolling-highlight': rollingId === cocktail.id }"
+          >
             <span class="ct-liked-info">
               {{ getPersonalityEmoji(cocktail.personality) }} {{ cocktail.femaleName }}
             </span>
@@ -19,12 +25,22 @@
             </button>
           </div>
         </div>
+        <button
+          v-if="matches.length > 1"
+          class="ct-random-btn"
+          :disabled="isRolling"
+          @click="spinRandom"
+        >
+          <span v-if="!isRolling">🎲 Zufällig entscheiden</span>
+          <span v-else>🎰 …</span>
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref, onUnmounted } from 'vue';
 import type { Cocktail, CocktailPersonality } from '../../interfaces/cocktail';
 
 interface Props {
@@ -41,7 +57,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-defineEmits<{
+const emit = defineEmits<{
   restart: [];
   view: [cocktail: Cocktail];
 }>();
@@ -50,6 +66,47 @@ const getPersonalityEmoji = (personality: CocktailPersonality): string => {
   const p = props.personalities.find(p => p.type === personality);
   return p?.emoji || '🍸';
 };
+
+// "Zufällig entscheiden": cycles through the current matches and lands on one.
+const isRolling = ref(false);
+const rollingId = ref<string | number | null>(null);
+let rollInterval: ReturnType<typeof setInterval> | null = null;
+
+const spinRandom = () => {
+  if (isRolling.value || props.matches.length === 0) {
+    return;
+  }
+
+  isRolling.value = true;
+  let ticks = 0;
+  const maxTicks = 14;
+  rollInterval = setInterval(() => {
+    const pick = props.matches[Math.floor(Math.random() * props.matches.length)];
+    rollingId.value = pick.id;
+    ticks++;
+    if (ticks >= maxTicks) {
+      if (rollInterval) {
+        clearInterval(rollInterval);
+        rollInterval = null;
+      }
+      isRolling.value = false;
+      const finalPick = props.matches.find(c => c.id === rollingId.value) || null;
+      if (finalPick) {
+        setTimeout(() => {
+          emit('view', finalPick);
+          rollingId.value = null;
+        }, 500);
+      }
+    }
+  }, 90);
+};
+
+onUnmounted(() => {
+  if (rollInterval) {
+    clearInterval(rollInterval);
+  }
+});
+
 </script>
 
 <style lang="scss" scoped>
@@ -91,8 +148,14 @@ const getPersonalityEmoji = (personality: CocktailPersonality): string => {
   h4 {
     font-size: 1.125rem;
     color: #fff;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.25rem;
   }
+}
+
+.ct-liked-subtitle {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-bottom: 1rem;
 }
 
 .ct-liked-items {
@@ -112,6 +175,14 @@ const getPersonalityEmoji = (personality: CocktailPersonality): string => {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  transition: all 0.15s ease;
+
+  &.is-rolling-highlight {
+    background: rgba(245, 166, 35, 0.2);
+    border-color: rgba(245, 166, 35, 0.7);
+    color: #fff;
+    transform: scale(1.02);
+  }
 }
 
 .ct-liked-info {
@@ -160,6 +231,29 @@ const getPersonalityEmoji = (personality: CocktailPersonality): string => {
   
   &:hover {
     background: linear-gradient(135deg, #5568d3 0%, #65397d 100%);
+  }
+}
+
+.ct-random-btn {
+  margin-top: 1.25rem;
+  padding: 0.8rem 1.75rem;
+  border-radius: 50px;
+  border: none;
+  background: linear-gradient(135deg, #f5a623, #e8580c);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(232, 88, 12, 0.4);
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.03);
+  }
+
+  &:disabled {
+    opacity: 0.8;
+    cursor: default;
   }
 }
 </style>
