@@ -27,8 +27,32 @@
       </button>
     </div>
 
-    <!-- Picker Screen: "Wer soll es sein?" -->
-    <div v-if="viewMode === 'picker'" class="ct-picker">
+    <!-- Swipe Counter -->
+    <div v-if="!isFinished" class="ct-counter">
+      <span>{{ displayCardIndex }} / {{ filteredCocktails.length }}</span>
+      <span v-if="likedCocktails.length > 0" class="ct-match-badge">💚 {{ likedCocktails.length }} Match{{ likedCocktails.length !== 1 ? 'es' : '' }}</span>
+    </div>
+
+    <!-- Match Notification Toast -->
+    <transition name="toast">
+      <div v-if="showMatchToast" class="ct-match-toast">
+        <span class="toast-icon">💚</span>
+        <span class="toast-text">Match! {{ lastMatchedCocktail?.femaleName }}</span>
+      </div>
+    </transition>
+
+    <!-- Restart Message -->
+    <RestartMessage
+      :show="isFinished"
+      :match-count="likedCocktails.length"
+      :matches="likedCocktails"
+      :personalities="personalities"
+      @restart="restartSwiping"
+      @view="viewCocktailDetails"
+    />
+
+    <!-- Picker: "Wer soll es sein?" - shown once you've swiped through everything -->
+    <div v-if="isFinished" class="ct-picker">
       <h2 class="ct-picker-heading">Wer soll es sein? 💫</h2>
       <p class="ct-picker-subheading">Wähl deinen Geschmack – oder lass den Zufall ran</p>
 
@@ -43,10 +67,6 @@
           <span class="ct-picker-name">{{ p.name }}</span>
         </button>
       </div>
-
-      <button class="ct-picker-all-btn" @click="pickFlavor(null)">
-        🍹 Alle {{ filteredCocktails.length }} Cocktails swipen
-      </button>
 
       <div class="ct-random-picker">
         <div class="ct-random-divider"><span>oder</span></div>
@@ -63,37 +83,8 @@
       </div>
     </div>
 
-    <!-- Swipe Counter -->
-    <div v-if="viewMode === 'swiping'" class="ct-counter">
-      <span>{{ displayCardIndex }} / {{ filteredCocktails.length }}</span>
-      <span v-if="likedCocktails.length > 0" class="ct-match-badge">💚 {{ likedCocktails.length }} Match{{ likedCocktails.length !== 1 ? 'es' : '' }}</span>
-    </div>
-
-    <!-- Back to picker -->
-    <div v-if="viewMode === 'swiping' && !isFinished" class="ct-back-to-picker">
-      <button @click="backToPicker" class="ct-back-btn">← Zurück zur Auswahl</button>
-    </div>
-
-    <!-- Match Notification Toast -->
-    <transition name="toast">
-      <div v-if="showMatchToast" class="ct-match-toast">
-        <span class="toast-icon">💚</span>
-        <span class="toast-text">Match! {{ lastMatchedCocktail?.femaleName }}</span>
-      </div>
-    </transition>
-
-    <!-- Restart Message -->
-    <RestartMessage
-      :show="viewMode === 'swiping' && isFinished"
-      :match-count="likedCocktails.length"
-      :matches="likedCocktails"
-      :personalities="personalities"
-      @restart="restartSwiping"
-      @view="viewCocktailDetails"
-    />
-
     <!-- Swipeable Cards Stack -->
-    <div v-if="viewMode === 'swiping' && !isFinished" class="ct-card-stack">
+    <div v-if="!isFinished" class="ct-card-stack">
       <CocktailCard
         v-for="(cocktail, index) in visibleCards"
         :key="`${currentCardIndex}-${cocktail.id}-${index}`"
@@ -114,7 +105,7 @@
     </div>
 
     <!-- Action Buttons -->
-    <div v-if="viewMode === 'swiping' && !isFinished" class="ct-swipe-actions">
+    <div v-if="!isFinished" class="ct-swipe-actions">
       <button @click="swipeLeft" class="ct-action-btn ct-action-nope" aria-label="Pass">
         <span class="ct-action-icon">✕</span>
       </button>
@@ -124,7 +115,7 @@
     </div>
 
     <!-- Instruction -->
-    <div v-if="viewMode === 'swiping' && !isFinished" class="ct-instruction">
+    <div v-if="!isFinished" class="ct-instruction">
       <p>← Swipe oder nutze die Buttons →</p>
     </div>
 
@@ -204,7 +195,6 @@ const alcoholFilteredCocktails = computed(() => {
   return allCocktails.value;
 });
 
-const viewMode = ref<'picker' | 'swiping'>('picker');
 const personalityFilter = ref<CocktailPersonality | null>(null);
 
 const filteredCocktails = computed(() => {
@@ -221,13 +211,6 @@ const setFilter = (filter: AlcoholFilter) => {
 
 const pickFlavor = (type: CocktailPersonality | null) => {
   personalityFilter.value = type;
-  currentCardIndex.value = 0;
-  viewMode.value = 'swiping';
-};
-
-const backToPicker = () => {
-  viewMode.value = 'picker';
-  personalityFilter.value = null;
   currentCardIndex.value = 0;
 };
 
@@ -380,7 +363,6 @@ const restartSwiping = () => {
   currentCardIndex.value = 0;
   likedCocktails.value = [];
   isAnimating.value = false;
-  viewMode.value = 'picker';
   personalityFilter.value = null;
   rollingResult.value = null;
 };
@@ -564,23 +546,6 @@ const removeMatch = (cocktail: Cocktail) => {
   }
 }
 
-.ct-picker-all-btn {
-  padding: 0.75rem 1.5rem;
-  border-radius: 50px;
-  border: none;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #fff;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  }
-}
-
 .ct-random-picker {
   margin-top: 1.75rem;
 }
@@ -659,24 +624,6 @@ const removeMatch = (cocktail: Cocktail) => {
   0% { transform: translateY(0); }
   50% { transform: translateY(-3px); }
   100% { transform: translateY(0); }
-}
-
-.ct-back-to-picker {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.ct-back-btn {
-  background: none;
-  border: none;
-  color: #999;
-  font-size: 0.85rem;
-  cursor: pointer;
-  text-decoration: underline;
-
-  &:hover {
-    color: #ceaa72;
-  }
 }
 
 .ct-counter {
