@@ -14,9 +14,22 @@
       <p class="ct-subtitle">Swipe für deinen perfekten Cocktail</p>
     </div>
 
+    <!-- Alcohol Filter -->
+    <div v-if="!isFinished" class="ct-filter-bar" role="group" aria-label="Filter nach Alkoholgehalt">
+      <button
+        v-for="filter in filterOptions"
+        :key="filter.value"
+        class="ct-filter-btn"
+        :class="{ active: activeFilter === filter.value }"
+        @click="setFilter(filter.value)"
+      >
+        {{ filter.label }}
+      </button>
+    </div>
+
     <!-- Swipe Counter -->
     <div class="ct-counter">
-      <span>{{ displayCardIndex }} / {{ allCocktails.length }}</span>
+      <span>{{ displayCardIndex }} / {{ filteredCocktails.length }}</span>
       <span v-if="likedCocktails.length > 0" class="ct-match-badge">💚 {{ likedCocktails.length }} Match{{ likedCocktails.length !== 1 ? 'es' : '' }}</span>
     </div>
 
@@ -128,13 +141,31 @@ const personalities: Personality[] = [
   { type: 'fruity', name: 'Fruchtig', emoji: '🍇', description: 'Fruchtig-frisch und ausgewogen' },
 ];
 
-const allCocktails = computed(() => {
-  console.log('📋 All cocktails loaded:', cocktailsData.length, 'cocktails');
-  cocktailsData.forEach((c, i) => {
-    console.log(`  ${i}: ID ${c.id} - ${c.femaleName}/${c.maleName} (${c.personality})`);
-  });
-  return cocktailsData;
+const allCocktails = computed(() => cocktailsData);
+
+type AlcoholFilter = 'all' | 'alcoholic' | 'virgin';
+const activeFilter = ref<AlcoholFilter>('all');
+const filterOptions: { value: AlcoholFilter; label: string }[] = [
+  { value: 'all', label: 'Alle' },
+  { value: 'alcoholic', label: '🍸 Mit Alkohol' },
+  { value: 'virgin', label: '🌿 Alkoholfrei' },
+];
+
+const filteredCocktails = computed(() => {
+  if (activeFilter.value === 'alcoholic') {
+    return allCocktails.value.filter(c => c.alcoholic);
+  }
+  if (activeFilter.value === 'virgin') {
+    return allCocktails.value.filter(c => !c.alcoholic);
+  }
+  return allCocktails.value;
 });
+
+const setFilter = (filter: AlcoholFilter) => {
+  activeFilter.value = filter;
+  currentCardIndex.value = 0;
+};
+
 const currentCardIndex = ref(0);
 const likedCocktails = ref<Cocktail[]>([]);
 const swipeDirection = ref<'left' | 'right' | null>(null);
@@ -145,24 +176,19 @@ const detailCocktail = ref<Cocktail | null>(null);
 const isAnimating = ref(false);
 const showMatchToast = ref(false);
 const lastMatchedCocktail = ref<Cocktail | null>(null);
-const isFinished = computed(() => currentCardIndex.value >= allCocktails.value.length);
+const isFinished = computed(() => currentCardIndex.value >= filteredCocktails.value.length);
 const displayCardIndex = computed(() => {
-  if (allCocktails.value.length === 0) {
+  if (filteredCocktails.value.length === 0) {
     return 0;
   }
-  return Math.min(currentCardIndex.value + 1, allCocktails.value.length);
+  return Math.min(currentCardIndex.value + 1, filteredCocktails.value.length);
 });
 
 const visibleCards = computed(() => {
   const cards = [];
-  for (let i = 0; i < 3 && currentCardIndex.value + i < allCocktails.value.length; i++) {
-    cards.push(allCocktails.value[currentCardIndex.value + i]);
+  for (let i = 0; i < 3 && currentCardIndex.value + i < filteredCocktails.value.length; i++) {
+    cards.push(filteredCocktails.value[currentCardIndex.value + i]);
   }
-  console.log('🎴 Visible cards:', {
-    currentIndex: currentCardIndex.value,
-    totalCocktails: allCocktails.value.length,
-    visibleCards: cards.map(c => `${c.id}: ${c.femaleName}/${c.maleName}`)
-  });
   return cards;
 });
 
@@ -193,17 +219,10 @@ const getPersonalityName = (personality: CocktailPersonality): string => {
 };
 
 const swipeLeft = () => {
-  if (currentCardIndex.value >= allCocktails.value.length || isAnimating.value) {
-    console.log('⛔ Swipe left blocked:', { currentIndex: currentCardIndex.value, isAnimating: isAnimating.value });
+  if (currentCardIndex.value >= filteredCocktails.value.length || isAnimating.value) {
     return;
   }
-  
-  const currentCocktail = allCocktails.value[currentCardIndex.value];
-  console.log('👈 Swipe LEFT:', { 
-    index: currentCardIndex.value, 
-    cocktail: `${currentCocktail.id}: ${currentCocktail.femaleName}/${currentCocktail.maleName}` 
-  });
-  
+
   isAnimating.value = true;
   swipeDirection.value = 'left';
   cardTransform.value = '';
@@ -211,23 +230,16 @@ const swipeLeft = () => {
     currentCardIndex.value++;
     swipeDirection.value = null;
     isAnimating.value = false;
-    console.log('✅ Swipe left complete. New index:', currentCardIndex.value);
-    checkIfFinished();
   }, 400);
 };
 
 const swipeRight = () => {
-  if (currentCardIndex.value >= allCocktails.value.length || isAnimating.value) {
-    console.log('⛔ Swipe right blocked:', { currentIndex: currentCardIndex.value, isAnimating: isAnimating.value });
+  if (currentCardIndex.value >= filteredCocktails.value.length || isAnimating.value) {
     return;
   }
-  
-  const currentCocktail = allCocktails.value[currentCardIndex.value];
-  console.log('👉 Swipe RIGHT:', { 
-    index: currentCardIndex.value, 
-    cocktail: `${currentCocktail.id}: ${currentCocktail.femaleName}/${currentCocktail.maleName}` 
-  });
-  
+
+  const currentCocktail = filteredCocktails.value[currentCardIndex.value];
+
   isAnimating.value = true;
   swipeDirection.value = 'right';
   cardTransform.value = '';
@@ -244,24 +256,10 @@ const swipeRight = () => {
     currentCardIndex.value++;
     swipeDirection.value = null;
     isAnimating.value = false;
-    console.log('✅ Swipe right complete. New index:', currentCardIndex.value);
-    checkIfFinished();
   }, 400);
 };
 
-const checkIfFinished = () => {
-  console.log('🏁 Check if finished:', { 
-    currentIndex: currentCardIndex.value, 
-    totalCocktails: allCocktails.value.length,
-    isFinished: currentCardIndex.value >= allCocktails.value.length
-  });
-  if (isFinished.value) {
-    console.log('🎉 All cocktails swiped! Matches:', likedCocktails.value.map(c => `${c.femaleName}/${c.maleName}`));
-  }
-};
-
 const restartSwiping = () => {
-  console.log('🔄 Restarting...');
   currentCardIndex.value = 0;
   likedCocktails.value = [];
   isAnimating.value = false;
@@ -355,6 +353,36 @@ const removeMatch = (cocktail: Cocktail) => {
 .ct-subtitle {
   font-size: 1.125rem;
   color: #999;
+}
+
+.ct-filter-bar {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.ct-filter-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ccc;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: rgba(206, 170, 114, 0.6);
+  }
+
+  &.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: transparent;
+    color: #fff;
+  }
 }
 
 .ct-counter {

@@ -17,7 +17,12 @@
         <div @click="$emit('view', cocktail)" class="ct-match-content-wrapper">
           <div class="ct-match-emoji">{{ getPersonalityEmoji(cocktail.personality) }}</div>
           <div class="ct-match-name">{{ cocktail.femaleName }}</div>
-          <div class="ct-match-price">{{ cocktail.price }}</div>
+          <div class="ct-match-meta">
+            <span class="ct-match-alcohol" :title="cocktail.alcoholic ? 'Mit Alkohol' : 'Alkoholfrei'">
+              {{ cocktail.alcoholic ? '🍸' : '🌿' }}
+            </span>
+            <span class="ct-match-price">{{ cocktail.price }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -156,6 +161,17 @@ export default {
   font-size: 0.8rem;
   color: #48bb78;
   font-weight: 500;
+}
+
+.ct-match-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.ct-match-alcohol {
+  font-size: 0.9rem;
 }
 
 @media (max-width: 768px) {

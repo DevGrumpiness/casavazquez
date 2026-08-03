@@ -15,6 +15,9 @@
     @mousedown="isTop ? handleMouseDown($event) : null"
   >
     <div class="ct-card-personality">{{ personalityEmoji }}</div>
+    <span class="ct-card-alcohol-badge" :class="{ 'is-virgin': !cocktail.alcoholic }">
+      {{ cocktail.alcoholic ? '🍸 Mit Alkohol' : '🌿 Alkoholfrei' }}
+    </span>
     <h2 class="ct-card-name">{{ cocktail.femaleName }}</h2>
     
     <div class="ct-card-characteristics">
@@ -238,6 +241,23 @@ const handleMouseDown = (e: MouseEvent) => {
   font-size: 3rem;
   text-align: center;
   margin-bottom: 0.5rem;
+}
+
+.ct-card-alcohol-badge {
+  display: block;
+  margin: 0 auto 0.75rem;
+  width: fit-content;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: linear-gradient(135deg, #ceaa72, #a9803f);
+
+  &.is-virgin {
+    background: linear-gradient(135deg, #48bb78, #2f855a);
+  }
 }
 
 .ct-card-category {
