@@ -26,6 +26,8 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
+    "@dicebear/collection": "^9.4.2",
+    "@dicebear/core": "^9.4.2",
     "@fullhuman/postcss-purgecss": "^8.0.0",
     "@types/leaflet": "^1.9.12",
     "@vitejs/plugin-vue": "^5.2.1",
