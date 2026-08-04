@@ -15,7 +15,12 @@
           ✕
         </button>
         <div @click="$emit('view', cocktail)" class="ct-match-content-wrapper">
-          <div class="ct-match-emoji">{{ getPersonalityEmoji(cocktail.personality) }}</div>
+          <PersonaAvatar
+            class="ct-match-persona"
+            :personality="cocktail.personality"
+            :emoji="getPersonalityEmoji(cocktail.personality)"
+            :personality-name="getPersonalityName(cocktail.personality)"
+          />
           <div class="ct-match-name">{{ cocktail.femaleName }}</div>
           <div class="ct-match-price">{{ cocktail.price }}</div>
         </div>
@@ -26,6 +31,7 @@
 
 <script setup lang="ts">
 import type { Cocktail, CocktailPersonality } from '../../interfaces/cocktail';
+import PersonaAvatar from './PersonaAvatar.vue';
 
 interface Props {
   matches: Cocktail[];
@@ -47,6 +53,11 @@ defineEmits<{
 const getPersonalityEmoji = (personality: CocktailPersonality): string => {
   const p = props.personalities.find(p => p.type === personality);
   return p?.emoji || '🍸';
+};
+
+const getPersonalityName = (personality: CocktailPersonality): string => {
+  const p = props.personalities.find(p => p.type === personality);
+  return p?.name || '';
 };
 </script>
 
@@ -140,9 +151,9 @@ export default {
   cursor: pointer;
 }
 
-.ct-match-emoji {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
+.ct-match-persona {
+  margin: 0 auto 0.5rem;
+  display: flex;
 }
 
 .ct-match-name {
@@ -167,8 +178,9 @@ export default {
     padding: 0.75rem;
   }
   
-  .ct-match-emoji {
-    font-size: 2rem;
+  .ct-match-persona :deep(.ct-persona-avatar) {
+    width: 44px;
+    height: 44px;
   }
   
   .ct-match-name {

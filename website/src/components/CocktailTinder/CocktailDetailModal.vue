@@ -4,7 +4,13 @@
       <div class="ct-detail-card" @click.stop>
         <button class="ct-detail-close" @click="$emit('close')" aria-label="Close">✕</button>
         
-        <div class="ct-card-personality">{{ personalityEmoji }}</div>
+        <PersonaAvatar
+          class="ct-card-persona"
+          :personality="cocktail.personality"
+          :emoji="personalityEmoji"
+          :personality-name="personalityName"
+          size="lg"
+        />
         <h2 class="ct-card-name">{{ cocktail.femaleName }}</h2>
         
         <div class="ct-card-characteristics">
@@ -41,6 +47,7 @@
 
 <script setup lang="ts">
 import type { Cocktail } from '../../interfaces/cocktail';
+import PersonaAvatar from './PersonaAvatar.vue';
 
 interface Props {
   show: boolean;
@@ -120,10 +127,9 @@ defineEmits<{
   }
 }
 
-.ct-card-personality {
-  font-size: 3rem;
-  text-align: center;
-  margin-bottom: 0.5rem;
+.ct-card-persona {
+  margin: 0 auto 0.5rem;
+  display: flex;
 }
 
 .ct-card-category {

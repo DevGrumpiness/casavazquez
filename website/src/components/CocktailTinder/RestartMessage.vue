@@ -12,7 +12,13 @@
         <div class="ct-liked-items">
           <div v-for="cocktail in matches" :key="cocktail.id" class="ct-liked-item">
             <span class="ct-liked-info">
-              {{ getPersonalityEmoji(cocktail.personality) }} {{ cocktail.femaleName }}
+              <PersonaAvatar
+                class="ct-liked-persona"
+                :personality="cocktail.personality"
+                :emoji="getPersonalityEmoji(cocktail.personality)"
+                :personality-name="getPersonalityName(cocktail.personality)"
+              />
+              {{ cocktail.femaleName }}
             </span>
             <button @click="$emit('view', cocktail)" class="ct-liked-order-btn">
               Details
@@ -26,6 +32,7 @@
 
 <script setup lang="ts">
 import type { Cocktail, CocktailPersonality } from '../../interfaces/cocktail';
+import PersonaAvatar from './PersonaAvatar.vue';
 
 interface Props {
   show: boolean;
@@ -49,6 +56,11 @@ defineEmits<{
 const getPersonalityEmoji = (personality: CocktailPersonality): string => {
   const p = props.personalities.find(p => p.type === personality);
   return p?.emoji || '🍸';
+};
+
+const getPersonalityName = (personality: CocktailPersonality): string => {
+  const p = props.personalities.find(p => p.type === personality);
+  return p?.name || '';
 };
 </script>
 
@@ -116,6 +128,24 @@ const getPersonalityEmoji = (personality: CocktailPersonality): string => {
 
 .ct-liked-info {
   flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.ct-liked-persona {
+  flex-shrink: 0;
+}
+
+.ct-liked-persona :deep(.ct-persona-avatar) {
+  width: 36px;
+  height: 36px;
+}
+
+.ct-liked-persona :deep(.ct-persona-badge) {
+  width: 16px;
+  height: 16px;
+  font-size: 0.65rem;
 }
 
 .ct-liked-order-btn {
