@@ -14,7 +14,13 @@
     @touchend="isTop ? handleTouchEnd($event) : null"
     @mousedown="isTop ? handleMouseDown($event) : null"
   >
-    <div class="ct-card-personality">{{ personalityEmoji }}</div>
+    <PersonaAvatar
+      class="ct-card-persona"
+      :personality="cocktail.personality"
+      :emoji="personalityEmoji"
+      :personality-name="personalityName"
+      size="lg"
+    />
     <span class="ct-card-alcohol-badge" :class="{ 'is-virgin': !cocktail.alcoholic }">
       {{ cocktail.alcoholic ? '🍸 Mit Alkohol' : '🌿 Alkoholfrei' }}
     </span>
@@ -52,6 +58,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import type { Cocktail } from '../../interfaces/cocktail';
+import PersonaAvatar from './PersonaAvatar.vue';
 
 interface Props {
   cocktail: Cocktail;
@@ -237,10 +244,9 @@ const handleMouseDown = (e: MouseEvent) => {
   }
 }
 
-.ct-card-personality {
-  font-size: 3rem;
-  text-align: center;
-  margin-bottom: 0.5rem;
+.ct-card-persona {
+  margin: 0 auto 0.5rem;
+  display: flex;
 }
 
 .ct-card-alcohol-badge {

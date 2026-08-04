@@ -12,6 +12,24 @@
     <div class="ct-header">
       <h1 class="ct-title">Cocktail Tinder 🍸</h1>
       <p class="ct-subtitle">Swipe für deinen perfekten Cocktail</p>
+      <div class="ct-gender-toggle" role="group" aria-label="Darstellung der Cocktail-Persönlichkeiten">
+        <button
+          type="button"
+          class="ct-gender-btn"
+          :class="{ active: genderPreference === 'female' }"
+          @click="genderPreference = 'female'"
+        >
+          ♀ Weiblich
+        </button>
+        <button
+          type="button"
+          class="ct-gender-btn"
+          :class="{ active: genderPreference === 'male' }"
+          @click="genderPreference = 'male'"
+        >
+          ♂ Männlich
+        </button>
+      </div>
     </div>
 
     <!-- Alcohol Filter -->
@@ -119,10 +137,14 @@
 import { ref, computed } from 'vue';
 import type { Cocktail, CocktailPersonality } from '../../interfaces/cocktail';
 import { cocktails as cocktailsData } from '../../data/cocktails';
+import { useGenderPreference } from '../../composables/useGenderPreference';
 import CocktailCard from './CocktailCard.vue';
 import MatchesGrid from './MatchesGrid.vue';
 import CocktailDetailModal from './CocktailDetailModal.vue';
 import RestartMessage from './RestartMessage.vue';
+
+const { genderPreference } = useGenderPreference();
+
 
 interface Personality {
   type: CocktailPersonality;
@@ -384,6 +406,38 @@ const removeMatch = (cocktail: Cocktail) => {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-color: transparent;
     color: #fff;
+  }
+}
+
+.ct-gender-toggle {
+  display: inline-flex;
+  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  padding: 0.25rem;
+  gap: 0.25rem;
+}
+
+.ct-gender-btn {
+  border: none;
+  background: transparent;
+  color: #bbb;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: #fff;
+  }
+
+  &.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
   }
 }
 
