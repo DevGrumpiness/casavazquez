@@ -62,7 +62,7 @@ import { blancos } from '../../../data/blancos';
 import { rosados } from '../../../data/rosados';
 import { drinkGroups } from './DrinkMenu.vue';
 import { cocktailGroups } from './CocktailsPage.vue';
-import { snackNames } from '../data/snacksRegistry';
+import { snacks } from './SnackMenu.vue';
 
 const { isAvailable } = useAvailability();
 
@@ -127,7 +127,9 @@ const registryGroups = computed<RegistryGroup[]>(() => {
       .map((d) => ({ id: availabilityId(g.group, d.name), name: d.name })),
   }));
 
-  const snackItems = snackNames.map((name) => ({ id: availabilityId('Snacks', name), name }));
+  const snackItems = snacks
+    .filter((snack) => snack.available !== false)
+    .map((snack) => ({ id: availabilityId('Snacks', snack.name), name: snack.name }));
 
   return [
     { group: 'Wein', items: wineItems },

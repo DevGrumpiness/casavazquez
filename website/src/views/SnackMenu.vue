@@ -470,31 +470,22 @@
 
 </template>
 
-<script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch } from "vue";
-import onmLogo from "../assets/images/Logo-Olive-Meer_klein.png";
-import BaseModal from "../components/BaseModal.vue";
-import FeaturedSlider from "../components/FeaturedSlider.vue";
-import { featuredPromos } from "../data/featuredPromos";
-import { useAvailability, availabilityId } from "../composables/useAvailability";
-// import cocaImage from "../assets/images/coca.webp";
-// import croquetasBoletus from "../assets/images/tapasclub/croquetas_boletus.png";
-// import croquetasChorizo from "../assets/images/tapasclub/croquetas_chorizo.png";
+<script lang="ts">
+// Plain (non-setup) script block: only `<script setup>` disallows top-level
+// exports, so the snack data lives here instead, following the same pattern
+// used in DrinkMenu.vue / CocktailsPage.vue. This lets the admin
+// availability page import `snacks` directly instead of relying on a
+// hand-maintained, easy-to-forget-to-update copy of the item names.
 import datillesImage from "../assets/images/tapasclub/datilles.png";
 import olivenMixImage from "../assets/images/tapasclub/olivenmix.png";
 import polloPiripiri from "../assets/images/tapasclub/pollo_piripiri.png";
-// import tortillaImage from "../assets/images/tapasclub/tortilla.png";
 import albondigasImage from "../assets/images/tapasclub/albondigas.png";
-// import champignonsImage from "../assets/images/tapasclub/champignons.png";
-// import zwiebelringeImage from "../assets/images/tapasclub/zwiebelringe.png";
 import rotebete from "../assets/images/tapasclub/rotebete_baellchen.png";
-// import pancehta from "../assets/images/tapasclub/pancheta.png";
 import calamares from "../assets/images/tapasclub/calamares.png";
-import mixtoImage from "../assets/images/tapasclub/mixto.webp";
 import flammImage from "../assets/images/tapasclub/flamm.png";
 import pommesImage from "../assets/images/pommes.webp";
 
-interface SnackItem {
+export interface SnackItem {
   name: string;
   description: string;
   price: string;
@@ -506,6 +497,164 @@ interface SnackItem {
   allergens?: number[];
   traceAllergens?: number[];
 }
+
+const flammkuchenVariants = [
+  {
+    name: "Flammkuchen Klassisch",
+    description: "Speck & Zwiebeln",
+    price: "9,50",
+    veggie: false
+  },
+  {
+    name: "Flammkuchen Vegetarisch",
+    description: "mit Dingen aus dem Garten",
+    price: "9,50",
+    veggie: true
+  },
+  {
+    name: "Flammkuchen Española",
+    description: "Chorizo & Oliven",
+    price: "9,50",
+    veggie: false
+  }
+]
+
+export const snacks: SnackItem[] = [
+  { name: 'Nachos mit Dip (Salsa/Aioli)', description: '', price: '6,5', veggie: true, keto: false, allergens: [11, 15] },
+  { name: 'Pimientos de Padrón - der Klassiker', description: '', price: '6,5', veggie: true, keto: true },
+  { name: 'Brot mit Aioli Dip', description: '', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 15] },
+  { name: 'Patatas Bravas', description: '', price: '5', veggie: true, keto: false, allergens: [9, 11, 15] },
+  { name: 'Chicken Fingers', description: 'Saftige panierte Hänchen-Stückchen', price: '6,5', veggie: false, keto: false, allergens: [9, 11, 15] },
+
+  { name: 'Pommes', description: '', price: '5', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
+  { name: 'Pommes groß', description: '', price: '7', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
+  { name: 'Oliven Mix', description: '', price: '6', veggie: true, onm: true, keto: true, image: olivenMixImage },
+  // { name: 'Croquetas con Jamón Iberico', description: 'kleine Kroketten mit Jamón-Füllung', price: '7,5', veggie: false, keto: false, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
+  ...flammkuchenVariants.map(variant => ({
+    name: variant.name,
+    description: variant.description,
+    price: variant.price,
+    veggie: variant.veggie,
+    keto: false,
+    image: flammImage
+  })),
+  {
+    name: 'Pollo Al Ajillo',
+    description: 'Gegarte, marinierte Hähnchen Flügel mit Knoblauch',
+    price: '8,5',
+    veggie: false,
+    keto: true,
+    image: polloPiripiri,
+    allergens: [14, 16],
+    traceAllergens: [4, 9, 12, 13, 15, 17, 22],
+    available: true
+  },
+  // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
+  // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
+  { name: 'Albondigas in Salsa', description: 'Fleischbällchen (5Stk) mit Chili-Käse Füllung (pikant) in Tomatensalsa', price: '7,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
+  // { name: 'Chorizo in Salsa', description: 'Pikante Chorizo (spanische Wurst) in Tomatensalsa', price: '6,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
+  // { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
+  { name: 'Dátiles con Bacon', description: 'Datteln im Speckmantel', price: '7,5', veggie: false, keto: false, image: datillesImage, allergens: [26] },
+  // {
+  //   name: 'Dados de Panceta',
+  //   description: 'Schweinbauch-Würfel, herzhaft mariniert. ca 150g',
+  //   price: '9,5',
+  //   veggie: false,
+  //   keto: true,
+  //   available: true,
+  //   image: pancehta,
+  //   allergens: [9, 16, 26]
+  // },
+  { name: 'Calamares Ringe', description: 'Tintenfischringe im Backteig', price: '7,5', veggie: false, keto: false, image: calamares, allergens: [9, 11, 13, 20] },
+  {
+    name: 'Harissa Bällchen',
+    description: 'Veganer Snack aus Harissa in Kräuter-Panade',
+    price: '7,5',
+    veggie: true,
+    keto: false,
+    image: rotebete,
+    allergens: [9, 27, 28, 29, 30]
+  },
+  // {
+  //   name: 'Rote Beete Ingwer Bällchen',
+  //   description: 'Veganer Snack aus proteinreichen Kichererbsen, mit rote Beete und Ingwer.',
+  //   price: '7,5',
+  //   veggie: true,
+  //   keto: false,
+  //   image: rotebete,
+  //   allergens: [9, 27, 28, 29, 30],
+  // },
+  // {
+  //   name: 'Vegane Erbsen Minz Sticks',
+  //   description: 'Veganund lecker.',
+  //   price: '7,5',
+  //   veggie: true,
+  //   keto: false,
+  //   image: veggieSticksImage,
+  //   allergens: [9, 27, 28, 29, 30],
+  //   available: false
+  // },
+  {
+    name: 'Verduras a la Parrilla',
+    description: 'Gemischtes Grillgemüse Antipasti-Art (lauwarm).',
+    price: '7,5',
+    veggie: true,
+    keto: false,
+    image: undefined,
+    allergens: [9, 27, 28, 29, 30]
+  },
+  {
+    name: 'Gambas Empanadas',
+    description: 'Gambas mit einer köstlich subtil gewürzten knusprigen Kokos-Kruste mit Knoblauch und Petersilie. ',
+    price: '8,5',
+    veggie: false,
+    keto: false,
+    image: undefined,
+    allergens: [9, 27, 28, 29, 30]
+  },
+  {
+    name: 'Blumenkohl Bites, würzig',
+    description: 'Blumenkohl Bites, würzig mit einer knusprigen Panade und einer leichten Schärfe',
+    price: '5,5',
+    veggie: true,
+    keto: false,
+    image: undefined,
+    allergens: [9, 27, 28, 29, 30]
+  },
+
+  {
+    name: 'Empanadillas de Pollo 4Stk',
+    description: 'Klassiker unter den spanischen Empanadas mit Hähnchen-Füllung ',
+    price: '7,5',
+    veggie: false,
+    keto: false,
+    image: undefined,
+    allergens: [9, 27, 28, 29, 30]
+  },
+//  {
+//     name: 'Costillas Picantes',
+//     description: 'Gegrillte, würzige Rippchen, losgeschnitten.',
+//     price: '8,5',
+//     veggie: false,
+//     keto: true,
+//     image: undefined,
+//     allergens: [9, 27, 28, 29, 30]
+//   },
+];
+// { name: 'Palta Rebozada', description: 'Avocadospalten paniert', price: '8,5', veggie: true, keto: false },
+// { name: 'Tapas Mix (2p)', description: 'Mix aus verschiedenen Tapas', price: '24,5', veggie: false, keto: false },
+// { name: 'Veggi Mix (2p)', description: 'Mix aus verschiedenen Veggie Tapas.', price: '24,5', veggie: true, keto: false },
+// { name: 'Aros de Cebolla', description: 'Zwiebelringe', price: '6', veggie: true, keto: false, image: zwiebelringeImage, allergens: [9, 11, 13] },
+</script>
+
+<script setup lang="ts">
+import { ref, computed, onMounted, onUnmounted, watch } from "vue";
+import onmLogo from "../assets/images/Logo-Olive-Meer_klein.png";
+import BaseModal from "../components/BaseModal.vue";
+import FeaturedSlider from "../components/FeaturedSlider.vue";
+import { featuredPromos } from "../data/featuredPromos";
+import { useAvailability, availabilityId } from "../composables/useAvailability";
+import mixtoImage from "../assets/images/tapasclub/mixto.webp";
 
 const allergenIndexMap: Record<number, string> = {
   1: "mit Farbstoff",
@@ -644,27 +793,6 @@ const quickWaitItems = [
     name: "Calamares",
     description: "Tintenfischringe im Backteig",
     price: "7,5"
-  }
-]
-
-const flammkuchenVariants = [
-  {
-    name: "Flammkuchen Klassisch",
-    description: "Speck & Zwiebeln",
-    price: "9,50",
-    veggie: false
-  },
-  {
-    name: "Flammkuchen Vegetarisch",
-    description: "mit Dingen aus dem Garten",
-    price: "9,50",
-    veggie: true
-  },
-  {
-    name: "Flammkuchen Española",
-    description: "Chorizo & Oliven",
-    price: "9,50",
-    veggie: false
   }
 ]
 
@@ -811,133 +939,6 @@ function scrollToSnackSection(sectionId: string) {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" })
   })
 }
-
-const snacks: SnackItem[] = [
-  { name: 'Nachos mit Dip (Salsa/Aioli)', description: '', price: '6,5', veggie: true, keto: false, allergens: [11, 15] },
-  { name: 'Pimientos de Padrón - der Klassiker', description: '', price: '6,5', veggie: true, keto: true },
-  { name: 'Brot mit Aioli Dip', description: '', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 15] },
-  { name: 'Patatas Bravas', description: '', price: '5', veggie: true, keto: false, allergens: [9, 11, 15] },
-  { name: 'Chicken Fingers', description: 'Saftige panierte Hänchen-Stückchen', price: '6,5', veggie: false, keto: false, allergens: [9, 11, 15] },
-  
-  { name: 'Pommes', description: '', price: '5', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
-  { name: 'Pommes groß', description: '', price: '7', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
-  { name: 'Oliven Mix', description: '', price: '6', veggie: true, onm: true, keto: true, image: olivenMixImage },
-  // { name: 'Croquetas con Jamón Iberico', description: 'kleine Kroketten mit Jamón-Füllung', price: '7,5', veggie: false, keto: false, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
-  ...flammkuchenVariants.map(variant => ({
-    name: variant.name,
-    description: variant.description,
-    price: variant.price,
-    veggie: variant.veggie,
-    keto: false,
-    image: flammImage
-  })),
-  {
-    name: 'Pollo Al Ajillo',
-    description: 'Gegarte, marinierte Hähnchen Flügel mit Knoblauch',
-    price: '8,5',
-    veggie: false,
-    keto: true,
-    image: polloPiripiri,
-    allergens: [14, 16],
-    traceAllergens: [4, 9, 12, 13, 15, 17, 22],
-    available: true
-  },
-  // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
-  // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
-  { name: 'Albondigas in Salsa', description: 'Fleischbällchen (5Stk) mit Chili-Käse Füllung (pikant) in Tomatensalsa', price: '7,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
-  // { name: 'Chorizo in Salsa', description: 'Pikante Chorizo (spanische Wurst) in Tomatensalsa', price: '6,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
-  // { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
-  { name: 'Dátiles con Bacon', description: 'Datteln im Speckmantel', price: '7,5', veggie: false, keto: false, image: datillesImage, allergens: [26] },
-  // {
-  //   name: 'Dados de Panceta',
-  //   description: 'Schweinbauch-Würfel, herzhaft mariniert. ca 150g',
-  //   price: '9,5',
-  //   veggie: false,
-  //   keto: true,
-  //   available: true,
-  //   image: pancehta,
-  //   allergens: [9, 16, 26]
-  // },
-  { name: 'Calamares Ringe', description: 'Tintenfischringe im Backteig', price: '7,5', veggie: false, keto: false, image: calamares, allergens: [9, 11, 13, 20] },
-  {
-    name: 'Harissa Bällchen',
-    description: 'Veganer Snack aus Harissa in Kräuter-Panade',
-    price: '7,5',
-    veggie: true,
-    keto: false,
-    image: rotebete,
-    allergens: [9, 27, 28, 29, 30]
-  },
-  // {
-  //   name: 'Rote Beete Ingwer Bällchen',
-  //   description: 'Veganer Snack aus proteinreichen Kichererbsen, mit rote Beete und Ingwer.',
-  //   price: '7,5',
-  //   veggie: true,
-  //   keto: false,
-  //   image: rotebete,
-  //   allergens: [9, 27, 28, 29, 30],
-  // },
-  // {
-  //   name: 'Vegane Erbsen Minz Sticks',
-  //   description: 'Veganund lecker.',
-  //   price: '7,5',
-  //   veggie: true,
-  //   keto: false,
-  //   image: veggieSticksImage,
-  //   allergens: [9, 27, 28, 29, 30],
-  //   available: false
-  // },
-  {
-    name: 'Verduras a la Parrilla',
-    description: 'Gemischtes Grillgemüse Antipasti-Art (lauwarm).',
-    price: '7,5',
-    veggie: true,
-    keto: false,
-    image: undefined,
-    allergens: [9, 27, 28, 29, 30]
-  },
-  {
-    name: 'Gambas Empanadas',
-    description: 'Gambas mit einer köstlich subtil gewürzten knusprigen Kokos-Kruste mit Knoblauch und Petersilie. ',
-    price: '8,5',
-    veggie: false,
-    keto: false,
-    image: undefined,
-    allergens: [9, 27, 28, 29, 30]
-  },
-  {
-    name: 'Blumenkohl Bites, würzig',
-    description: 'Blumenkohl Bites, würzig mit einer knusprigen Panade und einer leichten Schärfe',
-    price: '5,5',
-    veggie: true,
-    keto: false,
-    image: undefined,
-    allergens: [9, 27, 28, 29, 30]
-  },
-
-  {
-    name: 'Empanadillas de Pollo 4Stk',
-    description: 'Klassiker unter den spanischen Empanadas mit Hähnchen-Füllung ',
-    price: '7,5',
-    veggie: false,
-    keto: false,
-    image: undefined,
-    allergens: [9, 27, 28, 29, 30]
-  },
-//  {
-//     name: 'Costillas Picantes',
-//     description: 'Gegrillte, würzige Rippchen, losgeschnitten.',
-//     price: '8,5',
-//     veggie: false,
-//     keto: true,
-//     image: undefined,
-//     allergens: [9, 27, 28, 29, 30]
-//   },
-];
-// { name: 'Palta Rebozada', description: 'Avocadospalten paniert', price: '8,5', veggie: true, keto: false },
-// { name: 'Tapas Mix (2p)', description: 'Mix aus verschiedenen Tapas', price: '24,5', veggie: false, keto: false },
-// { name: 'Veggi Mix (2p)', description: 'Mix aus verschiedenen Veggie Tapas.', price: '24,5', veggie: true, keto: false },
-// { name: 'Aros de Cebolla', description: 'Zwiebelringe', price: '6', veggie: true, keto: false, image: zwiebelringeImage, allergens: [9, 11, 13] },
 
 function toggleVeggie() {
   veggie.value = !veggie.value;
