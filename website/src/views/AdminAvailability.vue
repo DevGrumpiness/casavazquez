@@ -21,8 +21,10 @@
       <input v-model="search" class="search-box" type="search" placeholder="Suchen…" />
 
       <p class="hint">
-        Ein deaktivierter Schalter blendet das Produkt sofort auf der Website aus (z.B. "heute ausverkauft") –
-        ganz ohne Deploy. Das gilt nur für Produkte, die grundsätzlich im Sortiment sind.
+        Ein deaktivierter Schalter "Verfügbar" blendet das Produkt sofort auf der Website mit einem
+        "heute ausverkauft"-Hinweis aus – ganz ohne Deploy. Das gilt nur für Produkte, die
+        grundsätzlich im Sortiment sind. Bei Snacks gibt es zusätzlich "Ausblenden": damit
+        verschwindet das Produkt komplett von der Karte, statt nur als ausverkauft markiert zu werden.
       </p>
 
       <div v-for="group in filteredGroups" :key="group.group" class="group">
@@ -30,15 +32,32 @@
         <ul>
           <li v-for="item in group.items" :key="item.id" class="item">
             <span class="item-name">{{ item.name }}</span>
-            <button
-              type="button"
-              class="toggle"
-              :class="{ on: isAvailable(item.id, true) }"
-              :aria-pressed="isAvailable(item.id, true)"
-              @click="toggle(item.id)"
-            >
-              <span class="knob"></span>
-            </button>
+            <div class="item-toggles">
+              <label class="toggle-label">
+                <span>Verfügbar</span>
+                <button
+                  type="button"
+                  class="toggle"
+                  :class="{ on: isAvailable(item.id, true) }"
+                  :aria-pressed="isAvailable(item.id, true)"
+                  @click="toggle(item.id)"
+                >
+                  <span class="knob"></span>
+                </button>
+              </label>
+              <label v-if="group.group === 'Snacks'" class="toggle-label">
+                <span>Anzeigen</span>
+                <button
+                  type="button"
+                  class="toggle"
+                  :class="{ on: !isHidden(item.id) }"
+                  :aria-pressed="!isHidden(item.id)"
+                  @click="toggleHidden(item.id)"
+                >
+                  <span class="knob"></span>
+                </button>
+              </label>
+            </div>
           </li>
         </ul>
       </div>
@@ -64,7 +83,7 @@ import { drinkGroups } from './DrinkMenu.vue';
 import { cocktailGroups } from './CocktailsPage.vue';
 import { snacks } from './SnackMenu.vue';
 
-const { isAvailable } = useAvailability();
+const { isAvailable, isHidden } = useAvailability();
 
 const user = ref<User | null>(null);
 const email = ref('');
@@ -99,6 +118,15 @@ async function toggle(id: string) {
   await setDoc(
     doc(db, 'availability', id),
     { available: next, updatedAt: serverTimestamp() },
+    { merge: true }
+  );
+}
+
+async function toggleHidden(id: string) {
+  const next = !isHidden(id);
+  await setDoc(
+    doc(db, 'availability', id),
+    { hidden: next, updatedAt: serverTimestamp() },
     { merge: true }
   );
 }
@@ -224,6 +252,21 @@ const filteredGroups = computed(() => {
 
 .item-name {
   font-size: 0.95rem;
+}
+
+.item-toggles {
+  display: flex;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.toggle-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.7rem;
+  opacity: 0.8;
 }
 
 .toggle {

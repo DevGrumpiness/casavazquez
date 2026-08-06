@@ -5,7 +5,14 @@ import { slug } from '../utils/slug';
 
 // Module-level singleton: one live subscription shared by every component
 // that uses this composable, so we don't open a Firestore listener per view.
-const overrides = reactive<Record<string, boolean>>({});
+//
+// Each item can be independently:
+// - "sold out today" (available: false) -> shown greyed out with a note
+//   (used by SnackMenu's "heute Ausverkauft" pill), or fully hidden in menus
+//   that don't have a "sold out" display (wine/drinks/cocktails).
+// - "hidden" (hidden: true) -> removed from the menu entirely, regardless
+//   of the available flag. This is the "don't show this item at all" toggle.
+const overrides = reactive<Record<string, { available: boolean; hidden: boolean }>>({});
 let subscribed = false;
 let ready = false;
 const readyWaiters: Array<() => void> = [];
@@ -21,7 +28,10 @@ function ensureSubscribed() {
                     delete overrides[change.doc.id];
                 } else {
                     const data = change.doc.data();
-                    overrides[change.doc.id] = data.available !== false;
+                    overrides[change.doc.id] = {
+                        available: data.available !== false,
+                        hidden: data.hidden === true,
+                    };
                 }
             });
             if (!ready) {
@@ -51,8 +61,12 @@ export function useAvailability() {
 
     function isAvailable(id: string, staticDefault: boolean = true): boolean {
         if (!staticDefault) return false; // structurally disabled in code, live toggle can't re-enable it
-        return overrides[id] ?? true;
+        return overrides[id]?.available ?? true;
     }
 
-    return { isAvailable, availabilityId, overrides };
+    function isHidden(id: string): boolean {
+        return overrides[id]?.hidden ?? false;
+    }
+
+    return { isAvailable, isHidden, availabilityId, overrides };
 }
