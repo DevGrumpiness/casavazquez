@@ -634,11 +634,11 @@ const quickWaitItems = [
     description: "Spanischer Olivenmix.",
     price: "6"
   },
-  {
-    name: "Verduras",
-    description: "Gemischtes Grillgemüse Antipasti-Art (lauwarm).",
-    price: "7,5"
-  },
+  // {
+  //   name: "Verduras",
+  //   description: "Gemischtes Grillgemüse Antipasti-Art (lauwarm).",
+  //   price: "7,5"
+  // },
   {
     name: "Calamares",
     description: "Tintenfischringe im Backteig",
@@ -833,7 +833,7 @@ const snacks: SnackItem[] = [
   // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
   // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
   { name: 'Albondigas in Salsa', description: 'Fleischbällchen (5Stk) mit Chili-Käse Füllung (pikant) in Tomatensalsa', price: '7,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
-  // { name: 'Chorizo in Salsa', description: 'Pikante Chorizo (spanische Wurst) in Tomatensalsa', price: '6,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
+  { name: 'Chorizo in Salsa', description: 'Pikante Chorizo (spanische Wurst) in Tomatensalsa', price: '6,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
   // { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
   { name: 'Dátiles con Bacon', description: 'Datteln im Speckmantel', price: '7,5', veggie: false, keto: false, image: datillesImage, allergens: [26] },
   // {
@@ -875,15 +875,15 @@ const snacks: SnackItem[] = [
   //   allergens: [9, 27, 28, 29, 30],
   //   available: false
   // },
-  {
-    name: 'Verduras a la Parrilla',
-    description: 'Gemischtes Grillgemüse Antipasti-Art (lauwarm).',
-    price: '7,5',
-    veggie: true,
-    keto: false,
-    image: undefined,
-    allergens: [9, 27, 28, 29, 30]
-  },
+  // {
+  //   name: 'Verduras a la Parrilla',
+  //   description: 'Gemischtes Grillgemüse Antipasti-Art (lauwarm).',
+  //   price: '7,5',
+  //   veggie: true,
+  //   keto: false,
+  //   image: undefined,
+  //   allergens: [9, 27, 28, 29, 30]
+  // },
   {
     name: 'Gambas Empanadas',
     description: 'Gambas mit einer köstlich subtil gewürzten knusprigen Kokos-Kruste mit Knoblauch und Petersilie. ',
@@ -893,15 +893,15 @@ const snacks: SnackItem[] = [
     image: undefined,
     allergens: [9, 27, 28, 29, 30]
   },
-  {
-    name: 'Blumenkohl Bites, würzig',
-    description: 'Blumenkohl Bites, würzig mit einer knusprigen Panade und einer leichten Schärfe',
-    price: '5,5',
-    veggie: true,
-    keto: false,
-    image: undefined,
-    allergens: [9, 27, 28, 29, 30]
-  },
+  // {
+  //   name: 'Blumenkohl Bites, würzig',
+  //   description: 'Blumenkohl Bites, würzig mit einer knusprigen Panade und einer leichten Schärfe',
+  //   price: '5,5',
+  //   veggie: true,
+  //   keto: false,
+  //   image: undefined,
+  //   allergens: [9, 27, 28, 29, 30]
+  // },
 
   {
     name: 'Empanadillas de Pollo 4Stk',

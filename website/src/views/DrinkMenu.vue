@@ -42,6 +42,13 @@
     </header>
 
     <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
+      <div class="drink-featured-card">
+        <span class="drink-featured-badge">Neu</span>
+        <div class="drink-featured-copy">
+          <h2>Limonade</h2>
+          <p>Erfrischende Limonade mit Gurke, Minze und TH Cherry Blossom Tonic</p>
+        </div>
+      </div>
       <transition-group name="drink" tag="ul" class="drinks-list">
         <li v-for="drink in nonAlcoholic ? softdrinks.filter(d => !d.alcoholic) : softdrinks" :key="drink.name"
           class="drinks-item">
@@ -368,6 +375,15 @@ const beers: Drink[] = [
     available: true,
   },
  {
+   name: "Estrella Galicia Fl. 0,2",
+    volume: "0,2l",
+    price: "2,5€",
+   category: "Bier",
+   alcoholic: true,
+   allergens: [4, 10],
+   available: true
+ },
+ {
    name: "Estrella vom Fass 0,2",
     volume: "0,2l",
     price: "2,9€",
@@ -424,15 +440,6 @@ const beers: Drink[] = [
 ];
 
 const softdrinks: Drink[] = [
-
-  {
-    name: "Eistee von Rauch (Granateapfel, Crenberry)",
-    volume: "0,33l",
-    price: "3,9€",
-    category: "Softdrink",
-    alcoholic: false,
-    allergens: [1, 2, 8]
-  },
   {
     name: "Bio Saftschorle von Rauch (Maracuja, Rhabarber)",
     volume: "0,33l",
@@ -441,7 +448,6 @@ const softdrinks: Drink[] = [
     alcoholic: false,
     allergens: []
   },
-  { name: "Thomas Henry", volume: "0,20l", price: "2,5€", category: "Softdrink", alcoholic: false, allergens: [24] },
   {
     name: "Coca Cola Zero",
     volume: "0,33l",

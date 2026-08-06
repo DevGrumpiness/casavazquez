@@ -207,5 +207,22 @@ export const rosados: Wine[] = [
         image: null,
         characteristics: 'Trocken, frisch, floral, mineralisch',
         available: false
+    },
+    {
+        name: 'Rosé Karla by von Kern',
+        id: 121,
+        prices: {
+            '0.1l': '4,00€',
+            '0.2l': '7,50€',
+            'flasche': '25,00€'
+        },
+        color: 'rosé',
+        grape: 'Spätburgunder, Cabernet Sauvignon, Merlot',
+        origin: 'Deutschland, Pfalz',
+        shortDescription: 'Trocken, fruchtiger Rosé mit Grapefruit, Erdbeere und Zitrone.',
+        longDescription: 'Der Rosé Karla by von Kern ist eine trockene Cuvée aus Spätburgunder, Cabernet Sauvignon und Merlot. Er verbindet frische Noten von Grapefruit und Zitrone mit saftiger Erdbeere und zeigt sich lebendig und klar im Abgang.',
+        image: null,
+        characteristics: 'trocken, fruchtig, Grapefruit, Erdbeere, Zitrone, rosé',
+        available: true
     }
 ]
