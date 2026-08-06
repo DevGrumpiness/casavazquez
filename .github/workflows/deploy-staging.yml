@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - staging
+  workflow_dispatch: {}
+  schedule:
+    # See deploy-production.yml for why we poll instead of relying on push.
+    - cron: '*/5 * * * *'
 
 permissions:
   contents: read
@@ -14,18 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Write website/.env
-        run: echo "${{ secrets.WEBSITE_ENV_FILE }}" > website/.env
-
-      - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-
-      - name: Install dependencies and build website
-        run: |
-          npm --prefix website ci
-          npm --prefix website run build
+          ref: staging
 
       - id: auth
         uses: google-github-actions/auth@v2
@@ -36,5 +30,37 @@ jobs:
 
       - uses: google-github-actions/setup-gcloud@v2
 
+      - name: Check whether a deploy is needed
+        id: check
+        run: |
+          HEAD_SHA=$(git rev-parse HEAD)
+          CURRENT_SHA=$(gcloud run services describe casavazquez-staging --region=europe-central2 --format='value(metadata.labels.git-sha)' 2>/dev/null || echo "")
+          echo "Deployed sha: $CURRENT_SHA"
+          echo "HEAD sha:     $HEAD_SHA"
+          echo "head_sha=$HEAD_SHA" >> "$GITHUB_OUTPUT"
+          if [ "$CURRENT_SHA" = "$HEAD_SHA" ]; then
+            echo "needed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "needed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Write website/.env
+        if: steps.check.outputs.needed == 'true'
+        run: echo "${{ secrets.WEBSITE_ENV_FILE }}" > website/.env
+
+      - uses: actions/setup-node@v4
+        if: steps.check.outputs.needed == 'true'
+        with:
+          node-version: '20'
+
+      - name: Install dependencies and build website
+        if: steps.check.outputs.needed == 'true'
+        run: |
+          npm --prefix website ci
+          npm --prefix website run build
+
       - name: Deploy to Cloud Run
-        run: gcloud run deploy casavazquez-staging --source=. --region=europe-central2 --allow-unauthenticated --clear-base-image --quiet --min-instances=0 --max-instances=1
+        if: steps.check.outputs.needed == 'true'
+        run: |
+          gcloud run deploy casavazquez-staging --source=. --region=europe-central2 --allow-unauthenticated --clear-base-image --quiet --min-instances=0 --max-instances=1
+          gcloud run services update casavazquez-staging --region=europe-central2 --update-labels=git-sha=${{ steps.check.outputs.head_sha }} --quiet
