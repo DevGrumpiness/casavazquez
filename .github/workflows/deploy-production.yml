@@ -1,0 +1,40 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Write website/.env
+        run: echo "${{ secrets.WEBSITE_ENV_FILE }}" > website/.env
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies and build website
+        run: |
+          npm --prefix website ci
+          npm --prefix website run build
+
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          project_id: casavazquez-470814
+          workload_identity_provider: projects/390932826487/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider
+          service_account: github-actions-deploy@casavazquez-470814.iam.gserviceaccount.com
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Deploy to Cloud Run
+        run: gcloud run deploy casavazquez-website-update --source=. --region=europe-central2 --allow-unauthenticated --clear-base-image --quiet
