@@ -806,15 +806,20 @@ function getLocalDateIso(date: Date) {
 const showQuickWaitSection = computed(() => getLocalDateIso(new Date()) === QUICK_WAIT_SECTION_DATE)
 const showTodayServiceNotice = computed(() => getLocalDateIso(new Date()) === TODAY_SERVICE_NOTICE_DATE)
 
-const { isAvailable } = useAvailability();
+const { isAvailable, isHidden } = useAvailability();
 
 // Merges the ad-hoc live "sold out today" toggle (Firestore) into the static
-// menu data, without touching the hardcoded `snacks` array above.
+// menu data, without touching the hardcoded `snacks` array above. Items
+// marked "hidden" in the admin page are dropped entirely here so they never
+// reach the template (as opposed to "sold out today", which stays visible
+// with the greyed-out pill).
 const liveSnacks = computed<SnackItem[]>(() =>
-  snacks.map(snack => ({
-    ...snack,
-    available: isAvailable(availabilityId('Snacks', snack.name), snack.available !== false),
-  }))
+  snacks
+    .filter(snack => !isHidden(availabilityId('Snacks', snack.name)))
+    .map(snack => ({
+      ...snack,
+      available: isAvailable(availabilityId('Snacks', snack.name), snack.available !== false),
+    }))
 );
 
 const filteredSnacks = computed(() => {
