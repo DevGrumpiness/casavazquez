@@ -41,11 +41,11 @@ const color = computed(() => getPersonalityColor(props.personality));
   box-shadow: 0 0 12px color-mix(in srgb, var(--persona-color, #667eea) 55%, transparent);
   overflow: visible;
   flex-shrink: 0;
-
-  &--sm {
-    width: 56px;
-    height: 56px;
-  }
+  // Base size doubles as the "sm" default so callers that only override the
+  // container width/height (e.g. via :deep()) always have a guaranteed
+  // fallback, even if the `--sm` modifier class isn't present in the DOM.
+  width: 56px;
+  height: 56px;
 
   &--lg {
     width: 88px;
@@ -54,6 +54,8 @@ const color = computed(() => getPersonalityColor(props.personality));
 }
 
 .ct-persona-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   border-radius: 50%;
