@@ -11,6 +11,10 @@
 // app never depends on a network call to DiceBear at build or run time.
 // The user can later swap any of these files 1:1 with custom-generated
 // artwork - just keep the same file names.
+//
+// NOTE: The "sweet" personality now uses custom illustrated artwork
+// (sweet-male.png / sweet-female.png, see personalityTheme.ts) instead of a
+// generated DiceBear avatar, so it has been removed from `configs` below.
 import { promises as fs } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -34,15 +38,6 @@ const configs = {
     seed: 'bitter-male', hair: ['shortCombover'], hairColor: ['2b2320'], mouth: ['smirk'], eyes: ['sleep'],
     facialHair: ['shadow'], facialHairProbability: 100, nose: ['wrinkles'], body: ['squared'],
     clothingColor: ['6b4a2f'], backgroundColor: ['b8860b'],
-  },
-  'sweet-female': {
-    seed: 'sweet-female', hair: ['pigtails'], hairColor: ['9a5b3f'], mouth: ['bigSmile'], eyes: ['happy'],
-    nose: ['smallRound'], body: ['rounded'], clothingColor: ['ff8fab'], backgroundColor: ['ff6b9d'],
-  },
-  'sweet-male': {
-    seed: 'sweet-male', hair: ['curlyHighTop'], hairColor: ['7a4a2f'], mouth: ['bigSmile'], eyes: ['happy'],
-    facialHairProbability: 0, nose: ['smallRound'], body: ['rounded'],
-    clothingColor: ['ff8fab'], backgroundColor: ['ff6b9d'],
   },
   'mysterious-female': {
     seed: 'mysterious-female', hair: ['long'], hairColor: ['1a1730'], mouth: ['smirk'], eyes: ['sleep'],

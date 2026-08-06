@@ -3,8 +3,8 @@ import type { GenderPreference } from '../../composables/useGenderPreference';
 
 import bitterFemale from '../../assets/cocktail-tinder/personas/bitter-female.svg?url';
 import bitterMale from '../../assets/cocktail-tinder/personas/bitter-male.svg?url';
-import sweetFemale from '../../assets/cocktail-tinder/personas/sweet-female.svg?url';
-import sweetMale from '../../assets/cocktail-tinder/personas/sweet-male.svg?url';
+import sweetFemale from '../../assets/cocktail-tinder/personas/sweet-female.png?url';
+import sweetMale from '../../assets/cocktail-tinder/personas/sweet-male.png?url';
 import mysteriousFemale from '../../assets/cocktail-tinder/personas/mysterious-female.svg?url';
 import mysteriousMale from '../../assets/cocktail-tinder/personas/mysterious-male.svg?url';
 import bitchyFemale from '../../assets/cocktail-tinder/personas/bitchy-female.svg?url';
