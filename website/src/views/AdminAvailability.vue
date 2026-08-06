@@ -20,13 +20,6 @@
 
       <input v-model="search" class="search-box" type="search" placeholder="Suchen…" />
 
-      <p class="hint">
-        Ein deaktivierter Schalter "Verfügbar" blendet das Produkt sofort auf der Website mit einem
-        "heute ausverkauft"-Hinweis aus – ganz ohne Deploy. Das gilt nur für Produkte, die
-        grundsätzlich im Sortiment sind. Bei Snacks gibt es zusätzlich "Ausblenden": damit
-        verschwindet das Produkt komplett von der Karte, statt nur als ausverkauft markiert zu werden.
-      </p>
-
       <div v-for="group in filteredGroups" :key="group.group" class="group">
         <h2>{{ group.group }}</h2>
         <ul>
@@ -229,12 +222,6 @@ const filteredGroups = computed(() => {
 .search-box {
   width: 100%;
   margin-bottom: 1rem;
-}
-
-.hint {
-  font-size: 0.85rem;
-  opacity: 0.75;
-  margin-bottom: 1.5rem;
 }
 
 .group h2 {
