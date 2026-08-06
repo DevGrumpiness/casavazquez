@@ -84,28 +84,25 @@ Each component has scoped styles following these principles:
 
 ## 🔧 Usage
 
+The component is embedded directly (no feature flag/URL parameter needed) in
+`src/views/CocktailsPage.vue`, which is served under the dedicated `/cocktails`
+route (see `src/router/index.ts`):
+
 ```vue
 <script setup>
-import { computed } from 'vue';
 import CocktailTinder from '../components/CocktailTinder/CocktailTinder.vue';
-
-// Feature flag for testing
-const showCocktailTinder = computed(() => {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get('test') === 'cocktails';
-});
 </script>
 
 <template>
-  <CocktailTinder v-if="showCocktailTinder" id="cocktail-tinder" />
+  <CocktailTinder id="cocktail-tinder" />
 </template>
 ```
 
 ## 🧪 Testing
 
-Access the feature via URL parameter:
+Access the feature directly via the dedicated route:
 ```
-https://yoursite.com/drinks?test=cocktails
+https://yoursite.com/cocktails
 ```
 
 ## 📦 Dependencies
