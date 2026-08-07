@@ -2,10 +2,8 @@
 
   <FeaturedSlider :items="sliderItems" />
 
-  <div class="bundle-offer">
-    <strong>Promotion</strong><br />
-    1 Flasche Maybach Grauer Burgunder + kleine Queso Manchego Platte für 20€
-  </div>
+    <div class="promo-banner">1 Flasche Maybach Grauer Burgunder + kleine Queso Manchego Platte für 20€</div>
+  
 
   <!-- Filter-Button -->
   <div class="filter-buttons">
@@ -507,12 +505,13 @@ const no3: Drink[] = [
 ];
 
 const schnapps: Drink[] = [
-  { name: "Scheibel Feine Marille", volume: "2cl", price: "5,5€", category: "Schnapps", alcoholic: true },
-  { name: "Scheibel Edles Fass 350 Nussler", volume: "2cl", price: "6,5€", category: "Schnapps", alcoholic: true },
-  { name: "Sasse Kakao Nuss", volume: "2cl", price: "4,5€", category: "Schnapps", alcoholic: true },
-  { name: "Sasse Salz Karamel", volume: "2cl", price: "4,5€", category: "Schnapps", alcoholic: true },
-  { name: "Sasse Sechser", volume: "2cl", price: "4,5€", category: "Schnapps", alcoholic: true },
-  { name: "Cardenal Mendoza", volume: "2cl", price: "5,5€", category: "Schnapps", alcoholic: true },
+  { name: "Scheibel Feine Marille", volume: "2cl", price: "3,5€", category: "Schnapps", alcoholic: true },
+  { name: "Scheibel Edles Fass 350 Nussler", volume: "2cl", price: "3,5€", category: "Schnapps", alcoholic: true },
+  { name: "Sasse Kakao Nuss", volume: "2cl", price: "2,5€", category: "Schnapps", alcoholic: true },
+  { name: "Sasse Salz Karamel", volume: "2cl", price: "2,5€", category: "Schnapps", alcoholic: true },
+  { name: "Sasse Sechser", volume: "2cl", price: "2,5€", category: "Schnapps", alcoholic: true },
+  { name: "Sasse Lagerkorn", volume: "2cl", price: "2,5€", category: "Schnapps", alcoholic: true },
+  { name: "Cardenal Mendoza", volume: "2cl", price: "4,5€", category: "Schnapps", alcoholic: true },
 ];
 
 const zeroAlc: Drink[] = [
@@ -846,6 +845,19 @@ const zeroAlc: Drink[] = [
 
 .cocktails-link-section {
   padding: 2rem 1rem;
+}
+
+.promo-banner {
+  text-align: center;
+  background: rgba($accent-color, 0.12);
+  border: 1px solid $accent-color;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin: 1rem auto 0;
+  max-width: 90%;
+  font-weight: 600;
+  color: $accent-color;
+  font-size: 0.95rem;
 }
 
 .cocktails-cta {
