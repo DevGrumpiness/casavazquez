@@ -1,9 +1,7 @@
 <template>
 
   <FeaturedSlider :items="sliderItems" />
-
-    <div class="promo-banner">1 Flasche Maybach Grauer Burgunder + kleine Queso Manchego Platte für 20€</div>
-  
+  <div class="promo-banner">1 Flasche Maybach Grauer Burgunder + kleine Queso Manchego Platte für 20€</div>
 
   <!-- Filter-Button -->
   <div class="filter-buttons">
@@ -34,19 +32,19 @@
     </div>
   </section>
   <!--    Softdrinks-->
+  <div class="drink-featured-card">
+    <span class="drink-featured-badge">Neu</span>
+    <div class="drink-featured-copy">
+      <h2>Limonade</h2>
+      <p>Erfrischende Limonade mit Gurke, Minze und TH Cherry Blossom Tonic - 3,90</p>
+    </div>
+  </div>
   <section class="drinks-menu-section">
     <header class="drinks-header">
       <h1 class="drinks-title">Bebidas</h1>
     </header>
 
     <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
-      <div class="drink-featured-card">
-        <span class="drink-featured-badge">Neu</span>
-        <div class="drink-featured-copy">
-          <h2>Limonade</h2>
-          <p>Erfrischende Limonade mit Gurke, Minze und TH Cherry Blossom Tonic</p>
-        </div>
-      </div>
       <transition-group name="drink" tag="ul" class="drinks-list">
         <li v-for="drink in visible('Softdrinks', nonAlcoholic ? softdrinks.filter(d => !d.alcoholic) : softdrinks)" :key="drink.name"
           class="drinks-item">
@@ -86,10 +84,11 @@
   </section>
 
   <!--    Spritz-->
+  <div class="promo-banner">Jeden Tag bis 19 Uhr nur 5€ pro Spritz</div>
   <section class="drinks-menu-section" v-if="!nonAlcoholic">
     <header class="drinks-header">
       <h1 class="drinks-title">Spritz</h1>
-      <p class="drinks-subtitle">lecker</p>
+      <p class="drinks-subtitle">Jeden Mittwoch nur 6,50</p>
     </header>
 
     <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
