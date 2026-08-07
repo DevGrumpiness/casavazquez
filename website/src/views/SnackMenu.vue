@@ -575,15 +575,15 @@ export const snacks: SnackItem[] = [
     image: rotebete,
     allergens: [9, 27, 28, 29, 30]
   },
-  // {
-  //   name: 'Rote Beete Ingwer Bällchen',
-  //   description: 'Veganer Snack aus proteinreichen Kichererbsen, mit rote Beete und Ingwer.',
-  //   price: '7,5',
-  //   veggie: true,
-  //   keto: false,
-  //   image: rotebete,
-  //   allergens: [9, 27, 28, 29, 30],
-  // },
+  {
+    name: 'Rote Beete Ingwer Bällchen',
+    description: 'Veganer Snack aus proteinreichen Kichererbsen, mit rote Beete und Ingwer.',
+    price: '7,5',
+    veggie: true,
+    keto: false,
+    image: rotebete,
+    allergens: [9, 27, 28, 29, 30],
+  },
   // {
   //   name: 'Vegane Erbsen Minz Sticks',
   //   description: 'Veganund lecker.',
