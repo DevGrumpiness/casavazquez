@@ -344,7 +344,7 @@ export interface Drink {
 
 export const beers: Drink[] = [
   {
-    name: "Radler",
+    name: "Radler 0,4l",
     volume: "0,4l",
     price: "3,9€",
     category: "Bier",
