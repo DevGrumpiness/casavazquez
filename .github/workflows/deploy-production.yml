@@ -1,0 +1,66 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}
+  schedule:
+    # Push-events don't reliably trigger Actions runs on this repo (a repo-level
+    # GitHub setting we can't change with our current token), so we poll every
+    # 5 minutes and only actually build+deploy if `main` has moved since the
+    # last successful deploy. This keeps "push to main -> live in a few
+    # minutes" working without a real push trigger.
+    - cron: '*/5 * * * *'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          project_id: casavazquez-470814
+          workload_identity_provider: projects/390932826487/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider
+          service_account: github-actions-deploy@casavazquez-470814.iam.gserviceaccount.com
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Check whether a deploy is needed
+        id: check
+        run: |
+          CURRENT_SHA=$(gcloud run services describe casavazquez-website-update --region=europe-central2 --format='value(metadata.labels.git-sha)' 2>/dev/null || echo "")
+          echo "Deployed sha: $CURRENT_SHA"
+          echo "HEAD sha:     ${{ github.sha }}"
+          if [ "$CURRENT_SHA" = "${{ github.sha }}" ]; then
+            echo "needed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "needed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Write website/.env
+        if: steps.check.outputs.needed == 'true'
+        run: echo "${{ secrets.WEBSITE_ENV_FILE }}" > website/.env
+
+      - uses: actions/setup-node@v4
+        if: steps.check.outputs.needed == 'true'
+        with:
+          node-version: '20'
+
+      - name: Install dependencies and build website
+        if: steps.check.outputs.needed == 'true'
+        run: |
+          npm --prefix website ci
+          npm --prefix website run build
+
+      - name: Deploy to Cloud Run
+        if: steps.check.outputs.needed == 'true'
+        run: |
+          gcloud run deploy casavazquez-website-update --source=. --region=europe-central2 --allow-unauthenticated --clear-base-image --quiet
+          gcloud run services update casavazquez-website-update --region=europe-central2 --update-labels=git-sha=${{ github.sha }} --quiet

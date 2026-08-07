@@ -105,6 +105,14 @@ const routes: RouteRecordRaw[] = [
         }
     },
     {
+        path: '/admin/verfuegbarkeit',
+        name: 'AdminAvailability',
+        component: () => import('../views/AdminAvailability.vue'),
+        meta: {
+            robots: 'noindex, nofollow'
+        }
+    },
+    {
         path: '/:pathMatch(.*)*',
         redirect: '/home',
     },

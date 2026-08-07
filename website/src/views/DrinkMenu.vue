@@ -24,7 +24,7 @@
 
     <div class="drinks-content">
       <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in bubbles" :key="drink.name" class="drinks-item">
+        <li v-for="drink in visible('Bubbles', bubbles)" :key="drink.name" class="drinks-item">
           <div class="drink-text">
             <span class="drinks-name">{{ drink.name }}</span>
           </div>
@@ -48,7 +48,7 @@
         </div>
       </div>
       <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in nonAlcoholic ? softdrinks.filter(d => !d.alcoholic) : softdrinks" :key="drink.name"
+        <li v-for="drink in visible('Softdrinks', nonAlcoholic ? softdrinks.filter(d => !d.alcoholic) : softdrinks)" :key="drink.name"
           class="drinks-item">
           <div class="drink-text">
             <span class="drinks-name">{{ drink.name }}<template v-if="drink.volume">&nbsp;{{ drink.volume }}</template>
@@ -72,14 +72,14 @@
 
     <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in nonAlcoholic ? beers.filter(d => !d.alcoholic) : beers" :key="drink.name"
+        <li v-for="drink in visible('Bier', nonAlcoholic ? beers.filter(d => !d.alcoholic) : beers)" :key="drink.name"
           class="drinks-item">
-          <div v-if="drink.available !== false" class="drink-text">
+          <div class="drink-text">
             <span class="drinks-name">{{ drink.name }}
               <sup v-if="drink.allergens" class="allergen-indices">{{ drink.allergens.join(',') }}</sup>
             </span>
           </div>
-          <span v-if="drink.available !== false" class="drinks-price">{{ drink.price }}</span>
+          <span class="drinks-price">{{ drink.price }}</span>
         </li>
       </transition-group>
     </div>
@@ -94,7 +94,7 @@
 
     <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in nonAlcoholic ? spritz.filter(d => !d.alcoholic) : spritz" :key="drink.name"
+        <li v-for="drink in visible('Spritz', nonAlcoholic ? spritz.filter(d => !d.alcoholic) : spritz)" :key="drink.name"
           class="drinks-item">
           <div class="drink-text">
             <span class="drinks-name">{{ drink.name }}
@@ -125,7 +125,7 @@
     <img src="../assets/images/no32.png" class="no3bottle" alt="no3 Gin" />
     <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
       <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in nonAlcoholic ? no3.filter(d => !d.alcoholic) : no3" :key="drink.name" class="drinks-item">
+        <li v-for="drink in visible('Gin', nonAlcoholic ? no3.filter(d => !d.alcoholic) : no3)" :key="drink.name" class="drinks-item">
           <div class="drink-text">
             <span class="drinks-name">{{ drink.name }}
               <sup v-if="drink.allergens" class="allergen-indices">{{ drink.allergens.join(',') }}</sup>
@@ -162,7 +162,7 @@
         </div>
       </div>
       <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in schnapps" :key="drink.name" class="drinks-item">
+        <li v-for="drink in visible('Schnapps', schnapps)" :key="drink.name" class="drinks-item">
           <div class="drink-text">
             <span class="drinks-name">{{ drink.name }} <span v-if="drink.volume">{{ drink.volume }}</span></span>
           </div>
@@ -184,7 +184,7 @@
     <div class="drinks-content" :class="nonAlcoholic && 'non-alcoholic'">
       <p class="zero-alc-disclaimer">Produkte in dieser Kategorie enthalten lt. Hersteller max. 0,5% Alkohol oder sind vollständig alkoholfrei. Bei Unsicherheiten sprecht uns gerne an.</p>
       <transition-group name="drink" tag="ul" class="drinks-list">
-        <li v-for="drink in nonAlcoholic ? zeroAlc.filter(d => !d.alcoholic) : zeroAlc" :key="drink.name"
+        <li v-for="drink in visible('Alkoholfrei', nonAlcoholic ? zeroAlc.filter(d => !d.alcoholic) : zeroAlc)" :key="drink.name"
           class="drinks-item">
           <div class="drink-text">
             <span class="drinks-name">{{ drink.name }}
@@ -330,14 +330,8 @@
 
 </template>
 
-<script setup lang="ts">
-import { ref, computed } from "vue";
-import FeaturedSlider from "../components/FeaturedSlider.vue";
-import { CocktailTinder } from "../components/CocktailTinder";
-import { featuredPromos } from "../data/featuredPromos";
-import scheibelImage from "../assets/images/scheibel_marille.png";
-
-interface Drink {
+<script lang="ts">
+export interface Drink {
   name: string;
   volume?: string;
   price: string;
@@ -348,21 +342,7 @@ interface Drink {
   neu?: boolean;
 }
 
-const nonAlcoholic = ref(false);
-const sliderItems = featuredPromos;
-
-function toggleNonAlcoholic() {
-  nonAlcoholic.value = !nonAlcoholic.value;
-}
-
-// Feature flag for testing
-const showCocktailTinder = computed(() => {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get('test') === 'cocktails';
-});
-
-
-const beers: Drink[] = [
+export const beers: Drink[] = [
   {
     name: "Radler",
     volume: "0,4l",
@@ -482,7 +462,7 @@ const softdrinks: Drink[] = [
 ];
 
 
-const spritz: Drink[] = [
+export const spritz: Drink[] = [
   { name: "*Limoncello", price: "8,5€", category: "Cocktail", alcoholic: true, allergens: [1, 4] },
   { name: "*Aperol", price: "8,5€", category: "Cocktail", alcoholic: true, allergens: [1, 4] },
   { name: "Sarti", price: "8,5€", category: "Cocktail", alcoholic: true, allergens: [1, 4] },
@@ -490,14 +470,14 @@ const spritz: Drink[] = [
   { name: "Amerie - Münsterländer Aperitif", price: "8,5€", category: "Cocktail", alcoholic: true, allergens: [1, 4] },
 ];
 
-const bubbles: Drink[] = [
+export const bubbles: Drink[] = [
   { name: "Prosecco 0,1l", price: "6€", category: "Bubbles", alcoholic: true, allergens: [4] },
   { name: "Prosecco 0,75l", price: "29,5€", category: "Bubbles", alcoholic: true, allergens: [4] },
   { name: "Crémant Rosé 0,75l", price: "34,5€", category: "Bubbles", alcoholic: true, allergens: [4] },
   { name: "Cava Brut 0,75l", price: "44,5€", category: "Bubbles", alcoholic: true, allergens: [4] }
 ];
 
-const no3: Drink[] = [
+export const no3: Drink[] = [
   { name: "Negroni", price: "12€", category: "Cocktail", alcoholic: true, allergens: [4] },
   { name: "Gin Fizz", price: "12€", category: "Cocktail", alcoholic: true, allergens: [11] },
   { name: "Gin Tonic", price: "9€", category: "Cocktail", alcoholic: true, allergens: [24] },
@@ -514,7 +494,7 @@ const schnapps: Drink[] = [
   { name: "Cardenal Mendoza", volume: "2cl", price: "4,5€", category: "Schnapps", alcoholic: true },
 ];
 
-const zeroAlc: Drink[] = [
+export const zeroAlc: Drink[] = [
   { name: "Gin Fizz", price: "9€", category: "Cocktail", alcoholic: false, allergens: [11] },
   { name: "Gin Tonic", price: "7,5€", category: "Cocktail", alcoholic: false, allergens: [24] },
   { name: "Martini Vibrante Spritz", price: "7,5€", category: "Cocktail", alcoholic: false, allergens: [1, 4] },
@@ -522,6 +502,45 @@ const zeroAlc: Drink[] = [
   { name: "Glitter Spritz", price: "7,5€", category: "Cocktail", alcoholic: false, allergens: [1, 4] },
   { name: "Crodino Spritz", price: "7,5€", category: "Cocktail", alcoholic: false, allergens: [1, 4] },
 ];
+
+// Groups shared with the admin availability toggle page (src/views/AdminAvailability.vue)
+export const drinkGroups: { group: string; items: Drink[] }[] = [
+  { group: 'Bubbles', items: bubbles },
+  { group: 'Bier', items: beers },
+  { group: 'Softdrinks', items: softdrinks },
+  { group: 'Spritz', items: spritz },
+  { group: 'Gin', items: no3 },
+  { group: 'Schnapps', items: schnapps },
+  { group: 'Alkoholfrei', items: zeroAlc },
+];
+</script>
+
+<script setup lang="ts">
+import { ref, computed } from "vue";
+import FeaturedSlider from "../components/FeaturedSlider.vue";
+import { CocktailTinder } from "../components/CocktailTinder";
+import { featuredPromos } from "../data/featuredPromos";
+import scheibelImage from "../assets/images/scheibel_marille.png";
+import { useAvailability, availabilityId } from "../composables/useAvailability";
+
+const { isAvailable } = useAvailability();
+
+function visible(group: string, items: Drink[]) {
+  return items.filter(d => isAvailable(availabilityId(group, d.name), d.available !== false));
+}
+
+const nonAlcoholic = ref(false);
+const sliderItems = featuredPromos;
+
+function toggleNonAlcoholic() {
+  nonAlcoholic.value = !nonAlcoholic.value;
+}
+
+// Feature flag for testing
+const showCocktailTinder = computed(() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get('test') === 'cocktails';
+});
 </script>
 
 
