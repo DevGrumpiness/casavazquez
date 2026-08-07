@@ -151,7 +151,7 @@ export const blancos: Wine[] = [
         longDescription: 'Die Cuvée aus Viura, Sauvignon Blanc, Chardonnay, Tempranillo Blanco und Garnacha Blanca reift teils im Holz, teils im Edelstahl. Noten von Birne, Limettenzeste und weißen Blüten verbinden sich mit cremigem Mundgefühl, feiner Würze und einer kühlen, kalkigen Mineralität. Der Jahrgang 2023 wirkt vielschichtig und bleibt trotzdem trinkanimierend – perfekt zu Pintxos, Meeresfrüchten oder cremigen Reisgerichten.',
         image: null,
         characteristics: 'Trocken, mineralisch, Rioja, Birne, Kräuter',
-        available: false
+        available: true
     },
     {
         name: 'Pompaelo Blanco 2023',
