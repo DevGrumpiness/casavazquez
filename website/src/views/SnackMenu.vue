@@ -978,7 +978,7 @@ const snacks: SnackItem[] = [
   // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
   // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
   { name: 'Albondigas in Salsa', description: 'Fleischbällchen (5Stk) mit Chili-Käse Füllung (pikant) in Tomatensalsa', price: '7,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
-  { name: 'Chorizo in Salsa', description: 'Pikante Chorizo (spanische Wurst) in Tomatensalsa', price: '6,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
+  // { name: 'Chorizo in Salsa', description: 'Pikante Chorizo (spanische Wurst) in Tomatensalsa', price: '6,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
   // { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
   { name: 'Dátiles con Bacon', description: 'Datteln im Speckmantel', price: '7,5', veggie: false, keto: false, image: datillesImage, allergens: [26] },
   // {
