@@ -145,7 +145,6 @@
                     <span v-if="snack.veggie" class="veggie-icon" title="Vegetarisch">&#127811;</span>
                   </span>
                 </span>
-                <!-- <img v-if="snack.onm" class="onmLogo" :src="onmLogo" alt="Olive und Meer" @click="showOnmInfo = true" /> -->
                 <BaseModal v-model="showOnmInfo">
                 <div style="display: flex;margin-bottom: 1rem; gap: 1rem">
                   <h2>Von <i>Olive & Meer</i></h2>
@@ -529,7 +528,7 @@ export const snacks: SnackItem[] = [
   { name: 'Pommes', description: '', price: '5', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
   { name: 'Pommes groß', description: '', price: '7', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
   { name: 'Oliven Mix', description: '', price: '6', veggie: true, onm: true, keto: true, image: olivenMixImage },
-  // { name: 'Croquetas con Jamón Iberico', description: 'kleine Kroketten mit Jamón-Füllung', price: '7,5', veggie: false, keto: false, image: croquetasChorizo, allergens: [9, 11, 13, 26] },
+  { name: 'Croquetas Manchego', description: 'kleine Kroketten mit Käse-Füllung', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 13, 26] },
   ...flammkuchenVariants.map(variant => ({
     name: variant.name,
     description: variant.description,
@@ -967,7 +966,7 @@ const snacks: SnackItem[] = [
   {
     name: 'Pollo Al Ajillo',
     description: 'Gegarte, marinierte Hähnchen Flügel mit Knoblauch',
-    price: '8,5',
+    price: '7,5',
     veggie: false,
     keto: true,
     image: polloPiripiri,
@@ -1001,15 +1000,15 @@ const snacks: SnackItem[] = [
     image: rotebete,
     allergens: [9, 27, 28, 29, 30]
   },
-  // {
-  //   name: 'Rote Beete Ingwer Bällchen',
-  //   description: 'Veganer Snack aus proteinreichen Kichererbsen, mit rote Beete und Ingwer.',
-  //   price: '7,5',
-  //   veggie: true,
-  //   keto: false,
-  //   image: rotebete,
-  //   allergens: [9, 27, 28, 29, 30],
-  // },
+  {
+    name: 'Rote Beete Ingwer Bällchen',
+    description: 'Veganer Snack aus proteinreichen Kichererbsen, mit rote Beete und Ingwer.',
+    price: '7,5',
+    veggie: true,
+    keto: false,
+    image: rotebete,
+    allergens: [9, 27, 28, 29, 30],
+  },
   // {
   //   name: 'Vegane Erbsen Minz Sticks',
   //   description: 'Veganund lecker.',
@@ -1038,15 +1037,15 @@ const snacks: SnackItem[] = [
     image: undefined,
     allergens: [9, 27, 28, 29, 30]
   },
-  // {
-  //   name: 'Blumenkohl Bites, würzig',
-  //   description: 'Blumenkohl Bites, würzig mit einer knusprigen Panade und einer leichten Schärfe',
-  //   price: '5,5',
-  //   veggie: true,
-  //   keto: false,
-  //   image: undefined,
-  //   allergens: [9, 27, 28, 29, 30]
-  // },
+  {
+    name: 'Blumenkohl Bites, würzig',
+    description: 'Blumenkohl Bites, würzig mit einer knusprigen Panade und einer leichten Schärfe',
+    price: '5,5',
+    veggie: true,
+    keto: false,
+    image: undefined,
+    allergens: [9, 27, 28, 29, 30]
+  },
 
   {
     name: 'Empanadillas de Pollo 4Stk',
