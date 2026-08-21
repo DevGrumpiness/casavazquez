@@ -309,21 +309,21 @@
         </div>
       </Transition> -->
 
-      <div v-show=false class="snack-section bundle">
-        <hr />
-        <br />
-        <h3 class="snacks-subtitle">Dessert</h3>
-        <ul class="snacks-extras">
-          <li class="snacks-item extra veggie">
-            <span class="snacks-name"><b>Tartufo mit Schoko-Kern und Haselnussmantel</b><br /></span>
-            <span class="snacks-price">8,50</span>
-          </li>
-          <li class="snacks-item extra veggie">
-            <span class="snacks-name"><b>Antojos de Dulcinea - Biskuitkuchen mit fruchtiger Sauce</b><br /></span>
-            <span class="snacks-price">6,50</span>
-          </li>
-        </ul>
-      </div>
+      <section v-if="!keto" class="dessert-section" aria-labelledby="dessert-title">
+        <div class="dessert-copy">
+          <span class="dessert-kicker">Zum süßen Abschluss</span>
+          <h3 id="dessert-title">Schoko-Moelleux</h3>
+          <p>Warmes französisches Schokoladenküchlein mit intensivem, flüssigem Schokoladenkern</p>
+          <div class="dessert-meta">
+            <span class="dessert-price">6,90 €</span>
+          </div>
+          <div class="dessert-meta">
+            <span class="dessert-allergens" title="enthält Gluten (Weizen), Ei, Laktose / Milch">Allergene 9, 11, 13</span>
+            <span class="dessert-veggie">Vegetarisch</span>
+          </div>
+        </div>
+        <img class="dessert-image" :src="chocoDessertImage" alt="Schoko-Moelleux" loading="lazy" />
+      </section>
     </div>
 
   </section>
@@ -483,6 +483,13 @@ import rotebete from "../assets/images/tapasclub/rotebete_baellchen.png";
 import calamares from "../assets/images/tapasclub/calamares.png";
 import flammImage from "../assets/images/tapasclub/flamm.png";
 import pommesImage from "../assets/images/pommes.webp";
+import avocadoImage from "../assets/images/tapasclub/avocado.png";
+import chocoDessertImage from "../assets/images/tapasclub/chocodessert.png";
+import pimientosImage from "../assets/images/tapasclub/pipa.png";
+import chickenFingersImage from "../assets/images/tapasclub/chickenfingers.png";
+import bravasImage from "../assets/images/tapasclub/bravas.png";
+import tortillaImage from "../assets/images/tapasclub/tortilla.png";
+import blumenkohlImage from "../assets/images/tinified (6)/blukohl.png";
 
 export interface SnackItem {
   name: string;
@@ -520,10 +527,10 @@ const flammkuchenVariants = [
 
 export const snacks: SnackItem[] = [
   { name: 'Nachos mit Dip (Salsa/Aioli)', description: '', price: '6,5', veggie: true, keto: false, allergens: [11, 15] },
-  { name: 'Pimientos de Padrón - der Klassiker', description: '', price: '6,5', veggie: true, keto: true },
+  { name: 'Pimientos de Padrón - der Klassiker', description: '', price: '6,5', veggie: true, keto: true, image: pimientosImage },
   { name: 'Brot mit Aioli Dip', description: '', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 15] },
-  { name: 'Patatas Bravas', description: '', price: '5', veggie: true, keto: false, allergens: [9, 11, 15] },
-  { name: 'Chicken Fingers', description: 'Saftige panierte Hänchen-Stückchen', price: '6,5', veggie: false, keto: false, allergens: [9, 11, 15] },
+  { name: 'Patatas Bravas', description: '', price: '5', veggie: true, keto: false, image: bravasImage, allergens: [9, 11, 15] },
+  { name: 'Chicken Fingers', description: 'Saftige panierte Hänchen-Stückchen', price: '6,5', veggie: false, keto: false, image: chickenFingersImage, allergens: [9, 11, 15] },
 
   { name: 'Pommes', description: '', price: '5', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
   { name: 'Pommes groß', description: '', price: '7', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
@@ -548,8 +555,8 @@ export const snacks: SnackItem[] = [
     traceAllergens: [4, 9, 12, 13, 15, 17, 22],
     available: true
   },
-  // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
-  // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
+  { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
+  { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
   { name: 'Albondigas in Salsa', description: 'Fleischbällchen (5Stk) mit Chili-Käse Füllung (pikant) in Tomatensalsa', price: '7,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
   // { name: 'Chorizo in Salsa', description: 'Pikante Chorizo (spanische Wurst) in Tomatensalsa', price: '6,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
   // { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
@@ -617,8 +624,17 @@ export const snacks: SnackItem[] = [
     price: '5,5',
     veggie: true,
     keto: false,
-    image: undefined,
+    image: blumenkohlImage,
     allergens: [9, 27, 28, 29, 30]
+  },
+  {
+    name: 'Avocado Fries Chili',
+    description: 'Knusprig panierte Avocadospalten mit Chili, außen crunchy und innen cremig',
+    price: '5,5',
+    veggie: true,
+    keto: false,
+    image: avocadoImage,
+    allergens: [9]
   },
 
   {
@@ -946,10 +962,10 @@ function scrollToSnackSection(sectionId: string) {
 
 const snacks: SnackItem[] = [
   { name: 'Nachos mit Dip (Salsa/Aioli)', description: '', price: '6,5', veggie: true, keto: false, allergens: [11, 15] },
-  { name: 'Pimientos de Padrón - der Klassiker', description: '', price: '6,5', veggie: true, keto: true },
+  { name: 'Pimientos de Padrón - der Klassiker', description: '', price: '6,5', veggie: true, keto: true, image: pimientosImage },
   { name: 'Brot mit Aioli Dip', description: '', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 15] },
-  { name: 'Patatas Bravas', description: '', price: '5', veggie: true, keto: false, allergens: [9, 11, 15] },
-  { name: 'Chicken Fingers', description: 'Saftige panierte Hänchen-Stückchen', price: '6,5', veggie: false, keto: false, allergens: [9, 11, 15] },
+  { name: 'Patatas Bravas', description: '', price: '5', veggie: true, keto: false, image: bravasImage, allergens: [9, 11, 15] },
+  { name: 'Chicken Fingers', description: 'Saftige panierte Hänchen-Stückchen', price: '6,5', veggie: false, keto: false, image: chickenFingersImage, allergens: [9, 11, 15] },
   
   { name: 'Pommes', description: '', price: '5', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
   { name: 'Pommes groß', description: '', price: '7', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
@@ -974,8 +990,8 @@ const snacks: SnackItem[] = [
     traceAllergens: [4, 9, 12, 13, 15, 17, 22],
     available: true
   },
-  // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
-  // { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
+  { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
+  { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
   { name: 'Albondigas in Salsa', description: 'Fleischbällchen (5Stk) mit Chili-Käse Füllung (pikant) in Tomatensalsa', price: '7,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
   // { name: 'Chorizo in Salsa', description: 'Pikante Chorizo (spanische Wurst) in Tomatensalsa', price: '6,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
   // { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
@@ -1043,8 +1059,17 @@ const snacks: SnackItem[] = [
     price: '5,5',
     veggie: true,
     keto: false,
-    image: undefined,
+    image: blumenkohlImage,
     allergens: [9, 27, 28, 29, 30]
+  },
+  {
+    name: 'Avocado Fries Chili',
+    description: 'Knusprig panierte Avocadospalten mit Chili, außen crunchy und innen cremig',
+    price: '5,5',
+    veggie: true,
+    keto: false,
+    image: avocadoImage,
+    allergens: [9]
   },
 
   {
@@ -1707,6 +1732,77 @@ hr {
   max-width: 90%;
 }
 
+.dessert-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 180px;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 3.5rem 0 1rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(206, 170, 114, 0.75);
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(206, 170, 114, 0.16), rgba(255, 255, 255, 0.04));
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
+}
+
+.dessert-kicker {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: $accent-color;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.dessert-copy h3 {
+  margin: 0;
+  color: $text-color;
+  font-family: 'King Red';
+  font-size: 2rem;
+  font-weight: normal;
+  letter-spacing: 0;
+}
+
+.dessert-copy p {
+  max-width: 34rem;
+  margin: 0.65rem 0 1rem;
+  color: $text-color;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.dessert-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: flex-end;
+}
+
+.dessert-price {
+  color: $accent-color;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.dessert-allergens,
+.dessert-veggie {
+  padding: 0.2rem 0.5rem;
+  border: 1px solid rgba(206, 170, 114, 0.5);
+  border-radius: 4px;
+  color: $text-color;
+  font-size: 0.65rem;
+}
+
+.dessert-image {
+  width: 180px;
+  height: 150px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+}
+
 .snack-bookmarks {
   margin: 0.7rem auto 1rem;
   max-width: 90%;
@@ -1972,6 +2068,17 @@ hr {
 }
 
 @media (max-width: 600px) {
+  .dessert-section {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  .dessert-image {
+    width: 100%;
+    height: 190px;
+    grid-row: 1;
+  }
+
   .allergen-table {
     font-size: 0.85rem;
   }
