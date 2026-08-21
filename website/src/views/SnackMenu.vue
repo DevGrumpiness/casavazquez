@@ -315,7 +315,7 @@
           <h3 id="dessert-title">Schoko-Moelleux</h3>
           <p>Warmes französisches Schokoladenküchlein mit intensivem, flüssigem Schokoladenkern</p>
           <div class="dessert-meta">
-            <span class="dessert-price">6,90 €</span>
+            <span class="dessert-price">7,50 €</span>
           </div>
           <div class="dessert-meta">
             <span class="dessert-allergens" title="enthält Gluten (Weizen), Ei, Laktose / Milch">Allergene 9, 11, 13</span>
