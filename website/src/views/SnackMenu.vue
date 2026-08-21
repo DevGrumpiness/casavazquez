@@ -799,11 +799,11 @@ const quickWaitItems = [
     description: "Spanischer Olivenmix.",
     price: "6"
   },
-  // {
-  //   name: "Verduras",
-  //   description: "Gemischtes Grillgemüse Antipasti-Art (lauwarm).",
-  //   price: "7,5"
-  // },
+  {
+    name: "Verduras",
+    description: "Gemischtes Grillgemüse Antipasti-Art (lauwarm).",
+    price: "7,5"
+  },
   {
     name: "Calamares",
     description: "Tintenfischringe im Backteig",
@@ -1036,14 +1036,14 @@ const snacks: SnackItem[] = [
   //   available: false
   // },
   // {
-  //   name: 'Verduras a la Parrilla',
-  //   description: 'Gemischtes Grillgemüse Antipasti-Art (lauwarm).',
-  //   price: '7,5',
-  //   veggie: true,
-  //   keto: false,
-  //   image: undefined,
-  //   allergens: [9, 27, 28, 29, 30]
-  // },
+    name: 'Verduras a la Parrilla',
+    description: 'Gemischtes Grillgemüse Antipasti-Art (lauwarm).',
+    price: '7,5',
+    veggie: true,
+    keto: false,
+    image: undefined,
+    allergens: [9, 27, 28, 29, 30]
+  },
   {
     name: 'Gambas Empanadas',
     description: 'Gambas mit einer köstlich subtil gewürzten knusprigen Kokos-Kruste mit Knoblauch und Petersilie. ',
