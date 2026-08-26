@@ -246,68 +246,7 @@
           <p>Jamón Serrano und Manchego auf einer Platte – servierbereit mit Brot.</p>
         </BaseModal>
       </div>
-<!-- 
-      <Transition name="section">
-        <div class="snack-section" v-if="!keto">
-          <hr />
-          <br />
-          <h3 class="snacks-subtitle">
-            Coca
-            <span class="coca-clickable" @click="showCocaInfo = true">
-              <img class="coca-image" :src="cocaImage" alt="Coca" />
-              <span class="enlarge-hint">🔍</span>
-            </span>
-          </h3>
-          <p class="snacks-note">
-            Coca ist ein traditionelles spanisches Flachbrot. Mit Mozarella überbacken ist die Portion
-            vergleichbar mit einer Pizza oder Pinsa.
-          </p>
 
-          <BaseModal v-model="showCocaInfo">
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-              <h2>Coca – "Spanische Pizza"</h2>
-              <img :src="cocaImage" alt="Coca" style="max-width: 300px; border-radius: 8px;" />
-            </div>
-            <p>Die Coca ist ein traditionelles spanisches Flachbrot, das mit verschiedenen Zutaten belegt werden kann. Sie ist
-              besonders beliebt in Katalonien und auf den Balearen. Die Portion ist vergleichbar mit einer Pizza oder Pinsa und
-              eignet sich perfekt zum Teilen oder allein genießen.</p>
-          </BaseModal>
-          <ul class="snacks-extras">
-            <li class="snacks-item extra veggie">
-              <span class="snacks-name"><b>Vegetarisch</b><br />mit Tomate und Mozarella </span>
-              <span class="snacks-price">12,90</span>
-            </li>
-            <li class="snacks-item extra veggie">
-              <span class="snacks-name"><b>Wahlweise zusätzlich:</b></span>
-            </li>
-            <li class="snacks-item extra" v-if="!veggie">
-              <span class="snacks-name">+ Chorizo</span>
-              <span class="snacks-price">+ 3,50</span>
-            </li>
-            <li class="snacks-item extra" v-if="!veggie">
-              <span class="snacks-name">+ Serrano</span>
-              <span class="snacks-price">+ 3,90</span>
-            </li>
-            <li class="snacks-item extra" v-if="!veggie">
-              <span class="snacks-name">+ Albondigas</span>
-              <span class="snacks-price">+ 3,90</span>
-            </li> 
-
-            <li class="snacks-item extra veggie">
-              <span class="snacks-name">+ Doppelt Mozarella</span>
-              <span class="snacks-price">+ 2,50</span>
-            </li>
-            <li class="snacks-item extra veggie">
-              <span class="snacks-name">+ Artischockenherzen</span>
-              <span class="snacks-price">+ 3,50</span>
-            </li>
-            <li class="snacks-item extra veggie">
-              <span class="snacks-name">+ Oliven</span>
-              <span class="snacks-price">+ 2,50</span>
-            </li>
-          </ul>
-        </div>
-      </Transition> -->
 
       <section v-if="!keto" class="dessert-section" aria-labelledby="dessert-title">
         <div class="dessert-copy">
@@ -993,6 +932,7 @@ const snacks: SnackItem[] = [
   { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
   { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
   { name: 'Albondigas in Salsa', description: 'Fleischbällchen (5Stk) mit Chili-Käse Füllung (pikant) in Tomatensalsa', price: '7,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
+  { name: 'Chapignons', description: 'paniert & frittiert', price: '5', veggie: false, keto: false, available: true, image: null, allergens: [11, 13] },
   // { name: 'Chorizo in Salsa', description: 'Pikante Chorizo (spanische Wurst) in Tomatensalsa', price: '6,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
   // { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
   { name: 'Dátiles con Bacon', description: 'Datteln im Speckmantel', price: '7,5', veggie: false, keto: false, image: datillesImage, allergens: [26] },
@@ -1035,7 +975,7 @@ const snacks: SnackItem[] = [
   //   allergens: [9, 27, 28, 29, 30],
   //   available: false
   // },
-  // {
+   {
     name: 'Verduras a la Parrilla',
     description: 'Gemischtes Grillgemüse Antipasti-Art (lauwarm).',
     price: '7,5',
