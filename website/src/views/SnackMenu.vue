@@ -485,7 +485,7 @@ export const snacks: SnackItem[] = [
   { name: 'Pimientos de Padrón - der Klassiker', description: '', price: '6,5', veggie: true,vegan: true, keto: true, image: pimientosImage },
   { name: 'Brot mit Aioli Dip', description: 'auf Wunsch mit veganem dip', price: '6,5', veggie: true, vegan: true, keto: false, allergens: [9, 11, 15] },
   { name: 'Patatas Bravas', description: 'auf Wunsch vegan', price: '5', veggie: true, keto: false,vegan: true, image: bravasImage, allergens: [9, 11, 15] },
-  { name: 'Zwiebelringe', description: 'vegan', price: '5', veggie: true, keto: false,vegan: true, image: undefined, allergens: [9, 11, 15] },
+  { name: 'Zwiebelringe', description: 'vegan', price: '5,5', veggie: true, keto: false,vegan: true, image: undefined, allergens: [9, 11, 15] },
   { name: 'Chicken Fingers', description: 'Saftige panierte Hänchen-Stückchen', price: '6,5', veggie: false, keto: false, image: chickenFingersImage, allergens: [9, 11, 15] },
 
   // { name: 'Pommes', description: '', price: '5', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
