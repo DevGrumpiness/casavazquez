@@ -211,7 +211,7 @@
         </ul>
       </div>
 
-      <div id="plato-jamon" class="snack-section anchor-target" v-if="!veggie">
+      <div id="plato-jamon" class="snack-section anchor-target" v-if="!veggie && !vegan">
         <hr />
         <br />
         <h3 class="snacks-subtitle with-price">
@@ -224,7 +224,7 @@
       </div>
 
       <Transition name="section">
-        <div id="plato-quesos" class="snack-section anchor-target" >
+        <div v-if="!vegan" id="plato-quesos" class="snack-section anchor-target" >
           <hr />
           <br />
           <h3 class="snacks-subtitle with-price">
@@ -237,7 +237,7 @@
         </div>
       </Transition>
 
-      <div id="plato-mixto" class="snack-section anchor-target">
+      <div v-if="!vegan" id="plato-mixto" class="snack-section anchor-target">
         <hr />
         <br />
         <h3 class="snacks-subtitle with-price">
@@ -263,7 +263,7 @@
       </div>
 
 
-      <section v-if="!keto" class="dessert-section" aria-labelledby="dessert-title">
+      <section v-if="!keto && !vegan" class="dessert-section" aria-labelledby="dessert-title">
         <div class="dessert-copy">
           <span class="dessert-kicker">Zum süßen Abschluss</span>
           <h3 id="dessert-title">Schoko-Moelleux</h3>
@@ -481,7 +481,7 @@ const flammkuchenVariants = [
 ]
 
 export const snacks: SnackItem[] = [
-  { name: 'Nachos mit Dip (Salsa/Aioli)', description: '', price: '6,5', veggie: true, vegan: true, keto: false, allergens: [11, 15] },
+  { name: 'Nachos mit Dip (Salsa/Aioli)', description: '', price: '6,5', veggie: true, keto: false, allergens: [11, 15] },
   { name: 'Pimientos de Padrón - der Klassiker', description: '', price: '6,5', veggie: true,vegan: true, keto: true, image: pimientosImage },
   { name: 'Brot mit Aioli Dip', description: 'auf Wunsch mit veganem dip', price: '6,5', veggie: true, vegan: true, keto: false, allergens: [9, 11, 15] },
   { name: 'Patatas Bravas', description: 'auf Wunsch vegan', price: '5', veggie: true, keto: false,vegan: true, image: bravasImage, allergens: [9, 11, 15] },
@@ -510,7 +510,7 @@ export const snacks: SnackItem[] = [
     traceAllergens: [4, 9, 12, 13, 15, 17, 22],
     available: true
   },
-  { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7',vegan: true, veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
+  { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
   { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: false, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
   { name: 'Albondigas in Salsa', description: 'Fleischbällchen (5Stk) mit Chili-Käse Füllung (pikant) in Tomatensalsa', price: '7,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
   // { name: 'Chorizo in Salsa', description: 'Pikante Chorizo (spanische Wurst) in Tomatensalsa', price: '6,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
@@ -928,7 +928,7 @@ function scrollToSnackSection(sectionId: string) {
   })
 }
 
-const snacks: SnackItem[] = [
+const legacySnacks: SnackItem[] = [
   { name: 'Nachos mit Dip (Salsa/Aioli)', description: '', price: '6,5', veggie: true, keto: false, allergens: [11, 15] },
   { name: 'Pimientos de Padrón - der Klassiker', description: '', price: '6,5', veggie: true, keto: true, image: pimientosImage },
   { name: 'Brot mit Aioli Dip', description: '', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 15] },
@@ -1064,6 +1064,8 @@ const snacks: SnackItem[] = [
 // { name: 'Tapas Mix (2p)', description: 'Mix aus verschiedenen Tapas', price: '24,5', veggie: false, keto: false },
 // { name: 'Veggi Mix (2p)', description: 'Mix aus verschiedenen Veggie Tapas.', price: '24,5', veggie: true, keto: false },
 // { name: 'Aros de Cebolla', description: 'Zwiebelringe', price: '6', veggie: true, keto: false, image: zwiebelringeImage, allergens: [9, 11, 13] },
+
+void legacySnacks
 
 function toggleVeggie() {
   veggie.value = !veggie.value;
