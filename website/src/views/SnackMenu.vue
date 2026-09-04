@@ -43,15 +43,30 @@
     </details>
   </div>
 
-  <div class="filter-buttons">
-    <span>Filter:</span>
-    <button class="filter-button" :class="{ active: veggie }" @click="toggleVeggie">
-      <i class="pi pi-times" v-if="veggie" style="font-size: 8px"></i>
-      Nur Veggie
-    </button>
-    <button class="filter-button" :class="{ active: keto }" @click="toggleKeto">
-      <i class="pi pi-times" v-if="keto" style="font-size: 8px"></i>
-      Keto-freundlich
+  <div class="filter-buttons" aria-label="Snack-Filter">
+    <div class="filter-options">
+      <button type="button" class="filter-button" :class="{ active: veggie }" :aria-pressed="veggie" @click="toggleVeggie">
+        <i v-if="veggie" class="pi pi-check" aria-hidden="true"></i>
+        Veggie
+      </button>
+      <button type="button" class="filter-button" :class="{ active: keto }" :aria-pressed="keto" @click="toggleKeto">
+        <i v-if="keto" class="pi pi-check" aria-hidden="true"></i>
+        Keto
+      </button>
+      <button type="button" class="filter-button" :class="{ active: vegan }" :aria-pressed="vegan" @click="toggleVegan">
+        <i v-if="vegan" class="pi pi-check" aria-hidden="true"></i>
+        Vegan
+      </button>
+    </div>
+    <button
+      v-if="hasActiveFilters"
+      type="button"
+      class="filter-reset"
+      title="Filter zurücksetzen"
+      aria-label="Filter zurücksetzen"
+      @click="clearFilters"
+    >
+      <i class="pi pi-times" aria-hidden="true"></i>
     </button>
   </div>
 
@@ -181,7 +196,7 @@
 
         <br />
         <ul class="snacks-extras">
-          <li class="snacks-item extra veggie">
+          <li v-if="!vegan" class="snacks-item extra veggie">
             <span class="snacks-name">Extra Aioli Dip</span>
             <span class="snacks-price">1,5</span>
           </li>
@@ -441,39 +456,40 @@ export interface SnackItem {
   available?: boolean;
   allergens?: number[];
   traceAllergens?: number[];
+  vegan?: boolean;
 }
 
 const flammkuchenVariants = [
   {
     name: "Flammkuchen Klassisch",
     description: "Speck & Zwiebeln",
-    price: "9,50",
+    price: "10,50",
     veggie: false
   },
   {
     name: "Flammkuchen Vegetarisch",
     description: "mit Dingen aus dem Garten",
-    price: "9,50",
+    price: "10,50",
     veggie: true
   },
   {
     name: "Flammkuchen Española",
     description: "Chorizo & Oliven",
-    price: "9,50",
+    price: "10,50",
     veggie: false
   }
 ]
 
 export const snacks: SnackItem[] = [
-  { name: 'Nachos mit Dip (Salsa/Aioli)', description: '', price: '6,5', veggie: true, keto: false, allergens: [11, 15] },
-  { name: 'Pimientos de Padrón - der Klassiker', description: '', price: '6,5', veggie: true, keto: true, image: pimientosImage },
-  { name: 'Brot mit Aioli Dip', description: '', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 15] },
-  { name: 'Patatas Bravas', description: 'auf Wunsch vegan', price: '5', veggie: true, keto: false, image: bravasImage, allergens: [9, 11, 15] },
+  { name: 'Nachos mit Dip (Salsa/Aioli)', description: '', price: '6,5', veggie: true, vegan: true, keto: false, allergens: [11, 15] },
+  { name: 'Pimientos de Padrón - der Klassiker', description: '', price: '6,5', veggie: true,vegan: true, keto: true, image: pimientosImage },
+  { name: 'Brot mit Aioli Dip', description: 'auf Wunsch mit veganem dip', price: '6,5', veggie: true, vegan: true, keto: false, allergens: [9, 11, 15] },
+  { name: 'Patatas Bravas', description: 'auf Wunsch vegan', price: '5', veggie: true, keto: false,vegan: true, image: bravasImage, allergens: [9, 11, 15] },
   { name: 'Chicken Fingers', description: 'Saftige panierte Hänchen-Stückchen', price: '6,5', veggie: false, keto: false, image: chickenFingersImage, allergens: [9, 11, 15] },
 
   // { name: 'Pommes', description: '', price: '5', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
   // { name: 'Pommes groß', description: '', price: '7', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
-  { name: 'Oliven Mix', description: '', price: '6', veggie: true, onm: true, keto: true, image: olivenMixImage },
+  { name: 'Oliven Mix', description: '', price: '6', veggie: true, onm: true, vegan: true,keto: true, image: olivenMixImage },
   { name: 'Croquetas Manchego', description: 'kleine Kroketten mit Käse-Füllung', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 13, 26] },
   ...flammkuchenVariants.map(variant => ({
     name: variant.name,
@@ -494,7 +510,7 @@ export const snacks: SnackItem[] = [
     traceAllergens: [4, 9, 12, 13, 15, 17, 22],
     available: true
   },
-  { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
+  { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7',vegan: true, veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
   { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: false, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
   { name: 'Albondigas in Salsa', description: 'Fleischbällchen (5Stk) mit Chili-Käse Füllung (pikant) in Tomatensalsa', price: '7,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
   // { name: 'Chorizo in Salsa', description: 'Pikante Chorizo (spanische Wurst) in Tomatensalsa', price: '6,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
@@ -516,6 +532,7 @@ export const snacks: SnackItem[] = [
     description: 'Veganer Snack aus Harissa in Kräuter-Panade',
     price: '7,5',
     veggie: true,
+    vegan: true,
     keto: false,
     image: rotebete,
     allergens: [9, 27, 28, 29, 30]
@@ -525,6 +542,7 @@ export const snacks: SnackItem[] = [
     description: 'Veganer Snack aus proteinreichen Kichererbsen, mit rote Beete und Ingwer.',
     price: '7,5',
     veggie: true,
+    vegan: true,
     keto: false,
     image: rotebete,
     allergens: [9, 27, 28, 29, 30],
@@ -545,6 +563,7 @@ export const snacks: SnackItem[] = [
     price: '7,5',
     veggie: true,
     keto: false,
+    vegan: true,
     image: undefined,
     allergens: [9, 27, 28, 29, 30]
   },
@@ -554,6 +573,7 @@ export const snacks: SnackItem[] = [
     price: '8,5',
     veggie: false,
     keto: false,
+    vegan: false,
     image: undefined,
     allergens: [9, 27, 28, 29, 30]
   },
@@ -563,6 +583,7 @@ export const snacks: SnackItem[] = [
     price: '5,5',
     veggie: true,
     keto: false,
+    vegan: true,
     image: blumenkohlImage,
     allergens: [9, 27, 28, 29, 30]
   },
@@ -572,6 +593,7 @@ export const snacks: SnackItem[] = [
     price: '5,5',
     veggie: true,
     keto: false,
+    vegan: false,
     image: avocadoImage,
     allergens: [9]
   },
@@ -644,6 +666,7 @@ const allergenIndexMap: Record<number, string> = {
 
 const veggie = ref(false)
 const keto = ref(false)
+const vegan = ref(false)
 const showOnmInfo = ref(false)
 const showCocaInfo = ref(false)
 const showAlbondigasInfo = ref(false)
@@ -784,8 +807,13 @@ const filteredSnacks = computed(() => {
   if (keto.value) {
     filtered = filtered.filter(s => s.keto)
   }
+  if (vegan.value) {
+    filtered = filtered.filter(s => s.vegan)
+  }
   return filtered
 })
+
+const hasActiveFilters = computed(() => veggie.value || keto.value || vegan.value)
 
 const isMobileDevice = ref(false)
 const bookmarkedSnackIds = ref<string[]>([])
@@ -884,6 +912,7 @@ function clearSnackBookmarks() {
 function scrollToBookmarkedSnack(snack: SnackItem) {
   veggie.value = false
   keto.value = false
+  vegan.value = false
   requestAnimationFrame(() => {
     document.getElementById(`snack-${toSnackId(getSnackBookmarkId(snack))}`)?.scrollIntoView({ behavior: "smooth", block: "start" })
   })
@@ -934,7 +963,7 @@ const snacks: SnackItem[] = [
   { name: 'Albondigas in Salsa', description: 'Fleischbällchen (5Stk) mit Chili-Käse Füllung (pikant) in Tomatensalsa', price: '7,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
   { name: 'Chapignons', description: 'paniert & frittiert', price: '5', veggie: false, keto: false, available: true, image: undefined, allergens: [11, 13] },
   // { name: 'Chorizo in Salsa', description: 'Pikante Chorizo (spanische Wurst) in Tomatensalsa', price: '6,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
-  { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli (nicht-vegan)', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
+  { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli (nicht-vegan)', price: '7,5', veggie: true, keto: false,  allergens: [9, 16], available: true },
   { name: 'Dátiles con Bacon', description: 'Datteln im Speckmantel', price: '7,5', veggie: false, keto: false, image: datillesImage, allergens: [26] },
   // {
   //   name: 'Dados de Panceta',
@@ -1044,6 +1073,16 @@ function toggleKeto() {
   keto.value = !keto.value;
 }
 
+function toggleVegan() {
+  vegan.value = !vegan.value;
+}
+
+function clearFilters() {
+  veggie.value = false;
+  keto.value = false;
+  vegan.value = false;
+}
+
 const portionCount = ref(0)
 const storageKey = 'buffetCounter'
 const ttlKey = 'buffetCounterTTL'
@@ -1137,30 +1176,66 @@ ul {
 }
 
 .filter-buttons {
+  width: min(90%, 960px);
+  margin: 1.5rem auto 0;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.45rem;
 
-  span {
-    font-weight: bold;
-    color: $text-color;
+  .filter-options {
+    flex: 1;
+    display: flex;
+    gap: 0.4rem;
   }
 
   .filter-button {
+    flex: 1;
+    min-width: 0;
     background-color: transparent;
-    border: 2px solid $accent-color;
+    border: 1px solid rgba(206, 170, 114, 0.65);
     color: $accent-color;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
+    min-height: 2.25rem;
+    padding: 0.35rem 0.45rem;
+    border-radius: 999px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.76rem;
+    font-weight: 600;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.25rem;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      border-color: $accent-color;
+      background-color: rgba(206, 170, 114, 0.16);
+    }
 
     &.active {
       background-color: $accent-color;
       color: $background-color;
+    }
+  }
+
+  .filter-reset {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(206, 170, 114, 0.65);
+    border-radius: 999px;
+    background: transparent;
+    color: $accent-color;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      border-color: $accent-color;
+      background-color: rgba(206, 170, 114, 0.16);
     }
   }
 }
@@ -1547,24 +1622,18 @@ hr {
 }
 
 .basic-snacks-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 70px 60px;
+  align-items: center;
   gap: 0.75rem;
-  flex-wrap: wrap;
   margin-bottom: 1.8rem;
 
   .snack-primary {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    flex: 1;
-    min-width: 0;
-
-    justify-content: space-between;
+    display: contents;
   }
 
   .snack-text {
+    grid-column: 1;
     display: flex;
     flex-direction: column;
 
@@ -1596,9 +1665,9 @@ hr {
   }
 
   .snacks-price {
+    grid-column: 3;
     font-size: 1rem;
     color: $accent-color;
-    flex-shrink: 0;
     min-width: 60px;
     text-align: right;
   }
@@ -1615,13 +1684,14 @@ hr {
 }
 
 .snack-photo {
+  grid-column: 2;
+  justify-self: center;
   width: 70px;
   height: 70px;
   border-radius: 8px;
   object-fit: contain;
   background-color: transparent;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  flex-shrink: 0;
 }
 
 .snack-status {
