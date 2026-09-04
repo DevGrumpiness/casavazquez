@@ -18,6 +18,8 @@
         <button type="button" class="logout" @click="handleLogout">Abmelden</button>
       </div>
 
+      <p v-if="updateError" class="error">{{ updateError }}</p>
+
       <input v-model="search" class="search-box" type="search" placeholder="Suchen…" />
 
       <div v-for="group in filteredGroups" :key="group.group" class="group">
@@ -83,6 +85,7 @@ const email = ref('');
 const password = ref('');
 const loggingIn = ref(false);
 const loginError = ref<string | null>(null);
+const updateError = ref<string | null>(null);
 const search = ref('');
 
 onAuthStateChanged(auth, (u) => {
@@ -108,20 +111,34 @@ async function handleLogout() {
 
 async function toggle(id: string) {
   const next = !isAvailable(id, true);
-  await setDoc(
-    doc(db, 'availability', id),
-    { available: next, updatedAt: serverTimestamp() },
-    { merge: true }
-  );
+  updateError.value = null;
+  try {
+    await setDoc(
+      doc(db, 'availability', id),
+      { available: next, updatedAt: serverTimestamp() },
+      { merge: true }
+    );
+  } catch (error: any) {
+    updateError.value = error.code === 'permission-denied'
+      ? 'Keine Schreibberechtigung in Firestore. Bitte die Firestore-Regeln prüfen.'
+      : 'Änderung konnte nicht gespeichert werden. Bitte Verbindung und Firebase-Konfiguration prüfen.';
+  }
 }
 
 async function toggleHidden(id: string) {
   const next = !isHidden(id);
-  await setDoc(
-    doc(db, 'availability', id),
-    { hidden: next, updatedAt: serverTimestamp() },
-    { merge: true }
-  );
+  updateError.value = null;
+  try {
+    await setDoc(
+      doc(db, 'availability', id),
+      { hidden: next, updatedAt: serverTimestamp() },
+      { merge: true }
+    );
+  } catch (error: any) {
+    updateError.value = error.code === 'permission-denied'
+      ? 'Keine Schreibberechtigung in Firestore. Bitte die Firestore-Regeln prüfen.'
+      : 'Änderung konnte nicht gespeichert werden. Bitte Verbindung und Firebase-Konfiguration prüfen.';
+  }
 }
 
 interface RegistryGroup {

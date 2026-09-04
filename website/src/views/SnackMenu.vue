@@ -468,11 +468,11 @@ export const snacks: SnackItem[] = [
   { name: 'Nachos mit Dip (Salsa/Aioli)', description: '', price: '6,5', veggie: true, keto: false, allergens: [11, 15] },
   { name: 'Pimientos de Padrón - der Klassiker', description: '', price: '6,5', veggie: true, keto: true, image: pimientosImage },
   { name: 'Brot mit Aioli Dip', description: '', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 15] },
-  { name: 'Patatas Bravas', description: '', price: '5', veggie: true, keto: false, image: bravasImage, allergens: [9, 11, 15] },
+  { name: 'Patatas Bravas', description: 'auf Wunsch vegan', price: '5', veggie: true, keto: false, image: bravasImage, allergens: [9, 11, 15] },
   { name: 'Chicken Fingers', description: 'Saftige panierte Hänchen-Stückchen', price: '6,5', veggie: false, keto: false, image: chickenFingersImage, allergens: [9, 11, 15] },
 
-  { name: 'Pommes', description: '', price: '5', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
-  { name: 'Pommes groß', description: '', price: '7', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
+  // { name: 'Pommes', description: '', price: '5', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
+  // { name: 'Pommes groß', description: '', price: '7', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
   { name: 'Oliven Mix', description: '', price: '6', veggie: true, onm: true, keto: true, image: olivenMixImage },
   { name: 'Croquetas Manchego', description: 'kleine Kroketten mit Käse-Füllung', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 13, 26] },
   ...flammkuchenVariants.map(variant => ({
@@ -495,7 +495,7 @@ export const snacks: SnackItem[] = [
     available: true
   },
   { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet', price: '7', veggie: true, keto: true, available: true, image: tortillaImage, allergens: [11, 13] },
-  { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: true, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
+  { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: false, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
   { name: 'Albondigas in Salsa', description: 'Fleischbällchen (5Stk) mit Chili-Käse Füllung (pikant) in Tomatensalsa', price: '7,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
   // { name: 'Chorizo in Salsa', description: 'Pikante Chorizo (spanische Wurst) in Tomatensalsa', price: '6,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
   // { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
@@ -934,7 +934,7 @@ const snacks: SnackItem[] = [
   { name: 'Albondigas in Salsa', description: 'Fleischbällchen (5Stk) mit Chili-Käse Füllung (pikant) in Tomatensalsa', price: '7,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
   { name: 'Chapignons', description: 'paniert & frittiert', price: '5', veggie: false, keto: false, available: true, image: undefined, allergens: [11, 13] },
   // { name: 'Chorizo in Salsa', description: 'Pikante Chorizo (spanische Wurst) in Tomatensalsa', price: '6,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
-  // { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
+  { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli (nicht-vegan)', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
   { name: 'Dátiles con Bacon', description: 'Datteln im Speckmantel', price: '7,5', veggie: false, keto: false, image: datillesImage, allergens: [26] },
   // {
   //   name: 'Dados de Panceta',
@@ -994,8 +994,8 @@ const snacks: SnackItem[] = [
     allergens: [9, 27, 28, 29, 30]
   },
   {
-    name: 'Blumenkohl Bites, würzig',
-    description: 'Blumenkohl Bites, würzig mit einer knusprigen Panade und einer leichten Schärfe',
+    name: 'Blumenkohl Bites, würzig, vegan',
+    description: 'Vegane Blumenkohl Bites, würzig mit einer knusprigen Panade und einer leichten Schärfe',
     price: '5,5',
     veggie: true,
     keto: false,
