@@ -444,6 +444,8 @@ import chickenFingersImage from "../assets/images/tapasclub/chickenfingers.png";
 import bravasImage from "../assets/images/tapasclub/bravas.png";
 import tortillaImage from "../assets/images/tapasclub/tortilla.png";
 import blumenkohlImage from "../assets/images/tinified (6)/blukohl.png";
+import nuggetsImage from "../assets/images/tapasclub/nuggets.png";
+import zwiebelringeImage from "../assets/images/tapasclub/zwiebelringe.png";
 
 export interface SnackItem {
   name: string;
@@ -485,7 +487,7 @@ export const snacks: SnackItem[] = [
   { name: 'Pimientos de Padrón - der Klassiker', description: '', price: '6,5', veggie: true,vegan: true, keto: true, image: pimientosImage },
   { name: 'Brot mit Aioli Dip', description: 'auf Wunsch mit veganem dip', price: '6,5', veggie: true, vegan: true, keto: false, allergens: [9, 11, 15] },
   { name: 'Patatas Bravas', description: 'auf Wunsch vegan', price: '5', veggie: true, keto: false,vegan: true, image: bravasImage, allergens: [9, 11, 15] },
-  { name: 'Zwiebelringe', description: 'vegan', price: '5,5', veggie: true, keto: false,vegan: true, image: undefined, allergens: [9, 11, 15] },
+  { name: 'Zwiebelringe', description: 'vegan', price: '5,5', veggie: true, keto: false,vegan: true, image: zwiebelringeImage, allergens: [9, 11, 15] },
   { name: 'Chicken Fingers', description: 'Saftige panierte Hänchen-Stückchen', price: '6,5', veggie: false, keto: false, image: chickenFingersImage, allergens: [9, 11, 15] },
 
   // { name: 'Pommes', description: '', price: '5', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
@@ -515,7 +517,7 @@ export const snacks: SnackItem[] = [
   { name: 'Tortilla Española', description: 'Mini Kartoffel-Omelet + Serrano', price: '8,5', veggie: false, available: true, keto: true, image: tortillaImage, allergens: [11, 13] },
   { name: 'Albondigas in Salsa', description: 'Fleischbällchen (5Stk) mit Chili-Käse Füllung (pikant) in Tomatensalsa', price: '7,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
   // { name: 'Chorizo in Salsa', description: 'Pikante Chorizo (spanische Wurst) in Tomatensalsa', price: '6,5', veggie: false, keto: true, available: true, image: albondigasImage, allergens: [11, 13] },
-  // { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
+  { name: 'Vegane Nuggets', description: 'mit Tomaten-Salsa oder Aioli', price: '7,5', veggie: true, keto: false, image: nuggetsImage, allergens: [9, 16], available: true },
   { name: 'Dátiles con Bacon', description: 'Datteln im Speckmantel', price: '7,5', veggie: false, keto: false, image: datillesImage, allergens: [26] },
   // {
   //   name: 'Dados de Panceta',
@@ -536,7 +538,8 @@ export const snacks: SnackItem[] = [
     vegan: true,
     keto: false,
     image: rotebete,
-    allergens: [9, 27, 28, 29, 30]
+    allergens: [9, 27, 28, 29, 30],
+    available: false
   },
   {
     name: 'Rote Beete Ingwer Bällchen',
