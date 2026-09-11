@@ -116,7 +116,7 @@ export const rosados: Wine[] = [
         longDescription: 'Der El Coto Rosado präsentiert sich in einem blassen Lachsrosa und besticht durch ein Bouquet von frischen Erdbeeren und roten Johannisbeeren. Am Gaumen zeigt er sich rund und elegant mit einer lebendigen Frische, die ihn zu einem idealen Begleiter für Salate, Geflügelgerichte und Meeresfrüchte macht. Genießen Sie ihn gut gekühlt.',
         image: null,
         characteristics: 'Trocken, frisch, fruchtig, elegant',
-        available: false
+        available: true
     },
     {
         name: 'Minuty Rosé',
