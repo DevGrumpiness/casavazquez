@@ -32,13 +32,13 @@
     </div>
   </section>
   <!--    Softdrinks-->
-  <div class="drink-featured-card">
+  <!-- <div class="drink-featured-card">
     <span class="drink-featured-badge">Neu</span>
     <div class="drink-featured-copy">
       <h2>Limonade</h2>
       <p>Erfrischende Limonade mit Gurke, Minze und TH Cherry Blossom Tonic - 3,90</p>
     </div>
-  </div>
+  </div> -->
   <section class="drinks-menu-section">
     <header class="drinks-header">
       <h1 class="drinks-title">Bebidas</h1>
