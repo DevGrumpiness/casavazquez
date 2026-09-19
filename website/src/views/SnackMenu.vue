@@ -491,8 +491,8 @@ export const snacks: SnackItem[] = [
   { name: 'Beer Battered Zwiebelringe', description: 'vegan', price: '5,5', veggie: true, keto: false,vegan: true, image: zwiebelringeImage, allergens: [9, 11, 15] },
   { name: 'Chicken Fingers', description: 'Saftige panierte Hänchen-Stückchen', price: '6,5', veggie: false, keto: false, image: chickenFingersImage, allergens: [9, 11, 15] },
 
-  // { name: 'Pommes', description: '', price: '5', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
-  // { name: 'Pommes groß', description: '', price: '7', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
+  { name: 'Pommes', description: 'mit Aioli oder Bravas-Dip', price: '5', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
+  { name: 'Pommes groß', description: 'mit Aioli oder Bravas-Dip', price: '7', veggie: true, keto: false, image: pommesImage, allergens: [11, 15], available: true },
   { name: 'Oliven Mix', description: '', price: '6', veggie: true, onm: true, vegan: true,keto: true, image: olivenMixImage },
   { name: 'Croquetas Manchego', description: 'kleine Kroketten mit Käse-Füllung', price: '6,5', veggie: true, keto: false, allergens: [9, 11, 13, 26] },
   ...flammkuchenVariants.map(variant => ({
