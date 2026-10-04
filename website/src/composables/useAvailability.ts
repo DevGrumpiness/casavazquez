@@ -56,6 +56,19 @@ export function availabilityId(group: string, name: string): string {
     return `${slug(group)}--${slug(name)}`;
 }
 
+/**
+ * Resolves once the first live snapshot has arrived (or after `timeoutMs`,
+ * so callers never hang when Firestore is unreachable).
+ */
+export function availabilityReady(timeoutMs: number = 3000): Promise<void> {
+    ensureSubscribed();
+    if (ready) return Promise.resolve();
+    return new Promise((resolve) => {
+        readyWaiters.push(resolve);
+        setTimeout(resolve, timeoutMs);
+    });
+}
+
 export function useAvailability() {
     ensureSubscribed();
 

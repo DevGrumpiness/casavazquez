@@ -31,11 +31,13 @@ function addMessage(content: string, isUser: boolean, local = false) {
 // Dynamisch importiert, damit Firebase und die Karten-Daten nicht im Start-Bundle landen.
 async function loadUnavailable(): Promise<{ wines: string[]; snacks: string[] }> {
   try {
-    const [{ useAvailability, availabilityId }, { vinos }, { snackData }] = await Promise.all([
+    const [{ useAvailability, availabilityId, availabilityReady }, { vinos }, { snackData }] = await Promise.all([
       import('./useAvailability'),
       import('../data/vinos'),
       import('../../../data/snacks'),
     ]);
+    // Auf Seiten ohne Karte (z. B. /home) ist die Live-Verfügbarkeit noch nicht geladen.
+    await availabilityReady();
     const { isAvailable, isHidden } = useAvailability();
     const isOff = (id: string) => !isAvailable(id) || isHidden(id);
     return {
