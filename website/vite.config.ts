@@ -5,6 +5,12 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [vue()],
   base: process.env.VITE_BASE_PATH || '/',
+  server: {
+    // local dev: forward API calls to the Express server (npm run dev in the repo root)
+    proxy: {
+      '/api': 'http://localhost:8080',
+    },
+  },
   build: {
     cssCodeSplit: true,
     rollupOptions: {

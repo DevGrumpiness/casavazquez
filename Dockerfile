@@ -17,7 +17,7 @@ COPY website/dist ./website/dist
 COPY data ./data
 
 # Copy the server file
-COPY index.ts ./
+COPY index.ts sommelier.ts ./
 
 # Install tsx globally for running TypeScript
 RUN npm install -g tsx

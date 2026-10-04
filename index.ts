@@ -3,8 +3,11 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
 import { vinos } from "./data/vinos";
+import { sommelierHandler } from "./sommelier";
 
 const app = express();
+// Cloud Run sits behind a proxy; needed so req.ip is the guest's address for rate limiting.
+app.set('trust proxy', 1);
 app.use(cors());
 const port = parseInt(process.env.PORT || '8080', 10);
 
@@ -16,6 +19,8 @@ const assetCacheRegex = /\.(?:js|css|woff2?|ttf|otf|png|jpe?g|gif|webp|svg|mp4|j
 app.get('/api/vinos', (req, res) => {
     res.json(vinos);
 });
+
+app.post('/api/sommelier', express.json({ limit: '10kb' }), sommelierHandler);
 
 app.use(express.static(distPath, {
     setHeaders: (res, filePath) => {
