@@ -12,7 +12,15 @@ const MAX_HISTORY = 10;
 // Großzügig, weil sich Gäste im Bar-WLAN eine IP-Adresse teilen.
 const PER_IP_LIMIT = 30;
 const PER_IP_WINDOW_MS = 10 * 60 * 1000;
-const DAILY_LIMIT = 100;
+// Ein einzelner Anschluss darf nicht das ganze Tagesbudget aufbrauchen.
+const PER_IP_DAILY_LIMIT = 60;
+const DAILY_LIMIT = 175;
+
+// Gesperrte IP-Adressen, kommagetrennt in der Umgebungsvariable SOMMELIER_BLOCKED_IPS.
+// Wer ein Limit reißt, steht mit IP im Server-Log ("[sommelier] limit").
+const blockedIps = new Set(
+    (process.env.SOMMELIER_BLOCKED_IPS ?? '').split(',').map(ip => ip.trim()).filter(Boolean),
+);
 
 const colorLabels: Record<string, string> = { red: 'Rotwein', white: 'Weißwein', 'rosé': 'Rosé' };
 
@@ -62,26 +70,46 @@ const wineNamesById = new Map(vinos.map(wine => [String(wine.id), wine.name]));
 const snackNames = new Set(snacksOnMenu.map(snack => snack.name));
 
 const requestsByIp = new Map<string, number[]>();
+const dailyCountByIp = new Map<string, number>();
+const loggedIps = new Set<string>();
 let dailyCount = 0;
 let dailyCountDay = '';
 
-function allowRequest(ip: string): 'ok' | 'ip' | 'daily' {
+type Verdict = 'ok' | 'ip' | 'ip-daily' | 'daily' | 'blocked';
+
+function allowRequest(ip: string): Verdict {
+    if (blockedIps.has(ip)) return 'blocked';
+
     const now = Date.now();
     const today = new Date(now).toISOString().slice(0, 10);
     if (today !== dailyCountDay) {
         dailyCountDay = today;
         dailyCount = 0;
         requestsByIp.clear();
+        dailyCountByIp.clear();
+        loggedIps.clear();
     }
-    if (dailyCount >= DAILY_LIMIT) return 'daily';
 
     const recent = (requestsByIp.get(ip) ?? []).filter(time => now - time < PER_IP_WINDOW_MS);
-    if (recent.length >= PER_IP_LIMIT) {
-        requestsByIp.set(ip, recent);
-        return 'ip';
-    }
-    recent.push(now);
     requestsByIp.set(ip, recent);
+    const ipToday = dailyCountByIp.get(ip) ?? 0;
+
+    let verdict: Verdict = 'ok';
+    if (ipToday >= PER_IP_DAILY_LIMIT) verdict = 'ip-daily';
+    else if (recent.length >= PER_IP_LIMIT) verdict = 'ip';
+    else if (dailyCount >= DAILY_LIMIT) verdict = 'daily';
+
+    if (verdict !== 'ok') {
+        // Einmal pro Tag und IP protokollieren, damit sich Störer im Log finden und sperren lassen.
+        if (verdict !== 'daily' && !loggedIps.has(ip)) {
+            loggedIps.add(ip);
+            console.warn(`[sommelier] limit (${verdict}) reached by ${ip}`);
+        }
+        return verdict;
+    }
+
+    recent.push(now);
+    dailyCountByIp.set(ip, ipToday + 1);
     dailyCount++;
     return 'ok';
 }
