@@ -9,7 +9,8 @@ const MODEL = 'claude-sonnet-5-5';
 const MAX_MESSAGE_CHARS = 500;
 const MAX_REPLY_CHARS = 4000;
 const MAX_HISTORY = 10;
-const PER_IP_LIMIT = 10;
+// Großzügig, weil sich Gäste im Bar-WLAN eine IP-Adresse teilen.
+const PER_IP_LIMIT = 30;
 const PER_IP_WINDOW_MS = 10 * 60 * 1000;
 const DAILY_LIMIT = 100;
 

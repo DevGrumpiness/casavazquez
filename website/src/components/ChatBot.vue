@@ -37,7 +37,11 @@
         />
         <button type="submit" class="send-button" aria-label="Senden" :disabled="!currentMessage.trim() || isLoading">➤</button>
       </form>
-      <p class="chat-hint">KI-Empfehlung. Bei Allergien bitte unser Team fragen.</p>
+      <p class="chat-hint">
+        KI-Empfehlung, verarbeitet von Anthropic (USA). Bitte keine persönlichen Daten eingeben.
+        <router-link to="/legals#sommelier" @click="toggleChat">Datenschutz</router-link>
+        · Bei Allergien bitte unser Team fragen.
+      </p>
     </div>
   </div>
 </template>
@@ -261,8 +265,14 @@ watch([() => messages.value.length, isLoading, isOpen], async () => {
 .chat-hint {
   margin-top: 6px;
   font-size: 0.68rem;
-  opacity: 0.6;
+  opacity: 0.7;
   text-align: center;
+  line-height: 1.35;
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
 }
 
 @media (max-width: 768px) {

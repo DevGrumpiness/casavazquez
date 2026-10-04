@@ -67,7 +67,7 @@
       </p>
       <h3>6. Empfänger, Drittlandtransfer</h3>
       <p>
-        Eine Weitergabe Ihrer Daten erfolgt nur, soweit dies zur Vertragserfüllung, zur Wahrung unserer berechtigten Interessen oder aufgrund gesetzlicher Verpflichtungen erforderlich ist. Ein Drittlandtransfer ist nicht vorgesehen; bei Aufrufen externer Inhalte (z. B. Karten) kann dies abhängig vom Anbieter technisch bedingt erfolgen.
+        Eine Weitergabe Ihrer Daten erfolgt nur, soweit dies zur Vertragserfüllung, zur Wahrung unserer berechtigten Interessen oder aufgrund gesetzlicher Verpflichtungen erforderlich ist. Ein Drittlandtransfer erfolgt nur bei Nutzung des digitalen Sommeliers (siehe Ziffer 10); bei Aufrufen externer Inhalte (z. B. Karten) kann dies abhängig vom Anbieter technisch bedingt erfolgen.
       </p>
       <h3>7. Speicherdauer</h3>
       <p>
@@ -80,6 +80,16 @@
       <h3>9. Pflicht zur Bereitstellung</h3>
       <p>
         Die Bereitstellung personenbezogener Daten ist für die Nutzung der Website grundsätzlich nicht erforderlich; ohne die Verarbeitung technisch notwendiger Daten ist die Bereitstellung der Website jedoch nicht möglich.
+      </p>
+      <h3 id="sommelier">10. Digitaler Sommelier (KI‑Chat)</h3>
+      <p>
+        Auf unserer Website können Sie freiwillig einen Chat nutzen, der Ihnen Weine und Snacks von unserer Karte empfiehlt. Die Antworten werden automatisiert durch ein KI‑Sprachmodell erzeugt und sind unverbindliche Empfehlungen; verbindliche Auskünfte, insbesondere zu Allergenen, erhalten Sie bei unserem Personal.
+      </p>
+      <p>
+        Wenn Sie den Chat nutzen, werden die von Ihnen eingegebenen Nachrichten und der bisherige Gesprächsverlauf an unseren Server und von dort zur Erzeugung der Antwort an unseren Dienstleister Anthropic (Anthropic PBC, USA) übermittelt. Ihre IP‑Adresse verarbeiten wir dabei kurzzeitig auf unserem Server, um Missbrauch zu begrenzen; sie wird nicht an Anthropic weitergegeben. Wir selbst speichern die Chat‑Inhalte nicht; der Verlauf liegt nur in Ihrem Browser und wird beim Neuladen der Seite verworfen. Für den Chat werden keine Cookies gesetzt.
+      </p>
+      <p>
+        Anthropic verarbeitet die Daten in unserem Auftrag (Art. 28 DSGVO), speichert die Anfragen nach eigenen Angaben nur für begrenzte Zeit und verwendet sie nicht zum Training seiner Modelle. Die Verarbeitung findet in den USA statt; die Übermittlung ist durch EU‑Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO) abgesichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem digitalen Beratungsangebot). Bitte geben Sie im Chat keine persönlichen oder sensiblen Daten ein (z. B. Namen, Kontaktdaten, Gesundheitsangaben).
       </p>
     </section>
 
